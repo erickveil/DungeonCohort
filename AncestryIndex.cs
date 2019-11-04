@@ -30,6 +30,8 @@ namespace Darkmoor
         RandomTable<Ancestry> _dungeon3 = new RandomTable<Ancestry>();
         RandomTable<Ancestry> _dungeon4 = new RandomTable<Ancestry>();
 
+        RandomTable<Ancestry> _pcRaces = new RandomTable<Ancestry>();
+
         Dice _dice;
         bool _isLoaded = false;
 
@@ -89,6 +91,33 @@ namespace Darkmoor
             }
         }
 
+        public void LoadPCAncestries()
+        {
+            var nameList = new List<string> { 
+                "Human", "Elf", "Dwarf", "Halfling", "Gnome", "Halfelf",
+                "Halforc", "Tiefling", "Aisimar", "Dragonborn", "Tortle",
+                "Warforged"
+            };
+
+            foreach(var name in nameList)
+            {
+                var ancestryObj = new Ancestry();
+                ancestryObj.Name = name;
+                ancestryObj.MinAppearing = 180;
+                ancestryObj.MaxAppearing = 220;
+                ancestryObj.BaseAc = 10;
+                ancestryObj.BaseToHit = 0;
+                ancestryObj.BaseNumAttacks = 1;
+                ancestryObj.HitDice = 1;
+                ancestryObj.MoraleBonus = 0;
+                ancestryObj.CR = "1/8";
+                ancestryObj.Type.Add("humanoid");
+                ancestryObj.AlignmentGE = AlignmentValue.ALIGN_VARIES;
+                ancestryObj.AlignmentLC = AlignmentValue.ALIGN_VARIES;
+                _pcRaces.AddItem(ancestryObj);
+            }
+        }
+
         /// <summary>
         /// Loads all ancestries from various files.
         /// </summary>
@@ -99,6 +128,7 @@ namespace Darkmoor
 
             LoadCsvAncestries();
             LoadJsonAncestries();
+            LoadPCAncestries();
         }
 
         /// <summary>
@@ -309,6 +339,71 @@ namespace Darkmoor
             if (tier == 2) { return _dungeon2.GetResult(); }
             if (tier == 3) { return _dungeon3.GetResult(); }
             return _dungeon4.GetResult();
+        }
+
+        public Ancestry GetRandomNPC(int tier, AlignmentValue goodEvil)
+        {
+            var professionTable = GetNPCProfessionTable(tier);
+            var profession = professionTable.GetResult();
+            var raceTable = GetRandomNPCRace(goodEvil);
+            profession.Composite = raceTable.GetResult();
+            return profession;
+        }
+
+        public RandomTable<Ancestry> GetRandomNPCRace(AlignmentValue goodEvil)
+        {
+            var table = new RandomTable<Ancestry>();
+            var humanoidTable = GetHumanoidTable();
+            var allHumanoids = humanoidTable.GetUniqueEntryList();
+            foreach (var ancestry in allHumanoids)
+            {
+                if (
+                    (ancestry.AlignmentGE == goodEvil)
+                    || (ancestry.AlignmentGE == AlignmentValue.ALIGN_NEUTRAL)
+                    || (ancestry.AlignmentGE == AlignmentValue.ALIGN_UNALIGNED)
+                    || (ancestry.AlignmentGE == AlignmentValue.ALIGN_UNKNOWN)
+                    || (ancestry.AlignmentGE == AlignmentValue.ALIGN_VARIES)
+                    )
+                {
+                    table.AddItem(ancestry);
+                }
+            }
+
+            var allPCRaceList = _pcRaces.GetUniqueEntryList();
+            foreach (var race in allPCRaceList)
+            {
+                table.AddItem(race);
+            }
+            return table;
+        }
+
+        public RandomTable<Ancestry> GetHumanoidTable()
+        {
+            var table = new RandomTable<Ancestry>();
+            var allAncestryList = _ancestryTable.GetUniqueEntryList();
+            foreach (var ancestry in allAncestryList)
+            {
+                if (!ancestry.Type.Contains("humanoid")) { continue; }
+                if (ancestry.Type.Contains("any race")) { continue; }
+                if (ancestry.Type.Contains("shapechangers")) { continue; }
+                table.AddItem(ancestry);
+            }
+            return table;
+        }
+
+        public RandomTable<Ancestry> GetNPCProfessionTable(int tier)
+        {
+            var table = new RandomTable<Ancestry>();
+
+            var allAncestries = _ancestryTable.GetUniqueEntryList();
+            foreach (var ancestry in allAncestries)
+            {
+                if (!ancestry.Type.Contains("any race")) { continue; }
+                if (ancestry.GetTier() > tier) { continue; }
+                table.AddItem(ancestry);
+            }
+
+            return table;
         }
 
 

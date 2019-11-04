@@ -9,7 +9,7 @@ namespace Darkmoor
     class RandomTable<T>
     {
         private List<T> _ItemList;
-        private int _NumEntries;
+        private List<T> _UniqueItemList;
         private Dice _dice;
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace Darkmoor
             _dice = Dice.Instance;
 
             _ItemList = new List<T>();
-            _NumEntries = 0;
+            _UniqueItemList = new List<T>();
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Darkmoor
         /// <param name="Weight"></param>
         public void AddItem(T Item, uint Weight = 1)
         {
-            ++_NumEntries;
+            _UniqueItemList.Add(Item);
             for (uint i = 0; i < Weight; ++i)
             {
                 _ItemList.Add(Item);
@@ -72,7 +72,7 @@ namespace Darkmoor
         /// <returns></returns>
         public int CountUniqueEntries()
         {
-            return _NumEntries;
+            return _UniqueItemList.Count;
         }
 
         /// <summary>
@@ -82,6 +82,11 @@ namespace Darkmoor
         public int CountPossibilites()
         {
             return _ItemList.Count;
+        }
+
+        public List<T> GetUniqueEntryList()
+        {
+            return _UniqueItemList;
         }
     }
 }

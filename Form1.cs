@@ -91,6 +91,16 @@ namespace DungeonCohort
             PrintBodyBold(target, monsterName);
         }
 
-        
+        private void bu_genNPC_Click(object sender, EventArgs e)
+        {
+            RichTextBox target = rtb_rndMonstOut;
+            target.Clear();
+
+            int tier = (int)nud_tier.Value;
+            Ancestry npc = _ancestryIndex.GetRandomNPC(tier, AlignmentValue.ALIGN_GOOD);
+
+            string npcName = npc.GetCompositeName();
+            PrintBody(target, npcName);
+        }
     }
 }

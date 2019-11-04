@@ -37,6 +37,9 @@ namespace Darkmoor
         private string _challengeRating;
         public string ChallengeRating { get => _challengeRating; set => _challengeRating = value; }
 
+        private List<string> align;
+        public List<string> Align { get => align; set => align = value; }
+
         public int GetXpValue()
         {
             return GetXpValue(_challengeRating);

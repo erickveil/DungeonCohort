@@ -32,6 +32,7 @@
             this.bu_monster = new System.Windows.Forms.Button();
             this.nud_tier = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.bu_genNPC = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,11 +85,22 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Tier";
             // 
+            // bu_genNPC
+            // 
+            this.bu_genNPC.Location = new System.Drawing.Point(13, 87);
+            this.bu_genNPC.Name = "bu_genNPC";
+            this.bu_genNPC.Size = new System.Drawing.Size(137, 23);
+            this.bu_genNPC.TabIndex = 4;
+            this.bu_genNPC.Text = "NPC";
+            this.bu_genNPC.UseVisualStyleBackColor = true;
+            this.bu_genNPC.Click += new System.EventHandler(this.bu_genNPC_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.bu_genNPC);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nud_tier);
             this.Controls.Add(this.bu_monster);
@@ -107,6 +119,7 @@
         private System.Windows.Forms.Button bu_monster;
         private System.Windows.Forms.NumericUpDown nud_tier;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button bu_genNPC;
     }
 }
 

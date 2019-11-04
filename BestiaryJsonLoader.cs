@@ -44,29 +44,13 @@ namespace Darkmoor
         public List<Ancestry> ExportAsAncestryList()
         {
             var ancestryList = new List<Ancestry>();
-            var allowedTypeList = new List<string> 
-            { 
-                "aberration",
-                "dragon",
-                "elemental",
-                "fey",
-                "giant",
-                "humanoid" 
-            };
 
             foreach (var bestiary in BestiaryList)
             {
                 foreach (var monster in bestiary.monster)
                 {
-                    foreach (var validType in allowedTypeList)
-                    {
-                        if (!monster.TypeList.Contains(validType)) 
-                        { 
-                            continue; 
-                        }
-                        var ancestry = AsAncestry(monster);
-                        ancestryList.Add(ancestry);
-                    } // foreach allowedTypeList
+                    var ancestry = AsAncestry(monster);
+                    ancestryList.Add(ancestry);
                 } // foreach bestiary.monster
             } // foreach BestiaryList
 
@@ -142,6 +126,7 @@ namespace Darkmoor
             var ancestryList = new List<Ancestry>();
             var allowedTypeList = new List<string> 
             { 
+                "aberration",
                 "construct",
                 "fiend",
                 "monstrosity",
@@ -186,6 +171,11 @@ namespace Darkmoor
             ancestry.BaseNumAttacks = _calcNumAttacks(monster.action);
             ancestry.HitDice = _parseHitDice(monster.hp);
             ancestry.MoraleBonus = (int)((monster.Wis - 10) * 0.5);
+            ancestry.Type = monster.TypeList;
+            ancestry.AlignmentLC = _getAncestryAlignment(monster.Align[0]);
+            ancestry.AlignmentGE = (monster.Align.Count < 2)
+                ? AlignmentValue.ALIGN_UNKNOWN
+                : _getAncestryAlignment(monster.Align[1]);
 
             float baseAppearing = 200 / ancestry.HitDice;
             float mod = baseAppearing * 0.15f;
@@ -195,6 +185,25 @@ namespace Darkmoor
             ancestry.MaxAppearing = (int)fMax;
 
             return ancestry;
+        }
+
+        private AlignmentValue _getAncestryAlignment(string alignStr)
+        {
+            switch (alignStr)
+            {
+                case "G": return AlignmentValue.ALIGN_GOOD;
+                case "E": return AlignmentValue.ALIGN_EVIL;
+                case "L": return AlignmentValue.ALIGN_LAW;
+                case "C": return AlignmentValue.ALIGN_CHAOS;
+                case "N": return AlignmentValue.ALIGN_NEUTRAL;
+                case "A": return AlignmentValue.ALIGN_VARIES;
+                case "U": return AlignmentValue.ALIGN_UNALIGNED;
+                case "unaligned": return AlignmentValue.ALIGN_UNALIGNED;
+                case "unknown": return AlignmentValue.ALIGN_UNKNOWN;
+                default:
+                    Console.WriteLine("Unknown alignment value: " + alignStr);
+                    return AlignmentValue.ALIGN_UNKNOWN;
+            }
         }
 
         /// <summary>
@@ -285,6 +294,7 @@ namespace Darkmoor
                 _loadAcData(monsterList, i, bestiary);
                 _loadActionData(monsterList, i, bestiary);
                 _loadCr(monsterList, i, bestiary);
+                _loadAlignment(monsterList, i, bestiary);
             }
 
             // clear out copy entries
@@ -294,6 +304,43 @@ namespace Darkmoor
             Console.WriteLine("Loaded " + filename);
 
         } // loadJsonMonsters
+
+        private void _loadAlignment(JArray monsterList, int monsterIndex,
+            Bestiary bestiary)
+        {
+            JObject monster = (JObject)monsterList[monsterIndex];
+            JToken alignmentToken = monster["alignment"];
+            if (alignmentToken is null)
+            {
+                bestiary.monster[monsterIndex].Align = 
+                    new List<string> { "unaligned", "unaligned" };
+                return;
+            }
+            if (alignmentToken.GetType() == typeof(JArray))
+            {
+                var alignArray = (JArray)alignmentToken;
+                Type type = alignArray[0].GetType();
+                if (alignArray[0].GetType() != typeof(JValue))
+                {
+                    bestiary.monster[monsterIndex].Align =
+                        new List<string> { "unknown" , "unknown" };
+                    return;
+                }
+
+                var alignList = new List<string>();
+                foreach (string alignStr in alignArray)
+                {
+                    alignList.Add(alignStr);
+                }
+                bestiary.monster[monsterIndex].Align = alignList;
+                return;
+            }
+            //throw new Exception("unknown alignment format");
+            bestiary.monster[monsterIndex].Align = new List<string> 
+            { 
+                "unknown" , "unknown" 
+            }; 
+        }
 
         private void _loadCr(JArray monsterList, int monsterIndex, 
             Bestiary bestiary)
