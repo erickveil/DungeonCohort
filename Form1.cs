@@ -83,9 +83,14 @@ namespace DungeonCohort
         {
             RichTextBox target = rtb_rndMonstOut;
             target.Clear();
-            Ancestry monster = _ancestryIndex.GetRandomAncestry();
+
+            int tier = (int)nud_tier.Value;
+            Ancestry monster = _ancestryIndex.GetRandomAncestry(tier);
+
             string monsterName = monster.Name;
             PrintBodyBold(target, monsterName);
         }
+
+        
     }
 }
