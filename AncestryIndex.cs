@@ -319,6 +319,8 @@ namespace Darkmoor
         /// <returns></returns>
         public Ancestry GetRandomAncestry(int tier)
         {
+            var tierZeroTable = GetTierZeroAncestryTable();
+            if (tier == 0) { return tierZeroTable.GetResult(); }
             if (tier == 1) { return _tier1.GetResult(); }
             if (tier == 2) { return _tier2.GetResult(); }
             if (tier == 3) { return _tier3.GetResult(); }
@@ -327,6 +329,8 @@ namespace Darkmoor
 
         public Ancestry GetRandomNaturalAncestry(int tier)
         {
+            var tierZeroTable = GetTierZeroAncestryTable();
+            if (tier == 0) { return tierZeroTable.GetResult(); }
             if (tier == 1) { return _natural1.GetResult(); }
             if (tier == 2) { return _natural2.GetResult(); }
             if (tier == 3) { return _natural3.GetResult(); }
@@ -335,6 +339,8 @@ namespace Darkmoor
 
         public Ancestry GetRandomDungeonAncestry(int tier)
         {
+            var tierZeroTable = GetTierZeroAncestryTable();
+            if (tier == 0) { return tierZeroTable.GetResult(); }
             if (tier == 1) { return _dungeon1.GetResult(); }
             if (tier == 2) { return _dungeon2.GetResult(); }
             if (tier == 3) { return _dungeon3.GetResult(); }
@@ -406,6 +412,18 @@ namespace Darkmoor
             return table;
         }
 
+        public RandomTable<Ancestry> GetTierZeroAncestryTable()
+        {
+            var table = new RandomTable<Ancestry>();
+            var allAncestries = _ancestryTable.GetUniqueEntryList();
+            foreach (var ancestry in allAncestries)
+            {
+                //if (ancestry.Type.Contains("any race")) { continue; }
+                if (ancestry.GetXpValue() > 200) { continue; }
+                table.AddItem(ancestry);
+            }
+            return table;
+        }
 
     }
 }

@@ -94,6 +94,7 @@ namespace Darkmoor
 
         public static int GetTier(int xpValue)
         {
+            if (xpValue <= 200) { return 0; }
             if (xpValue <= 1800) { return 1; }
             if (xpValue <= 7200) { return 2; }
             if (xpValue <= 18000) { return 3; }

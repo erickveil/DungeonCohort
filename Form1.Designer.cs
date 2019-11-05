@@ -62,16 +62,11 @@
             0,
             0,
             0});
-            this.nud_tier.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nud_tier.Name = "nud_tier";
             this.nud_tier.Size = new System.Drawing.Size(42, 20);
             this.nud_tier.TabIndex = 2;
             this.nud_tier.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});

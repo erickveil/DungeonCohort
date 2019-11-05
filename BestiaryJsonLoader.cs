@@ -60,32 +60,16 @@ namespace Darkmoor
         public List<Ancestry> ExportAncestryListForTier(int tier)
         {
             var ancestryList = new List<Ancestry>();
-            var allowedTypeList = new List<string> 
-            { 
-                "aberration",
-                "dragon",
-                "elemental",
-                "fey",
-                "giant",
-                "humanoid" 
-            };
 
             foreach (var bestiary in BestiaryList)
             {
                 foreach (var monster in bestiary.monster)
                 {
-                    foreach (var validType in allowedTypeList)
-                    {
-                        if (!monster.TypeList.Contains(validType)) 
-                        { 
-                            continue; 
-                        }
-                        int xpValue = monster.GetXpValue();
-                        int monsterTier = BestiaryMonster.GetTier(xpValue);
-                        if (monsterTier != tier) { continue; }
-                        var ancestry = AsAncestry(monster);
-                        ancestryList.Add(ancestry);
-                    }
+                    int xpValue = monster.GetXpValue();
+                    int monsterTier = BestiaryMonster.GetTier(xpValue);
+                    if (monsterTier != tier) { continue; }
+                    var ancestry = AsAncestry(monster);
+                    ancestryList.Add(ancestry);
                 }
             }
             return ancestryList;
@@ -183,6 +167,7 @@ namespace Darkmoor
             float fMax = baseAppearing + mod;
             ancestry.MinAppearing = (int)fMin;
             ancestry.MaxAppearing = (int)fMax;
+            ancestry.CR = monster.ChallengeRating;
 
             return ancestry;
         }

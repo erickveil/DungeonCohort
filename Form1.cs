@@ -88,7 +88,8 @@ namespace DungeonCohort
             Ancestry monster = _ancestryIndex.GetRandomAncestry(tier);
 
             string monsterName = monster.Name;
-            PrintBodyBold(target, monsterName);
+            string cr = monster.CR;
+            PrintBody(target, monsterName + " (" + cr + ")" );
         }
 
         private void bu_genNPC_Click(object sender, EventArgs e)
@@ -100,7 +101,8 @@ namespace DungeonCohort
             Ancestry npc = _ancestryIndex.GetRandomNPC(tier, AlignmentValue.ALIGN_GOOD);
 
             string npcName = npc.GetCompositeName();
-            PrintBody(target, npcName);
+            string cr = npc.CR;
+            PrintBody(target, npcName + " (" + cr + ")" );
         }
     }
 }
