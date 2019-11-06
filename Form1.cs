@@ -86,11 +86,13 @@ namespace DungeonCohort
 
             int tier = (int)nud_tier.Value;
             string biome = cb_biome.Text;
-            Ancestry monster = _ancestryIndex.GetRandomAncestry(tier, biome);
+            bool isStdRace = cb_stdRaceNpcs.Checked;
+            Ancestry monster = _ancestryIndex.GetRandomAncestry(tier, biome, 
+                isStdRace);
 
             string monsterName = monster.GetCompositeName();
             string cr = monster.CR;
-            PrintBody(target, monsterName + " (" + cr + ")" );
+            PrintBody(target, monsterName + " (CR: " + cr + ")" );
         }
 
         private void bu_genNPC_Click(object sender, EventArgs e)
@@ -99,8 +101,9 @@ namespace DungeonCohort
             target.Clear();
 
             int tier = (int)nud_tier.Value;
+            bool isStdRace = cb_stdRaceNpcs.Checked;
             Ancestry npc = _ancestryIndex.GetRandomNPC(tier, 
-                AlignmentValue.ALIGN_GOOD);
+                AlignmentValue.ALIGN_GOOD, isStdRace);
 
             string npcName = npc.GetCompositeName();
             string cr = npc.CR;

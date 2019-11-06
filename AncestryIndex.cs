@@ -77,7 +77,7 @@ namespace Darkmoor
             var nameList = new List<string> { 
                 "Human", "Elf", "Dwarf", "Halfling", "Gnome", "Halfelf",
                 "Halforc", "Tiefling", "Aisimar", "Dragonborn", "Tortle",
-                "Warforged"
+                "Warforged", "Goliath", "Gensai", "Tabaxi"
             };
 
             foreach(var name in nameList)
@@ -244,8 +244,11 @@ namespace Darkmoor
         /// Chaos Civ
         /// Neutral Civ
         /// </param>
+        /// <param name="isStandardRace">If set to true, only uses standard 
+        /// PC races for generating NPCs. Avoids monster race NPCs</param>
         /// <returns></returns>
-        public Ancestry GetRandomAncestry(int tier, string biome)
+        public Ancestry GetRandomAncestry(int tier, string biome, 
+            bool isStandardRace = false)
         {
             var biomeTable = FilterTableByBiomeType(_ancestryTable, biome);
             var tierTable = FilterTableByTier(biomeTable, tier);
@@ -266,7 +269,7 @@ namespace Darkmoor
             Ancestry result = finalTable.GetResult();
             if (IsNpcProfesson(result))
             {
-                result = ConvertProfessionToNPC(result, align);
+                result = ConvertProfessionToNPC(result, align, isStandardRace);
             }
             return result;
         }
@@ -529,25 +532,29 @@ namespace Darkmoor
             return 900900; 
         }
 
-        public Ancestry GetRandomNPC(int tier, AlignmentValue goodEvil)
+        public Ancestry GetRandomNPC(int tier, AlignmentValue goodEvil, 
+            bool isUseStdPCRace)
         {
             var professionTable = GetNPCProfessionTable(tier);
             var profession = professionTable.GetResult();
-            var raceTable = GetRandomNPCRace(goodEvil);
+            var raceTable = GetRandomNPCRace(goodEvil, isUseStdPCRace);
             profession.Composite = raceTable.GetResult();
             return profession;
         }
 
         public Ancestry ConvertProfessionToNPC(Ancestry ancestry, 
-            AlignmentValue goodEvil)
+            AlignmentValue goodEvil, bool isUseStdPCRace)
         {
-            var raceTable = GetRandomNPCRace(goodEvil);
+            var raceTable = GetRandomNPCRace(goodEvil, isUseStdPCRace);
             ancestry.Composite = raceTable.GetResult();
             return ancestry;
         }
 
-        public RandomTable<Ancestry> GetRandomNPCRace(AlignmentValue goodEvil)
+        public RandomTable<Ancestry> GetRandomNPCRace(AlignmentValue goodEvil,
+            bool isUseStdPCRace)
         {
+            if (isUseStdPCRace) { return _pcRaces; }
+
             var table = new RandomTable<Ancestry>();
             var humanoidTable = GetHumanoidTable();
             var allHumanoids = humanoidTable.GetUniqueEntryList();
