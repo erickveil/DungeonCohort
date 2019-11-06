@@ -15,21 +15,6 @@ namespace Darkmoor
     class AncestryIndex
     {
         RandomTable<Ancestry> _ancestryTable;
-        RandomTable<Ancestry> _tier1;
-        RandomTable<Ancestry> _tier2;
-        RandomTable<Ancestry> _tier3;
-        RandomTable<Ancestry> _tier4;
-
-        RandomTable<Ancestry> _natural1 = new RandomTable<Ancestry>();
-        RandomTable<Ancestry> _natural2 = new RandomTable<Ancestry>();
-        RandomTable<Ancestry> _natural3 = new RandomTable<Ancestry>();
-        RandomTable<Ancestry> _natural4 = new RandomTable<Ancestry>();
-
-        RandomTable<Ancestry> _dungeon1 = new RandomTable<Ancestry>();
-        RandomTable<Ancestry> _dungeon2 = new RandomTable<Ancestry>();
-        RandomTable<Ancestry> _dungeon3 = new RandomTable<Ancestry>();
-        RandomTable<Ancestry> _dungeon4 = new RandomTable<Ancestry>();
-
         RandomTable<Ancestry> _pcRaces = new RandomTable<Ancestry>();
 
         Dice _dice;
@@ -48,10 +33,6 @@ namespace Darkmoor
         {
             _dice = Dice.Instance;
             _ancestryTable = new RandomTable<Ancestry>();
-            _tier1 = new RandomTable<Ancestry>();
-            _tier2 = new RandomTable<Ancestry>();
-            _tier3 = new RandomTable<Ancestry>();
-            _tier4 = new RandomTable<Ancestry>();
         }
 
         /// <summary>
@@ -208,77 +189,6 @@ namespace Darkmoor
             {
                 _ancestryTable.AddItem(ancestry);
             }
-            var ancestryListT1 = loader.ExportAncestryListForTier(1);
-            foreach (var ancestry in ancestryListT1)
-            {
-                _tier1.AddItem(ancestry);
-            }
-            var ancestryListT2 = loader.ExportAncestryListForTier(2);
-            foreach (var ancestry in ancestryListT2)
-            {
-                _tier2.AddItem(ancestry);
-            }
-            var ancestryListT3 = loader.ExportAncestryListForTier(3);
-            foreach (var ancestry in ancestryListT3)
-            {
-                _tier3.AddItem(ancestry);
-            }
-            var ancestryListT4 = loader.ExportAncestryListForTier(4);
-            foreach (var ancestry in ancestryListT4)
-            {
-                _tier4.AddItem(ancestry);
-            }
-
-            // Flora and Fauna
-            var ff1 = loader.ExportFloraAndFauna(1);
-            foreach (var ancestry in ff1)
-            {
-                _natural1.AddItem(ancestry);
-                _natural2.AddItem(ancestry);
-            }
-            var ff2 = loader.ExportFloraAndFauna(2);
-            foreach (var ancestry in ff2)
-            {
-                _natural2.AddItem(ancestry);
-                _natural3.AddItem(ancestry);
-            }
-            var ff3 = loader.ExportFloraAndFauna(3);
-            foreach (var ancestry in ff3)
-            {
-                _natural3.AddItem(ancestry);
-                _natural4.AddItem(ancestry);
-            }
-            var ff4 = loader.ExportFloraAndFauna(4);
-            foreach (var ancestry in ff4)
-            {
-                _natural4.AddItem(ancestry);
-            }
-
-            // dungeon material
-            var dun1 = loader.ExportDungeonEcology(1);
-            foreach (var ancestry in dun1)
-            {
-                _dungeon1.AddItem(ancestry);
-                _dungeon2.AddItem(ancestry);
-            }
-            var dun2 = loader.ExportDungeonEcology(2);
-            foreach (var ancestry in dun2)
-            {
-                _dungeon2.AddItem(ancestry);
-                _dungeon3.AddItem(ancestry);
-            }
-            var dun3 = loader.ExportDungeonEcology(3);
-            foreach (var ancestry in dun3)
-            {
-                _dungeon3.AddItem(ancestry);
-                _dungeon4.AddItem(ancestry);
-            }
-            var dun4 = loader.ExportDungeonEcology(4);
-            foreach (var ancestry in dun4)
-            {
-                _dungeon4.AddItem(ancestry);
-            }
-
         }
 
         private void _fillStringEntry(List<string> entryList, int index, 
@@ -319,32 +229,46 @@ namespace Darkmoor
         /// <returns></returns>
         public Ancestry GetRandomAncestry(int tier)
         {
-            var tierZeroTable = GetTierZeroAncestryTable();
-            if (tier == 0) { return tierZeroTable.GetResult(); }
-            if (tier == 1) { return _tier1.GetResult(); }
-            if (tier == 2) { return _tier2.GetResult(); }
-            if (tier == 3) { return _tier3.GetResult(); }
-            return _tier4.GetResult();
+            return GetRandomAncestry(tier, "");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tier"></param>
+        /// <param name="biome">Pass an empty string to select from any biome.
+        /// Otherwise the biome values are as follows:
+        /// Dungeon
+        /// Wilderness
+        /// Lawful Civ
+        /// Chaos Civ
+        /// Neutral Civ
+        /// </param>
+        /// <returns></returns>
         public Ancestry GetRandomAncestry(int tier, string biome)
         {
             var biomeTable = FilterTableByBiomeType(_ancestryTable, biome);
             var tierTable = FilterTableByTier(biomeTable, tier);
             var finalTable = tierTable;
 
+            AlignmentValue align = AlignmentValue.ALIGN_NEUTRAL;
             if (biome == "Lawful Civ")
             {
-                finalTable = FilterTableByGEAlignment(tierTable, 
-                    AlignmentValue.ALIGN_GOOD);
+                align = AlignmentValue.ALIGN_GOOD;
+                finalTable = FilterTableByGEAlignment(tierTable, align);
             }
             else if (biome == "Chaos Civ")
             {
-                finalTable = FilterTableByGEAlignment(tierTable, 
-                    AlignmentValue.ALIGN_EVIL);
+                align = AlignmentValue.ALIGN_EVIL;
+                finalTable = FilterTableByGEAlignment(tierTable, align);
             }
 
-            return finalTable.GetResult();
+            Ancestry result = finalTable.GetResult();
+            if (IsNpcProfesson(result))
+            {
+                result = ConvertProfessionToNPC(result, align);
+            }
+            return result;
         }
 
         /// <summary>
@@ -590,8 +514,6 @@ namespace Darkmoor
             return resultTable;
         }
 
-
-
         /// <summary>
         /// Returns the upper xp limit on a tier's CR
         /// </summary>
@@ -607,26 +529,6 @@ namespace Darkmoor
             return 900900; 
         }
 
-        public Ancestry GetRandomNaturalAncestry(int tier)
-        {
-            var tierZeroTable = GetTierZeroAncestryTable();
-            if (tier == 0) { return tierZeroTable.GetResult(); }
-            if (tier == 1) { return _natural1.GetResult(); }
-            if (tier == 2) { return _natural2.GetResult(); }
-            if (tier == 3) { return _natural3.GetResult(); }
-            return _natural4.GetResult();
-        }
-
-        public Ancestry GetRandomDungeonAncestry(int tier)
-        {
-            var tierZeroTable = GetTierZeroAncestryTable();
-            if (tier == 0) { return tierZeroTable.GetResult(); }
-            if (tier == 1) { return _dungeon1.GetResult(); }
-            if (tier == 2) { return _dungeon2.GetResult(); }
-            if (tier == 3) { return _dungeon3.GetResult(); }
-            return _dungeon4.GetResult();
-        }
-
         public Ancestry GetRandomNPC(int tier, AlignmentValue goodEvil)
         {
             var professionTable = GetNPCProfessionTable(tier);
@@ -634,6 +536,14 @@ namespace Darkmoor
             var raceTable = GetRandomNPCRace(goodEvil);
             profession.Composite = raceTable.GetResult();
             return profession;
+        }
+
+        public Ancestry ConvertProfessionToNPC(Ancestry ancestry, 
+            AlignmentValue goodEvil)
+        {
+            var raceTable = GetRandomNPCRace(goodEvil);
+            ancestry.Composite = raceTable.GetResult();
+            return ancestry;
         }
 
         public RandomTable<Ancestry> GetRandomNPCRace(AlignmentValue goodEvil)
@@ -649,6 +559,7 @@ namespace Darkmoor
                     || (ancestry.AlignmentGE == AlignmentValue.ALIGN_UNALIGNED)
                     || (ancestry.AlignmentGE == AlignmentValue.ALIGN_UNKNOWN)
                     || (ancestry.AlignmentGE == AlignmentValue.ALIGN_VARIES)
+                    || goodEvil == AlignmentValue.ALIGN_NEUTRAL
                     )
                 {
                     table.AddItem(ancestry);
@@ -690,6 +601,11 @@ namespace Darkmoor
             }
 
             return table;
+        }
+
+        public bool IsNpcProfesson(Ancestry ancestry)
+        {
+            return (ancestry.Type.Contains("any race"));
         }
 
         public RandomTable<Ancestry> GetTierZeroAncestryTable()

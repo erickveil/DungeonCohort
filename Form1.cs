@@ -88,7 +88,7 @@ namespace DungeonCohort
             string biome = cb_biome.Text;
             Ancestry monster = _ancestryIndex.GetRandomAncestry(tier, biome);
 
-            string monsterName = monster.Name;
+            string monsterName = monster.GetCompositeName();
             string cr = monster.CR;
             PrintBody(target, monsterName + " (" + cr + ")" );
         }
