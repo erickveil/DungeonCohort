@@ -59,6 +59,7 @@
     <Compile Include="BestiaryMonster.cs" />
     <Compile Include="BestiaryMonsterAction.cs" />
     <Compile Include="BestiaryMonsterHp.cs" />
+    <Compile Include="Character.cs" />
     <Compile Include="Dice.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

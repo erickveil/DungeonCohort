@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using DungeonCohort;
 
 namespace Darkmoor
 {
@@ -532,14 +533,16 @@ namespace Darkmoor
             return 900900; 
         }
 
-        public Ancestry GetRandomNPC(int tier, AlignmentValue goodEvil, 
+        public Character GetRandomNPC(int tier, AlignmentValue goodEvil, 
             bool isUseStdPCRace)
         {
             var professionTable = GetNPCProfessionTable(tier);
             var profession = professionTable.GetResult();
             var raceTable = GetRandomNPCRace(goodEvil, isUseStdPCRace);
             profession.Composite = raceTable.GetResult();
-            return profession;
+            var npc = new Character();
+            npc.Init(profession);
+            return npc;
         }
 
         public Ancestry ConvertProfessionToNPC(Ancestry ancestry, 

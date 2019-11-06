@@ -102,12 +102,13 @@ namespace DungeonCohort
 
             int tier = (int)nud_tier.Value;
             bool isStdRace = cb_stdRaceNpcs.Checked;
-            Ancestry npc = _ancestryIndex.GetRandomNPC(tier, 
+            Character npc = _ancestryIndex.GetRandomNPC(tier, 
                 AlignmentValue.ALIGN_GOOD, isStdRace);
 
-            string npcName = npc.GetCompositeName();
-            string cr = npc.CR;
-            PrintBody(target, npcName + " (" + cr + ")" );
+            string npcName = npc.GetFullIdentifier();
+            string alignment = npc.GetAlignmentString();
+            string cr = npc.Ancestry.CR;
+            PrintBody(target, npcName + " (" + cr + ")\n" + alignment);
         }
     }
 }
