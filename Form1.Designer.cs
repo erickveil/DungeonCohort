@@ -36,6 +36,7 @@
             this.cb_biome = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cb_stdRaceNpcs = new System.Windows.Forms.CheckBox();
+            this.bu_npcParty = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,18 +127,31 @@
             // cb_stdRaceNpcs
             // 
             this.cb_stdRaceNpcs.AutoSize = true;
+            this.cb_stdRaceNpcs.Checked = true;
+            this.cb_stdRaceNpcs.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_stdRaceNpcs.Location = new System.Drawing.Point(886, 28);
             this.cb_stdRaceNpcs.Name = "cb_stdRaceNpcs";
-            this.cb_stdRaceNpcs.Size = new System.Drawing.Size(805, 90);
+            this.cb_stdRaceNpcs.Size = new System.Drawing.Size(322, 36);
             this.cb_stdRaceNpcs.TabIndex = 7;
             this.cb_stdRaceNpcs.Text = "Standard Race NPCs";
             this.cb_stdRaceNpcs.UseVisualStyleBackColor = true;
+            // 
+            // bu_npcParty
+            // 
+            this.bu_npcParty.Location = new System.Drawing.Point(20, 318);
+            this.bu_npcParty.Name = "bu_npcParty";
+            this.bu_npcParty.Size = new System.Drawing.Size(365, 55);
+            this.bu_npcParty.TabIndex = 8;
+            this.bu_npcParty.Text = "NPC Party";
+            this.bu_npcParty.UseVisualStyleBackColor = true;
+            this.bu_npcParty.Click += new System.EventHandler(this.bu_npcParty_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2133, 1073);
+            this.Controls.Add(this.bu_npcParty);
             this.Controls.Add(this.cb_stdRaceNpcs);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cb_biome);
@@ -165,6 +179,7 @@
         private System.Windows.Forms.ComboBox cb_biome;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox cb_stdRaceNpcs;
+        private System.Windows.Forms.Button bu_npcParty;
     }
 }
 

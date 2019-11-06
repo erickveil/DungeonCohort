@@ -14,6 +14,7 @@ namespace DungeonCohort
     public partial class Form1 : Form
     {
         AncestryIndex _ancestryIndex;
+        Dice _dice;
 
         
         public Form1()
@@ -22,6 +23,7 @@ namespace DungeonCohort
 
             _ancestryIndex = AncestryIndex.Instance;
             _ancestryIndex.LoadAllSources();
+            _dice = Dice.Instance;
         }
 
         public void Print(RichTextBox target, string message, Font font)
@@ -54,29 +56,45 @@ namespace DungeonCohort
 
         public void PrintH3(RichTextBox target, string msg)
         {
-           var typeface = "ITC Avant Garde Gothic LT";
-           var size = 9;
-           var style = FontStyle.Bold;
-           var font = new Font(typeface, size, style);
-           Print(target, msg, font);
+            var typeface = "ITC Avant Garde Gothic LT";
+            var size = 9;
+            var style = FontStyle.Bold;
+            var font = new Font(typeface, size, style);
+            Print(target, msg, font);
         }
 
         public void PrintBody(RichTextBox target, string msg)
         {
-           var typeface = "AvantGarde Normal";
-           var size = 11;
-           var style = FontStyle.Regular;
-           var font = new Font(typeface, size, style);
-           Print(target, msg, font);
+            var typeface = "AvantGarde Normal";
+            var size = 11;
+            var style = FontStyle.Regular;
+            var font = new Font(typeface, size, style);
+            Print(target, msg, font);
         }
 
         public void PrintBodyBold(RichTextBox target, string msg)
         {
-           var typeface = "AvantGarde Normal";
-           var size = 11;
-           var style = FontStyle.Bold;
-           var font = new Font(typeface, size, style);
-           Print(target, msg, font);
+            var typeface = "AvantGarde Normal";
+            var size = 11;
+            var style = FontStyle.Bold;
+            var font = new Font(typeface, size, style);
+            Print(target, msg, font);
+        }
+
+        public void PrintList(RichTextBox target, string msg)
+        {
+
+            var typeface = "AvantGarde Normal";
+            var size = 11;
+            var style = FontStyle.Regular;
+            var font = new Font(typeface, size, style);
+
+            int msgStart = target.Text.Length;
+            int msgLen = msg.Length;
+            target.AppendText(msg);
+            target.Select(msgStart, msgLen);
+            target.SelectionFont = font;
+            target.SelectionBullet = true;
         }
 
         private void bu_monster_Click(object sender, EventArgs e)
@@ -109,6 +127,38 @@ namespace DungeonCohort
             string alignment = npc.GetAlignmentString();
             string cr = npc.Ancestry.CR;
             PrintBody(target, npcName + " (" + cr + ")\n" + alignment);
+        }
+
+        private void bu_npcParty_Click(object sender, EventArgs e)
+        {
+            int numMembers = _dice.Roll(1, 4) + 1;
+            int tier = (int)nud_tier.Value;
+            bool isStdRace = cb_stdRaceNpcs.Checked;
+            AlignmentValue align = Character.ChoseAlignmentGE();
+            var leader = _ancestryIndex.GetRandomNPC(tier, align, isStdRace);
+            var partyRoster = new List<Character>();
+            for (int i = 0; i < numMembers; ++i)
+            {
+                partyRoster.Add(
+                    _ancestryIndex.GetRandomNPC(tier, align, isStdRace)
+                    );
+            }
+
+            RichTextBox target = rtb_rndMonstOut;
+            target.Clear();
+
+            PrintH1(target, "NPC Party\n");
+            string npcName = leader.GetFullIdentifier();
+            string alignment = leader.GetAlignmentString();
+            string cr = leader.Ancestry.CR;
+            PrintList(target, npcName + " (cr: " + cr + "; " + alignment + ")\n");
+            foreach(var npc in partyRoster)
+            {
+                npcName = npc.GetFullIdentifier();
+                alignment = npc.GetAlignmentString();
+                cr = npc.Ancestry.CR;
+                PrintList(target, npcName + " (cr: " + cr + "; " + alignment + ")\n");
+            }
         }
     }
 }

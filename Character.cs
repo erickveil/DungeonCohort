@@ -101,6 +101,15 @@ namespace DungeonCohort
                 );
         }
 
+        public static AlignmentValue ChoseAlignmentGE()
+        {
+            var table = new RandomTable<AlignmentValue>();
+            table.AddItem(AlignmentValue.ALIGN_EVIL);
+            table.AddItem(AlignmentValue.ALIGN_GOOD);
+            table.AddItem(AlignmentValue.ALIGN_NEUTRAL);
+            return table.GetResult();
+        }
+
         private void _initAlignment()
         {
             var tableLC = new RandomTable<AlignmentValue>();
