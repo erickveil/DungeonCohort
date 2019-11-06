@@ -33,6 +33,8 @@
             this.nud_tier = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.bu_genNPC = new System.Windows.Forms.Button();
+            this.cb_biome = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,11 +92,36 @@
             this.bu_genNPC.UseVisualStyleBackColor = true;
             this.bu_genNPC.Click += new System.EventHandler(this.bu_genNPC_Click);
             // 
+            // cb_biome
+            // 
+            this.cb_biome.FormattingEnabled = true;
+            this.cb_biome.Items.AddRange(new object[] {
+            "Dungeon",
+            "Wilderness",
+            "Lawful Civ",
+            "Chaos Civ",
+            "Neutral Civ"});
+            this.cb_biome.Location = new System.Drawing.Point(193, 9);
+            this.cb_biome.Name = "cb_biome";
+            this.cb_biome.Size = new System.Drawing.Size(121, 21);
+            this.cb_biome.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(152, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(36, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Biome";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cb_biome);
             this.Controls.Add(this.bu_genNPC);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nud_tier);
@@ -115,6 +142,8 @@
         private System.Windows.Forms.NumericUpDown nud_tier;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bu_genNPC;
+        private System.Windows.Forms.ComboBox cb_biome;
+        private System.Windows.Forms.Label label2;
     }
 }
 

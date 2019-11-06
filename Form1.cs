@@ -85,7 +85,8 @@ namespace DungeonCohort
             target.Clear();
 
             int tier = (int)nud_tier.Value;
-            Ancestry monster = _ancestryIndex.GetRandomAncestry(tier);
+            string biome = cb_biome.Text;
+            Ancestry monster = _ancestryIndex.GetRandomAncestry(tier, biome);
 
             string monsterName = monster.Name;
             string cr = monster.CR;

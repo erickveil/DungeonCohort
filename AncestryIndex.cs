@@ -327,6 +327,145 @@ namespace Darkmoor
             return _tier4.GetResult();
         }
 
+        public Ancestry GetRandomAncestry(int tier, string biome)
+        {
+            var tierZeroTable = GetTierZeroAncestryTable();
+            var biomeTable = FilterTableByBiomeType(tierZeroTable, biome);
+            var tierTable = FilterTableByTier(biomeTable, 0, tier);
+            return tierTable.GetResult();
+        }
+
+        /// <summary>
+        /// Many biomes of random monsters are just selected from a list of
+        /// types that the monster may be a part of.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="biome"></param>
+        /// <returns></returns>
+        public RandomTable<Ancestry> FilterTableByBiomeType(
+            RandomTable<Ancestry> source, string biome)
+        {
+            var sourceList = source.GetUniqueEntryList();
+            var allowedType = new List<string>();
+            if (biome == "Dungeon")
+            {
+                allowedType = new List<string>
+                {
+                    "abberation",
+                    "celestial",
+                    "construct",
+                    "dragon",
+                    "elemental",
+                    "fiend",
+                    "humanoid",
+                    "monstrosity",
+                    "ooze",
+                    "undead"
+                };
+            }
+            else if (biome == "Wilderness")
+            {
+                allowedType = new List<string>
+                {
+                    "beast",
+                    "celestial",
+                    "dragon",
+                    "elemental",
+                    "fey",
+                    "fiend",
+                    "giant",
+                    "humanoid",
+                    "plant"
+                };
+            }
+            else if (biome == "Lawful Civ")
+            {
+                allowedType = new List<string>
+                {
+                    "celestial",
+                    "dragon",
+                    "giant",
+                    "humanoid"
+                };
+            }
+            else if (biome == "Chaos Civ")
+            {
+                allowedType = new List<string>
+                {
+                    "dragon",
+                    "fiend",
+                    "giant",
+                    "humanoid",
+                    "undead"
+                };
+            }
+            else if (biome == "Neutral Civ")
+            {
+                allowedType = new List<string>
+                {
+                    "dragon",
+                    "giant",
+                    "humanoid"
+                };
+            }
+            else
+            {
+                Console.WriteLine("Unknown biome filter: " + biome);
+                return source;
+            }
+            var resultTable = new RandomTable<Ancestry>();
+            foreach (var ancestry in sourceList)
+            {
+                foreach (var filter in allowedType)
+                {
+                    if (!ancestry.Type.Contains(filter)) { continue; }
+                    resultTable.AddItem(ancestry);
+                }
+            }
+            if (resultTable.CountUniqueEntries() == 0)
+            {
+                Console.WriteLine("No valid entries in table for biome " +
+                    "filter: " + biome);
+            }
+            return resultTable;
+        }
+
+        public RandomTable<Ancestry> FilterTableByTier(
+            RandomTable<Ancestry> source, int lowTier, int highTier)
+        {
+            var sourceList = source.GetUniqueEntryList();
+            var resultTable = new RandomTable<Ancestry>();
+            int lowXp = TierToXp(lowTier - 1);
+            int highXp = TierToXp(highTier);
+            foreach (var ancestry in sourceList)
+            {
+                if (ancestry.GetXpValue() < lowXp) { continue; }
+                if (ancestry.GetXpValue() > highXp) { continue; }
+                resultTable.AddItem(ancestry);
+            }
+            if (resultTable.CountUniqueEntries() == 0)
+            {
+                Console.WriteLine("No valid entries in table for tier " +
+                    "filter.");
+            }
+            return resultTable;
+        }
+
+        /// <summary>
+        /// Returns the upper xp limit on a tier's CR
+        /// </summary>
+        /// <param name="tier"></param>
+        /// <returns></returns>
+        public static int TierToXp(int tier)
+        {
+            if (tier == -1) { return 0; }
+            if (tier == 0) { return 200; }
+            if (tier == 1) { return 1800; }
+            if (tier == 2) { return 7200; }
+            if (tier == 3) { return 18000; }
+            return 900900; 
+        }
+
         public Ancestry GetRandomNaturalAncestry(int tier)
         {
             var tierZeroTable = GetTierZeroAncestryTable();
