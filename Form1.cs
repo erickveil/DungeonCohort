@@ -14,6 +14,7 @@ namespace DungeonCohort
     public partial class Form1 : Form
     {
         AncestryIndex _ancestryIndex;
+        JsonLootLoader _lootLoader;
         Dice _dice;
 
         
@@ -24,6 +25,8 @@ namespace DungeonCohort
             _ancestryIndex = AncestryIndex.Instance;
             _ancestryIndex.LoadAllSources();
             _dice = Dice.Instance;
+            _lootLoader = new JsonLootLoader();
+            _lootLoader.LoadLootJsonData();
         }
 
         public void Print(RichTextBox target, string message, Font font)
