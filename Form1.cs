@@ -99,7 +99,8 @@ namespace DungeonCohort
             target.Clear();
 
             int tier = (int)nud_tier.Value;
-            Ancestry npc = _ancestryIndex.GetRandomNPC(tier, AlignmentValue.ALIGN_GOOD);
+            Ancestry npc = _ancestryIndex.GetRandomNPC(tier, 
+                AlignmentValue.ALIGN_GOOD);
 
             string npcName = npc.GetCompositeName();
             string cr = npc.CR;

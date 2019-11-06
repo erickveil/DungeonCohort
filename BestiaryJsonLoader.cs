@@ -183,6 +183,7 @@ namespace Darkmoor
                 case "N": return AlignmentValue.ALIGN_NEUTRAL;
                 case "A": return AlignmentValue.ALIGN_VARIES;
                 case "U": return AlignmentValue.ALIGN_UNALIGNED;
+                case "NX": return AlignmentValue.ALIGN_NEUTRAL;
                 case "unaligned": return AlignmentValue.ALIGN_UNALIGNED;
                 case "unknown": return AlignmentValue.ALIGN_UNKNOWN;
                 default:

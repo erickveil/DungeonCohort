@@ -329,10 +329,22 @@ namespace Darkmoor
 
         public Ancestry GetRandomAncestry(int tier, string biome)
         {
-            var tierZeroTable = GetTierZeroAncestryTable();
-            var biomeTable = FilterTableByBiomeType(tierZeroTable, biome);
-            var tierTable = FilterTableByTier(biomeTable, 0, tier);
-            return tierTable.GetResult();
+            var biomeTable = FilterTableByBiomeType(_ancestryTable, biome);
+            var tierTable = FilterTableByTier(biomeTable, tier);
+            var finalTable = tierTable;
+
+            if (biome == "Lawful Civ")
+            {
+                finalTable = FilterTableByGEAlignment(tierTable, 
+                    AlignmentValue.ALIGN_GOOD);
+            }
+            else if (biome == "Chaos Civ")
+            {
+                finalTable = FilterTableByGEAlignment(tierTable, 
+                    AlignmentValue.ALIGN_EVIL);
+            }
+
+            return finalTable.GetResult();
         }
 
         /// <summary>
@@ -408,6 +420,10 @@ namespace Darkmoor
                     "humanoid"
                 };
             }
+            else if (biome == "")
+            {
+                return source;
+            }
             else
             {
                 Console.WriteLine("Unknown biome filter: " + biome);
@@ -430,8 +446,16 @@ namespace Darkmoor
             return resultTable;
         }
 
+        /// <summary>
+        /// Create a table that is made up of Ancestries that fall within the 
+        /// provided tiers.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="highTier"></param>
+        /// <param name="lowTier"></param>
+        /// <returns></returns>
         public RandomTable<Ancestry> FilterTableByTier(
-            RandomTable<Ancestry> source, int lowTier, int highTier)
+            RandomTable<Ancestry> source, int highTier, int lowTier = 0)
         {
             var sourceList = source.GetUniqueEntryList();
             var resultTable = new RandomTable<Ancestry>();
@@ -450,6 +474,123 @@ namespace Darkmoor
             }
             return resultTable;
         }
+
+        /// <summary>
+        /// Create a table that is made up of ancestries with the correct
+        /// alignement.
+        /// Neutral requests can include Good or Evil, or even questionably
+        /// aligned results.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="alignGE"></param>
+        /// <returns></returns>
+        public RandomTable<Ancestry> FilterTableByGEAlignment(
+            RandomTable<Ancestry> source, AlignmentValue alignGE)
+        {
+            var sourceList = source.GetUniqueEntryList();
+            var resultTable = new RandomTable<Ancestry>();
+            foreach (var ancestry in sourceList)
+            {
+                bool isExactMatch = ancestry.AlignmentGE == alignGE;
+                bool isTestingForNeutral = 
+                    alignGE == AlignmentValue.ALIGN_NEUTRAL;
+                bool isAncestryNeutral =
+                    ancestry.AlignmentGE == AlignmentValue.ALIGN_NEUTRAL
+                    || ancestry.AlignmentGE == AlignmentValue.ALIGN_UNALIGNED
+                    || ancestry.AlignmentGE == AlignmentValue.ALIGN_UNKNOWN;
+                bool isAncectryFlexible =
+                    ancestry.AlignmentGE == AlignmentValue.ALIGN_VARIES;
+
+                // Exact matches are on the list, of course
+                if (isExactMatch)
+                {
+                    resultTable.AddItem(ancestry);
+                    continue;
+                }
+                // Flexibly aligned ancestries can be on the list
+                if (isAncectryFlexible) 
+                {
+                    resultTable.AddItem(ancestry);
+                    continue;
+                } 
+                // Asking for a neutral aligned ancestry can result in anybody
+                if (isTestingForNeutral)
+                {
+                    resultTable.AddItem(ancestry);
+                    continue;
+                }
+                // Neutral aligned ancestries can be found anywhere
+                if (isAncestryNeutral)
+                {
+                    resultTable.AddItem(ancestry);
+                    continue;
+                }
+            }
+            if (resultTable.CountPossibilites() == 0)
+            {
+                Console.WriteLine("No results obtained from an AlignGE " +
+                    "filter.");
+            }
+            return resultTable;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="alignLC"></param>
+        /// <returns></returns>
+        public RandomTable<Ancestry> FilterTableByLCAlignment(
+            RandomTable<Ancestry> source, AlignmentValue alignLC)
+        {
+            var sourceList = source.GetUniqueEntryList();
+            var resultTable = new RandomTable<Ancestry>();
+            foreach (var ancestry in sourceList)
+            {
+                bool isExactMatch = ancestry.AlignmentLC == alignLC;
+                bool isTestingForNeutral = 
+                    alignLC == AlignmentValue.ALIGN_NEUTRAL;
+                bool isAncestryNeutral =
+                    ancestry.AlignmentGE == AlignmentValue.ALIGN_NEUTRAL
+                    || ancestry.AlignmentGE == AlignmentValue.ALIGN_UNALIGNED
+                    || ancestry.AlignmentGE == AlignmentValue.ALIGN_UNKNOWN;
+                bool isAncectryFlexible =
+                    ancestry.AlignmentGE == AlignmentValue.ALIGN_VARIES;
+
+                // Exact matches are on the list, of course
+                if (isExactMatch)
+                {
+                    resultTable.AddItem(ancestry);
+                    continue;
+                }
+                // Flexibly aligned ancestries can be on the list
+                if (isAncectryFlexible) 
+                {
+                    resultTable.AddItem(ancestry);
+                    continue;
+                } 
+                // Asking for a neutral aligned ancestry can result in anybody
+                if (isTestingForNeutral)
+                {
+                    resultTable.AddItem(ancestry);
+                    continue;
+                }
+                // Neutral aligned ancestries can be found anywhere
+                if (isAncestryNeutral)
+                {
+                    resultTable.AddItem(ancestry);
+                    continue;
+                }
+            }
+            if (resultTable.CountPossibilites() == 0)
+            {
+                Console.WriteLine("No results obtained from an AlignCL " +
+                    "filter.");
+            }
+            return resultTable;
+        }
+
+
 
         /// <summary>
         /// Returns the upper xp limit on a tier's CR
