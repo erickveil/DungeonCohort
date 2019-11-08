@@ -36,5 +36,10 @@ namespace DungeonCohort
         {
             return _lootObj.GetIndividualLootTable(tier);
         }
+
+        public RandomTable<LootTableResult> GetHordeLootTable(int tier)
+        {
+            return _lootObj.GetHordeLootTable(tier);
+        }
     }
 }

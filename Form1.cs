@@ -187,5 +187,35 @@ namespace DungeonCohort
                     alignment + "; " + lootReport + ")\n");
             }
         }
+
+        private void bu_indiTreasure_Click(object sender, EventArgs e)
+        {
+            RichTextBox target = rtb_rndMonstOut;
+            target.Clear();
+            int tier = (int)nud_tier.Value;
+
+            var lootTable = _lootLoader.GetIndividualLootTable(tier);
+            LootTableResult loot = lootTable.GetResult();
+            string lootReport = "Loot: " + loot.AsString();
+
+            PrintBody(target, lootReport);
+
+
+
+        }
+
+        private void bu_hordeTreasure_Click(object sender, EventArgs e)
+        {
+            RichTextBox target = rtb_rndMonstOut;
+            target.Clear();
+            int tier = (int)nud_tier.Value;
+
+            var lootTable = _lootLoader.GetHordeLootTable(tier);
+            LootTableResult loot = lootTable.GetResult();
+            string lootReport = "Treasure Horde:\n" + loot.AsString();
+
+            PrintBody(target, lootReport);
+
+        }
     }
 }
