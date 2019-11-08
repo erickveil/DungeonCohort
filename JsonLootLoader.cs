@@ -47,5 +47,10 @@ namespace DungeonCohort
         {
             return _lootObj.GetGemstoneTable(type);
         }
+
+        public RandomTable<ArtObjects> GetArtTable(string type)
+        {
+            return _lootObj.GetArtTable(type);
+        }
     }
 }

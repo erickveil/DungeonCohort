@@ -58,6 +58,17 @@ namespace DungeonCohort
             Console.WriteLine("Could not find gem table for type: " + type);
             return gemstones[0].AsRollableTable();
         }
+
+        public RandomTable<ArtObjects> GetArtTable(string type)
+        {
+            foreach (var artData in artobjects)
+            {
+                if (type != artData.type) { continue; }
+                return artData.AsRollableTable();
+            }
+            Console.WriteLine("Could not find art table for tyep: " + type);
+            return artobjects[0].AsRollableTable();
+        }
         
     }
 }

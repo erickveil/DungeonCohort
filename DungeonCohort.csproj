@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Ancestry.cs" />
     <Compile Include="AncestryIndex.cs" />
+    <Compile Include="ArtObjects.cs" />
     <Compile Include="Bestiary.cs" />
     <Compile Include="BestiaryJsonLoader.cs" />
     <Compile Include="BestiaryMonster.cs" />

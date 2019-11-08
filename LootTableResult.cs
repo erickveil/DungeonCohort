@@ -14,7 +14,20 @@ namespace DungeonCohort
         public int GP = 0;
         public int PP = 0;
 
+        /// <summary>
+        /// Note: I've tried running games where hoards have multiple types of
+        /// gems, and honestly, it's a huge pain to describe and nobody gets
+        /// anything special or exciting out of the variety.
+        /// They're all the same value anyway, so why not make them all the 
+        /// same type? 
+        /// </summary>
         public Gemstones Gems;
+
+        /// <summary>
+        /// Art on the other hand might be confused for magical items, and 
+        /// should be unique, so we use a list of items.
+        /// </summary>
+        public List<ArtObjects> ArtList = new List<ArtObjects>();
 
         public string AsString()
         {
@@ -36,6 +49,12 @@ namespace DungeonCohort
                 report += Gems.qty.ToString() + " " + Gems.type + " at " 
                     + Gems.value.ToString() + " gp each";
             }
+            if (report != "" && !(ArtList is null)) { report += "\n"; }
+            foreach (var art in ArtList)
+            {
+                report += art.name + " worth " + art.value.ToString() + " gp\n";
+            }
+                
 
             if (report == "") { return "none"; }
 

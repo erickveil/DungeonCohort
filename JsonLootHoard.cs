@@ -51,16 +51,17 @@ namespace DungeonCohort
                 tableEntry.PP = coins.rollPp();
 
                 tableEntry = _addGemsToHord(tableEntry, record.gems);
+                tableEntry = _addArtToHoard(tableEntry, record.artobjects);
 
                 lootTable.AddItem(tableEntry, weight);
             }
             return lootTable;
         }
 
-        private LootTableResult _addGemsToHord(LootTableResult source, 
+        private LootTableResult _addGemsToHord(LootTableResult baseEntry, 
             JsonLootHordeTableEntryStuff gemData)
         {
-            if (gemData is null) { return source; }
+            if (gemData is null) { return baseEntry; }
 
             int numGems = _dice.Roll(gemData.amount);
             string type = gemData.type;
@@ -68,9 +69,27 @@ namespace DungeonCohort
             var gemstoneTable = _hoardItemSource.GetGemstoneTable(type);
             var gemCache = gemstoneTable.GetResult();
             gemCache.qty = numGems;
-            source.Gems = gemCache;
+            baseEntry.Gems = gemCache;
 
-            return source;
+            return baseEntry;
+        }
+
+        private LootTableResult _addArtToHoard(LootTableResult baseEntry, 
+            JsonLootHordeTableEntryStuff artData)
+        {
+            if (artData is null) { return baseEntry; }
+
+            int numItems = _dice.Roll(artData.amount);
+            string type = artData.type;
+            var artTable = _hoardItemSource.GetArtTable(type);
+
+            for (int i = 0; i < numItems; ++i)
+            {
+                var artObject = artTable.GetResult();
+                baseEntry.ArtList.Add(artObject);
+            }
+
+            return baseEntry;
         }
 
 
