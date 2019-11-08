@@ -81,5 +81,41 @@ namespace Darkmoor
             //Console.WriteLine("Total: " + total);
             return total;
         }
+
+        /// <summary>
+        /// Rolls dice in string form (1d4, 2d6, etc).
+        /// </summary>
+        /// <param name="dieStr"></param>
+        /// <returns></returns>
+        public int Roll(string dieStr)
+        {
+            string[] splitDie = dieStr.Split('d');
+            if (splitDie.Length != 2)
+            {
+                Console.WriteLine("Illegal die string provided for rolling: " 
+                    + dieStr);
+                return 0;
+            }
+
+            int numDice = 1;
+            bool success = int.TryParse(splitDie[0], out numDice);
+            if (!success)
+            {
+                Console.WriteLine("Could not determine number of dice for " +
+                    "rolling: " + dieStr);
+                return 0;
+            }
+
+            int sides = 1;
+            success = int.TryParse(splitDie[1], out sides);
+            if (!success)
+            {
+                Console.WriteLine("Could not determine sides of die for " +
+                    "rolling: " + dieStr);
+                return 0;
+            }
+
+            return Roll(numDice, sides);
+        }
     }
 }

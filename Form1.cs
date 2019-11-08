@@ -15,6 +15,7 @@ namespace DungeonCohort
     {
         AncestryIndex _ancestryIndex;
         JsonLootLoader _lootLoader;
+        JsonItemLoader _itemLoader;
         Dice _dice;
 
         
@@ -27,6 +28,8 @@ namespace DungeonCohort
             _dice = Dice.Instance;
             _lootLoader = new JsonLootLoader();
             _lootLoader.LoadLootJsonData();
+            _itemLoader = new JsonItemLoader();
+            _itemLoader.LoadItemJsonData();
         }
 
         public void Print(RichTextBox target, string message, Font font)

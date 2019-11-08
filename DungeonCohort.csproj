@@ -67,6 +67,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="JsonItem.cs" />
+    <Compile Include="JsonItemLoader.cs" />
+    <Compile Include="JsonItemRoot.cs" />
     <Compile Include="JsonLoot.cs" />
     <Compile Include="JsonLootArt.cs" />
     <Compile Include="JsonLootCoins.cs" />
