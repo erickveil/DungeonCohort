@@ -24,6 +24,9 @@ namespace DungeonCohort
         public List<JsonLootHoard> hoard =
             new List<JsonLootHoard>();
 
+        public List<JsonLootMagicitems> magicitems =
+            new List<JsonLootMagicitems>();
+
 
         public RandomTable<LootTableResult> GetIndividualLootTable(int tier)
         {

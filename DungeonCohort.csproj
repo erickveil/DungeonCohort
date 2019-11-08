@@ -79,6 +79,8 @@
     <Compile Include="JsonLootIndividual.cs" />
     <Compile Include="JsonLootIndividualCoins.cs" />
     <Compile Include="JsonLootLoader.cs" />
+    <Compile Include="JsonLootMagicitems.cs" />
+    <Compile Include="JsonLootMagicitemsTable.cs" />
     <Compile Include="LootTableResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
