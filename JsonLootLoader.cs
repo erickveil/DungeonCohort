@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Darkmoor;
 
 namespace DungeonCohort
 {
@@ -29,7 +30,11 @@ namespace DungeonCohort
             _lootObj = JsonConvert.DeserializeObject<JsonLoot>(jsonData);
 
             Console.WriteLine("Loaded " + filename);
+        }
 
+        public RandomTable<LootTableResult> GetIndividualLootTable(int tier)
+        {
+            return _lootObj.GetIndividualLootTable(tier);
         }
     }
 }

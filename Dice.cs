@@ -110,8 +110,31 @@ namespace Darkmoor
             success = int.TryParse(splitDie[1], out sides);
             if (!success)
             {
-                Console.WriteLine("Could not determine sides of die for " +
-                    "rolling: " + dieStr);
+                string[] splitMultiply = splitDie[1].Split('*');
+                if (splitMultiply.Length == 2)
+                {
+                    int multiplier = 1;
+                    success = int.TryParse(splitMultiply[0], out sides); 
+                    if (!success)
+                    {
+                        Console.WriteLine("Could not parse sides on split " +
+                            "multiply dice: " + dieStr);
+                        return 0;
+                    }
+                    success = int.TryParse(splitMultiply[1], out multiplier);
+                    if (!success)
+                    {
+                        Console.WriteLine("Could not parse multiplier on " +
+                            "split multiply dice: " + dieStr);
+                        return 0;
+                    }
+                    return Roll(numDice, sides) * multiplier;
+                }
+
+                // TODO: repeat for split add and split subtract
+
+                Console.WriteLine("Could not pars sides on die string: " 
+                    + dieStr);
                 return 0;
             }
 

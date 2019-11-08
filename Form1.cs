@@ -114,9 +114,13 @@ namespace DungeonCohort
             Ancestry monster = _ancestryIndex.GetRandomAncestry(tier, biome, 
                 isStdRace);
 
+            var lootTable = _lootLoader.GetIndividualLootTable(tier);
+            LootTableResult loot = lootTable.GetResult();
+            string lootReport = "\nLoot: " + loot.AsString();
+
             string monsterName = monster.GetCompositeName();
             string cr = monster.CR;
-            PrintBody(target, monsterName + " (CR: " + cr + ")" );
+            PrintBody(target, monsterName + " (CR: " + cr + ")" + lootReport);
         }
 
         private void bu_genNPC_Click(object sender, EventArgs e)

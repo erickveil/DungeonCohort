@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Darkmoor;
 
 namespace DungeonCohort
 {
@@ -22,6 +23,15 @@ namespace DungeonCohort
 
         public List<JsonLootHoard> hoard =
             new List<JsonLootHoard>();
+
+
+        public RandomTable<LootTableResult> GetIndividualLootTable(int tier)
+        {
+            if (tier < 1) { tier = 1; }
+            if (tier > 4) { tier = 4; }
+            int tableIndex = tier - 1;
+            return individual[tableIndex].AsRollableTable();
+        }
         
     }
 }
