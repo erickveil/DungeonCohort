@@ -17,7 +17,7 @@ namespace DungeonCohort
         public string AsString()
         {
             string report = "";
-            string delim = "; ";
+            string delim = ", ";
 
             if (CP > 0) { report += "cp: " + CP.ToString(); }
             if (report != "" && SP > 0) { report += delim; }

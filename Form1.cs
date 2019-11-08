@@ -133,10 +133,15 @@ namespace DungeonCohort
             Character npc = _ancestryIndex.GetRandomNPC(tier, 
                 AlignmentValue.ALIGN_GOOD, isStdRace);
 
+            var lootTable = _lootLoader.GetIndividualLootTable(tier);
+            LootTableResult loot = lootTable.GetResult();
+            string lootReport = "\nLoot: " + loot.AsString();
+
             string npcName = npc.GetFullIdentifier();
             string alignment = npc.GetAlignmentString();
             string cr = npc.Ancestry.CR;
-            PrintBody(target, npcName + " (" + cr + ")\n" + alignment);
+            PrintBody(target, npcName + " (" + cr + ")\n" + alignment
+                + lootReport);
         }
 
         private void bu_npcParty_Click(object sender, EventArgs e)
@@ -158,16 +163,28 @@ namespace DungeonCohort
             target.Clear();
 
             PrintH1(target, "NPC Party\n");
+
+            var lootTable = _lootLoader.GetIndividualLootTable(tier);
+            LootTableResult loot = lootTable.GetResult();
+            string lootReport = "Loot: " + loot.AsString();
+
             string npcName = leader.GetFullIdentifier();
             string alignment = leader.GetAlignmentString();
             string cr = leader.Ancestry.CR;
-            PrintList(target, npcName + " (cr: " + cr + "; " + alignment + ")\n");
+            PrintList(target, npcName + " (cr: " + cr + "; " + alignment 
+                + "; " + lootReport + ")\n");
             foreach(var npc in partyRoster)
             {
+                lootTable = _lootLoader.GetIndividualLootTable(tier);
+                loot = lootTable.GetResult();
+                lootReport = "Loot: " + loot.AsString();
+
                 npcName = npc.GetFullIdentifier();
                 alignment = npc.GetAlignmentString();
                 cr = npc.Ancestry.CR;
-                PrintList(target, npcName + " (cr: " + cr + "; " + alignment + ")\n");
+
+                PrintList(target, npcName + " (cr: " + cr + "; " + 
+                    alignment + "; " + lootReport + ")\n");
             }
         }
     }
