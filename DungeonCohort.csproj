@@ -84,6 +84,7 @@
     <Compile Include="JsonLootMagicitems.cs" />
     <Compile Include="JsonLootMagicitemsTable.cs" />
     <Compile Include="LootTableResult.cs" />
+    <Compile Include="MagicItems.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomTable.cs" />

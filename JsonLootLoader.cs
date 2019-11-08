@@ -52,5 +52,10 @@ namespace DungeonCohort
         {
             return _lootObj.GetArtTable(type);
         }
+
+        public RandomTable<MagicItems> GetMagicItemTable(string type)
+        {
+            return _lootObj.GetMagicItemTable(type);
+        }
     }
 }

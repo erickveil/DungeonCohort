@@ -69,6 +69,18 @@ namespace DungeonCohort
             Console.WriteLine("Could not find art table for tyep: " + type);
             return artobjects[0].AsRollableTable();
         }
+
+        public RandomTable<MagicItems> GetMagicItemTable(string type)
+        {
+            foreach (var magicData in magicitems)
+            {
+                if (type != magicData.type) { continue; }
+                return magicData.AsRollableTable();
+            }
+            Console.WriteLine("Could not find magic item table for type: " 
+                + type);
+            return magicitems[0].AsRollableTable();
+        }
         
     }
 }

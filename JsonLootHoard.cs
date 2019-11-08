@@ -52,6 +52,8 @@ namespace DungeonCohort
 
                 tableEntry = _addGemsToHord(tableEntry, record.gems);
                 tableEntry = _addArtToHoard(tableEntry, record.artobjects);
+                tableEntry = _addMagicItemsToHoard(tableEntry, 
+                    record.magicitems);
 
                 lootTable.AddItem(tableEntry, weight);
             }
@@ -87,6 +89,24 @@ namespace DungeonCohort
             {
                 var artObject = artTable.GetResult();
                 baseEntry.ArtList.Add(artObject);
+            }
+
+            return baseEntry;
+        }
+
+        private LootTableResult _addMagicItemsToHoard(LootTableResult baseEntry,
+            JsonLootHordeTableEntryStuff magicData)
+        {
+            if (magicData is null) { return baseEntry; }
+
+            int numItems = _dice.Roll(magicData.amount);
+            string type = magicData.type;
+            var magicItemTable = _hoardItemSource.GetMagicItemTable(type);
+
+            for (int i = 0; i < numItems; ++i)
+            {
+                var magicItem = magicItemTable.GetResult();
+                baseEntry.MagicItemList.Add(magicItem);
             }
 
             return baseEntry;

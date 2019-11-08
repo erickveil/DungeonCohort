@@ -29,6 +29,11 @@ namespace DungeonCohort
         /// </summary>
         public List<ArtObjects> ArtList = new List<ArtObjects>();
 
+        /// <summary>
+        /// Likewise, magic items should be unique
+        /// </summary>
+        public List<MagicItems> MagicItemList = new List<MagicItems>();
+
         public string AsString()
         {
             string report = "";
@@ -54,7 +59,12 @@ namespace DungeonCohort
             {
                 report += art.name + " worth " + art.value.ToString() + " gp\n";
             }
-                
+
+            if (report != "" && !(MagicItemList is null)) { report += "\n"; }
+            foreach (var magicItem in MagicItemList)
+            {
+                report += magicItem.name + "\n";
+            }
 
             if (report == "") { return "none"; }
 
