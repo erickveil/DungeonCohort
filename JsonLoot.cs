@@ -13,5 +13,15 @@ namespace DungeonCohort
     {
         public List<JsonLootGemstones> gemstones = 
             new List<JsonLootGemstones>();
+
+        public List<JsonLootArt> artobjects =
+            new List<JsonLootArt>();
+
+        public List<JsonLootIndividual> individual =
+            new List<JsonLootIndividual>();
+
+        public List<JsonLootHoard> hoard =
+            new List<JsonLootHoard>();
+        
     }
 }

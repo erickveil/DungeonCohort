@@ -68,7 +68,13 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="JsonLoot.cs" />
+    <Compile Include="JsonLootArt.cs" />
+    <Compile Include="JsonLootCoins.cs" />
     <Compile Include="JsonLootGemstones.cs" />
+    <Compile Include="JsonLootHoard.cs" />
+    <Compile Include="JsonLootHordeTableEntry.cs" />
+    <Compile Include="JsonLootIndividual.cs" />
+    <Compile Include="JsonLootIndividualCoins.cs" />
     <Compile Include="JsonLootLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
