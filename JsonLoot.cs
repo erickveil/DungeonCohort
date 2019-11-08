@@ -27,6 +27,10 @@ namespace DungeonCohort
         public List<JsonLootMagicitems> magicitems =
             new List<JsonLootMagicitems>();
 
+        public void Init()
+        {
+            foreach (var hoardData in hoard) { hoardData.Init(this); }
+        }
 
         public RandomTable<LootTableResult> GetIndividualLootTable(int tier)
         {
@@ -42,7 +46,17 @@ namespace DungeonCohort
             if (tier > 4) { tier = 4; }
             int tableIndex = tier - 1;
             return hoard[tableIndex].AsRollableTable();
+        }
 
+        public RandomTable<Gemstones> GetGemstoneTable(string type)
+        {
+            foreach (var gemData in gemstones)
+            {
+                if (type != gemData.type) { continue; }
+                return gemData.AsRollableTable();
+            }
+            Console.WriteLine("Could not find gem table for type: " + type);
+            return gemstones[0].AsRollableTable();
         }
         
     }

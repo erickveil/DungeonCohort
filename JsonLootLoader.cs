@@ -28,6 +28,7 @@ namespace DungeonCohort
 
             // load the easy items
             _lootObj = JsonConvert.DeserializeObject<JsonLoot>(jsonData);
+            _lootObj.Init();
 
             Console.WriteLine("Loaded " + filename);
         }
@@ -40,6 +41,11 @@ namespace DungeonCohort
         public RandomTable<LootTableResult> GetHordeLootTable(int tier)
         {
             return _lootObj.GetHordeLootTable(tier);
+        }
+
+        public RandomTable<Gemstones> GetGemstoneTable(string type)
+        {
+            return _lootObj.GetGemstoneTable(type);
         }
     }
 }

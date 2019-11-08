@@ -67,6 +67,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gemstones.cs" />
     <Compile Include="JsonItem.cs" />
     <Compile Include="JsonItemLoader.cs" />
     <Compile Include="JsonItemRoot.cs" />

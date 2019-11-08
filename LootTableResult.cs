@@ -14,6 +14,8 @@ namespace DungeonCohort
         public int GP = 0;
         public int PP = 0;
 
+        public Gemstones Gems;
+
         public string AsString()
         {
             string report = "";
@@ -28,6 +30,12 @@ namespace DungeonCohort
             if (GP > 0) { report += "gp: " + GP.ToString(); }
             if (report != "" && PP > 0) { report += delim; }
             if (PP > 0) { report += "pp: " + PP.ToString(); }
+            if (report != "" && !(Gems is null)) { report += "\n"; }
+            if (!(Gems is null))
+            {
+                report += Gems.qty.ToString() + " " + Gems.type + " at " 
+                    + Gems.value.ToString() + " gp each";
+            }
 
             if (report == "") { return "none"; }
 
