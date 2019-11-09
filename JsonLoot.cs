@@ -30,6 +30,11 @@ namespace DungeonCohort
         public void Init()
         {
             foreach (var hoardData in hoard) { hoardData.Init(this); }
+
+            var itemLoader = new JsonItemLoader();
+            itemLoader.LoadItemJsonData();
+            JsonItemRoot itemResource = itemLoader.ItemObj;
+            foreach (var itemData in magicitems) { itemData.Init(itemResource); }
         }
 
         public RandomTable<LootTableResult> GetIndividualLootTable(int tier)

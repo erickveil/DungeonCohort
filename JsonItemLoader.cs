@@ -14,6 +14,8 @@ namespace DungeonCohort
     {
         JsonItemRoot _itemObj;
 
+        internal JsonItemRoot ItemObj { get => _itemObj; set => _itemObj = value; }
+
         public void LoadItemJsonData()
         {
             string filename = "items.json";
@@ -25,7 +27,7 @@ namespace DungeonCohort
                 return;
             }
 
-            _itemObj = JsonConvert.DeserializeObject<JsonItemRoot>(jsonData);
+            ItemObj = JsonConvert.DeserializeObject<JsonItemRoot>(jsonData);
 
             Console.WriteLine("Loaded " + filename);
         }
