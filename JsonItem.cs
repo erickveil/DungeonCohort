@@ -32,5 +32,12 @@ namespace DungeonCohort
         public float vehSpeed;
         public JArray additionalSources;
         public JArray additionalEntries;
+
+        public MagicItems AsMagicItem()
+        {
+            var magicItem = new MagicItems();
+            magicItem.name = name;
+            return magicItem;
+        }
     }
 }

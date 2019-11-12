@@ -72,6 +72,7 @@
     <Compile Include="JsonItem.cs" />
     <Compile Include="JsonItemLoader.cs" />
     <Compile Include="JsonItemRoot.cs" />
+    <Compile Include="JsonItemGroup.cs" />
     <Compile Include="JsonLoot.cs" />
     <Compile Include="JsonLootArt.cs" />
     <Compile Include="JsonLootCoins.cs" />
@@ -82,7 +83,11 @@
     <Compile Include="JsonLootIndividualCoins.cs" />
     <Compile Include="JsonLootLoader.cs" />
     <Compile Include="JsonLootMagicitems.cs" />
-    <Compile Include="JsonLootMagicitemsTable.cs" />
+    <Compile Include="JsonLootMagicitemsTableEntry.cs" />
+    <Compile Include="JsonMagicVariantLoader.cs" />
+    <Compile Include="JsonMagicVariantRoot.cs" />
+    <Compile Include="JsonMagicVariants.cs" />
+    <Compile Include="JsonMagicVariantsInherits.cs" />
     <Compile Include="LootTableResult.cs" />
     <Compile Include="MagicItems.cs" />
     <Compile Include="Program.cs" />

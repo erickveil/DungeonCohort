@@ -13,8 +13,8 @@ namespace DungeonCohort
         public string source;
         public int page;
         public string type;
-        public List<JsonLootMagicitemsTable> table = 
-            new List<JsonLootMagicitemsTable>();
+        public List<JsonLootMagicitemsTableEntry> table = 
+            new List<JsonLootMagicitemsTableEntry>();
 
         private JsonItemRoot _itemResource;
 
@@ -26,15 +26,14 @@ namespace DungeonCohort
         public RandomTable<MagicItems> AsRollableTable()
         {
             var itemTable = new RandomTable<MagicItems>();
-            foreach (var entry in table)
+            foreach (JsonLootMagicitemsTableEntry entry in table)
             {
                 uint weight = (uint)(entry.max - entry.min + 1);
-                var item = new MagicItems();
 
-                // TODO: fill out magic item object with item json data held in jsonItemRoot
-                item.name = entry.item;
+                JsonItem itemData = _itemResource.GetItemById(entry.GetItemId());
+                MagicItems magicItem = itemData.AsMagicItem();
 
-                itemTable.AddItem(item, weight); 
+                itemTable.AddItem(magicItem, weight); 
             }
             return itemTable;
         }
