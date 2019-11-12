@@ -10,5 +10,9 @@ namespace DungeonCohort
     {
         public string name;
 
+        // TODO: These need to be set!
+        public string rarity;
+        public string type; // major/minor
+
     }
 }

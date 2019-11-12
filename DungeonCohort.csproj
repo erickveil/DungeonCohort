@@ -89,6 +89,7 @@
     <Compile Include="JsonMagicVariants.cs" />
     <Compile Include="JsonMagicVariantsInherits.cs" />
     <Compile Include="LootTableResult.cs" />
+    <Compile Include="MagicItemPermissions.cs" />
     <Compile Include="MagicItems.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -13,6 +13,7 @@ namespace DungeonCohort
         public string name;
         public string rarity;
         public string type;
+        public string tier;
         public float value;
         public float weight;
         public string source;
@@ -37,6 +38,8 @@ namespace DungeonCohort
         {
             var magicItem = new MagicItems();
             magicItem.name = name;
+            magicItem.rarity = rarity;
+            magicItem.type = tier;
             return magicItem;
         }
     }

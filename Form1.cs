@@ -193,6 +193,8 @@ namespace DungeonCohort
 
             var lootTable = _lootLoader.GetIndividualLootTable(tier);
             LootTableResult loot = lootTable.GetResult();
+            var permissions = GetItemPermissions();
+            loot.PurgeResults(permissions);
             string lootReport = "Loot: " + loot.AsString();
 
             PrintBody(target, lootReport);
@@ -207,12 +209,30 @@ namespace DungeonCohort
             target.Clear();
             int tier = (int)nud_tier.Value;
 
+
             var lootTable = _lootLoader.GetHordeLootTable(tier);
             LootTableResult loot = lootTable.GetResult();
+            var permissions = GetItemPermissions();
+            loot.PurgeResults(permissions);
             string lootReport = "Treasure Horde:\n" + loot.AsString();
 
             PrintBody(target, lootReport);
 
+        }
+
+        private MagicItemPermissions GetItemPermissions()
+        {
+            var permissions = new MagicItemPermissions();
+            permissions.MinorCommon = cb_allowCommon.Checked;
+            permissions.MinorUncommon = cb_allowMinorUncommon.Checked;
+            permissions.MinorRare = cb_allowMinorRare.Checked;
+            permissions.MinorVeryRare = cb_allowMinorVeryRare.Checked;
+            permissions.MinorLegendary = cb_allowMinorLegendary.Checked;
+            permissions.MajorUncommon = cb_allowMajorUncommon.Checked;
+            permissions.MajorRare = cb_allowMajorRare.Checked;
+            permissions.MajorVeryRare = cb_allowMajorVeryRare.Checked;
+            permissions.MajorLegendary = cb_allowMajorLegendary.Checked;
+            return permissions;
         }
     }
 }

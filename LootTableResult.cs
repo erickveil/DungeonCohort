@@ -63,7 +63,9 @@ namespace DungeonCohort
             if (report != "" && !(MagicItemList is null)) { report += "\n"; }
             foreach (var magicItem in MagicItemList)
             {
-                report += magicItem.name + "\n";
+                report += magicItem.name 
+                    + "(" + magicItem.type + ", " + magicItem.rarity + ")"
+                    + "\n";
             }
 
             if (report == "") { return "none"; }
@@ -71,5 +73,73 @@ namespace DungeonCohort
             return report;
         }
 
-    }
-}
+        public void PurgeResults(MagicItemPermissions permissions)
+        {
+            var newItemList = new List<MagicItems>();
+
+            foreach (var magicItem in MagicItemList)
+            {
+                if (magicItem.type == "Minor")
+                {
+                    if (magicItem.rarity == "Common" && permissions.MinorCommon)
+                    {
+                        newItemList.Add(magicItem);
+                        continue;
+                    }
+                    if (magicItem.rarity == "Uncommon" && permissions.MinorUncommon)
+                    {
+                        newItemList.Add(magicItem);
+                        continue;
+                    }
+                    if (magicItem.rarity == "Rare" && permissions.MinorRare)
+                    {
+                        newItemList.Add(magicItem);
+                        continue;
+                    }
+                    if (magicItem.rarity == "Very Rare" && permissions.MinorVeryRare)
+                    {
+                        newItemList.Add(magicItem);
+                        continue;
+                    }
+                    if (magicItem.rarity == "Legendary" && permissions.MinorLegendary)
+                    {
+                        newItemList.Add(magicItem);
+                        continue;
+                    }
+                }
+                else if (magicItem.type == "Major")
+                {
+                    if (magicItem.rarity == "Uncommon" && permissions.MajorUncommon)
+                    {
+                        newItemList.Add(magicItem);
+                        continue;
+                    }
+                    if (magicItem.rarity == "Rare" && permissions.MajorRare)
+                    {
+                        newItemList.Add(magicItem);
+                        continue;
+                    }
+                    if (magicItem.rarity == "Very Rare" && permissions.MajorVeryRare)
+                    {
+                        newItemList.Add(magicItem);
+                        continue;
+                    }
+                    if (magicItem.rarity == "Legendary" && permissions.MajorLegendary)
+                    {
+                        newItemList.Add(magicItem);
+                        continue;
+                    }
+                }
+                else if (magicItem.rarity == "" || magicItem.rarity is null
+                    || magicItem.type == "" || magicItem.type is null)
+                {
+                     newItemList.Add(magicItem);
+                     continue;
+                }
+            } // foreach
+            MagicItemList.Clear();
+            MagicItemList = newItemList;
+        } // PurgeResults
+
+    } // LootTableResult
+} // namespace

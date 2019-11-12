@@ -50,7 +50,8 @@ namespace DungeonCohort
             var variantItem = ConvertFromVariant(variant);
             if (!(variantItem is null)) { return variantItem; }
 
-            Console.WriteLine("Could not determine JsonItem for " + id);
+            // There's a lot of them.
+            //Console.WriteLine("Could not determine JsonItem for " + id);
 
             // the Cross reference sub-tables are absurd.
             // Let's just make it up
@@ -83,10 +84,18 @@ namespace DungeonCohort
 
         private JsonItem BuildItemFromScratch(string id)
         {
-            // remove last "}"
-            string name = id.Remove(id.Length - 1);
-            // remove first "{@tiem "
-            name = name.Substring(7);
+            string name;
+            if (id[0] != '{')
+            {
+                name = id;
+            }
+            else
+            {
+                // remove last "}"
+                name = id.Remove(id.Length - 1);
+                // remove first "{@tiem "
+                name = name.Substring(7);
+            }
             var item = new JsonItem();
             item.name = name;
             return item;
