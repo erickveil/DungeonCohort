@@ -275,6 +275,136 @@ namespace Darkmoor
             return result;
         }
 
+        public Ancestry GetRandomAncestryByXpv(string biome, int targetXpv, 
+            bool isStandardRace = false)
+        {
+            var biomeTable = FilterTableByBiomeType(_ancestryTable, biome);
+            var finalTable = FilterTableByXpValue(biomeTable, targetXpv);
+
+            AlignmentValue align = AlignmentValue.ALIGN_NEUTRAL;
+            if (biome == "Lawful Civ")
+            {
+                align = AlignmentValue.ALIGN_GOOD;
+                finalTable = FilterTableByGEAlignment(finalTable, align);
+            }
+            else if (biome == "Chaos Civ")
+            {
+                align = AlignmentValue.ALIGN_EVIL;
+                finalTable = FilterTableByGEAlignment(finalTable, align);
+            }
+
+            Ancestry result = finalTable.GetResult();
+            if (IsNpcProfesson(result))
+            {
+                result = ConvertProfessionToNPC(result, align, isStandardRace);
+            }
+
+            return result;
+        }
+
+        public RandomTable<Ancestry> FilterTableByXpValue(
+            RandomTable<Ancestry> source, int targetXpv)
+        {
+            var sourceList = source.GetUniqueEntryList();
+            var resultTable = new RandomTable<Ancestry>();
+            int minXp = GetNextLowestXpv(targetXpv);
+
+            foreach (Ancestry ancestry in sourceList)
+            {
+                int subjectXpv = ancestry.GetXpValue();
+                if (subjectXpv > targetXpv) { continue; }
+                if (subjectXpv < minXp) { continue; }
+
+                resultTable.AddItem(ancestry);
+            }
+
+            if (resultTable.GetUniqueEntryList().Count == 0) { return source; }
+            return resultTable;
+        }
+
+        /// <summary>
+        /// Returns the next highest, even CR xp value, relative to an 
+        /// arbitrary number.
+        /// </summary>
+        /// <param name="targetXpv"></param>
+        /// <returns></returns>
+        public static int GetNextHighestXpv(int targetXpv)
+        {
+            int[] xpList = 
+            { 
+                10, 25, 50, 100, 200, 450, 700, 1100, 1800, 2300, 
+                2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000,
+                18000, 20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000,
+                105000, 120000, 135000, 155000
+            };
+
+            if (xpList.Length != 34)
+            {
+                throw new Exception("The xpList is an incorrect size: " 
+                    + xpList.Length);
+            }
+
+            int lastVal = xpList[xpList.Length - 1];
+            if (targetXpv > lastVal) { return 200000; }
+
+            int firstVal = xpList[0];
+            if (targetXpv <= firstVal) { return firstVal; }
+
+            for (int i = 0; i < xpList.Length; ++i)
+            {
+                int thisXpv = xpList[i];
+                int nextXpv = xpList[i + 1];
+                if (targetXpv > thisXpv && targetXpv <= nextXpv) 
+                { 
+                    return nextXpv; 
+                }
+            }
+
+            throw new Exception("Unexpected targetXpv: " + targetXpv);
+        }
+
+        /// <summary>
+        /// Returns the next lowest, even CR xp value, relative to an 
+        /// arbitrary number.
+        /// </summary>
+        /// <param name="targetXpv"></param>
+        /// <returns></returns>
+        public static int GetNextLowestXpv(int targetXpv)
+        {
+            int[] xpList = 
+            { 
+                10, 25, 50, 100, 200, 450, 700, 1100, 1800, 2300, 
+                2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000,
+                18000, 20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000,
+                105000, 120000, 135000, 155000
+            };
+
+            if (xpList.Length != 34)
+            {
+                throw new Exception("The xpList is an incorrect size: " 
+                    + xpList.Length);
+            }
+
+            int lastVal = xpList[xpList.Length - 1];
+            if (targetXpv > lastVal) { return lastVal; }
+
+            int firstVal = xpList[0];
+            if (targetXpv <= firstVal) { return 0; }
+
+            for (int i = 0; i < xpList.Length; ++i)
+            {
+                int thisXpv = xpList[i];
+                int nextXpv = xpList[i + 1];
+                if (targetXpv > thisXpv && targetXpv <= nextXpv) 
+                { 
+                    return thisXpv; 
+                }
+            }
+
+            throw new Exception("Unexpected targetXpv: " + targetXpv);
+
+        }
+
         /// <summary>
         /// Many biomes of random monsters are just selected from a list of
         /// types that the monster may be a part of.

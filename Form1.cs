@@ -16,6 +16,7 @@ namespace DungeonCohort
         AncestryIndex _ancestryIndex;
         JsonLootLoader _lootLoader;
         Dice _dice;
+        EncounterBuilder _encounterBuilder;
 
         
         public Form1()
@@ -27,6 +28,9 @@ namespace DungeonCohort
             _dice = Dice.Instance;
             _lootLoader = new JsonLootLoader();
             _lootLoader.LoadLootJsonData();
+
+            _encounterBuilder = new EncounterBuilder();
+            _encounterBuilder.MonsterSource = _ancestryIndex;
         }
 
         public void Print(RichTextBox target, string message, Font font)
@@ -233,6 +237,31 @@ namespace DungeonCohort
             permissions.MajorVeryRare = cb_allowMajorVeryRare.Checked;
             permissions.MajorLegendary = cb_allowMajorLegendary.Checked;
             return permissions;
+        }
+
+        private void bu_encounter_Click(object sender, EventArgs e)
+        {
+            _encounterBuilder.Clear();
+            _encounterBuilder.PcLevelList.Add((int)nud_pcLevelA.Value);
+            _encounterBuilder.PcLevelList.Add((int)nud_pcLevelB.Value);
+            _encounterBuilder.PcLevelList.Add((int)nud_pcLevelC.Value);
+            _encounterBuilder.PcLevelList.Add((int)nud_pcLevelD.Value);
+
+            _encounterBuilder.PcQtyList.Add((int)nud_pcQtyA.Value);
+            _encounterBuilder.PcQtyList.Add((int)nud_pcQtyB.Value);
+            _encounterBuilder.PcQtyList.Add((int)nud_pcQtyC.Value);
+            _encounterBuilder.PcQtyList.Add((int)nud_pcQtyD.Value);
+
+            _encounterBuilder.Difficulty = cb_difficulty.Text;
+
+            string biome = cb_biome.Text;
+            bool isStandardRace = cb_stdRaceNpcs.Checked;
+
+            _encounterBuilder.PickOneMookPerPc(biome, isStandardRace);
+
+            RichTextBox target = rtb_rndMonstOut;
+            target.Clear();
+            PrintBody(target, _encounterBuilder.LastEncounterAsString());
         }
     }
 }
