@@ -47,11 +47,17 @@ namespace DungeonCohort
 
         public Encounter PickRandomEncounter(string biome, bool isStandardRace)
         {
-            var encounterTable = new RandomTable<Encounter>();
-            encounterTable.AddItem(PickOneMookPerPc(biome, isStandardRace));
-            encounterTable.AddItem(PickTwoMooksPerPc(biome, isStandardRace));
-
-            return encounterTable.GetResult();
+            // Cant use an encounter table, because the last rolled becomes
+            // the output data, regardless of choice.
+            var dice = Dice.Instance;
+            int roll = dice.Roll(1, 2);
+            switch(roll)
+            {
+                case 1: return PickOneMookPerPc(biome, isStandardRace);
+                case 2: return PickTwoMooksPerPc(biome, isStandardRace);
+                default: 
+                    throw new Exception("Invalid encounter strategy selected.");
+            }
         }
 
         public Encounter PickOneMookPerPc(string biome, bool isStandardRace)

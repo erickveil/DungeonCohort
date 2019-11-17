@@ -263,5 +263,26 @@ namespace DungeonCohort
             target.Clear();
             PrintBody(target, _encounterBuilder.LastEncounterAsString());
         }
+
+        private void bu_rollDice_Click(object sender, EventArgs e)
+        {
+            int num = (int)nud_dNum.Value;
+            var resultList = new List<int>();
+            int size = (int)nud_dieSize.Value;
+            int result = _dice.Roll(num, size, out resultList);
+
+            string output = "";
+            foreach (var roll in resultList)
+            {
+                output += roll.ToString() + "\n";
+            }
+            output += "Total: " + result.ToString();
+
+            RichTextBox target = rtb_rndMonstOut;
+            target.Clear();
+            PrintBody(target, output);
+
+
+        }
     }
 }
