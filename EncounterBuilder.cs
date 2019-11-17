@@ -50,12 +50,13 @@ namespace DungeonCohort
             // Cant use an encounter table, because the last rolled becomes
             // the output data, regardless of choice.
             var dice = Dice.Instance;
-            int roll = dice.Roll(1, 3);
+            int roll = dice.Roll(1, 4);
             switch(roll)
             {
                 case 1: return PickOneMookPerPc(biome, isStandardRace);
                 case 2: return PickTwoMooksPerPc(biome, isStandardRace);
                 case 3: return PickOneBoss(biome, isStandardRace);
+                case 4: return PickBossWithMooks(biome, isStandardRace);
                 default: 
                     throw new Exception("Invalid encounter strategy selected.");
             }
@@ -78,6 +79,75 @@ namespace DungeonCohort
             return PickMooks(qty, biome, isStandardRace);
         }
 
+        public Encounter PickBossWithMooks(string biome, bool isStandardRace)
+        {
+            int numPcs = CalcTotalPcs();
+            if (numPcs == 0)
+            {
+                throw new Exception("Can't generate encounter for no PCs.");
+            }
+
+            // how much of the xp budget does the boss take?
+            var dice = Dice.Instance;
+            int bossSize = dice.Roll(1, 3);
+            float bossMod;
+            switch (bossSize)
+            {
+                case 1: 
+                    bossMod = 0.5f;
+                    break;
+                case 2:
+                    bossMod = 0.33f;
+                    break;
+                default:
+                    bossMod = 0.25f;
+                    break;
+            }
+
+            var encounter = new Encounter();
+
+            int ut = CalcUpperThreshold();
+            int randomUpperThreshold = CalcRandomUpperThreshold();
+            int bossXpValue = (int)(randomUpperThreshold * bossMod);
+
+            // boss
+            int totalMonsters = numPcs + 1;
+            float mod = CalcXpMultiplier(totalMonsters , numPcs);
+            bossXpValue = (int)(bossXpValue / mod);
+
+            Ancestry boss = MonsterSource.GetRandomAncestryByXpv(biome, 
+                bossXpValue, isStandardRace);
+            var bossRoster = new EncounterComponent();
+            bossRoster.Monster = boss;
+            bossRoster.Qty = 1;
+            encounter.MemberList.Add(bossRoster);
+
+            // mooks
+            // TODO: The Mooks are too high CR for their difficulty and qty
+            int xpLeftForMooks = randomUpperThreshold - bossXpValue;
+            int totalMooks = numPcs;
+            int mookXpValue = (int)(xpLeftForMooks / totalMooks);
+            Ancestry mooks = MonsterSource.GetRandomAncestryByXpv(biome,
+                mookXpValue, isStandardRace);
+            var mookRoster = new EncounterComponent();
+            mookRoster.Monster = mooks;
+            mookRoster.Qty = totalMooks;
+            encounter.MemberList.Add(mookRoster);
+
+            // save
+            LastModifier = mod;
+            LastEncounter = encounter;
+
+            return encounter;
+        }
+
+        /// <summary>
+        /// Picks mooks for an encounter and records the picks to the class
+        /// </summary>
+        /// <param name="numMonsters"></param>
+        /// <param name="biome"></param>
+        /// <param name="isStandardRace"></param>
+        /// <returns></returns>
         public Encounter PickMooks(int numMonsters, string biome, 
             bool isStandardRace)
         {
