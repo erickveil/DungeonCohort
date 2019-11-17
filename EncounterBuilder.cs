@@ -50,14 +50,20 @@ namespace DungeonCohort
             // Cant use an encounter table, because the last rolled becomes
             // the output data, regardless of choice.
             var dice = Dice.Instance;
-            int roll = dice.Roll(1, 2);
+            int roll = dice.Roll(1, 3);
             switch(roll)
             {
                 case 1: return PickOneMookPerPc(biome, isStandardRace);
                 case 2: return PickTwoMooksPerPc(biome, isStandardRace);
+                case 3: return PickOneBoss(biome, isStandardRace);
                 default: 
                     throw new Exception("Invalid encounter strategy selected.");
             }
+        }
+
+        public Encounter PickOneBoss(string biome, bool isStandardRace)
+        {
+            return PickMooks(numMonsters: 1, biome, isStandardRace);
         }
 
         public Encounter PickOneMookPerPc(string biome, bool isStandardRace)
