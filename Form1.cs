@@ -257,7 +257,7 @@ namespace DungeonCohort
             string biome = cb_biome.Text;
             bool isStandardRace = cb_stdRaceNpcs.Checked;
 
-            _encounterBuilder.PickOneMookPerPc(biome, isStandardRace);
+            _encounterBuilder.PickRandomEncounter(biome, isStandardRace);
 
             RichTextBox target = rtb_rndMonstOut;
             target.Clear();

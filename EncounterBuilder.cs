@@ -45,20 +45,40 @@ namespace DungeonCohort
             LastModifier = 0;
         }
 
+        public Encounter PickRandomEncounter(string biome, bool isStandardRace)
+        {
+            var encounterTable = new RandomTable<Encounter>();
+            encounterTable.AddItem(PickOneMookPerPc(biome, isStandardRace));
+            encounterTable.AddItem(PickTwoMooksPerPc(biome, isStandardRace));
+
+            return encounterTable.GetResult();
+        }
+
         public Encounter PickOneMookPerPc(string biome, bool isStandardRace)
         {
             int qty = CalcTotalPcs();
-            if (qty == 0)
+            return PickMooks(qty, biome, isStandardRace);
+        }
+
+        public Encounter PickTwoMooksPerPc(string biome, bool isStandardRace)
+        {
+            int qty = CalcTotalPcs() * 2;
+            return PickMooks(qty, biome, isStandardRace);
+        }
+
+        public Encounter PickMooks(int numMonsters, string biome, 
+            bool isStandardRace)
+        {
+            int numPcs = CalcTotalPcs();
+            if (numPcs == 0)
             {
                 throw new Exception("Can't generate encounter for no PCs.");
             }
             int ut = CalcUpperThreshold();
-            int totalPcs = CalcTotalPcs();
             int randomUpperThreshold = CalcRandomUpperThreshold();
-            //int monsterXpValue = CalcUpperThreshold() / CalcTotalPcs();
-            int monsterXpValue = (randomUpperThreshold / totalPcs);
+            int monsterXpValue = (randomUpperThreshold / numMonsters);
 
-            float mod = CalcXpMultiplier(qtyMonsters: qty, qtyPlayers: qty);
+            float mod = CalcXpMultiplier(numMonsters, numPcs);
             LastModifier = mod;
             monsterXpValue = (int)(monsterXpValue / mod);
 
@@ -67,7 +87,7 @@ namespace DungeonCohort
             var encounter = new Encounter();
             var mookRoster = new EncounterComponent();
             mookRoster.Monster = mook;
-            mookRoster.Qty = qty;
+            mookRoster.Qty = numMonsters;
             encounter.MemberList.Add(mookRoster);
             LastEncounter = encounter;
             return encounter;
