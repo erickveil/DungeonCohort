@@ -20,11 +20,14 @@ namespace DungeonCohort
 
         public Encounter LastEncounter;
         public float LastModifier;
+        public string LastSubDifficulty;
 
         public string LastEncounterAsString()
         {
             // TODO: Calculate actual difficulty, not the expected difficulty
-            string output = "Difficulty: " + Difficulty + "\n"
+            string output = "Difficulty: " 
+                + LastSubDifficulty + " "
+                + Difficulty + "\n"
                 + LastEncounter.AsString() + "\n"
                 + "Adjusted xp: " 
                 + ((int)(LastModifier * LastEncounter.GetTotalXpv())).ToString()
@@ -50,12 +53,13 @@ namespace DungeonCohort
                 throw new Exception("Can't generate encounter for no PCs.");
             }
             int ut = CalcUpperThreshold();
-            int tpc = CalcTotalPcs();
-            int monsterXpValue = CalcUpperThreshold() / CalcTotalPcs();
+            int totalPcs = CalcTotalPcs();
+            int randomUpperThreshold = CalcRandomUpperThreshold();
+            //int monsterXpValue = CalcUpperThreshold() / CalcTotalPcs();
+            int monsterXpValue = (randomUpperThreshold / totalPcs);
 
-            float mod = CalcXpMultiplier(qty, qty);
+            float mod = CalcXpMultiplier(qtyMonsters: qty, qtyPlayers: qty);
             LastModifier = mod;
-            // TODO: verify this is correct
             monsterXpValue = (int)(monsterXpValue / mod);
 
             Ancestry mook = MonsterSource.GetRandomAncestryByXpv(biome, 
@@ -141,7 +145,35 @@ namespace DungeonCohort
                 default:
                     throw new Exception("Bad difficulty: " + Difficulty);
             }
+        }
 
+        public int CalcRandomUpperThreshold()
+        {
+            var dice = Dice.Instance;
+            int subDifficultyLevel = dice.Roll(1, 3);
+
+            int lowerThreshold = CalcLowerThreshold();
+            int upperThreshold = CalcUpperThreshold();
+            int difficultyXpSize = upperThreshold - lowerThreshold;
+            float mod;
+            int range;
+
+            switch (subDifficultyLevel)
+            {
+                case 1:
+                    LastSubDifficulty = "Low";
+                    mod = 0.25f;
+                    range = (int)(difficultyXpSize * mod);
+                    return lowerThreshold + range;
+                case 2:
+                    LastSubDifficulty = "Middle";
+                    mod = 0.5f;
+                    range = (int)(difficultyXpSize * mod);
+                    return lowerThreshold + range;
+                default:
+                    LastSubDifficulty = "High";
+                    return upperThreshold;
+            }
         }
 
         public int CalcEasyThreshold()

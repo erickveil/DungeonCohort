@@ -16,7 +16,9 @@ namespace DungeonCohort
         {
             string name = Monster.GetCompositeName();
             // TODO: Random names pluralize?
-            return Qty.ToString() + " " + Monster.GetCompositeName();
+            return Qty.ToString() + " " + Monster.GetCompositeName()
+                + " (CR " + Monster.CR + ")"
+                ;
         }
     }
 }
