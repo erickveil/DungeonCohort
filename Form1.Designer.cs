@@ -71,6 +71,16 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab_dev = new System.Windows.Forms.TabPage();
             this.tab_mythic = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nud_chaosFactor = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cobo_odds = new System.Windows.Forms.ComboBox();
+            this.bu_fate = new System.Windows.Forms.Button();
+            this.tb_fate = new System.Windows.Forms.TextBox();
+            this.bu_event = new System.Windows.Forms.Button();
+            this.rtb_event = new System.Windows.Forms.RichTextBox();
+            this.bu_scene = new System.Windows.Forms.Button();
+            this.tb_scene = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -87,6 +97,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_dNum)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tab_dev.SuspendLayout();
+            this.tab_mythic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_chaosFactor)).BeginInit();
             this.SuspendLayout();
             // 
             // rtb_rndMonstOut
@@ -642,6 +654,16 @@
             // 
             // tab_mythic
             // 
+            this.tab_mythic.Controls.Add(this.tb_scene);
+            this.tab_mythic.Controls.Add(this.bu_scene);
+            this.tab_mythic.Controls.Add(this.rtb_event);
+            this.tab_mythic.Controls.Add(this.bu_event);
+            this.tab_mythic.Controls.Add(this.tb_fate);
+            this.tab_mythic.Controls.Add(this.bu_fate);
+            this.tab_mythic.Controls.Add(this.cobo_odds);
+            this.tab_mythic.Controls.Add(this.label8);
+            this.tab_mythic.Controls.Add(this.nud_chaosFactor);
+            this.tab_mythic.Controls.Add(this.label7);
             this.tab_mythic.Location = new System.Drawing.Point(10, 48);
             this.tab_mythic.Name = "tab_mythic";
             this.tab_mythic.Padding = new System.Windows.Forms.Padding(3);
@@ -649,6 +671,115 @@
             this.tab_mythic.TabIndex = 1;
             this.tab_mythic.Text = "GM Emulation";
             this.tab_mythic.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(20, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(460, 80);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Chaos Factor";
+            // 
+            // nud_chaosFactor
+            // 
+            this.nud_chaosFactor.Location = new System.Drawing.Point(213, 18);
+            this.nud_chaosFactor.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.nud_chaosFactor.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_chaosFactor.Name = "nud_chaosFactor";
+            this.nud_chaosFactor.Size = new System.Drawing.Size(120, 38);
+            this.nud_chaosFactor.TabIndex = 1;
+            this.nud_chaosFactor.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(339, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(208, 80);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Odds";
+            // 
+            // cobo_odds
+            // 
+            this.cobo_odds.FormattingEnabled = true;
+            this.cobo_odds.Items.AddRange(new object[] {
+            "Impossible",
+            "No way",
+            "Very unlikely",
+            "Unlikely",
+            "50/50",
+            "Somewhat likely",
+            "Very likely",
+            "Near sure thing",
+            "A sure thing",
+            "Has to be"});
+            this.cobo_odds.Location = new System.Drawing.Point(426, 17);
+            this.cobo_odds.Name = "cobo_odds";
+            this.cobo_odds.Size = new System.Drawing.Size(226, 39);
+            this.cobo_odds.TabIndex = 3;
+            // 
+            // bu_fate
+            // 
+            this.bu_fate.Location = new System.Drawing.Point(26, 65);
+            this.bu_fate.Name = "bu_fate";
+            this.bu_fate.Size = new System.Drawing.Size(182, 50);
+            this.bu_fate.TabIndex = 4;
+            this.bu_fate.Text = "Fate";
+            this.bu_fate.UseVisualStyleBackColor = true;
+            this.bu_fate.Click += new System.EventHandler(this.bu_fate_Click);
+            // 
+            // tb_fate
+            // 
+            this.tb_fate.Location = new System.Drawing.Point(225, 72);
+            this.tb_fate.Name = "tb_fate";
+            this.tb_fate.Size = new System.Drawing.Size(236, 38);
+            this.tb_fate.TabIndex = 5;
+            // 
+            // bu_event
+            // 
+            this.bu_event.Location = new System.Drawing.Point(26, 133);
+            this.bu_event.Name = "bu_event";
+            this.bu_event.Size = new System.Drawing.Size(182, 50);
+            this.bu_event.TabIndex = 6;
+            this.bu_event.Text = "Event";
+            this.bu_event.UseVisualStyleBackColor = true;
+            // 
+            // rtb_event
+            // 
+            this.rtb_event.Location = new System.Drawing.Point(225, 133);
+            this.rtb_event.Name = "rtb_event";
+            this.rtb_event.Size = new System.Drawing.Size(236, 223);
+            this.rtb_event.TabIndex = 7;
+            this.rtb_event.Text = "";
+            // 
+            // bu_scene
+            // 
+            this.bu_scene.Location = new System.Drawing.Point(26, 363);
+            this.bu_scene.Name = "bu_scene";
+            this.bu_scene.Size = new System.Drawing.Size(182, 50);
+            this.bu_scene.TabIndex = 8;
+            this.bu_scene.Text = "Scene";
+            this.bu_scene.UseVisualStyleBackColor = true;
+            // 
+            // tb_scene
+            // 
+            this.tb_scene.Location = new System.Drawing.Point(233, 370);
+            this.tb_scene.Name = "tb_scene";
+            this.tb_scene.Size = new System.Drawing.Size(228, 38);
+            this.tb_scene.TabIndex = 9;
             // 
             // Form1
             // 
@@ -679,6 +810,9 @@
             this.tabControl1.ResumeLayout(false);
             this.tab_dev.ResumeLayout(false);
             this.tab_dev.PerformLayout();
+            this.tab_mythic.ResumeLayout(false);
+            this.tab_mythic.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_chaosFactor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -728,6 +862,16 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tab_dev;
         private System.Windows.Forms.TabPage tab_mythic;
+        private System.Windows.Forms.TextBox tb_scene;
+        private System.Windows.Forms.Button bu_scene;
+        private System.Windows.Forms.RichTextBox rtb_event;
+        private System.Windows.Forms.Button bu_event;
+        private System.Windows.Forms.TextBox tb_fate;
+        private System.Windows.Forms.Button bu_fate;
+        private System.Windows.Forms.ComboBox cobo_odds;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown nud_chaosFactor;
+        private System.Windows.Forms.Label label7;
     }
 }
 

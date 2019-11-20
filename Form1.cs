@@ -284,5 +284,21 @@ namespace DungeonCohort
 
 
         }
+
+        private void bu_fate_Click(object sender, EventArgs e)
+        {
+            var gm = new GmEmulator();
+
+            int chaosFactor = (int)nud_chaosFactor.Value;
+            string odds = cobo_odds.Text;
+            if (odds == "")
+            {
+                tb_fate.Text = "Set odds!";
+                return;
+            }
+
+            string result = gm.RollFate(chaosFactor, odds);
+            tb_fate.Text = result;
+        }
     }
 }
