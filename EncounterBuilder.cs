@@ -25,6 +25,7 @@ namespace DungeonCohort
         public string LastEncounterAsString()
         {
             // TODO: Calculate actual difficulty, not the expected difficulty
+            /*
             string output = "Difficulty: " 
                 + LastSubDifficulty + " "
                 + Difficulty + "\n"
@@ -32,6 +33,9 @@ namespace DungeonCohort
                 + "Adjusted xp: " 
                 + ((int)(LastModifier * LastEncounter.GetTotalXpv())).ToString()
                 ;
+            */
+            string output = LastEncounter.AsString() + "\n" + "\n"
+                + GetDifficultyReport(LastEncounter);
 
             return output;
         }
@@ -43,6 +47,73 @@ namespace DungeonCohort
             Difficulty = "";
             LastEncounter = null;
             LastModifier = 0;
+        }
+
+        public string GetDifficultyReport(Encounter encounter)
+        {
+            string difficulty = CalcActualDifficulty(encounter);
+
+            int partyEasy = CalcEasyThreshold();
+            int partyMedium = CalcMediumThreshold();
+            int partyHard = CalcHardThreshold();
+            int partyDeadly = CalcDeadlyThreshold();
+            int partyAbsurd = (partyDeadly - partyHard) + partyDeadly;
+
+            string breakdown = "Easy: " + partyEasy.ToString() + "\n"
+                + "Medium: " + partyMedium.ToString() + "\n"
+                + "Hard: " + partyHard.ToString() + "\n"
+                + "Deadly: " + partyDeadly.ToString() + "\n"
+                + "Absurd: " + partyAbsurd.ToString();
+
+            int totalXp = encounter.GetTotalXpv();
+            int totalPcs = CalcTotalPcs();
+            int totalMonsters = encounter.GetTotalMonsters();
+
+            float xpMod = CalcXpMultiplier(totalMonsters, totalPcs);
+            int adjustedXpv = ((int)(xpMod * totalXp));
+
+            string totals = "Total XP: " + totalXp.ToString() + "\n"
+                + "Adjusted XP: " + adjustedXpv.ToString();
+
+            string report = "Difficulty: " + difficulty + "\n" + "\n"
+                + breakdown + "\n" + "\n"
+                + totals;
+
+            return report;
+        }
+
+        public string CalcActualDifficulty(Encounter encounter)
+        {
+            int partyEasy = CalcEasyThreshold();
+            int partyMedium = CalcMediumThreshold();
+            int partyHard = CalcHardThreshold();
+            int partyDeadly = CalcDeadlyThreshold();
+            int partyAbsurd = (partyDeadly - partyHard) + partyDeadly;
+
+            int totalMonsterXp = 0;
+            int qtyMonsters = 0;
+            foreach (var comp in encounter.MemberList)
+            {
+                int qty = comp.Qty;
+                Ancestry monster = comp.Monster;
+                int xpv = monster.GetXpValue();
+                totalMonsterXp += (xpv * qty);
+                qtyMonsters += qty;
+            }
+
+            int qtyPcs = CalcTotalPcs();
+            float xpMod = CalcXpMultiplier(qtyMonsters, qtyPcs);
+            totalMonsterXp = (int)(totalMonsterXp * xpMod);
+
+            string difficulty;
+            if (totalMonsterXp < partyEasy) { difficulty = "Trivial"; }
+            else if (totalMonsterXp < partyMedium) { difficulty = "Easy"; }
+            else if (totalMonsterXp < partyHard) { difficulty = "Medium"; }
+            else if (totalMonsterXp < partyDeadly) { difficulty = "Hard"; }
+            else if (totalMonsterXp < partyAbsurd) { difficulty = "Deadly"; }
+            else { difficulty = "Absurd"; }
+
+            return difficulty;
         }
 
         public Encounter PickRandomEncounter(string biome, bool isStandardRace)

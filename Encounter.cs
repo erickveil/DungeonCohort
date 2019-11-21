@@ -17,7 +17,7 @@ namespace DungeonCohort
             {
                 output += member.AsString() + "\n";
             }
-            output += "Total xp: " + GetTotalXpv().ToString();
+            //output += "Total xp: " + GetTotalXpv().ToString();
 
             return output;
         }
@@ -33,6 +33,13 @@ namespace DungeonCohort
                 
             }
             return xpv;
+        }
+
+        public int GetTotalMonsters()
+        {
+            int total = 0;
+            foreach (var comp in MemberList) { total += comp.Qty; }
+            return total;
         }
     }
 }
