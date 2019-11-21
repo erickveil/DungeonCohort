@@ -168,7 +168,8 @@
             "Wilderness",
             "Lawful Civ",
             "Chaos Civ",
-            "Neutral Civ"});
+            "Neutral Civ",
+            "Hell"});
             this.cb_biome.Location = new System.Drawing.Point(739, 23);
             this.cb_biome.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.cb_biome.Name = "cb_biome";

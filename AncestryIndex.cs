@@ -482,6 +482,14 @@ namespace Darkmoor
             {
                 return source;
             }
+            else if (biome == "Hell")
+            {
+                allowedType = new List<string>
+                {
+                    "devil",
+                    "yugoloth"
+                };
+            }
             else
             {
                 Console.WriteLine("Unknown biome filter: " + biome);
