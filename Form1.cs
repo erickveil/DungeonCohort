@@ -300,5 +300,10 @@ namespace DungeonCohort
             string result = gm.RollFate(chaosFactor, odds);
             tb_fate.Text = result;
         }
+
+        private void bu_event_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

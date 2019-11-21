@@ -756,6 +756,7 @@
             this.bu_event.TabIndex = 6;
             this.bu_event.Text = "Event";
             this.bu_event.UseVisualStyleBackColor = true;
+            this.bu_event.Click += new System.EventHandler(this.bu_event_Click);
             // 
             // rtb_event
             // 
