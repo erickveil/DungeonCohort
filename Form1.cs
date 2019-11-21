@@ -287,8 +287,6 @@ namespace DungeonCohort
 
         private void bu_fate_Click(object sender, EventArgs e)
         {
-            var gm = new GmEmulator();
-
             int chaosFactor = (int)nud_chaosFactor.Value;
             string odds = cobo_odds.Text;
             if (odds == "")
@@ -297,13 +295,31 @@ namespace DungeonCohort
                 return;
             }
 
-            string result = gm.RollFate(chaosFactor, odds);
+            bool isEvent;
+            string result = GmEmulator.RollFate(chaosFactor, odds, out isEvent);
             tb_fate.Text = result;
+
+            if (!isEvent) { return; }
+
+            tb_fate.Text = tb_fate.Text + " (Event!)";
+
+            string eventStr = GmEmulator.RollRandomEvent();
+            rtb_event.Clear();
+            PrintBody(rtb_event, eventStr);
         }
 
         private void bu_event_Click(object sender, EventArgs e)
         {
+            string eventStr = GmEmulator.RollRandomEvent();
+            rtb_event.Clear();
+            PrintBody(rtb_event, eventStr);
+        }
 
+        private void bu_scene_Click(object sender, EventArgs e)
+        {
+            int chaosFactor = (int)nud_chaosFactor.Value;
+            string result = GmEmulator.RollSceneMod(chaosFactor);
+            tb_scene.Text = result;
         }
     }
 }
