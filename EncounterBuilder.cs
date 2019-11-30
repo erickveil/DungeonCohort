@@ -145,6 +145,9 @@ namespace DungeonCohort
                 case 11: return PickThreeTypes(biome, isStandardRace);
                 case 12: return PickMooks(numMooks, biome, 
                     isStandardRace);
+                case 13:
+                    numMooks = dice.Roll(1, (numPcs * 2));
+                    return PickMooks(numMooks, biome, isStandardRace);
 
                 default: 
                     throw new Exception("Invalid encounter strategy selected.");

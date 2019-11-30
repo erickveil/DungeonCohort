@@ -257,10 +257,31 @@ namespace DungeonCohort
             string biome = cb_biome.Text;
             bool isStandardRace = cb_stdRaceNpcs.Checked;
 
-            _encounterBuilder.PickRandomEncounter(biome, isStandardRace);
-
             RichTextBox target = rtb_rndMonstOut;
             target.Clear();
+
+            if (biome == "")
+            {
+                PrintBody(target, "Set Biome");
+                return;
+            }
+            if (_encounterBuilder.Difficulty == "")
+            {
+                PrintBody(target, "Set Difficulty");
+                return;
+            }
+            if (_encounterBuilder.PcLevelList.Sum() == 0)
+            {
+                PrintBody(target, "Set PC Levels");
+                return;
+            }
+            if (_encounterBuilder.PcQtyList.Sum() == 0)
+            {
+                PrintBody(target, "Set Number of PCs");
+                return;
+            }
+            _encounterBuilder.PickRandomEncounter(biome, isStandardRace);
+
             PrintBody(target, _encounterBuilder.LastEncounterAsString());
         }
 
