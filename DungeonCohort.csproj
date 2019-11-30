@@ -61,6 +61,12 @@
     <Compile Include="BestiaryMonsterAction.cs" />
     <Compile Include="BestiaryMonsterHp.cs" />
     <Compile Include="Character.cs" />
+    <Compile Include="CrawlRoomContents.cs" />
+    <Compile Include="CrawlRoomExit.cs" />
+    <Compile Include="CrawlRoomFeature.cs" />
+    <Compile Include="CrawlRoomIllumintion.cs" />
+    <Compile Include="CrawlRooms.cs" />
+    <Compile Include="CrawlRoomShape.cs" />
     <Compile Include="Dice.cs" />
     <Compile Include="Encounter.cs" />
     <Compile Include="EncounterBuilder.cs" />

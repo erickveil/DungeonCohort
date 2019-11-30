@@ -342,5 +342,10 @@ namespace DungeonCohort
             string result = GmEmulator.RollSceneMod(chaosFactor);
             tb_scene.Text = result;
         }
+
+        private void but_CrawlRoom_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -67,6 +67,12 @@ namespace Darkmoor
             return _ItemList[Index];
         }
 
+        public int GetResultIndex()
+        {
+            if (_ItemList.Count == 0) { return -1; }
+            return _dice.Roll(1, _ItemList.Count) - 1;
+        }
+
         /// <summary>
         /// Gets the number of individual items added to the table
         /// </summary>
