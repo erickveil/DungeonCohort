@@ -21,9 +21,11 @@ namespace DungeonCohort
         public CrawlRoomIllumintion Illumination;
         public CrawlRoomFeature Feature;
         public CrawlRoomContents Contents;
-        public CrawlRoomExit LeftExit = null;
-        public CrawlRoomExit RightExit = null;
-        public CrawlRoomExit AheadExit = null;
+        public CrawlRoomExit NorthExit = null;
+        public CrawlRoomExit SouthExit = null;
+        public CrawlRoomExit EastExit = null;
+        public CrawlRoomExit WestExit = null;
+        public CrawlRoomExit StandardExit;
 
 
         public void RandomizeRoom(string dungeonType, bool isLargeRooms, 
