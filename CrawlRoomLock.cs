@@ -7,7 +7,7 @@ using Darkmoor;
 
 namespace DungeonCohort
 {
-    class Lock
+    class CrawlRoomLock
     {
         public string LockType;
         public int LockDC;

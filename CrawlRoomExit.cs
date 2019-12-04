@@ -12,8 +12,8 @@ namespace DungeonCohort
         public string Type;
         public string Mechanism;
         public string State;
-        public Lock DoorLock;
-        public Trap DoorTrap;
+        public CrawlRoomLock DoorLock;
+        public CrawlRoomTrap DoorTrap;
 
         public void RandomizeExit(int tier)
         {
@@ -40,7 +40,7 @@ namespace DungeonCohort
                 || Type.Contains("Mimic")
                 ) )
             {
-                DoorTrap = new Trap();
+                DoorTrap = new CrawlRoomTrap();
                 DoorTrap.InitAsDoorTrap(tier);
             }
         }
@@ -101,7 +101,7 @@ namespace DungeonCohort
 
             if (State == "Locked")
             {
-                DoorLock = new Lock();
+                DoorLock = new CrawlRoomLock();
                 DoorLock.Init(tier);
             }
             else

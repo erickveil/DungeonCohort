@@ -26,6 +26,7 @@ namespace DungeonCohort
         public CrawlRoomExit EastExit = null;
         public CrawlRoomExit WestExit = null;
         public CrawlRoomExit StandardExit;
+        public int CeilingHeight; // also choose a standard height?
 
 
         public void RandomizeRoom(string dungeonType, bool isLargeRooms, 
