@@ -13,11 +13,12 @@ namespace DungeonCohort
         public string DamageDice;
         public string DamageType;
         public int DC;
+        public string Disarm;
         public bool IsMagic = false;
         public string Severity;
+        public string TrapDoorContents;
         public string Trigger;
         public string Type;
-        public string Disarm;
 
 
         public void InitAsDoorTrap(int tier)
@@ -151,10 +152,35 @@ namespace DungeonCohort
             });
 
             var trap = typeTable.GetResult();
-            trap.Severity = severity;
-            trap.Disarm = disarm;
-            trap.DC = dc;
+            AttackBonus = trap.AttackBonus;
+            DamageDice = trap.DamageDice;
+            DamageType = trap.DamageType;
+            DC = dc;
+            Disarm = disarm;
+            IsMagic = false;
+            Severity = severity;
+            Trigger = trap.Trigger;
+            Type = trap.Type;
 
+        }
+
+        private string _chooseTrapDoorContents()
+        {
+            // TODO: trap doors are a subtype of trap and get a full object result
+            var table = new RandomTable<string>();
+            table.AddItem("Drops to empty shaft", 3);
+            table.AddItem("Spikes"); // coating
+            table.AddItem("Monster"); // guardian type monster
+            table.AddItem("Incidental treasure"); // treasure
+            table.AddItem("Liquid"); // trap pool
+            table.AddItem("Straight drop to next level");
+            table.AddItem("Slide to next level"); // no damage
+            table.AddItem("Teleport to another part of the dungeon and dropped to the floor");
+            table.AddItem("Blender blades. Roll damage twice");
+            table.AddItem("Gravity reverses each turn. Save to escape each reversal");
+            table.AddItem("Gas"); // gas type
+            table.AddItem("Straw. No damage");
+            return table.GetResult();
         }
 
         private string _chooseSeverity()
@@ -216,6 +242,7 @@ namespace DungeonCohort
 
         private string _chooseDamageType()
         {
+            return "";
 
         }
     }
