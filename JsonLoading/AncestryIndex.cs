@@ -43,7 +43,10 @@ namespace Darkmoor
         {
             get
             {
-                if (_instance is null) { _instance = new AncestryIndex(); }
+                if (_instance is null) { 
+                    _instance = new AncestryIndex();
+                    _instance.LoadAllSources();
+                }
                 return _instance;
             }
         }
@@ -52,7 +55,7 @@ namespace Darkmoor
         /// Old method used in the initial testing. Now ancestries are loaded
         /// from files so you can control what is included in your world.
         /// </summary>
-        public void LoadConstantAncestries()
+        private void LoadConstantAncestries()
         {
             var nameList = new List<string> { 
                 "human", "elf", "dwarf", "hobgoblin", "dark elf", "orc" 
@@ -73,7 +76,7 @@ namespace Darkmoor
             }
         }
 
-        public void LoadPCAncestries()
+        private void LoadPCAncestries()
         {
             var nameList = new List<string> { 
                 "Human", "Elf", "Dwarf", "Halfling", "Gnome", "Halfelf",
@@ -103,7 +106,7 @@ namespace Darkmoor
         /// <summary>
         /// Loads all ancestries from various files.
         /// </summary>
-        public void LoadAllSources()
+        private void LoadAllSources()
         {
             if (_isLoaded) { return; }
             _isLoaded = true;
@@ -117,7 +120,7 @@ namespace Darkmoor
         /// CSV ancestries are easy to create by users who want to add their 
         /// own or control available ancestries via whitelist.
         /// </summary>
-        public void LoadCsvAncestries()
+        private void LoadCsvAncestries()
         {
             try
             {
@@ -179,7 +182,7 @@ namespace Darkmoor
         /// These JSON files are not included with this repo, as they contain
         /// monsters that I don't have the license for.
         /// </summary>
-        public void LoadJsonAncestries()
+        private void LoadJsonAncestries()
         {
             var loader = new BestiaryJsonLoader();
             loader.LoadAllBestiaries();

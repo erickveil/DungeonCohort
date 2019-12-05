@@ -16,7 +16,7 @@ namespace DungeonCohort
         AncestryIndex _ancestryIndex;
         JsonLootLoader _lootLoader;
         Dice _dice;
-        EncounterBuilder _encounterBuilder;
+        EncounterFactory _encounterFactory;
 
         
         public Form1()
@@ -24,13 +24,10 @@ namespace DungeonCohort
             InitializeComponent();
 
             _ancestryIndex = AncestryIndex.Instance;
-            _ancestryIndex.LoadAllSources();
             _dice = Dice.Instance;
-            _lootLoader = new JsonLootLoader();
-            _lootLoader.LoadLootJsonData();
+            _lootLoader = JsonLootLoader.Instance;
 
-            _encounterBuilder = new EncounterBuilder();
-            _encounterBuilder.MonsterSource = _ancestryIndex;
+            _encounterFactory = new EncounterFactory();
         }
 
         public void Print(RichTextBox target, string message, Font font)
@@ -194,17 +191,13 @@ namespace DungeonCohort
             RichTextBox target = rtb_rndMonstOut;
             target.Clear();
             int tier = (int)nud_tier.Value;
-
-            var lootTable = _lootLoader.GetIndividualLootTable(tier);
-            LootTableResult loot = lootTable.GetResult();
             var permissions = GetItemPermissions();
-            loot.PurgeResults(permissions);
+
+            var treasureGen = new TreasureFactory();
+            var loot = treasureGen.GetIndividualTreasure(tier, permissions);
+
             string lootReport = "Loot: " + loot.AsString();
-
             PrintBody(target, lootReport);
-
-
-
         }
 
         private void bu_hordeTreasure_Click(object sender, EventArgs e)
@@ -212,14 +205,12 @@ namespace DungeonCohort
             RichTextBox target = rtb_rndMonstOut;
             target.Clear();
             int tier = (int)nud_tier.Value;
-
-
-            var lootTable = _lootLoader.GetHordeLootTable(tier);
-            LootTableResult loot = lootTable.GetResult();
             var permissions = GetItemPermissions();
-            loot.PurgeResults(permissions);
-            string lootReport = "Treasure Horde:\n" + loot.AsString();
 
+            var treasureGen = new TreasureFactory();
+            var loot = treasureGen.GetTreasureHoard(tier, permissions);
+
+            string lootReport = "Treasure Horde:\n" + loot.AsString();
             PrintBody(target, lootReport);
 
         }
@@ -241,18 +232,18 @@ namespace DungeonCohort
 
         private void bu_encounter_Click(object sender, EventArgs e)
         {
-            _encounterBuilder.Clear();
-            _encounterBuilder.PcLevelList.Add((int)nud_pcLevelA.Value);
-            _encounterBuilder.PcLevelList.Add((int)nud_pcLevelB.Value);
-            _encounterBuilder.PcLevelList.Add((int)nud_pcLevelC.Value);
-            _encounterBuilder.PcLevelList.Add((int)nud_pcLevelD.Value);
+            _encounterFactory.Clear();
+            _encounterFactory.PcLevelList.Add((int)nud_pcLevelA.Value);
+            _encounterFactory.PcLevelList.Add((int)nud_pcLevelB.Value);
+            _encounterFactory.PcLevelList.Add((int)nud_pcLevelC.Value);
+            _encounterFactory.PcLevelList.Add((int)nud_pcLevelD.Value);
 
-            _encounterBuilder.PcQtyList.Add((int)nud_pcQtyA.Value);
-            _encounterBuilder.PcQtyList.Add((int)nud_pcQtyB.Value);
-            _encounterBuilder.PcQtyList.Add((int)nud_pcQtyC.Value);
-            _encounterBuilder.PcQtyList.Add((int)nud_pcQtyD.Value);
+            _encounterFactory.PcQtyList.Add((int)nud_pcQtyA.Value);
+            _encounterFactory.PcQtyList.Add((int)nud_pcQtyB.Value);
+            _encounterFactory.PcQtyList.Add((int)nud_pcQtyC.Value);
+            _encounterFactory.PcQtyList.Add((int)nud_pcQtyD.Value);
 
-            _encounterBuilder.Difficulty = cb_difficulty.Text;
+            _encounterFactory.Difficulty = cb_difficulty.Text;
 
             string biome = cb_biome.Text;
             bool isStandardRace = cb_stdRaceNpcs.Checked;
@@ -265,24 +256,24 @@ namespace DungeonCohort
                 PrintBody(target, "Set Biome");
                 return;
             }
-            if (_encounterBuilder.Difficulty == "")
+            if (_encounterFactory.Difficulty == "")
             {
                 PrintBody(target, "Set Difficulty");
                 return;
             }
-            if (_encounterBuilder.PcLevelList.Sum() == 0)
+            if (_encounterFactory.PcLevelList.Sum() == 0)
             {
                 PrintBody(target, "Set PC Levels");
                 return;
             }
-            if (_encounterBuilder.PcQtyList.Sum() == 0)
+            if (_encounterFactory.PcQtyList.Sum() == 0)
             {
                 PrintBody(target, "Set Number of PCs");
                 return;
             }
-            _encounterBuilder.PickRandomEncounter(biome, isStandardRace);
+            _encounterFactory.PickRandomEncounter(biome, isStandardRace);
 
-            PrintBody(target, _encounterBuilder.LastEncounterAsString());
+            PrintBody(target, _encounterFactory.LastEncounterAsString());
         }
 
         private void bu_rollDice_Click(object sender, EventArgs e)

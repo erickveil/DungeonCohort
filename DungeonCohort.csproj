@@ -52,14 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ancestry.cs" />
-    <Compile Include="AncestryIndex.cs" />
-    <Compile Include="ArtObjects.cs" />
-    <Compile Include="Bestiary.cs" />
-    <Compile Include="BestiaryJsonLoader.cs" />
-    <Compile Include="BestiaryMonster.cs" />
-    <Compile Include="BestiaryMonsterAction.cs" />
-    <Compile Include="BestiaryMonsterHp.cs" />
+    <Compile Include="JsonLoading\Ancestry.cs" />
+    <Compile Include="JsonLoading\AncestryIndex.cs" />
+    <Compile Include="JsonLoading\ArtObjects.cs" />
+    <Compile Include="JsonLoading\Bestiary.cs" />
+    <Compile Include="JsonLoading\BestiaryJsonLoader.cs" />
+    <Compile Include="JsonLoading\BestiaryMonster.cs" />
+    <Compile Include="JsonLoading\BestiaryMonsterAction.cs" />
+    <Compile Include="JsonLoading\BestiaryMonsterHp.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="CrawlRoomContents.cs" />
     <Compile Include="CrawlRoomExit.cs" />
@@ -68,44 +68,45 @@
     <Compile Include="CrawlRooms.cs" />
     <Compile Include="CrawlRoomShape.cs" />
     <Compile Include="Dice.cs" />
-    <Compile Include="Encounter.cs" />
-    <Compile Include="EncounterBuilder.cs" />
-    <Compile Include="EncounterComponent.cs" />
+    <Compile Include="ResultObjects\Encounter.cs" />
+    <Compile Include="EncounterFactory.cs" />
+    <Compile Include="ResultObjects\EncounterComponent.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gemstones.cs" />
+    <Compile Include="ResultObjects\Gemstones.cs" />
     <Compile Include="GmEmulator.cs" />
-    <Compile Include="JsonItem.cs" />
-    <Compile Include="JsonItemLoader.cs" />
-    <Compile Include="JsonItemRoot.cs" />
-    <Compile Include="JsonItemGroup.cs" />
-    <Compile Include="JsonLoot.cs" />
-    <Compile Include="JsonLootArt.cs" />
-    <Compile Include="JsonLootCoins.cs" />
-    <Compile Include="JsonLootGemstones.cs" />
-    <Compile Include="JsonLootHoard.cs" />
-    <Compile Include="JsonLootHordeTableEntry.cs" />
-    <Compile Include="JsonLootIndividual.cs" />
-    <Compile Include="JsonLootIndividualCoins.cs" />
-    <Compile Include="JsonLootLoader.cs" />
-    <Compile Include="JsonLootMagicitems.cs" />
-    <Compile Include="JsonLootMagicitemsTableEntry.cs" />
-    <Compile Include="JsonMagicVariantLoader.cs" />
-    <Compile Include="JsonMagicVariantRoot.cs" />
-    <Compile Include="JsonMagicVariants.cs" />
-    <Compile Include="JsonMagicVariantsInherits.cs" />
+    <Compile Include="JsonLoading\JsonItem.cs" />
+    <Compile Include="JsonLoading\JsonItemLoader.cs" />
+    <Compile Include="JsonLoading\JsonItemRoot.cs" />
+    <Compile Include="JsonLoading\JsonItemGroup.cs" />
+    <Compile Include="JsonLoading\JsonLoot.cs" />
+    <Compile Include="JsonLoading\JsonLootArt.cs" />
+    <Compile Include="JsonLoading\JsonLootCoins.cs" />
+    <Compile Include="JsonLoading\JsonLootGemstones.cs" />
+    <Compile Include="JsonLoading\JsonLootHoard.cs" />
+    <Compile Include="JsonLoading\JsonLootHordeTableEntry.cs" />
+    <Compile Include="JsonLoading\JsonLootIndividual.cs" />
+    <Compile Include="JsonLoading\JsonLootIndividualCoins.cs" />
+    <Compile Include="JsonLoading\JsonLootLoader.cs" />
+    <Compile Include="JsonLoading\JsonLootMagicitems.cs" />
+    <Compile Include="JsonLoading\JsonLootMagicitemsTableEntry.cs" />
+    <Compile Include="JsonLoading\JsonMagicVariantLoader.cs" />
+    <Compile Include="JsonLoading\JsonMagicVariantRoot.cs" />
+    <Compile Include="JsonLoading\JsonMagicVariants.cs" />
+    <Compile Include="JsonLoading\JsonMagicVariantsInherits.cs" />
     <Compile Include="CrawlRoomLock.cs" />
-    <Compile Include="LootTableResult.cs" />
+    <Compile Include="ResultObjects\LootTableResult.cs" />
     <Compile Include="MagicItemPermissions.cs" />
-    <Compile Include="MagicItems.cs" />
+    <Compile Include="ResultObjects\MagicItems.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomTable.cs" />
     <Compile Include="CrawlRoomTrap.cs" />
+    <Compile Include="TreasureFactory.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

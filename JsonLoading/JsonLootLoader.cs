@@ -15,7 +15,26 @@ namespace DungeonCohort
     {
         JsonLoot _lootObj;
 
-        public void LoadLootJsonData()
+        private static JsonLootLoader _instance = null;
+
+        private JsonLootLoader()
+        {
+
+        }
+
+        public static JsonLootLoader Instance
+        {
+            get
+            {
+                if(_instance is null) { 
+                    _instance = new JsonLootLoader();
+                    _instance.LoadLootJsonData();
+                }
+                return _instance;
+            }
+        }
+
+        private void LoadLootJsonData()
         {
             string filename = "loot.json";
             string jsonData;

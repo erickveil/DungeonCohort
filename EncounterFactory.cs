@@ -10,17 +10,22 @@ namespace DungeonCohort
     /// <summary>
     /// Generates an encounter ballanced to a party of PCs (not by tier)
     /// </summary>
-    class EncounterBuilder
+    class EncounterFactory
     {
         public List<int> PcLevelList = new List<int>();
         public List<int> PcQtyList = new List<int>();
         public string Difficulty;
 
-        public AncestryIndex MonsterSource;
+        private AncestryIndex MonsterSource;
 
         public Encounter LastEncounter;
         public float LastModifier;
         public string LastSubDifficulty;
+
+        public EncounterFactory()
+        {
+            MonsterSource = AncestryIndex.Instance;
+        }
 
         public string LastEncounterAsString()
         {
