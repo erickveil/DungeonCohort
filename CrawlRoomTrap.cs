@@ -167,6 +167,7 @@ namespace DungeonCohort
         private string _chooseTrapDoorContents()
         {
             // TODO: trap doors are a subtype of trap and get a full object result
+            // not just a string result
             var table = new RandomTable<string>();
             table.AddItem("Drops to empty shaft", 3);
             table.AddItem("Spikes"); // coating
