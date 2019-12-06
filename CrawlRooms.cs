@@ -53,13 +53,29 @@ namespace DungeonCohort
             var typeTableFactory = JsonChamberPurposeLoader.Instance;
             var typeTable = 
                 typeTableFactory.GetDungeonRoomTypeTable(dungeonType);
-            RoomType = typeTable.GetResult();
+            if (IsHall)
+            {
+                RoomType = "Hall";
+            }
+            else
+            {
+                RoomType = typeTable.GetResult();
+            }
+
+            var dice = Dice.Instance;
+            Orientation = dice.Roll(1, 4);
 
         }
 
-        public void AsString()
+        public string AsString()
         {
             // RoomType comes out seperately for formatting.
+
+            string desc = ""
+                + RoomSize + ", " + RoomShape + "\n"
+                + (IsHall ? "" : "Orientation: " + Orientation.ToString() + "\n")
+                ;
+            return desc;
         }
 
         public void _setIsHall()

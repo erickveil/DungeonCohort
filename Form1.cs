@@ -358,6 +358,8 @@ namespace DungeonCohort
             target.Clear();
             PrintH2(target, room.RoomType);
 
+            PrintBody(target, "\n" + room.AsString());
+
         }
 
         private void bu_mythicClear_Click(object sender, EventArgs e)
