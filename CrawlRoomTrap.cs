@@ -14,7 +14,9 @@ namespace DungeonCohort
         public string DamageType;
         public int DC;
         public string Disarm;
+        public string Effect;
         public bool IsMagic = false;
+        public string Location;
         public string Severity;
         public string TrapDoorContents;
         public string Trigger;
@@ -35,17 +37,20 @@ namespace DungeonCohort
             int attk = _chooseAttkBonus(severity);
             string dice = _chooseDamage(tier, severity);
             string damageType = _chooseDamageType();
+            CrawlRoomTrap beam = _chooseBeamEffect();
 
             typeTable.AddItem(new CrawlRoomTrap
             {
                 DamageDice = dice,
                 DamageType = "Falling",
+                Location = "The floor",
                 Type = "Trap door",
                 // Trap door content?
-            }); 
+            });
             typeTable.AddItem(new CrawlRoomTrap
             {
                 DamageDice = dice,
+                Location = _chooseLocation(),
                 Type = "Gas",
                 // Gas type?
             });
@@ -54,8 +59,8 @@ namespace DungeonCohort
                 AttackBonus = attk,
                 DamageDice = dice,
                 DamageType = "Piercing",
+                Location = "The floor",
                 Type = "Spikes",
-                // trap direction?
                 // trap coating?
             });
             typeTable.AddItem(new CrawlRoomTrap
@@ -63,8 +68,8 @@ namespace DungeonCohort
                 AttackBonus = attk,
                 DamageDice = dice,
                 DamageType = "Piercing",
+                Location = _chooseLocation(),
                 Type = "Darts",
-                // trap direction?
                 // trap coating?
             });
             typeTable.AddItem(new CrawlRoomTrap
@@ -72,64 +77,76 @@ namespace DungeonCohort
                 AttackBonus = attk,
                 DamageDice = dice,
                 DamageType = "Slashing",
+                Location = _chooseLocation(),
                 Type = "Blades",
-                // trap direction?
                 // trap coating?
             });
             typeTable.AddItem(new CrawlRoomTrap
             {
                 DamageDice = dice,
                 DamageType = "Bludgeoning",
+                Location = "The ceiling",
                 Type = "Falling Blocks",
             });
             typeTable.AddItem(new CrawlRoomTrap
             {
-                Type = "Net"
+                Location = "The ceiling",
+                DamageDice = "None",
+                DamageType = "Restrained",
+                Type = "Net",
             });
             typeTable.AddItem(new CrawlRoomTrap
             {
                 AttackBonus = attk,
                 DamageDice = dice,
-                DamageType = damageType,
+                DamageType = beam.DamageType,
+                Effect = beam.Effect,
                 IsMagic = true,
+                Location = _chooseLocation(),
                 Type = "Magic beam",
-                // trap direction?
-                // beam effect
             });
             typeTable.AddItem(new CrawlRoomTrap
             {
+                DamageDice = dice,
+                DamageType = beam.DamageType,
+                Effect = beam.Effect,
                 IsMagic = true,
+                Location = _chooseLocation(),
                 Trigger = "Viewing",
                 Type = "Magic symbol",
-                // trap effect 
             });
             typeTable.AddItem(new CrawlRoomTrap
             {
-                AttackBonus = attk,
                 DamageDice = dice,
+                DamageType = beam.DamageType,
+                Effect = beam.Effect,
                 IsMagic = true,
-                Type = "Magic Blast",
-                // trap effect?
+                Location = _chooseLocation(),
+                Type = "Magic blast",
                 // radius?
             });
             typeTable.AddItem(new CrawlRoomTrap
             {
+                Location = "The ceiling",
                 Type = "Cage drops from above"
             }); 
             typeTable.AddItem(new CrawlRoomTrap
             {
+                Location = "The room",
                 Type = "Room Trap",
                 // exits blocked?
                 // room trap type?
             });      
             typeTable.AddItem(new CrawlRoomTrap
             {
+                Location = "The exit",
                 Type = ""
                 // exit blocker?
             });
             typeTable.AddItem(new CrawlRoomTrap
             {
                 DamageType = "Falling",
+                Location = _chooseLocation(),
                 Type = "Reverse gravity",
             });
             typeTable.AddItem(new CrawlRoomTrap
@@ -137,8 +154,8 @@ namespace DungeonCohort
                 AttackBonus = attk,
                 DamageDice = dice,
                 DamageType = "Piercing",
+                Location = _chooseLocation(),
                 Type = "Spears",
-                // trap directon
                 // coating
             });
             typeTable.AddItem(new CrawlRoomTrap
@@ -146,8 +163,8 @@ namespace DungeonCohort
                 AttackBonus = attk,
                 DamageDice = dice,
                 DamageType = "Piercing",
+                Location = _chooseLocation(),
                 Type = "Arrows",
-                // trap direciton
                 // coating
             });
 
@@ -181,6 +198,103 @@ namespace DungeonCohort
             table.AddItem("Gravity reverses each turn. Save to escape each reversal");
             table.AddItem("Gas"); // gas type
             table.AddItem("Straw. No damage");
+            return table.GetResult();
+        }
+
+        private CrawlRoomTrap _chooseBeamEffect()
+        {
+            var table = new RandomTable<CrawlRoomTrap>();
+
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Armor damaged -1 AC on failed save",
+                DamageType = "Acid"
+            }); 
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Movement halved on failed save",
+                DamageType = "Cold"
+            });          
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Unattended flamable items are destroyed",
+                DamageType = "Fire"
+            });
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Concentration checks at disadvantage",
+                DamageType = "Psychic"
+            });
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Those slain rise as zombies",
+                DamageType = "Necrotic"
+            });
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Save or be blinded",
+                DamageType = "Radiant"
+            });
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Strikes all in a straight line from the source",
+                DamageType = "Lightning"
+            });
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Roll for wandering monster chance from noise",
+                DamageType = "Thunder"
+            });
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Save or knocked back 10 feet",
+                DamageType = "Force"
+            });
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Take one level of exhaustion per tier",
+                DamageType = "Exhaustion"
+            });
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Save or acquire Fear condition",
+                DamageType = "Fear"
+            }); 
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Save or incapacitated",
+                DamageType = "Incapacitation"
+            });
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Save or paralyzed",
+                DamageType = "Paralyzation"
+            });
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Save or petrified",
+                DamageType = "Petrification"
+            });
+            table.AddItem(new CrawlRoomTrap
+            {
+                Effect = "Save or stunned",
+                DamageType = "Stunning"
+            });
+
+
+            return table.GetResult();
+        }
+
+        private string _chooseLocation()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("The wall ahead");
+            table.AddItem("The ceiling");
+            table.AddItem("The right wall");
+            table.AddItem("The left wall");
+            table.AddItem("The wall behind");
+
             return table.GetResult();
         }
 
