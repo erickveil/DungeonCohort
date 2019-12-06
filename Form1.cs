@@ -338,5 +338,12 @@ namespace DungeonCohort
         {
 
         }
+
+        private void bu_mythicClear_Click(object sender, EventArgs e)
+        {
+            rtb_event.Clear();
+            tb_fate.Text = "";
+            tb_scene.Text = "";
+        }
     }
 }
