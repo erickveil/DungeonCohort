@@ -89,6 +89,7 @@
             this.but_CrawlRoom = new System.Windows.Forms.Button();
             this.rtb_Crawl = new System.Windows.Forms.RichTextBox();
             this.bu_mythicClear = new System.Windows.Forms.Button();
+            this.bu_rndTrap = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -609,6 +610,7 @@
             // 
             // tab_dev
             // 
+            this.tab_dev.Controls.Add(this.bu_rndTrap);
             this.tab_dev.Controls.Add(this.rtb_rndMonstOut);
             this.tab_dev.Controls.Add(this.gb_AllowedMagicItems);
             this.tab_dev.Controls.Add(this.bu_encounter);
@@ -863,6 +865,16 @@
             this.bu_mythicClear.UseVisualStyleBackColor = true;
             this.bu_mythicClear.Click += new System.EventHandler(this.bu_mythicClear_Click);
             // 
+            // bu_rndTrap
+            // 
+            this.bu_rndTrap.Location = new System.Drawing.Point(91, 230);
+            this.bu_rndTrap.Name = "bu_rndTrap";
+            this.bu_rndTrap.Size = new System.Drawing.Size(137, 23);
+            this.bu_rndTrap.TabIndex = 17;
+            this.bu_rndTrap.Text = "Random Trap";
+            this.bu_rndTrap.UseVisualStyleBackColor = true;
+            this.bu_rndTrap.Click += new System.EventHandler(this.bu_rndTrap_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -963,6 +975,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox combo_crawlDungeonType;
         private System.Windows.Forms.Button bu_mythicClear;
+        private System.Windows.Forms.Button bu_rndTrap;
     }
 }
 

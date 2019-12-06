@@ -23,6 +23,14 @@ namespace DungeonCohort
             loot.PurgeResults(allowedItems);
             return loot;
         }
+        public LootTableResult GetIndividualTreasure(int tier)
+        {
+            var lootTable = _lootLoader.GetIndividualLootTable(tier);
+            LootTableResult loot = lootTable.GetResult();
+            var allowedItems = new MagicItemPermissions();
+            loot.PurgeResults(allowedItems);
+            return loot;
+        }
 
         public LootTableResult GetTreasureHoard(int tier,
             MagicItemPermissions allowedItems)

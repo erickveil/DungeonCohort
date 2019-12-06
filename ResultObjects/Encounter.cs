@@ -10,7 +10,7 @@ namespace DungeonCohort
     {
         public List<EncounterComponent> MemberList = new List<EncounterComponent>();
 
-        public string AsString()
+        public string ToString()
         {
             string output = "";
             foreach (var member in MemberList)

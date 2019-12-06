@@ -34,7 +34,7 @@ namespace DungeonCohort
         /// </summary>
         public List<MagicItems> MagicItemList = new List<MagicItems>();
 
-        public string AsString()
+        public string ToString()
         {
             string report = "";
             string delim = ", ";

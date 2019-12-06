@@ -114,7 +114,7 @@ namespace DungeonCohort
 
             var lootTable = _lootLoader.GetIndividualLootTable(tier);
             LootTableResult loot = lootTable.GetResult();
-            string lootReport = "\nLoot: " + loot.AsString();
+            string lootReport = "\nLoot: " + loot.ToString();
 
             string monsterName = monster.GetCompositeName();
             string cr = monster.CR;
@@ -133,7 +133,7 @@ namespace DungeonCohort
 
             var lootTable = _lootLoader.GetIndividualLootTable(tier);
             LootTableResult loot = lootTable.GetResult();
-            string lootReport = "\nLoot: " + loot.AsString();
+            string lootReport = "\nLoot: " + loot.ToString();
 
             string npcName = npc.GetFullIdentifier();
             string alignment = npc.GetAlignmentString();
@@ -164,7 +164,7 @@ namespace DungeonCohort
 
             var lootTable = _lootLoader.GetIndividualLootTable(tier);
             LootTableResult loot = lootTable.GetResult();
-            string lootReport = "Loot: " + loot.AsString();
+            string lootReport = "Loot: " + loot.ToString();
 
             string npcName = leader.GetFullIdentifier();
             string alignment = leader.GetAlignmentString();
@@ -175,7 +175,7 @@ namespace DungeonCohort
             {
                 lootTable = _lootLoader.GetIndividualLootTable(tier);
                 loot = lootTable.GetResult();
-                lootReport = "Loot: " + loot.AsString();
+                lootReport = "Loot: " + loot.ToString();
 
                 npcName = npc.GetFullIdentifier();
                 alignment = npc.GetAlignmentString();
@@ -196,7 +196,7 @@ namespace DungeonCohort
             var treasureGen = new TreasureFactory();
             var loot = treasureGen.GetIndividualTreasure(tier, permissions);
 
-            string lootReport = "Loot: " + loot.AsString();
+            string lootReport = "Loot: " + loot.ToString();
             PrintBody(target, lootReport);
         }
 
@@ -210,7 +210,7 @@ namespace DungeonCohort
             var treasureGen = new TreasureFactory();
             var loot = treasureGen.GetTreasureHoard(tier, permissions);
 
-            string lootReport = "Treasure Horde:\n" + loot.AsString();
+            string lootReport = "Treasure Horde:\n" + loot.ToString();
             PrintBody(target, lootReport);
 
         }
@@ -344,6 +344,18 @@ namespace DungeonCohort
             rtb_event.Clear();
             tb_fate.Text = "";
             tb_scene.Text = "";
+        }
+
+        private void bu_rndTrap_Click(object sender, EventArgs e)
+        {
+            int tier = (int)nud_tier.Value;
+            var trap = new CrawlRoomTrap();
+            trap.InitTrap(tier);
+
+            var target = rtb_rndMonstOut;
+            target.Clear();
+            PrintBody(target, trap.ToString());
+
         }
     }
 }

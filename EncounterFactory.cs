@@ -29,7 +29,7 @@ namespace DungeonCohort
 
         public string LastEncounterAsString()
         {
-            string output = LastEncounter.AsString() + "\n" + "\n"
+            string output = LastEncounter.ToString() + "\n" + "\n"
                 + GetDifficultyReport(LastEncounter);
 
             return output;

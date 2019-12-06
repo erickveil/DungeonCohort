@@ -8,14 +8,14 @@ namespace DungeonCohort
 {
     class MagicItemPermissions
     {
-        public bool MinorCommon;
-        public bool MinorUncommon;
-        public bool MinorRare;
-        public bool MinorVeryRare;
-        public bool MinorLegendary;
-        public bool MajorUncommon;
-        public bool MajorRare;
-        public bool MajorVeryRare;
-        public bool MajorLegendary;
+        public bool MinorCommon = true;
+        public bool MinorUncommon = true;
+        public bool MinorRare = true;
+        public bool MinorVeryRare = true;
+        public bool MinorLegendary = true;
+        public bool MajorUncommon = true;
+        public bool MajorRare = true;
+        public bool MajorVeryRare = true;
+        public bool MajorLegendary = true;
     }
 }
