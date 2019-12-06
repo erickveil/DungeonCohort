@@ -336,6 +336,27 @@ namespace DungeonCohort
 
         private void but_CrawlRoom_Click(object sender, EventArgs e)
         {
+            var room = new CrawlRooms();
+            string dungeonType = combo_crawlDungeonType.Text;
+            bool isLargeRoom = cb_crawlLargeRooms.Checked;
+            bool isNarrowHalls = cb_crawlNarrowPassages.Checked;
+            int tier = (int)nud_tier.Value;
+            CrawlRooms.ExitDirection enterFrom = CrawlRooms.ExitDirection.EXIT_EAST;
+            CrawlRoomExit entry = new CrawlRoomExit();
+            entry.InitAsStandard(tier);
+
+            room.RandomizeRoom(
+                dungeonType,
+                isLargeRoom,
+                isNarrowHalls,
+                tier,
+                enterFrom,
+                entry
+                );
+
+            var target = rtb_Crawl;
+            target.Clear();
+            PrintH2(target, room.RoomType);
 
         }
 

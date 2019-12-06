@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Darkmoor;
+using DungeonCohort.JsonLoading;
 
 namespace DungeonCohort
 {
@@ -48,11 +49,17 @@ namespace DungeonCohort
             {
                 _setRoomShape(tier, enterFrom, entry);
             }
+
+            var typeTableFactory = JsonChamberPurposeLoader.Instance;
+            var typeTable = 
+                typeTableFactory.GetDungeonRoomTypeTable(dungeonType);
+            RoomType = typeTable.GetResult();
+
         }
 
         public void AsString()
         {
-
+            // RoomType comes out seperately for formatting.
         }
 
         public void _setIsHall()

@@ -68,6 +68,9 @@
     <Compile Include="CrawlRooms.cs" />
     <Compile Include="CrawlRoomShape.cs" />
     <Compile Include="Dice.cs" />
+    <Compile Include="JsonLoading\JsonChamberPurpose.cs" />
+    <Compile Include="JsonLoading\JsonChamberPurposeTable.cs" />
+    <Compile Include="JsonLoading\JsonChamberPurposeLoader.cs" />
     <Compile Include="ResultObjects\Encounter.cs" />
     <Compile Include="EncounterFactory.cs" />
     <Compile Include="ResultObjects\EncounterComponent.cs" />
