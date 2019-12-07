@@ -41,13 +41,16 @@ namespace DungeonCohort
         {
             _setIsHall();
             _setRoomSize(isLargeRooms, isNarrowHalls);
+            Illumination = new CrawlRoomIllumintion();
             if (IsHall)
             {
                 _setHallShape(tier, enterFrom, entry);
+                Illumination.InitForHall();
             }
             else
             {
                 _setRoomShape(tier, enterFrom, entry);
+                Illumination.InitForRoom();
             }
 
             var typeTableFactory = JsonChamberPurposeLoader.Instance;
@@ -65,6 +68,7 @@ namespace DungeonCohort
             var dice = Dice.Instance;
             Orientation = dice.Roll(1, 4);
 
+
         }
 
         public string AsString()
@@ -72,6 +76,7 @@ namespace DungeonCohort
             // RoomType comes out seperately for formatting.
 
             string desc = ""
+                + "Illumination: " + Illumination.AsString() + "\n"
                 + RoomSize + ", " + RoomShape + "\n"
                 + (IsHall ? "" : "Orientation: " + Orientation.ToString() + "\n")
                 ;
