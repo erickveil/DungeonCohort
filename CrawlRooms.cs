@@ -42,6 +42,7 @@ namespace DungeonCohort
             _setIsHall();
             _setRoomSize(isLargeRooms, isNarrowHalls);
             Illumination = new CrawlRoomIllumintion();
+            Feature = new CrawlRoomFeature();
             if (IsHall)
             {
                 _setHallShape(tier, enterFrom, entry);
@@ -51,6 +52,7 @@ namespace DungeonCohort
             {
                 _setRoomShape(tier, enterFrom, entry);
                 Illumination.InitForRoom();
+                Feature.Init();
             }
 
             var typeTableFactory = JsonChamberPurposeLoader.Instance;
@@ -58,7 +60,7 @@ namespace DungeonCohort
                 typeTableFactory.GetDungeonRoomTypeTable(dungeonType);
             if (IsHall)
             {
-                RoomType = "Hall";
+                RoomType = "Hallway";
             }
             else
             {
@@ -69,18 +71,48 @@ namespace DungeonCohort
             Orientation = dice.Roll(1, 4);
 
 
+
+        }
+
+        public string GetHeader()
+        {
+            return
+                (Feature.Descriptor == "" ? "" : Feature.Descriptor + " ")
+                + RoomType;
         }
 
         public string AsString()
         {
-            // RoomType comes out seperately for formatting.
+            // RoomType comes out seperately as headder for formatting.
 
             string desc = ""
                 + "Illumination: " + Illumination.AsString() + "\n"
                 + RoomSize + ", " + RoomShape + "\n"
                 + (IsHall ? "" : "Orientation: " + Orientation.ToString() + "\n")
+                // TODO: NEXT: How to define standard doors? Entry Door?
+                + GetExits()
                 ;
             return desc;
+        }
+
+        public string GetExits()
+        {
+            int numExits = 0;
+            if (!(NorthExit is null)) { ++numExits; }
+            if (!(SouthExit is null)) { ++numExits; }
+            if (!(EastExit is null)) { ++numExits; }
+            if (!(WestExit is null)) { ++numExits; }
+
+            string north = NorthExit is null ? "" : "North: " + NorthExit.ToString() + "\n";
+            string south = SouthExit is null ? "" : "South: " + SouthExit.ToString() + "\n";
+            string east = EastExit is null ? "" : "East:" + EastExit.ToString() + "\n";
+            string west = WestExit is null ? "" : "West:" + WestExit.ToString() + "\n";
+
+            return "Exits: " + numExits.ToString() + "\n"
+                + north 
+                + south 
+                + east 
+                + west;
         }
 
         public void _setIsHall()

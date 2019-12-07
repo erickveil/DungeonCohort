@@ -356,7 +356,7 @@ namespace DungeonCohort
 
             var target = rtb_Crawl;
             target.Clear();
-            PrintH2(target, room.RoomType);
+            PrintH2(target, room.GetHeader());
 
             PrintBody(target, "\n" + room.AsString());
 

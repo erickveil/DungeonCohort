@@ -62,6 +62,16 @@ namespace DungeonCohort
             // standard door aren't trapped
         }
 
+        public string ToString()
+        {
+            return Type + "; "
+                + Mechanism + "; "
+                + State + "; "
+                + (DoorLock is null ? "" : DoorLock.ToString() + "; ")
+                + (DoorTrap is null ? "" : DoorTrap.ToString() )
+                ;
+        }
+
         private void _setMechanism(int tier)
         {
             var mechanismTable = new RandomTable<string>();
