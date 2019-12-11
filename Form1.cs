@@ -18,6 +18,7 @@ namespace DungeonCohort
         Dice _dice;
         EncounterFactory _encounterFactory;
 
+        CrawlRooms _lastRoom = null;
         
         public Form1()
         {
@@ -358,8 +359,41 @@ namespace DungeonCohort
             pcQtyList.Add((int)nud_pcQtyD.Value);
 
             CrawlRooms.ExitDirection enterFrom = CrawlRooms.ExitDirection.EXIT_EAST;
-            CrawlRoomExit entry = new CrawlRoomExit();
-            entry.InitAsStandard(tier);
+            string entryInputVal = cb_crawlEnterDirection.Text;
+
+            CrawlRoomExit entry;
+            if (_lastRoom is null)
+            {
+                _lastRoom = new CrawlRooms();
+                _lastRoom.NorthExit = new CrawlRoomExit();
+                _lastRoom.SouthExit = new CrawlRoomExit();
+                _lastRoom.EastExit = new CrawlRoomExit();
+                _lastRoom.WestExit = new CrawlRoomExit();
+                _lastRoom.NorthExit.InitAsStandard(tier);
+                _lastRoom.SouthExit.InitAsStandard(tier);
+                _lastRoom.EastExit.InitAsStandard(tier);
+                _lastRoom.WestExit.InitAsStandard(tier);
+            }
+
+            switch (entryInputVal)
+            {
+                case "North":
+                    enterFrom = CrawlRooms.ExitDirection.EXIT_NORTH;
+                    entry = _lastRoom.SouthExit;
+                    break;
+                case "South":
+                    enterFrom = CrawlRooms.ExitDirection.EXIT_SOUTH;
+                    entry = _lastRoom.NorthExit;
+                    break;
+                case "East":
+                    enterFrom = CrawlRooms.ExitDirection.EXIT_EAST;
+                    entry = _lastRoom.WestExit;
+                    break;
+                default:
+                    enterFrom = CrawlRooms.ExitDirection.EXIT_WEST;
+                    entry = _lastRoom.EastExit;
+                    break;
+            }
 
             var target = rtb_Crawl;
             target.Clear();
@@ -400,6 +434,7 @@ namespace DungeonCohort
             PrintH2(target, room.RoomType);
             PrintBody(target, "\n" + room.AsString());
 
+            _lastRoom = room;
         }
 
         private void bu_mythicClear_Click(object sender, EventArgs e)
@@ -419,6 +454,13 @@ namespace DungeonCohort
             target.Clear();
             PrintBody(target, trap.ToString());
 
+        }
+
+        private void bu_crawlClear_Click(object sender, EventArgs e)
+        {
+            _lastRoom = null;
+            var target = rtb_Crawl;
+            target.Clear();
         }
     }
 }

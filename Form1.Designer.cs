@@ -91,6 +91,9 @@
             this.but_CrawlRoom = new System.Windows.Forms.Button();
             this.rtb_Crawl = new System.Windows.Forms.RichTextBox();
             this.ch_crawlFullEncounters = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cb_crawlEnterDirection = new System.Windows.Forms.ComboBox();
+            this.bu_crawlClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -833,6 +836,9 @@
             // 
             // tabCrawl
             // 
+            this.tabCrawl.Controls.Add(this.bu_crawlClear);
+            this.tabCrawl.Controls.Add(this.cb_crawlEnterDirection);
+            this.tabCrawl.Controls.Add(this.label10);
             this.tabCrawl.Controls.Add(this.ch_crawlFullEncounters);
             this.tabCrawl.Controls.Add(this.label9);
             this.tabCrawl.Controls.Add(this.combo_crawlDungeonType);
@@ -928,10 +934,42 @@
             this.ch_crawlFullEncounters.AutoSize = true;
             this.ch_crawlFullEncounters.Location = new System.Drawing.Point(16, 248);
             this.ch_crawlFullEncounters.Name = "ch_crawlFullEncounters";
-            this.ch_crawlFullEncounters.Size = new System.Drawing.Size(770, 90);
+            this.ch_crawlFullEncounters.Size = new System.Drawing.Size(308, 36);
             this.ch_crawlFullEncounters.TabIndex = 6;
             this.ch_crawlFullEncounters.Text = "Use Full Encounters";
             this.ch_crawlFullEncounters.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(10, 308);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(155, 32);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Enter From";
+            // 
+            // cb_crawlEnterDirection
+            // 
+            this.cb_crawlEnterDirection.FormattingEnabled = true;
+            this.cb_crawlEnterDirection.Items.AddRange(new object[] {
+            "North",
+            "South",
+            "East",
+            "West"});
+            this.cb_crawlEnterDirection.Location = new System.Drawing.Point(190, 305);
+            this.cb_crawlEnterDirection.Name = "cb_crawlEnterDirection";
+            this.cb_crawlEnterDirection.Size = new System.Drawing.Size(254, 39);
+            this.cb_crawlEnterDirection.TabIndex = 8;
+            // 
+            // bu_crawlClear
+            // 
+            this.bu_crawlClear.Location = new System.Drawing.Point(25, 365);
+            this.bu_crawlClear.Name = "bu_crawlClear";
+            this.bu_crawlClear.Size = new System.Drawing.Size(191, 57);
+            this.bu_crawlClear.TabIndex = 9;
+            this.bu_crawlClear.Text = "Clear Path";
+            this.bu_crawlClear.UseVisualStyleBackColor = true;
+            this.bu_crawlClear.Click += new System.EventHandler(this.bu_crawlClear_Click);
             // 
             // Form1
             // 
@@ -1036,6 +1074,9 @@
         private System.Windows.Forms.Button bu_mythicClear;
         private System.Windows.Forms.Button bu_rndTrap;
         private System.Windows.Forms.CheckBox ch_crawlFullEncounters;
+        private System.Windows.Forms.ComboBox cb_crawlEnterDirection;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button bu_crawlClear;
     }
 }
 
