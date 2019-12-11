@@ -125,7 +125,19 @@ namespace DungeonCohort
 
         public override string ToString()
         {
-            string desc = ContentType.ToString() + "\n"
+            string difficultyDesc;
+            if (ContentType == RoomContentType.Monster 
+                || ContentType == RoomContentType.MonsterAndTreasure) 
+            { 
+                difficultyDesc = " (" + EncounterDifficulty + ")\n"; 
+            }
+            else 
+            { 
+                difficultyDesc = "\n"; 
+            }
+
+            string desc = _getTypeString(ContentType) 
+                + difficultyDesc
                 + (RoomEncounter is null ? "" : RoomEncounter.ToString() + "\n")
                 + (RoomTrap is null ? "" : RoomTrap.ToString() + "\n")
                 + (RoomTreasure is null ? "" : RoomTreasure.ToString())
@@ -159,6 +171,17 @@ namespace DungeonCohort
         {
             var lootGetn = new TreasureFactory();
             RoomTreasure = lootGetn.GetIndividualTreasure(tier);
+        }
+
+        private string _getTypeString(RoomContentType typeVal)
+        {
+            switch (typeVal)
+            {
+                case RoomContentType.HazardAndTreasure: return "Hazard And Treasure";
+                case RoomContentType.MonsterAndTreasure: return "Monster And Treasure";
+                case RoomContentType.TrapAndTreasure: return "Trap And Treasure";
+                default: return typeVal.ToString();
+            }
         }
 
     }
