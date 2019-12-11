@@ -25,22 +25,54 @@ namespace DungeonCohort
         public CrawlRoomTrap RoomTrap = null;
         public LootTableResult RoomTreasure = null;
 
-        public void Init(int tier, MagicItemPermissions allowedLoot)
+        public static string GetRandomDifficulty()
         {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Easy", 4);
+            table.AddItem("Medium", 16);
+            table.AddItem("Hard", 8);
+            table.AddItem("Deadly");
+
+            return table.GetResult();
+        }
+
+        public void Init(int tier, MagicItemPermissions allowedLoot, 
+            bool isHall)
+        {
+            EncounterDifficulty = GetRandomDifficulty();
+
             var contentsTable = new RandomTable<RoomContentType>();
 
-            // Current chances set to DMG 5e
-            contentsTable.AddItem(RoomContentType.Empty, 8);
-            contentsTable.AddItem(RoomContentType.Monster, 28);
-            contentsTable.AddItem(RoomContentType.MonsterAndTreasure, 20);
-            contentsTable.AddItem(RoomContentType.Trap, 10);
-            contentsTable.AddItem(RoomContentType.TrapAndTreasure, 3);
-            contentsTable.AddItem(RoomContentType.Hazard, 6);
-            contentsTable.AddItem(RoomContentType.HazardAndTreasure, 8);
-            contentsTable.AddItem(RoomContentType.Obstacle, 4);
-            contentsTable.AddItem(RoomContentType.Trick, 4);
-            contentsTable.AddItem(RoomContentType.Merchant);
-            contentsTable.AddItem(RoomContentType.Treasure, 6);
+            
+            if (isHall)
+            {
+                contentsTable.AddItem(RoomContentType.Empty, 20);
+                contentsTable.AddItem(RoomContentType.Monster, 5);
+                contentsTable.AddItem(RoomContentType.Trap, 5);
+                /*
+                contentsTable.AddItem(RoomContentType.Hazard, 2);
+                contentsTable.AddItem(RoomContentType.Obstacle, 2);
+                contentsTable.AddItem(RoomContentType.Trick, 1);
+                */
+            }
+            else
+            {
+                // Current chances set to DMG 5e
+                contentsTable.AddItem(RoomContentType.Empty, 8);
+                contentsTable.AddItem(RoomContentType.Monster, 28);
+                contentsTable.AddItem(RoomContentType.MonsterAndTreasure, 20);
+                contentsTable.AddItem(RoomContentType.Trap, 10);
+                contentsTable.AddItem(RoomContentType.TrapAndTreasure, 3);
+                contentsTable.AddItem(RoomContentType.Treasure, 6);
+                /*
+                contentsTable.AddItem(RoomContentType.Hazard, 6);
+                contentsTable.AddItem(RoomContentType.Obstacle, 4);
+                contentsTable.AddItem(RoomContentType.Trick, 4);
+                contentsTable.AddItem(RoomContentType.HazardAndTreasure, 8);
+                contentsTable.AddItem(RoomContentType.Merchant);
+                */
+            }
 
             ContentType = contentsTable.GetResult();
 
@@ -49,7 +81,6 @@ namespace DungeonCohort
                 case RoomContentType.Empty:
                     break;
                 case RoomContentType.Monster:
-                    // TODO: Generate difficulty - Save member for output
                     break;
                 case RoomContentType.MonsterAndTreasure:
                     SetRoomHoard(tier, allowedLoot);
@@ -80,15 +111,15 @@ namespace DungeonCohort
 
         public void Init(string biome, bool isStandardRace, 
             MagicItemPermissions allowedLoot, List<int> pcLevelList,
-            List<int> pcQtyList)
+            List<int> pcQtyList, bool isHall)
         {
             int tier = EncounterFactory.GetTier(pcLevelList, pcQtyList);
-            Init(tier, allowedLoot);
+            Init(tier, allowedLoot, isHall);
 
             if (ContentType == RoomContentType.Monster 
                 || ContentType == RoomContentType.MonsterAndTreasure)
             {
-                SetRoomEncounter(biome, isStandardRace);
+                SetRoomEncounter(biome, isStandardRace, pcLevelList, pcQtyList);
             }
         }
 
@@ -102,9 +133,13 @@ namespace DungeonCohort
             return desc;
         }
 
-        public void SetRoomEncounter(string biome, bool isStandardRace)
+        public void SetRoomEncounter(string biome, bool isStandardRace, 
+            List<int> pcLevelList, List<int> pcQtyList)
         {
             var encounterGen = new EncounterFactory();
+            encounterGen.PcLevelList = pcLevelList;
+            encounterGen.PcQtyList = pcQtyList;
+            encounterGen.Difficulty = EncounterDifficulty;
             RoomEncounter = encounterGen.PickRandomEncounter(biome, isStandardRace);
         }
 
@@ -124,7 +159,6 @@ namespace DungeonCohort
         {
             var lootGetn = new TreasureFactory();
             RoomTreasure = lootGetn.GetIndividualTreasure(tier);
-
         }
 
     }

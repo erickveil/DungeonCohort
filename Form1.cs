@@ -341,9 +341,46 @@ namespace DungeonCohort
             bool isLargeRoom = cb_crawlLargeRooms.Checked;
             bool isNarrowHalls = cb_crawlNarrowPassages.Checked;
             int tier = (int)nud_tier.Value;
+
+            bool isSetEncounters = ch_crawlFullEncounters.Checked;
+            MagicItemPermissions allowedItems = GetItemPermissions();
+            string biome = cb_biome.Text;
+            bool isStandardRace = cb_stdRaceNpcs.Checked;
+            List<int> pcLevelList = new List<int>();
+            List<int> pcQtyList = new List<int>();
+            pcLevelList.Add((int)nud_pcLevelA.Value);
+            pcLevelList.Add((int)nud_pcLevelB.Value);
+            pcLevelList.Add((int)nud_pcLevelC.Value);
+            pcLevelList.Add((int)nud_pcLevelD.Value);
+            pcQtyList.Add((int)nud_pcQtyA.Value);
+            pcQtyList.Add((int)nud_pcQtyB.Value);
+            pcQtyList.Add((int)nud_pcQtyC.Value);
+            pcQtyList.Add((int)nud_pcQtyD.Value);
+
             CrawlRooms.ExitDirection enterFrom = CrawlRooms.ExitDirection.EXIT_EAST;
             CrawlRoomExit entry = new CrawlRoomExit();
             entry.InitAsStandard(tier);
+
+            var target = rtb_Crawl;
+            target.Clear();
+            if (isSetEncounters)
+            {
+                if (biome == "")
+                {
+                    PrintBody(target, "Set Biome");
+                    return;
+                }
+                if (pcLevelList.Sum() == 0)
+                {
+                    PrintBody(target, "Set PC Levels");
+                    return;
+                }
+                if (pcQtyList.Sum() == 0)
+                {
+                    PrintBody(target, "Set Number of PCs");
+                    return;
+                }
+            }
 
             room.RandomizeRoom(
                 dungeonType,
@@ -351,13 +388,16 @@ namespace DungeonCohort
                 isNarrowHalls,
                 tier,
                 enterFrom,
-                entry
+                entry,
+                isSetEncounters,
+                allowedItems,
+                biome,
+                isStandardRace,
+                pcLevelList,
+                pcQtyList
                 );
 
-            var target = rtb_Crawl;
-            target.Clear();
             PrintH2(target, room.RoomType);
-
             PrintBody(target, "\n" + room.AsString());
 
         }

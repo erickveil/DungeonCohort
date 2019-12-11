@@ -37,7 +37,9 @@ namespace DungeonCohort
 
         public void RandomizeRoom(string dungeonType, bool isLargeRooms, 
             bool isNarrowHalls, int tier, ExitDirection enterFrom, 
-            CrawlRoomExit entry)
+            CrawlRoomExit entry, bool isSetEncounters, 
+            MagicItemPermissions allowedLoot, string biome, 
+            bool isStandardRace, List<int> pcLevelList, List<int> pcQtyList)
         {
             _setIsHall();
             _setRoomSize(isLargeRooms, isNarrowHalls);
@@ -68,6 +70,17 @@ namespace DungeonCohort
             var dice = Dice.Instance;
             Orientation = dice.Roll(1, 4);
 
+            Contents = new CrawlRoomContents();
+            if (isSetEncounters)
+            {
+                Contents.Init(biome, isStandardRace, allowedLoot, pcLevelList, 
+                    pcQtyList, IsHall);
+
+            }
+            else
+            {
+                Contents.Init(tier, allowedLoot, IsHall);
+            }
 
         }
 
@@ -79,6 +92,7 @@ namespace DungeonCohort
                 + "Illumination: " + Illumination.AsString() + "\n"
                 + RoomSize + ", " + RoomShape + "\n"
                 + (IsHall ? "" : "Orientation: " + Orientation.ToString() + "\n")
+                + "Contents: " + Contents.ToString()
                 ;
             return desc;
         }
