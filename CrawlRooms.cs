@@ -86,7 +86,7 @@ namespace DungeonCohort
         public void _setIsHall()
         {
             Dice dice = Dice.Instance;
-            IsHall = (dice.Roll(1, 6) <= 3);
+            IsHall = (dice.Roll(1, 6) <= 2);
         }
 
         /// <summary>
