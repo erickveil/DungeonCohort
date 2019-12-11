@@ -19,6 +19,7 @@ namespace DungeonCohort
         EncounterFactory _encounterFactory;
 
         CrawlRooms _lastRoom = null;
+        CrawlRoomExit _standardExit = null;
         
         public Form1()
         {
@@ -338,11 +339,24 @@ namespace DungeonCohort
         private void but_CrawlRoom_Click(object sender, EventArgs e)
         {
             var room = new CrawlRooms();
+
+            // Get basic crawl room specifications from UI
             string dungeonType = combo_crawlDungeonType.Text;
             bool isLargeRoom = cb_crawlLargeRooms.Checked;
             bool isNarrowHalls = cb_crawlNarrowPassages.Checked;
             int tier = (int)nud_tier.Value;
 
+            // persistently use the same standard exit in all rooms
+            // creating it if necessary
+            if (_standardExit is null)
+            {
+                _standardExit = new CrawlRoomExit();
+                _standardExit.InitAsStandard(tier);
+            }
+            room.StandardExit = _standardExit;
+
+            // If we generate full encounters in monster rooms, we need more
+            // data from the UI
             bool isSetEncounters = ch_crawlFullEncounters.Checked;
             MagicItemPermissions allowedItems = GetItemPermissions();
             string biome = cb_biome.Text;
@@ -358,10 +372,12 @@ namespace DungeonCohort
             pcQtyList.Add((int)nud_pcQtyC.Value);
             pcQtyList.Add((int)nud_pcQtyD.Value);
 
+            // Match the entrance to this room to the exit of the last room
             CrawlRooms.ExitDirection enterFrom = CrawlRooms.ExitDirection.EXIT_EAST;
             string entryInputVal = cb_crawlEnterDirection.Text;
 
             CrawlRoomExit entry;
+            // First enter the dungeon by a standard exit type
             if (_lastRoom is null)
             {
                 _lastRoom = new CrawlRooms();
@@ -375,6 +391,7 @@ namespace DungeonCohort
                 _lastRoom.WestExit.InitAsStandard(tier);
             }
 
+            // String to enum conversion
             switch (entryInputVal)
             {
                 case "North":
@@ -395,6 +412,7 @@ namespace DungeonCohort
                     break;
             }
 
+            // for encounters we need to make sure the encounter data is set
             var target = rtb_Crawl;
             target.Clear();
             if (isSetEncounters)
@@ -416,6 +434,7 @@ namespace DungeonCohort
                 }
             }
 
+            // put it all together here
             room.RandomizeRoom(
                 dungeonType,
                 isLargeRoom,
@@ -431,9 +450,11 @@ namespace DungeonCohort
                 pcQtyList
                 );
 
+            // print it out
             PrintH2(target, room.RoomType);
             PrintBody(target, "\n" + room.AsString());
 
+            // save the room for determining the next room's entrance
             _lastRoom = room;
         }
 

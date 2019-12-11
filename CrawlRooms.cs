@@ -186,9 +186,6 @@ namespace DungeonCohort
 
             RoomShape = shapeTable.GetResult();
 
-            StandardExit = new CrawlRoomExit();
-            StandardExit.InitAsStandard(tier);
-
             if (RoomShape.Contains("Straight")) {
                 _setExits(enterFrom, entry, false, false, true, tier);
             }
