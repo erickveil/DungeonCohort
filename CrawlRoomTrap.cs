@@ -217,6 +217,12 @@ namespace DungeonCohort
                 Trigger = trigger,
                 Type = "Arrows",
             });
+            typeTable.AddItem(new CrawlRoomTrap
+            {
+                Type = "Sleep spell trap for " + dice.Roll(13, 8) + 
+                " hp of creatures in ascending order of total hp, no save " +
+                "(undead and immune to charm not affected)"
+            });
 
             var trap = typeTable.GetResult();
 
