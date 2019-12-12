@@ -24,6 +24,7 @@ namespace DungeonCohort
         public Encounter RoomEncounter = null;
         public CrawlRoomTrap RoomTrap = null;
         public LootTableResult RoomTreasure = null;
+        public string Hazard = "";
 
         public static string GetRandomDifficulty()
         {
@@ -50,8 +51,8 @@ namespace DungeonCohort
                 contentsTable.AddItem(RoomContentType.Empty, 20);
                 contentsTable.AddItem(RoomContentType.Monster, 5);
                 contentsTable.AddItem(RoomContentType.Trap, 5);
-                /*
                 contentsTable.AddItem(RoomContentType.Hazard, 2);
+                /*
                 contentsTable.AddItem(RoomContentType.Obstacle, 2);
                 contentsTable.AddItem(RoomContentType.Trick, 1);
                 */
@@ -65,11 +66,11 @@ namespace DungeonCohort
                 contentsTable.AddItem(RoomContentType.Trap, 10);
                 contentsTable.AddItem(RoomContentType.TrapAndTreasure, 3);
                 contentsTable.AddItem(RoomContentType.Treasure, 6);
-                /*
                 contentsTable.AddItem(RoomContentType.Hazard, 6);
+                /*
+                contentsTable.AddItem(RoomContentType.HazardAndTreasure, 8);
                 contentsTable.AddItem(RoomContentType.Obstacle, 4);
                 contentsTable.AddItem(RoomContentType.Trick, 4);
-                contentsTable.AddItem(RoomContentType.HazardAndTreasure, 8);
                 contentsTable.AddItem(RoomContentType.Merchant);
                 */
             }
@@ -93,8 +94,10 @@ namespace DungeonCohort
                     SetRoomHoard(tier, allowedLoot);
                     break;
                 case RoomContentType.Hazard:
+                    SetRoomHazard(tier);
                     break;
                 case RoomContentType.HazardAndTreasure:
+                    SetRoomHazard(tier);
                     SetIncidentalTreasure(tier);
                     break;
                 case RoomContentType.Obstacle:
@@ -136,13 +139,60 @@ namespace DungeonCohort
                 difficultyDesc = "\n"; 
             }
 
-            string desc = _getTypeString(ContentType) 
+            string desc = _getTypeString(ContentType)
                 + difficultyDesc
+                + (Hazard == "" ? "" : Hazard + "\n")
                 + (RoomEncounter is null ? "" : RoomEncounter.ToString() + "\n")
                 + (RoomTrap is null ? "" : RoomTrap.ToString() + "\n")
-                + (RoomTreasure is null ? "" : RoomTreasure.ToString())
+                + (RoomTreasure is null ? "" : RoomTreasure.ToString() + "\n")
                 ;
             return desc;
+        }
+
+        public void SetRoomHazard(int tier)
+        {
+            string severity = CrawlRoomTrap.ChooseSeverity();
+            int dc = CrawlRoomTrap.ChooseDc(severity);
+            string damage = CrawlRoomTrap.ChooseDamage(tier, severity);
+            string gas = CrawlRoomTrap.ChooseGasType();
+
+            var table = new RandomTable<string>();
+            table.AddItem("Brown mold (" + damage + " cold damage)");
+            table.AddItem("Green slime (" + damage + " acid damage)");
+            table.AddItem("Shridker (alarm - check for wandering monsters)");
+            table.AddItem("Violet Fungus (Monster Manual - necrotic damage)");
+            table.AddItem("Yellow Mold (" + damage + " poison damage)");
+            table.AddItem("Spiderwebs (DC " + dc + " dex save or restrained)");
+            table.AddItem("Area currently caved in and not passable");
+            table.AddItem("Cave in when PCs pass through (DC " + dc 
+                + " dex save or take " + damage + "bludgeoning damage)");
+            table.AddItem("Monster in area and 1 in 10 chance of cave in " +
+                "each combat round");
+            table.AddItem("Area caves in after PCs pass and blocks return");
+            table.AddItem("Floor caves in and party drops to lower level");
+            table.AddItem("Partial flooding, up to knees");
+            table.AddItem("Partial flooding, conceals trap (disadvantage to " +
+                "detect)");
+            table.AddItem("Deeply submerged (10-20 ft) - swimming required " +
+                "(check for wandering aquatic monster)");
+            table.AddItem("Completely submerged - underwater swimming " +
+                "required (check for wandering aquatic monster)");
+            table.AddItem("Desecrated ground with undead (advantage to " +
+                "all rolls)");
+            table.AddItem("Slippery - Check for wandering monstar (DC 10 " +
+                "acrobatics or fall prone each movement phase)");
+            table.AddItem("Magic dead area");
+            table.AddItem("Area filled with gas: " + gas);
+            table.AddItem("The floor is lava (sink if entered, " + damage + 
+                " damage each round, DC " + dc + " check to escape)");
+            table.AddItem("Room is on fire (" + damage + " fire damage " + 
+                "each turn in area)");
+            table.AddItem("Rubble filled area. Difficult terrain.");
+
+            Hazard = table.GetResult();
+
+            if (Hazard.ToLower().Contains("trap")) { SetRoomTrap(tier); }
+
         }
 
         public void SetRoomEncounter(string biome, bool isStandardRace, 
