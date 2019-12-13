@@ -54,7 +54,8 @@ namespace DungeonCohort
         public static string ChooseMundaneFeature()
         {
             var table = new RandomTable<string>();
-            table.AddItem(ChooseTrickObject(), 32);
+            table.AddItem(ChooseTrickObject(), 16);
+            table.AddItem("Collumns", 8);
             table.AddItem("Balcony above to adjacent area above");
             table.AddItem("Balcony over adjacent area below");
             table.AddItem("Iron grate over crawlway that leads " 
