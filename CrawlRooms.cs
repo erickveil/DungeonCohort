@@ -280,14 +280,27 @@ namespace DungeonCohort
                     SouthExit = entry;
                     WestExit = leftExit;
                     break;
-                default: // west
+                case ExitDirection.EXIT_WEST:
                     EastExit = straightExit;
                     NorthExit = leftExit;
                     SouthExit = rightExit;
                     WestExit = entry;
                     break;
+                default:
+                    EastExit = _buildExit(isLeft, tier);
+                    NorthExit = _buildExit(isRight, tier);
+                    SouthExit = _buildExit(isStraight, tier);
+                    WestExit = _buildExit(tier);
+                    break;
             }
 
+        }
+
+        private CrawlRoomExit _buildExit(int tier)
+        {
+            var dice = Dice.Instance;
+            bool isSet = dice.Roll(1, 6) <= 3;
+            return _buildExit(isSet, tier);
         }
 
         private CrawlRoomExit _buildExit(bool isSet, int tier)
