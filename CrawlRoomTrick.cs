@@ -9,8 +9,34 @@ namespace DungeonCohort
 {
     class CrawlRoomTrick
     {
-        public string Object;
-        public string Effect;
+        public string Object = "";
+        public string Effect = "";
+
+        public void Init()
+        {
+            var dice = Dice.Instance;
+            bool isTrick = dice.Roll(1, 6) <= 3;
+            if (isTrick) { InitAsTrick(); }
+            else { InitAsFeature(); }
+        }
+
+
+        public void InitAsTrick()
+        {
+            Object = ChooseTrickObject();
+            Effect = ChooseTrickEffect();
+        }
+
+        public void InitAsFeature()
+        {
+            Object = ChooseMundaneFeature();
+        }
+
+        public override string ToString()
+        {
+            return Object
+                + (Effect == "" ? "" : ": " + Effect);
+        }
 
         public static string ChooseTrickObject()
         {
@@ -47,6 +73,30 @@ namespace DungeonCohort
             table.AddItem("Hourglass");
             table.AddItem("Mirror");
             table.AddItem("Sarcophagus");
+            table.AddItem("Lever");
+            table.AddItem("Obvious pressure plate");
+            table.AddItem("Dias");
+            table.AddItem("Natural spring");
+            table.AddItem("Mushroom ring");
+            table.AddItem("Stone wheel");
+            table.AddItem("Skeleton of a monkey with its hand in a " +
+                "jar, wrapped around a gemstone");
+            table.AddItem("Large, floating eye");
+            table.AddItem("Pyramid");
+            table.AddItem("Massive harp with broken strings");
+            table.AddItem("A bowl of unusual fruit");
+            table.AddItem("A ring of salt");
+            table.AddItem("A sword embedded in the stone floor");
+            table.AddItem("A smoky quartz wall");
+            table.AddItem("Three imp sculptures in tiny alcoves near the " +
+                "ceiling");
+            table.AddItem("A music box");
+            table.AddItem("A nest with three purple eggs");
+            table.AddItem("A Marbel pedestal");
+            table.AddItem("A red rune on the ceiling");
+            table.AddItem("A drooping plant bearing a single, red fruit");
+            table.AddItem("Five red, wooden, creepy masks");
+            table.AddItem("A dome of black glass");
 
             return table.GetResult();
         }
@@ -56,10 +106,39 @@ namespace DungeonCohort
             var table = new RandomTable<string>();
             table.AddItem(ChooseTrickObject(), 16);
             table.AddItem("Collumns", 8);
-            table.AddItem("Balcony above to adjacent area above");
-            table.AddItem("Balcony over adjacent area below");
+            table.AddItem("Balcony above to adjacent area above", 4);
+            table.AddItem("Balcony over adjacent area below", 4);
             table.AddItem("Iron grate over crawlway that leads " 
                 + ChooseDirection());
+            table.AddItem("Still smoking pipe");
+            table.AddItem("Copper pipe");
+            table.AddItem("Flower Box");
+            table.AddItem("Alcove of wooden mugs");
+            table.AddItem("Giant red X");
+            table.AddItem("Skeleton of a small dog");
+            table.AddItem("A broken mirror");
+            table.AddItem("Bloody footprints");
+            table.AddItem("Eyes in a jar");
+            table.AddItem("Music eminates from the ceiling");
+            table.AddItem("A sizzling hibachi");
+            table.AddItem("A corpse wrapped in a roll of black silk");
+            table.AddItem("A scale model of the PCs' home town with a " +
+                "statue of a demon in the square.");
+            table.AddItem("A swarm of flies");
+            table.AddItem("A trail of ants leads from an exit to a blank wall");
+            table.AddItem("A fly covered manequin hangs from a noose");
+            table.AddItem("An unlucky teleport victim");
+            table.AddItem("An iron cage containing an almost escaped skeleton");
+            table.AddItem("Three piranha in a fishbowl");
+            table.AddItem("A window into stone");
+            table.AddItem("A bottomless hole");
+            table.AddItem("A broken, marble head");
+            table.AddItem("A severed foot in a velvet slipper");
+            table.AddItem("A single serving of gelatinous cube");
+            table.AddItem("The ceiling is dripping with blood");
+            table.AddItem("A fireplace stuffed with bones");
+            table.AddItem("Bones litter the floor");
+            table.AddItem("A collection of hand-drawn orc erotica");
             return table.GetResult();
         }
 

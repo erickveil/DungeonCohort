@@ -24,7 +24,8 @@ namespace DungeonCohort
         public Encounter RoomEncounter = null;
         public CrawlRoomTrap RoomTrap = null;
         public LootTableResult RoomTreasure = null;
-        public string Hazard = "";
+        public string RoomHazard = "";
+        public CrawlRoomTrick RoomTrick = null;
 
         public static string GetRandomDifficulty()
         {
@@ -54,7 +55,6 @@ namespace DungeonCohort
                 contentsTable.AddItem(RoomContentType.Hazard, 2);
                 /*
                 contentsTable.AddItem(RoomContentType.Obstacle, 2);
-                contentsTable.AddItem(RoomContentType.Trick, 1);
                 */
             }
             else
@@ -67,10 +67,10 @@ namespace DungeonCohort
                 contentsTable.AddItem(RoomContentType.TrapAndTreasure, 3);
                 contentsTable.AddItem(RoomContentType.Treasure, 6);
                 contentsTable.AddItem(RoomContentType.Hazard, 6);
-                /*
                 contentsTable.AddItem(RoomContentType.HazardAndTreasure, 8);
-                contentsTable.AddItem(RoomContentType.Obstacle, 4);
                 contentsTable.AddItem(RoomContentType.Trick, 4);
+                /*
+                contentsTable.AddItem(RoomContentType.Obstacle, 4);
                 contentsTable.AddItem(RoomContentType.Merchant);
                 */
             }
@@ -103,6 +103,8 @@ namespace DungeonCohort
                 case RoomContentType.Obstacle:
                     break;
                 case RoomContentType.Trick:
+                    RoomTrick = new CrawlRoomTrick();
+                    RoomTrick.Init();
                     break;
                 case RoomContentType.Merchant:
                     break;
@@ -141,8 +143,9 @@ namespace DungeonCohort
 
             string desc = _getTypeString(ContentType)
                 + difficultyDesc
-                + (Hazard == "" ? "" : Hazard + "\n")
+                + (RoomHazard == "" ? "" : RoomHazard + "\n")
                 + (RoomEncounter is null ? "" : RoomEncounter.ToString() + "\n")
+                + (RoomTrick is null ? "" : RoomTrick.ToString() + "\n")
                 + (RoomTrap is null ? "" : RoomTrap.ToString() + "\n")
                 + (RoomTreasure is null ? "" : RoomTreasure.ToString() + "\n")
                 ;
@@ -165,7 +168,7 @@ namespace DungeonCohort
             table.AddItem("Spiderwebs (DC " + dc + " dex save or restrained)");
             table.AddItem("Area currently caved in and not passable");
             table.AddItem("Cave in when PCs pass through (DC " + dc 
-                + " dex save or take " + damage + "bludgeoning damage)");
+                + " dex save or take " + damage + " bludgeoning damage)");
             table.AddItem("Monster in area and 1 in 10 chance of cave in " +
                 "each combat round");
             table.AddItem("Area caves in after PCs pass and blocks return");
@@ -189,9 +192,9 @@ namespace DungeonCohort
                 "each turn in area)");
             table.AddItem("Rubble filled area. Difficult terrain.");
 
-            Hazard = table.GetResult();
+            RoomHazard = table.GetResult();
 
-            if (Hazard.ToLower().Contains("trap")) { SetRoomTrap(tier); }
+            if (RoomHazard.ToLower().Contains("trap")) { SetRoomTrap(tier); }
 
         }
 
