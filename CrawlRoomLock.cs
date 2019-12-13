@@ -27,5 +27,10 @@ namespace DungeonCohort
             if (tier == 3) { LockDC = 17 + mod; }
             LockDC = 20 + mod;
         }
+
+        public override string ToString()
+        {
+            return LockType + " DC: " + LockDC.ToString();
+        }
     }
 }

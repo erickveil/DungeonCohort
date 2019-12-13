@@ -9,9 +9,9 @@ namespace DungeonCohort
 {
     class CrawlRoomExit
     {
-        public string Type;
-        public string Mechanism;
-        public string State;
+        public string Type = "";
+        public string Mechanism = "";
+        public string State = "";
         public CrawlRoomLock DoorLock;
         public CrawlRoomTrap DoorTrap;
 
@@ -47,10 +47,31 @@ namespace DungeonCohort
 
         public override string ToString()
         {
+            string doorLock;
+            if (Type.ToLower().Contains("curtain")
+                || Type.ToLower().Contains("arch")
+                || Type.ToLower().Contains("mimic")
+                )
+            {
+                doorLock = "";
+            }
+            else if (State.ToLower().Contains("barred"))
+            {
+                doorLock = "";
+            }
+            else if (DoorLock is null)
+            {
+                doorLock = "";
+            }
+            else
+            {
+                doorLock = DoorLock.ToString();
+            }
+
             return Type + "; "
-                + (Mechanism is null ? "" : Mechanism + "; ")
-                + (State is null ? "" : State + "; ")
-                + (DoorLock is null ? "Unlocked" : DoorLock.ToString() ) 
+                + (Mechanism == "" ? "" : Mechanism + "; ")
+                + (State == "" ? "" : State + "; ")
+                + doorLock
                 + (DoorTrap is null ? "" : "; Trapped: " + DoorTrap.ToString() )
                 ;
         }
@@ -108,6 +129,8 @@ namespace DungeonCohort
             stateTable.AddItem("Open");
             stateTable.AddItem("Destroyed");
             stateTable.AddItem("Opened by a lever in the next room");
+
+            State = stateTable.GetResult();
 
             if (State == "Locked")
             {

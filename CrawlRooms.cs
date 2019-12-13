@@ -118,8 +118,8 @@ namespace DungeonCohort
 
             string north = NorthExit is null ? "" : "North: " + NorthExit.ToString() + "\n";
             string south = SouthExit is null ? "" : "South: " + SouthExit.ToString() + "\n";
-            string east = EastExit is null ? "" : "East:" + EastExit.ToString() + "\n";
-            string west = WestExit is null ? "" : "West:" + WestExit.ToString() + "\n";
+            string east = EastExit is null ? "" : "East: " + EastExit.ToString() + "\n";
+            string west = WestExit is null ? "" : "West: " + WestExit.ToString() + "\n";
 
             return "Exits: " + numExits.ToString() + "\n"
                 + north 
