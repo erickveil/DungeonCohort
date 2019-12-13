@@ -45,6 +45,16 @@ namespace DungeonCohort
             }
         }
 
+        public override string ToString()
+        {
+            return Type + "; "
+                + (Mechanism is null ? "" : Mechanism + "; ")
+                + (State is null ? "" : State + "; ")
+                + (DoorLock is null ? "Unlocked" : DoorLock.ToString() ) 
+                + (DoorTrap is null ? "" : "; Trapped: " + DoorTrap.ToString() )
+                ;
+        }
+
         public void InitAsStandard(int tier)
         {
             var typeTable = new RandomTable<string>();
@@ -60,16 +70,6 @@ namespace DungeonCohort
             _setMechanism(tier);
 
             // standard door aren't trapped
-        }
-
-        public string ToString()
-        {
-            return Type + "; "
-                + Mechanism + "; "
-                + State + "; "
-                + (DoorLock is null ? "" : DoorLock.ToString() + "; ")
-                + (DoorTrap is null ? "" : DoorTrap.ToString() )
-                ;
         }
 
         private void _setMechanism(int tier)

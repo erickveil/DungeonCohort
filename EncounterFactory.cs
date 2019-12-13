@@ -22,6 +22,18 @@ namespace DungeonCohort
         public float LastModifier;
         public string LastSubDifficulty;
 
+        public static int GetTier(List<int>PcLevelList, List<int>PcQtyList)
+        {
+            float totalLevels = PcLevelList.Count();
+            float totalPCs = PcQtyList.Count();
+            float avgLevel = totalLevels / totalPCs;
+
+            if (avgLevel < 5.5f) { return 1; }
+            if (avgLevel < 11.5f) { return 2; }
+            if (avgLevel < 17.5f) { return 3; }
+            return 4;
+        }
+
         public EncounterFactory()
         {
             MonsterSource = AncestryIndex.Instance;

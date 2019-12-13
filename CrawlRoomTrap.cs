@@ -65,11 +65,11 @@ namespace DungeonCohort
         private void _setType(int tier, bool isDoor)
         {
             var typeTable = new RandomTable<CrawlRoomTrap>();
-            string severity = _chooseSeverity();
+            string severity = ChooseSeverity();
             string disarm = _chooseDisarm();
-            int dc = _chooseDc(severity);
-            int attk = _chooseAttkBonus(severity);
-            string damageDice = _chooseDamage(tier, severity);
+            int dc = ChooseDc(severity);
+            int attk = ChooseAttkBonus(severity);
+            string damageDice = ChooseDamage(tier, severity);
             CrawlRoomTrap beam = _chooseBeamEffect();
             Dice dice = Dice.Instance;
             bool isCoated = dice.Roll(1, 6) <= 2;
@@ -85,7 +85,7 @@ namespace DungeonCohort
             typeTable.AddItem(new CrawlRoomTrap
             {
                 DamageDice = damageDice,
-                Effect = _chooseGasType(),
+                Effect = ChooseGasType(),
                 Location = _chooseLocation(),
                 Trigger = trigger,
                 Type = "Gas",
@@ -217,6 +217,12 @@ namespace DungeonCohort
                 Trigger = trigger,
                 Type = "Arrows",
             });
+            typeTable.AddItem(new CrawlRoomTrap
+            {
+                Type = "Sleep spell trap for " + dice.Roll(13, 8) + 
+                " hp of creatures in ascending order of total hp, no save " +
+                "(undead and immune to charm not affected)"
+            });
 
             var trap = typeTable.GetResult();
 
@@ -323,8 +329,8 @@ namespace DungeonCohort
             bool isHardBlock)
         {
             var table = new RandomTable<string>();
-            string dmg = _chooseDamage(tier, severity);
-            string dc = _chooseDc(severity).ToString();
+            string dmg = ChooseDamage(tier, severity);
+            string dc = ChooseDc(severity).ToString();
 
             table.AddItem("Solid stone slap drops from ceiling");
             table.AddItem("Portcuillus drops from ceiling");
@@ -380,7 +386,7 @@ namespace DungeonCohort
             var coating = isCoated ? _chooseCoating() : "";
             var monsterGen = new EncounterFactory();
             //var monster = monsterGen.PickMooks(1, "Trap", false);
-            string damageDice = _chooseDamage(tier, severity);
+            string damageDice = ChooseDamage(tier, severity);
 
             table.AddItem(new CrawlRoomTrap
             {
@@ -518,7 +524,7 @@ namespace DungeonCohort
                 DamageType = "Falling",
                 DamageDice = damageDice,
                 Coating = "",
-                Effect = _chooseGasType(),
+                Effect = ChooseGasType(),
                 TrapDoorContents = "Gas",
                 TrapMonster = null,
                 TrapTreasure = null,
@@ -542,7 +548,7 @@ namespace DungeonCohort
             return table.GetResult();
         }
 
-        private string _chooseGasType()
+        public static string ChooseGasType()
         {
             var table = new RandomTable<string>();
             string color = _chooseGasColor();
@@ -577,7 +583,7 @@ namespace DungeonCohort
             return table.GetResult();
         }
 
-        private string _choosePolymorphForm()
+        public static string _choosePolymorphForm()
         {
             var table = new RandomTable<string>();
 
@@ -605,7 +611,7 @@ namespace DungeonCohort
             return table.GetResult();
         }
 
-        private string _chooseGasColor()
+        public static string _chooseGasColor()
         {
             var table = new RandomTable<string>();
 
@@ -623,7 +629,7 @@ namespace DungeonCohort
 
         }
 
-        private string _chooseGasOdor()
+        public static string _chooseGasOdor()
         {
             var table = new RandomTable<string>();
 
@@ -737,7 +743,7 @@ namespace DungeonCohort
             return table.GetResult();
         }
 
-        private string _chooseSeverity()
+        public static string ChooseSeverity()
         {
             var severityTable = new RandomTable<string>();
             severityTable.AddItem("Setback", 2);
@@ -946,7 +952,7 @@ namespace DungeonCohort
             return table.GetResult();
         }
 
-        private int _chooseDc(string severity)
+        public static int ChooseDc(string severity)
         {
             var dice = Dice.Instance;
             if (severity == "Setback") { return dice.RandomNumber(10, 11); }
@@ -954,7 +960,7 @@ namespace DungeonCohort
             return dice.RandomNumber(16, 20);
         }
 
-        private int _chooseAttkBonus(string severity)
+        public static int ChooseAttkBonus(string severity)
         {
             var dice = Dice.Instance;
             if (severity == "Setback") { return dice.RandomNumber(3, 5); }
@@ -962,7 +968,7 @@ namespace DungeonCohort
             return dice.RandomNumber(9, 12);
         }
 
-        private string _chooseDamage(int tier, string severity)
+        public static string ChooseDamage(int tier, string severity)
         {
             switch (tier)
             {
@@ -996,7 +1002,7 @@ namespace DungeonCohort
             return table.GetResult();
         }
 
-        private string _chooseDisease()
+        public static string _chooseDisease()
         {
             var table = new RandomTable<string>();
 

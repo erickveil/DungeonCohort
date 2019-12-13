@@ -37,7 +37,9 @@ namespace DungeonCohort
 
         public void RandomizeRoom(string dungeonType, bool isLargeRooms, 
             bool isNarrowHalls, int tier, ExitDirection enterFrom, 
-            CrawlRoomExit entry)
+            CrawlRoomExit entry, bool isSetEncounters, 
+            MagicItemPermissions allowedLoot, string biome, 
+            bool isStandardRace, List<int> pcLevelList, List<int> pcQtyList)
         {
             _setIsHall();
             _setRoomSize(isLargeRooms, isNarrowHalls);
@@ -70,6 +72,17 @@ namespace DungeonCohort
             var dice = Dice.Instance;
             Orientation = dice.Roll(1, 4);
 
+            Contents = new CrawlRoomContents();
+            if (isSetEncounters)
+            {
+                Contents.Init(biome, isStandardRace, allowedLoot, pcLevelList, 
+                    pcQtyList, IsHall);
+
+            }
+            else
+            {
+                Contents.Init(tier, allowedLoot, IsHall);
+            }
 
 
         }
@@ -89,7 +102,7 @@ namespace DungeonCohort
                 + "Illumination: " + Illumination.AsString() + "\n"
                 + RoomSize + ", " + RoomShape + "\n"
                 + (IsHall ? "" : "Orientation: " + Orientation.ToString() + "\n")
-                // TODO: NEXT: How to define standard doors? Entry Door?
+                + "Contents: " + Contents.ToString() +  "\n"
                 + GetExits()
                 ;
             return desc;
@@ -118,7 +131,7 @@ namespace DungeonCohort
         public void _setIsHall()
         {
             Dice dice = Dice.Instance;
-            IsHall = (dice.Roll(1, 6) <= 3);
+            IsHall = (dice.Roll(1, 6) <= 2);
         }
 
         /// <summary>
@@ -134,12 +147,45 @@ namespace DungeonCohort
             shapeTable.AddItem("T-Shaped");
             shapeTable.AddItem("L-Shaped");
 
+            var numExitsTable = new RandomTable<int>();
+            numExitsTable.AddItem(0);
+            numExitsTable.AddItem(1, 4);
+            numExitsTable.AddItem(2, 8);
+            numExitsTable.AddItem(3, 2);
+            int numExits = numExitsTable.GetResult();
             var dice = Dice.Instance;
             int exitChance = 3;
-            bool isLeft = (dice.Roll(1, 6) <= exitChance);
-            bool isRight = (dice.Roll(1, 6) <= exitChance);
-            bool isStraight = (dice.Roll(1, 6) <= exitChance);
+            bool isLeft = false;
+            bool isRight = false;
+            bool isStraight = false;
 
+            while (numExits > 0)
+            {
+                if (!isStraight)
+                {
+                    isStraight = (dice.Roll(1, 6) <= exitChance);
+                    if (isStraight) { --numExits; }
+                    if (numExits <= 0) { break; }
+                }
+
+                if (!isLeft)
+                {
+                    isLeft = (dice.Roll(1, 6) <= exitChance);
+                    if (isLeft) { --numExits; }
+                    if (numExits <= 0) { break; }
+                }
+
+                if (!isRight)
+                {
+                    isRight = (dice.Roll(1, 6) <= exitChance);
+                    if (isRight) { --numExits; }
+                    if (numExits <= 0) { break; }
+                }
+
+                if (isRight && isLeft && isStraight) { break; }
+            }
+
+            
             _setExits(enterFrom, entry, isRight, isLeft, isStraight, tier);
 
             RoomShape = shapeTable.GetResult();
@@ -156,40 +202,33 @@ namespace DungeonCohort
             CrawlRoomExit entry)
         {
             var shapeTable = new RandomTable<string>();
-            shapeTable.AddItem("Straight", 2);
+            shapeTable.AddItem("Straight", 4);
             shapeTable.AddItem("Cross", 2);
-            shapeTable.AddItem("T Fork", 2);
+            shapeTable.AddItem("T Fork", 8);
             shapeTable.AddItem("Right-turning", 2);
             shapeTable.AddItem("Left-turning", 2);
             shapeTable.AddItem("Stairs up one level");
             shapeTable.AddItem("Stairs down one level");
 
-            int choice = shapeTable.GetResultIndex();
-            RoomShape = shapeTable.GetResult(choice);
+            RoomShape = shapeTable.GetResult();
 
-            StandardExit = new CrawlRoomExit();
-            StandardExit.InitAsStandard(tier);
-
-            switch (choice)
-            {
-                case 0: // straight
-                    _setExits(enterFrom, entry, false, false, true, tier);
-                    break;
-                case 1: // cross
-                    _setExits(enterFrom, entry, true, true, true, tier);
-                    break;
-                case 2: // T
-                    _setTHallExits(enterFrom, entry, tier);
-                    break;
-                case 3: // right
-                    _setExits(enterFrom, entry, true, false, false, tier);
-                    break;
-                case 4: // left
-                    _setExits(enterFrom, entry, false, true, false, tier);
-                    break;
-                default: //stairs; 
-                    _setExits(enterFrom, entry, false, false, false, tier);
-                    break;
+            if (RoomShape.Contains("Straight")) {
+                _setExits(enterFrom, entry, false, false, true, tier);
+            }
+            else if (RoomShape.Contains("Cross")) {
+                _setExits(enterFrom, entry, true, true, true, tier);
+            }
+            else if (RoomShape.Contains("T")) {
+                _setTHallExits(enterFrom, entry, tier);
+            }
+            else if (RoomShape.Contains("Right")) {
+                _setExits(enterFrom, entry, true, false, false, tier);
+            }
+            else if (RoomShape.Contains("Left")) {
+                _setExits(enterFrom, entry, false, true, false, tier);
+            }
+            else {
+                _setExits(enterFrom, entry, false, false, false, tier);
             }
         }
 

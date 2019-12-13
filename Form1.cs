@@ -18,6 +18,8 @@ namespace DungeonCohort
         Dice _dice;
         EncounterFactory _encounterFactory;
 
+        CrawlRooms _lastRoom = null;
+        CrawlRoomExit _standardExit = null;
         
         public Form1()
         {
@@ -337,29 +339,123 @@ namespace DungeonCohort
         private void but_CrawlRoom_Click(object sender, EventArgs e)
         {
             var room = new CrawlRooms();
+
+            // Get basic crawl room specifications from UI
             string dungeonType = combo_crawlDungeonType.Text;
             bool isLargeRoom = cb_crawlLargeRooms.Checked;
             bool isNarrowHalls = cb_crawlNarrowPassages.Checked;
             int tier = (int)nud_tier.Value;
-            CrawlRooms.ExitDirection enterFrom = CrawlRooms.ExitDirection.EXIT_EAST;
-            CrawlRoomExit entry = new CrawlRoomExit();
-            entry.InitAsStandard(tier);
 
+            // persistently use the same standard exit in all rooms
+            // creating it if necessary
+            if (_standardExit is null)
+            {
+                _standardExit = new CrawlRoomExit();
+                _standardExit.InitAsStandard(tier);
+            }
+            room.StandardExit = _standardExit;
+
+            // If we generate full encounters in monster rooms, we need more
+            // data from the UI
+            bool isSetEncounters = ch_crawlFullEncounters.Checked;
+            MagicItemPermissions allowedItems = GetItemPermissions();
+            string biome = cb_biome.Text;
+            bool isStandardRace = cb_stdRaceNpcs.Checked;
+            List<int> pcLevelList = new List<int>();
+            List<int> pcQtyList = new List<int>();
+            pcLevelList.Add((int)nud_pcLevelA.Value);
+            pcLevelList.Add((int)nud_pcLevelB.Value);
+            pcLevelList.Add((int)nud_pcLevelC.Value);
+            pcLevelList.Add((int)nud_pcLevelD.Value);
+            pcQtyList.Add((int)nud_pcQtyA.Value);
+            pcQtyList.Add((int)nud_pcQtyB.Value);
+            pcQtyList.Add((int)nud_pcQtyC.Value);
+            pcQtyList.Add((int)nud_pcQtyD.Value);
+
+            // Match the entrance to this room to the exit of the last room
+            CrawlRooms.ExitDirection enterFrom = CrawlRooms.ExitDirection.EXIT_EAST;
+            string entryInputVal = cb_crawlEnterDirection.Text;
+
+            CrawlRoomExit entry;
+            // First enter the dungeon by a standard exit type
+            if (_lastRoom is null)
+            {
+                _lastRoom = new CrawlRooms();
+                _lastRoom.NorthExit = new CrawlRoomExit();
+                _lastRoom.SouthExit = new CrawlRoomExit();
+                _lastRoom.EastExit = new CrawlRoomExit();
+                _lastRoom.WestExit = new CrawlRoomExit();
+                _lastRoom.NorthExit.InitAsStandard(tier);
+                _lastRoom.SouthExit.InitAsStandard(tier);
+                _lastRoom.EastExit.InitAsStandard(tier);
+                _lastRoom.WestExit.InitAsStandard(tier);
+            }
+
+            // String to enum conversion
+            switch (entryInputVal)
+            {
+                case "North":
+                    enterFrom = CrawlRooms.ExitDirection.EXIT_NORTH;
+                    entry = _lastRoom.SouthExit;
+                    break;
+                case "South":
+                    enterFrom = CrawlRooms.ExitDirection.EXIT_SOUTH;
+                    entry = _lastRoom.NorthExit;
+                    break;
+                case "East":
+                    enterFrom = CrawlRooms.ExitDirection.EXIT_EAST;
+                    entry = _lastRoom.WestExit;
+                    break;
+                default:
+                    enterFrom = CrawlRooms.ExitDirection.EXIT_WEST;
+                    entry = _lastRoom.EastExit;
+                    break;
+            }
+
+            // for encounters we need to make sure the encounter data is set
+            var target = rtb_Crawl;
+            target.Clear();
+            if (isSetEncounters)
+            {
+                if (biome == "")
+                {
+                    PrintBody(target, "Set Biome");
+                    return;
+                }
+                if (pcLevelList.Sum() == 0)
+                {
+                    PrintBody(target, "Set PC Levels");
+                    return;
+                }
+                if (pcQtyList.Sum() == 0)
+                {
+                    PrintBody(target, "Set Number of PCs");
+                    return;
+                }
+            }
+
+            // put it all together here
             room.RandomizeRoom(
                 dungeonType,
                 isLargeRoom,
                 isNarrowHalls,
                 tier,
                 enterFrom,
-                entry
+                entry,
+                isSetEncounters,
+                allowedItems,
+                biome,
+                isStandardRace,
+                pcLevelList,
+                pcQtyList
                 );
 
-            var target = rtb_Crawl;
             target.Clear();
             PrintH2(target, room.GetHeader());
-
             PrintBody(target, "\n" + room.AsString());
 
+            // save the room for determining the next room's entrance
+            _lastRoom = room;
         }
 
         private void bu_mythicClear_Click(object sender, EventArgs e)
@@ -379,6 +475,13 @@ namespace DungeonCohort
             target.Clear();
             PrintBody(target, trap.ToString());
 
+        }
+
+        private void bu_crawlClear_Click(object sender, EventArgs e)
+        {
+            _lastRoom = null;
+            var target = rtb_Crawl;
+            target.Clear();
         }
     }
 }
