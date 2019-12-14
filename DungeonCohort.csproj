@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrawlRoomGate.cs" />
     <Compile Include="CrawlRoomTrick.cs" />
     <Compile Include="JsonLoading\Ancestry.cs" />
     <Compile Include="JsonLoading\AncestryIndex.cs" />

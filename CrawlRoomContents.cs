@@ -26,6 +26,7 @@ namespace DungeonCohort
         public LootTableResult RoomTreasure = null;
         public string RoomHazard = "";
         public CrawlRoomTrick RoomTrick = null;
+        public CrawlRoomGate RoomGate = null;
 
         public static string GetRandomDifficulty()
         {
@@ -59,7 +60,6 @@ namespace DungeonCohort
             }
             else
             {
-                // Current chances set to DMG 5e
                 contentsTable.AddItem(RoomContentType.Empty, 8);
                 contentsTable.AddItem(RoomContentType.Monster, 28);
                 contentsTable.AddItem(RoomContentType.MonsterAndTreasure, 20);
@@ -68,7 +68,7 @@ namespace DungeonCohort
                 contentsTable.AddItem(RoomContentType.Treasure, 6);
                 contentsTable.AddItem(RoomContentType.Hazard, 6);
                 contentsTable.AddItem(RoomContentType.HazardAndTreasure, 8);
-                contentsTable.AddItem(RoomContentType.Trick, 4);
+                contentsTable.AddItem(RoomContentType.Trick, 6);
                 /*
                 contentsTable.AddItem(RoomContentType.Obstacle, 4);
                 contentsTable.AddItem(RoomContentType.Merchant);
@@ -103,8 +103,7 @@ namespace DungeonCohort
                 case RoomContentType.Obstacle:
                     break;
                 case RoomContentType.Trick:
-                    RoomTrick = new CrawlRoomTrick();
-                    RoomTrick.Init();
+                    SetRoomTrick();
                     break;
                 case RoomContentType.Merchant:
                     break;
@@ -146,10 +145,31 @@ namespace DungeonCohort
                 + (RoomHazard == "" ? "" : RoomHazard + "\n")
                 + (RoomEncounter is null ? "" : RoomEncounter.ToString() + "\n")
                 + (RoomTrick is null ? "" : RoomTrick.ToString() + "\n")
+                + (RoomGate is null ? "" : RoomGate.ToString() + "\n")
                 + (RoomTrap is null ? "" : RoomTrap.ToString() + "\n")
                 + (RoomTreasure is null ? "" : RoomTreasure.ToString() + "\n")
                 ;
             return desc;
+        }
+
+        public void SetRoomTrick()
+        {
+            var dice = Dice.Instance;
+
+            int roll = dice.Roll(1, 6);
+
+            if (roll <= 4)
+            {
+                RoomTrick = new CrawlRoomTrick();
+                RoomTrick.Init();
+                return;
+            }
+            else
+            {
+                RoomGate = new CrawlRoomGate();
+                RoomGate.Init();
+                return;
+            }
         }
 
         public void SetRoomHazard(int tier)
@@ -191,6 +211,7 @@ namespace DungeonCohort
             table.AddItem("Room is on fire (" + damage + " fire damage " + 
                 "each turn in area)");
             table.AddItem("Rubble filled area. Difficult terrain.");
+            table.AddItem("Elder rune: " + CrawlRoomGate.ChooseElderRune());
 
             RoomHazard = table.GetResult();
 

@@ -44,8 +44,6 @@ namespace DungeonCohort
 
             string liquid = ChoosePoolLiquid();
 
-            // gate? 
-
             table.AddItem("Altar");
             table.AddItem("Pool: " + liquid);
             table.AddItem("Fountain");
