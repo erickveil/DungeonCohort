@@ -17,6 +17,14 @@ namespace DungeonCohort
 
         public void RandomizeExit(int tier)
         {
+            var dice = Dice.Instance;
+            bool isSecret = dice.Roll(1, 20) == 1;
+            if (isSecret)
+            {
+                InitAsSecretDoor(tier);
+                return;
+            }
+
             var typeTable = new RandomTable<string>();
             typeTable.AddItem("Wooden Door", 16);
             typeTable.AddItem("Archway", 8);
@@ -30,7 +38,6 @@ namespace DungeonCohort
 
             _setMechanism(tier);
 
-            var dice = Dice.Instance;
             bool isTrapped = dice.Roll(1, 20) == 1;
             if (!isTrapped) { return; }
 
@@ -88,12 +95,33 @@ namespace DungeonCohort
             // standard doors have easier locks
             --tier;
             if (tier < 1) { tier = 1; }
-            _setMechanism(tier);
+            _setMechanism(tier, true);
 
             // standard door aren't trapped
         }
 
-        private void _setMechanism(int tier)
+        public void InitAsSecretDoor(int tier)
+        {
+            var table = new RandomTable<string>();
+            table.AddItem("Wall");
+            table.AddItem("Archway covered by illusion");
+            table.AddItem("Bookshelf");
+            table.AddItem("Wardrobe");
+            table.AddItem("Coffin");
+
+            string form = table.GetResult();
+            Type = "Secret Door: " + form;
+            _setSecretDoorMechanism();
+
+            var dice = Dice.Instance;
+            bool isTrapped = dice.Roll(1, 10) == 1;
+            if (!isTrapped) { return; }
+
+            DoorTrap = new CrawlRoomTrap();
+            DoorTrap.InitAsDoorTrap(tier);
+        }
+
+        private void _setMechanism(int tier, bool isStandard = false)
         {
             var mechanismTable = new RandomTable<string>();
             mechanismTable.AddItem("Knob", 4);
@@ -114,8 +142,27 @@ namespace DungeonCohort
             else
             {
                 Mechanism = mechanismTable.GetResult();
+                if (isStandard) { return; }
                 _setState(tier);
             }
+        }
+
+        private void _setSecretDoorMechanism()
+        {
+            var mechanismTable = new RandomTable<string>();
+            mechanismTable.AddItem("Push on door");
+            mechanismTable.AddItem("Press loose stone near door");
+            mechanismTable.AddItem("Step on floor plate");
+            mechanismTable.AddItem("Mysteriously opens ajar on its own");
+            mechanismTable.AddItem("Already open, closes and seals after " +
+                "1 party member enters");
+            mechanismTable.AddItem("Twist a sconce");
+            mechanismTable.AddItem("Lever disguised as part of the " +
+                "concealment");
+            mechanismTable.AddItem("Obvious lever in the room");
+            mechanismTable.AddItem("Inconspicuous keyhole");
+
+            Mechanism = mechanismTable.GetResult();
         }
 
         private void _setState(int tier)
