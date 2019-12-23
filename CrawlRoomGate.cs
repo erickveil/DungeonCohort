@@ -300,12 +300,14 @@ namespace DungeonCohort
             table.AddItem("Kara-tur");
             table.AddItem("Wilderlands");
             table.AddItem("Underdark");
+            table.AddItem("Zakhara (Al Qadim)");
 
             // my own worlds
             table.AddItem("The Ring");
             table.AddItem("Sverdheim");
             table.AddItem("Corinthia");
             table.AddItem("Anaxarete");
+            table.AddItem("The Primordial Wilderness");
             return table.GetResult();
         }
 
