@@ -34,7 +34,7 @@ namespace DungeonCohort
         /// </summary>
         public List<MagicItems> MagicItemList = new List<MagicItems>();
 
-        public string ToString()
+        public override string ToString()
         {
             string report = "";
             string delim = ", ";
@@ -54,13 +54,20 @@ namespace DungeonCohort
                 report += Gems.qty.ToString() + " " + Gems.type + " at " 
                     + Gems.value.ToString() + " gp each";
             }
-            if (report != "" && !(ArtList is null)) { report += "\n"; }
+            if (report != "" && ( !(ArtList is null) && ArtList.Count != 0 ) ) 
+            { 
+                report += "\n"; 
+            }
             foreach (var art in ArtList)
             {
                 report += art.name + " worth " + art.value.ToString() + " gp\n";
             }
 
-            if (report != "" && !(MagicItemList is null)) { report += "\n"; }
+            if (report != "" 
+                && ( !(MagicItemList is null) && MagicItemList.Count != 0 ) ) 
+            {
+                report += "\n";
+            }
             foreach (var magicItem in MagicItemList)
             {
                 report += magicItem.name 
