@@ -182,7 +182,7 @@ namespace DungeonCohort
             var table = new RandomTable<string>();
             table.AddItem("Brown mold (" + damage + " cold damage)");
             table.AddItem("Green slime (" + damage + " acid damage)");
-            table.AddItem("Shridker (alarm - check for wandering monsters)");
+            table.AddItem("Shrieker (alarm - check for wandering monsters)");
             table.AddItem("Violet Fungus (Monster Manual - necrotic damage)");
             table.AddItem("Yellow Mold (" + damage + " poison damage)");
             table.AddItem("Spiderwebs (DC " + dc + " dex save or restrained)");

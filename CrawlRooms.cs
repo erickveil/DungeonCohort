@@ -84,6 +84,7 @@ namespace DungeonCohort
                 Contents.Init(tier, allowedLoot, IsHall);
             }
 
+            _setFeaturesByRoomType(tier, allowedLoot);
 
         }
 
@@ -128,18 +129,48 @@ namespace DungeonCohort
                 + west;
         }
 
-        public void _setFeaturesByRoomType()
+        public void _setFeaturesByRoomType(int tier, 
+            MagicItemPermissions permissions
+            )
         {
+            var dice = Dice.Instance;
+
             if (RoomType.ToLower().Contains("vault"))
             {
+                bool isLooted = dice.Roll(1, 6) <= 2;
+                if (isLooted &&
+                    !(
+                    Contents.ContentType == CrawlRoomContents.RoomContentType.HazardAndTreasure
+                    || Contents.ContentType == CrawlRoomContents.RoomContentType.MonsterAndTreasure
+                    || Contents.ContentType == CrawlRoomContents.RoomContentType.TrapAndTreasure
+                    || Contents.ContentType == CrawlRoomContents.RoomContentType.Treasure
+                    )
+                    )
+                {
+                    RoomType += " (Recently looted)";
+                    Contents.RoomTreasure = null;
+                }
+                else
+                {
+                    Contents.SetRoomHoard(tier, permissions);
+                }
+                
             }
-            if (RoomType.Contains("Trap"))
+            if (RoomType.Contains("Trap")
+                || RoomType.Contains("(trapped)")
+                )
             {
-                // Trap room or complex trap
+                // possible complex trap
+                Contents.RoomTrap = new CrawlRoomTrap();
+                Contents.RoomTrap.InitAsRoomTrap(tier);
             }
             if (RoomType.Contains("trap"))
             {
-                // 75% chance
+                bool isTrapped = dice.Roll(1, 4) <= 3;
+                if (isTrapped)
+                {
+                    Contents.SetRoomTrap(tier);
+                }
             }
             if (RoomType.Contains("Armory"))
             {
@@ -147,6 +178,8 @@ namespace DungeonCohort
             }
             if (RoomType.Contains("Chapel")
                 || RoomType.Contains("Shrine")
+                || RoomType.Contains("Central temple")
+                || RoomType == "Chantry"
                 )
 
             {
@@ -154,31 +187,91 @@ namespace DungeonCohort
             }
             if (RoomType.Contains("Cistern")
                 || RoomType.Contains("Well")
+                || RoomType.ToLower().Contains("bath")
                 )
             {
-                // possible magic pool
+                Contents.RoomTrick = new CrawlRoomTrick();
+                Contents.RoomTrick.Object = "Filled with: " + CrawlRoomTrick.ChoosePoolLiquid(); 
+                bool isTrick = dice.Roll(1, 6) == 1;
+                if (isTrick)
+                {
+                    Contents.RoomTrick.Effect = 
+                        CrawlRoomTrick.ChooseTrickEffect();
+                }
             }
-            if (RoomType.Contains("Kennel"))
+            if (RoomType.Contains("Kennel")
+                || RoomType.ToLower().Contains("zoo")
+                || RoomType.Contains("Stable")
+                || RoomType.Contains("Bestiary")
+                )
             {
-                // chance of pet monster in cages
+                bool isEncounter = dice.Roll(1, 6) <= 3;
+                if (isEncounter)
+                {
+                    Contents.ContentType = 
+                        CrawlRoomContents.RoomContentType.Monster;
+                }
             }
-            if (RoomType.Contains("Pen"))
+            if (RoomType.Contains("Pen")
+                || RoomType.Contains("Prison")
+                || RoomType == "Cell"
+                )
             {
-                // chance of random encounter
+                // Chance of ally
+                bool isEncounter = dice.Roll(1, 6) <= 3;
+                if (isEncounter)
+                {
+                    Contents.ContentType = 
+                        CrawlRoomContents.RoomContentType.Monster;
+                }
             }
             if (RoomType.Contains("Storage"))
             {
-                // chance of treasure -- or mundane loot
+                int roll = dice.Roll(1, 8);
+                bool isHoard = roll == 8;
+                bool isIncidental = roll >= 6;
+                bool isEmpty = roll == 1;
+                if (isHoard)
+                {
+                    Contents.SetRoomHoard(tier, permissions);
+                }
+                else if (isIncidental)
+                {
+                    Contents.SetIncidentalTreasure(tier);
+                }
+                else if (isEmpty)
+                {
+                    Contents.RoomTreasure = null;
+                    RoomType += " (Empty)";
+                }
+                else
+                {
+                    // chance of mundane loot 2-6
+                }
             }
             if (RoomType.Contains("Throne"))
             {
-                // Throne
+                if (Contents.RoomTrick is null)
+                {
+                    Contents.SetRoomTrick();
+                    Contents.RoomTrick.Object = "Throne";
+                }
             }
             if (RoomType.Contains("Trophy")
                 || RoomType.Contains("Gallery")
                 )
             {
-                // Chance of treasure
+                int roll = dice.Roll(1, 6);
+                bool isHoard = roll == 6;
+                bool isIncidental = roll >= 4;
+                if (isHoard)
+                {
+                    Contents.SetRoomHoard(tier, permissions);
+                }
+                else if (isIncidental)
+                {
+                    Contents.SetIncidentalTreasure(tier);
+                }
             }
             if (RoomType.Contains("Workshop"))
             {
@@ -186,21 +279,114 @@ namespace DungeonCohort
             }
             if (RoomType.Contains("Conjuring"))
             {
-                // chance of monster
-                // chance of gate
-                // chance of magic circle
+                bool isGate = dice.Roll(1, 6) <= 3;
+                bool isMonster = dice.Roll(1, 6) <= 2;
+                bool isCircle = (dice.Roll(1, 6) <= 3) && !isGate;
+                if (isGate)
+                {
+                    Contents.RoomGate = new CrawlRoomGate();
+                    Contents.RoomGate.Init();
+                    Contents.RoomGate.GateDestination = 
+                        CrawlRoomGate.ChooseAnotherDimension();
+                    Contents.RoomGate.GateDirection = "One-way, to here";
+                }
+                if (isMonster)
+                {
+                    if (Contents.ContentType != 
+                        CrawlRoomContents.RoomContentType.MonsterAndTreasure)
+                    {
+                        Contents.ContentType = 
+                            CrawlRoomContents.RoomContentType.Monster;
+                    }
+                }
+                if (isCircle)
+                {
+                    Contents.SetRoomTrick();
+                    Contents.RoomTrick.Object = "Magic circle";
+                }
             }
             if (RoomType.Contains("Lair"))
             {
-                // chance of monster
+                bool isMonster = dice.Roll(1, 6) <= 4;
+                if (isMonster)
+                {
+                    if (Contents.ContentType != 
+                        CrawlRoomContents.RoomContentType.MonsterAndTreasure)
+                    {
+                        Contents.ContentType = 
+                            CrawlRoomContents.RoomContentType.Monster;
+                    }
+                }
             }
-            if (RoomType.Contains("Library"))
+            if (RoomType.Contains("Library")
+                || RoomType.Contains("Study")
+                || RoomType.Contains("Classroom")
+                || RoomType.Contains("schoolroom")
+                )
             {
                 // books?
             }
             if (RoomType.Contains("Planar"))
             {
-                // Gate - 25% active
+                bool isActive = dice.Roll(1, 4) == 4;
+                Contents.RoomGate = new CrawlRoomGate();
+                Contents.RoomGate.Init();
+                if (!isActive)
+                {
+                    RoomType += " (Currently inactive)";
+                }
+                Contents.RoomGate.GateDestination = 
+                    CrawlRoomGate.ChooseAnotherDimension();
+            }
+            if (RoomType.Contains("Crypt")
+                || RoomType.Contains("Tomb")
+                )
+            {
+                // chance of tomb object/sepulcher
+                bool isMonster = dice.Roll(1, 6) <= 2;
+                if (isMonster)
+                {
+                    if (Contents.ContentType != 
+                        CrawlRoomContents.RoomContentType.MonsterAndTreasure)
+                    {
+                        Contents.ContentType = 
+                            CrawlRoomContents.RoomContentType.Monster;
+                    }
+                }
+            }
+            if (RoomType.Contains("Grand crypt"))
+            {
+                // 100% with sepulcher
+                RoomSize = "Large";
+            }
+            if (RoomType.Contains("large")
+                || RoomType.Contains("great")
+                )
+            {
+                RoomSize = "Large";
+            }
+            if (RoomType.Contains("Divination"))
+            {
+                // divination object
+            }
+            if (RoomType.Contains("Guard")
+                || RoomType.Contains("Watch room")
+                )
+            {
+                bool isMonster = dice.Roll(1, 6) <= 4;
+                if (isMonster)
+                {
+                    if (Contents.ContentType != 
+                        CrawlRoomContents.RoomContentType.MonsterAndTreasure)
+                    {
+                        Contents.ContentType = 
+                            CrawlRoomContents.RoomContentType.Monster;
+                    }
+                }
+            }
+            if (RoomType == "Closet")
+            {
+                RoomSize = "Small";
             }
 
         }

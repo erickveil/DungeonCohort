@@ -57,6 +57,23 @@ namespace DungeonCohort
             _setType(tier, isDoor: true);
         }
 
+        public void InitAsRoomTrap(int tier)
+        {
+            string severity = ChooseSeverity();
+            string disarm = _chooseDisarm();
+            int dc = ChooseDc(severity);
+            string trigger = _chooseTrapTrigger();
+
+            Location = "";
+            Type = "Room Trap";
+            ExitBlocker = _chooseExitBlocker(tier, severity, true);
+            Trigger = trigger;
+            Effect = _chooseRoomTrapEffect();
+            DC = dc;
+            Disarm = disarm;
+            Severity = severity;
+        }
+
         public void InitTrap(int tier)
         {
             _setType(tier, isDoor: false);

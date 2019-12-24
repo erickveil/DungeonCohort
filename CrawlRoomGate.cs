@@ -41,7 +41,8 @@ namespace DungeonCohort
                 + GateForm + "; Openend by "
                 + GateActivation + " to reveal "
                 + GateVisualEffect + ". It transports "
-                + GateAllowance + " " 
+                + GateAllowance
+                + " to " + GateDestination + " "
                 + GateFrequency 
                 + (GateSideEffect == "" ? "" : ". Effect on first user: " 
                 + GateSideEffect)

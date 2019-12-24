@@ -285,7 +285,7 @@ namespace DungeonCohort
         public static string ChoosePoolLiquid()
         {
             var table = new RandomTable<string>();
-            table.AddItem("Empty (Needs to be filled to gain effect)", 5);
+            table.AddItem("Empty", 5);
             table.AddItem("Clean water", 10);
             table.AddItem("Blood");
             table.AddItem("Dirty water", 10);
