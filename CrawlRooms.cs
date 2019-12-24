@@ -14,9 +14,9 @@ namespace DungeonCohort
     /// </summary>
     class CrawlRooms
     {
-        public enum ExitDirection  
-        { 
-            EXIT_NORTH, EXIT_SOUTH, EXIT_WEST, EXIT_EAST 
+        public enum ExitDirection
+        {
+            EXIT_NORTH, EXIT_SOUTH, EXIT_WEST, EXIT_EAST
         };
 
         public string RoomSize;
@@ -35,10 +35,10 @@ namespace DungeonCohort
         public int CeilingHeight; // also choose a standard height?
 
 
-        public void RandomizeRoom(string dungeonType, bool isLargeRooms, 
-            bool isNarrowHalls, int tier, ExitDirection enterFrom, 
-            CrawlRoomExit entry, bool isSetEncounters, 
-            MagicItemPermissions allowedLoot, string biome, 
+        public void RandomizeRoom(string dungeonType, bool isLargeRooms,
+            bool isNarrowHalls, int tier, ExitDirection enterFrom,
+            CrawlRoomExit entry, bool isSetEncounters,
+            MagicItemPermissions allowedLoot, string biome,
             bool isStandardRace, List<int> pcLevelList, List<int> pcQtyList)
         {
             _setIsHall();
@@ -58,7 +58,7 @@ namespace DungeonCohort
             }
 
             var typeTableFactory = JsonChamberPurposeLoader.Instance;
-            var typeTable = 
+            var typeTable =
                 typeTableFactory.GetDungeonRoomTypeTable(dungeonType);
             if (IsHall)
             {
@@ -75,7 +75,7 @@ namespace DungeonCohort
             Contents = new CrawlRoomContents();
             if (isSetEncounters)
             {
-                Contents.Init(biome, isStandardRace, allowedLoot, pcLevelList, 
+                Contents.Init(biome, isStandardRace, allowedLoot, pcLevelList,
                     pcQtyList, IsHall);
 
             }
@@ -102,7 +102,7 @@ namespace DungeonCohort
                 + "Illumination: " + Illumination.AsString() + "\n"
                 + RoomSize + ", " + RoomShape + "\n"
                 + (IsHall ? "" : "Orientation: " + Orientation.ToString() + "\n")
-                + "Contents: " + Contents.ToString() +  "\n"
+                + "Contents: " + Contents.ToString() + "\n"
                 + GetExits()
                 ;
             return desc;
@@ -122,10 +122,87 @@ namespace DungeonCohort
             string west = WestExit is null ? "" : "West: " + WestExit.ToString() + "\n";
 
             return "Exits: " + numExits.ToString() + "\n"
-                + north 
-                + south 
-                + east 
+                + north
+                + south
+                + east
                 + west;
+        }
+
+        public void _setFeaturesByRoomType()
+        {
+            if (RoomType.ToLower().Contains("vault"))
+            {
+            }
+            if (RoomType.Contains("Trap"))
+            {
+                // Trap room or complex trap
+            }
+            if (RoomType.Contains("trap"))
+            {
+                // 75% chance
+            }
+            if (RoomType.Contains("Armory"))
+            {
+                // Armory contents?
+            }
+            if (RoomType.Contains("Chapel")
+                || RoomType.Contains("Shrine")
+                )
+
+            {
+                // a chapel furnishing
+            }
+            if (RoomType.Contains("Cistern")
+                || RoomType.Contains("Well")
+                )
+            {
+                // possible magic pool
+            }
+            if (RoomType.Contains("Kennel"))
+            {
+                // chance of pet monster in cages
+            }
+            if (RoomType.Contains("Pen"))
+            {
+                // chance of random encounter
+            }
+            if (RoomType.Contains("Storage"))
+            {
+                // chance of treasure -- or mundane loot
+            }
+            if (RoomType.Contains("Throne"))
+            {
+                // Throne
+            }
+            if (RoomType.Contains("Trophy")
+                || RoomType.Contains("Gallery")
+                )
+            {
+                // Chance of treasure
+            }
+            if (RoomType.Contains("Workshop"))
+            {
+                // What kind?
+            }
+            if (RoomType.Contains("Conjuring"))
+            {
+                // chance of monster
+                // chance of gate
+                // chance of magic circle
+            }
+            if (RoomType.Contains("Lair"))
+            {
+                // chance of monster
+            }
+            if (RoomType.Contains("Library"))
+            {
+                // books?
+            }
+            if (RoomType.Contains("Planar"))
+            {
+                // Gate - 25% active
+            }
+
         }
 
         public void _setIsHall()
