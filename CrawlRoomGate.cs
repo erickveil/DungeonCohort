@@ -42,7 +42,7 @@ namespace DungeonCohort
                 + GateActivation + " to reveal "
                 + GateVisualEffect + ". It transports "
                 + GateAllowance
-                + " to " + GateDestination + " "
+                + " to " + GateDestination + "\n"
                 + GateFrequency 
                 + (GateSideEffect == "" ? "" : ". Effect on first user: " 
                 + GateSideEffect)
@@ -225,7 +225,7 @@ namespace DungeonCohort
             table.AddItem(ChooseOuterPlanes());
             table.AddItem(ChooseTransientPlanes());
             table.AddItem(ChooseSetting());
-            // TODO: add procedural prime worlds from 1e Manual o/t Planes
+            table.AddItem(BuildRandomPrimeWorld());
             return table.GetResult();
         }
 
@@ -308,8 +308,135 @@ namespace DungeonCohort
             table.AddItem("Sverdheim");
             table.AddItem("Corinthia");
             table.AddItem("Anaxarete");
+            table.AddItem("Futurea");
             table.AddItem("The Primordial Wilderness");
             return table.GetResult();
+        }
+
+        public static string ChoosePrimePhysicalFactor()
+        {
+            var table = new RandomTable<string>();
+            table.AddItem("10 - Sentience impossible. All magger reacts " +
+                "with all other matter in an explosive fashion.");
+            table.AddItem("8 - All liquid matter can be used as fuel or " +
+                "explosives. Creatures over four feet high impossible. " +
+                "Electrical discharges (lightning) impossible.");
+            table.AddItem("6 - Creatures over 10 feet tall unlikely. " +
+                "Certain liquids and gases inert.");
+            table.AddItem("5 - Bipedal creatures over 10 feet tall " +
+                "unlikely. Flight restricted to small hollow-boned " +
+                "creatures. Most liquids and gases inert, but combustion " +
+                "such as that found in gas engines and firearms possible.");
+            table.AddItem("3 - Flight possible for large hollow-boned " +
+                "creatures. Explosive chemical reactions such as those " +
+                "found in firearms are erratic. Creatures over 10 " +
+                "feet tall possible.");
+            table.AddItem("1 - Flight possible for most winged " +
+                "creatures. Sentience and language possible for most " +
+                "inteligent creatures. Animation of inanimate objects " +
+                "possible. Size dows not limit flight ability or " +
+                "inteligence.");
+            table.AddItem("0 - Language possible for most inteligent " +
+                "creatures. Animation of inanimate objects possible. " +
+                "Size does not limit flight ability or inteligence.");
+            table.AddItem("-1 - Flight possible by thought or " +
+                "super-developed powers. Most flammable substances inert.");
+            table.AddItem("-3 - Sentience and gigantism in normally " +
+                "nonsentient creatures - giant white rabbits possible.");
+            table.AddItem("-5 - Gravidy determined locally. Fire can " +
+                "exist without consuming its fuel source.");
+            table.AddItem("-7 - Nonsentient items like chairs, trees, " +
+                "etc. become fully aware. Humanoid form no longer the " +
+                "norm among civilizations.");
+            table.AddItem("-10 - Entire plane is aware, including all " +
+                "elemnets. Instantaneous movement by thought. Elements " +
+                "exist in their pure states. Further negative shifts " +
+                "indicate all component element aparts return to their " +
+                "own planes.");
+            return table.GetResult();
+        }
+
+        public static string ChoosePrimeMagicalFactor()
+        {
+            var table = new RandomTable<string>();
+            table.AddItem("10 - Universal spell casting among all races " +
+                "capable of sentient thought - ppower limited only " +
+                "by imagination. These planes soon dissolve into a " +
+                "number of demi-planes ruled by individuals.");
+            table.AddItem("8 - All spell effects are visible. Spells " +
+                "of 11th-level magic are possible. No saving throws " +
+                "against magic.");
+            table.AddItem("5 - Spells of 10th-level magic are " +
+                "possible. Magic-useres can cast an unlimited number of " +
+                "spells per day.");
+            table.AddItem("3 - Spells of 9th-level magic are possible. " +
+                "Magic-useres do not need to study from spell books, " +
+                "nor do clerics need tp pray for spells. All individuals " +
+                "of sentient races can cast spells.");
+            table.AddItem("1 - Most individuals of sentient races can " +
+                "cast spells.");
+            table.AddItem("0 - Most individuals of most sentient races " +
+                "can cast spells, if given proper training. Magic-users " +
+                "must study their spells and clerics must pray for spells.");
+            table.AddItem("-1 - Maximum of 8th-level spells possible. " +
+                "Rare individuals of one or two sentient races can " +
+                "cast spells.");
+            table.AddItem("-3 - Maximum of 6th-level spells possible. " +
+                "Clerics can gain only 1st and 2nd level spells.");
+            table.AddItem("-5 - Spells that rely on Powers of other " +
+                "planes do not operate. Maximum of 3rd level spells possible.");
+            table.AddItem("-7 - No spells operate. Creativity and " +
+                "imagination are uncommon among sentient creatures. " +
+                "Songs disappear.");
+            table.AddItem("-10 - No magic, creativity, or imagination " +
+                "exist. Beyond this point, sentient life is impossible.");
+            return table.GetResult();
+        }
+
+        public static string ChoosePrimeTemportalFactor()
+        {
+            var table = new RandomTable<string>();
+            table.AddItem("10 - Planetary situation and connection with " +
+                "other planes wildly different than Prime. Differently " +
+                "colored sun, lack of atmosphere, etc.");
+            table.AddItem("8 - Life exists on this plane, but is alien " +
+                "in nature - breathes methane, is not carbon-based, etc. " +
+                "Environment may be hostile to travelers.");
+            table.AddItem("5 - Earth-like planet, alien life but " +
+                "familiar types to the travellers (reptiles, mammals, " +
+                "dragons, etc) Most forms of life missing.");
+            table.AddItem("4 - Earth-like planet, familiar creatures " +
+                "and sentient beings (dwarves, elves, etc). Continents " +
+                "are in different patterns.");
+            table.AddItem("1 - Continents in familiar patterns, " +
+                "familiar creatures and sentient beings. Society and " +
+                "individuals different.");
+            table.AddItem("0 - Continents, life, and society similar " +
+                "to home plane. Individuals who resemble companions " +
+                "exist, thought their actions, attitudes, and " +
+                "alignments may vary from those of the travelers' " +
+                "Prime plane");
+            table.AddItem("-1 - Plane similar to traveler's Prime, but " +
+                "exists up to a week in the past or future.");
+            table.AddItem("-3 - Plane similar to the travler's Primer, " +
+                "but exists up to a year in the past or furture.");
+            table.AddItem("-5 - Plane similar to travler's Prime, " +
+                "but exists up to a century in the past or future.");
+            table.AddItem("-7 - Plane similar to the traveler's " +
+                "Prime, but exists up to a millenium in the past or future.");
+            table.AddItem("-10 - Plane is similar to traveler's Prime, " +
+                "but exists millions of years in the past or future.");
+            return table.GetResult();
+        }
+
+        public static string BuildRandomPrimeWorld()
+        {
+            string desc = "Alternate Prime Material world:\n"
+                + "Physical Factor: " + ChoosePrimePhysicalFactor() + "\n"
+                + "Magical Factor: " + ChoosePrimeMagicalFactor() + "\n"
+                + "Temporal Factor: " + ChoosePrimeTemportalFactor();
+            return desc;
+
         }
 
 
