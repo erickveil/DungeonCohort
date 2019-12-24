@@ -561,6 +561,19 @@ namespace DungeonCohort
                 Trigger = "Stepping on trapdoor",
                 Type = "Trapdoor"
             });
+            table.AddItem(new CrawlRoomTrap
+            {
+                DamageType = "None",
+                DamageDice = "",
+                Coating = "",
+                Effect = "",
+                TrapDoorContents = "Drops victim into a one-way active gate: " 
+                + CrawlRoomGate.ChooseGateDestination(),
+                TrapMonster = null,
+                TrapTreasure = null,
+                Trigger = "Stepping on trapdoor",
+                Type = "Trapdoor"
+            });
 
             return table.GetResult();
         }
