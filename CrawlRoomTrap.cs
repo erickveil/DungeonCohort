@@ -90,7 +90,7 @@ namespace DungeonCohort
             CrawlRoomTrap beam = _chooseBeamEffect();
             Dice dice = Dice.Instance;
             bool isCoated = dice.Roll(1, 6) <= 2;
-            string coating = isCoated ? _chooseCoating() : "";
+            string coating = isCoated ? ChooseCoating() : "";
             CrawlRoomTrap trapdoor = _chooseTrapDoorTrap(tier, severity);
             int radius = dice.Roll(1, 6) * 5;
             string trigger = isDoor 
@@ -103,7 +103,7 @@ namespace DungeonCohort
             {
                 DamageDice = damageDice,
                 Effect = ChooseGasType(),
-                Location = _chooseLocation(),
+                Location = ChooseLocation(),
                 Trigger = trigger,
                 Type = "Gas",
             });
@@ -123,7 +123,7 @@ namespace DungeonCohort
                 Coating = coating,
                 DamageDice = damageDice,
                 DamageType = "Piercing",
-                Location = _chooseLocation(),
+                Location = ChooseLocation(),
                 Trigger = trigger,
                 Type = "Darts",
             });
@@ -133,7 +133,7 @@ namespace DungeonCohort
                 Coating = coating,
                 DamageDice = damageDice,
                 DamageType = "Slashing",
-                Location = _chooseLocation(),
+                Location = ChooseLocation(),
                 Trigger = trigger,
                 Type = "Blades",
             });
@@ -160,7 +160,7 @@ namespace DungeonCohort
                 DamageType = beam.DamageType,
                 Effect = beam.Effect,
                 IsMagic = true,
-                Location = _chooseLocation(),
+                Location = ChooseLocation(),
                 Trigger = trigger,
                 Type = "Beam",
             });
@@ -170,7 +170,7 @@ namespace DungeonCohort
                 DamageType = beam.DamageType,
                 Effect = beam.Effect,
                 IsMagic = true,
-                Location = _chooseLocation(),
+                Location = ChooseLocation(),
                 Trigger = "Viewing",
                 Type = "Symbol",
             });
@@ -180,7 +180,7 @@ namespace DungeonCohort
                 DamageType = beam.DamageType,
                 Effect = beam.Effect,
                 IsMagic = true,
-                Location = _chooseLocation(),
+                Location = ChooseLocation(),
                 Radius = radius,
                 Trigger = trigger,
                 Type = "Blast",
@@ -209,7 +209,7 @@ namespace DungeonCohort
             typeTable.AddItem(new CrawlRoomTrap
             {
                 DamageType = "Falling",
-                Location = _chooseLocation(),
+                Location = ChooseLocation(),
                 Trigger = trigger,
                 IsMagic = true,
                 Type = "Reverse gravity",
@@ -220,7 +220,7 @@ namespace DungeonCohort
                 Coating = coating,
                 DamageDice = damageDice,
                 DamageType = "Piercing",
-                Location = _chooseLocation(),
+                Location = ChooseLocation(),
                 Trigger = trigger,
                 Type = "Spears",
             });
@@ -230,7 +230,7 @@ namespace DungeonCohort
                 Coating = coating,
                 DamageDice = damageDice,
                 DamageType = "Piercing",
-                Location = _chooseLocation(),
+                Location = ChooseLocation(),
                 Trigger = trigger,
                 Type = "Arrows",
             });
@@ -308,9 +308,9 @@ namespace DungeonCohort
         private string _chooseRoomTrapEffect()
         {
             var table = new RandomTable<string>();
-            string direction = _chooseLocation();
+            string direction = ChooseLocation();
             string pool = _chooseTrapDoorPoolEffect();
-            string coating = _chooseCoating();
+            string coating = ChooseCoating();
             var monsterGen = new EncounterFactory();
             //var encounter = monsterGen.PickRandomEncounter("Trap", false);
             /* ugggg if i want to set an encounter, i'd have to create 
@@ -400,7 +400,7 @@ namespace DungeonCohort
             var loot = lootGen.GetIndividualTreasure(1);
             var dice = Dice.Instance;
             bool isCoated = dice.Roll(1, 6) <= 2;
-            var coating = isCoated ? _chooseCoating() : "";
+            var coating = isCoated ? ChooseCoating() : "";
             var monsterGen = new EncounterFactory();
             //var monster = monsterGen.PickMooks(1, "Trap", false);
             string damageDice = ChooseDamage(tier, severity);
@@ -760,7 +760,7 @@ namespace DungeonCohort
             return table.GetResult();
         }
 
-        private string _chooseLocation()
+        public static string ChooseLocation()
         {
             var table = new RandomTable<string>();
 
@@ -1021,7 +1021,7 @@ namespace DungeonCohort
             }
         }
 
-        private string _chooseCoating()
+        public static string ChooseCoating()
         {
             var table = new RandomTable<string>();
 

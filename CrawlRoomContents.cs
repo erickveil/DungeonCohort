@@ -16,13 +16,14 @@ namespace DungeonCohort
         { 
             Empty, Monster, Trap, Hazard, Obstacle, Trick, Treasure,
             MonsterAndTreasure, HazardAndTreasure, TrapAndTreasure, 
-            Merchant
+            Merchant 
         };
         public RoomContentType ContentType;
 
         public string EncounterDifficulty;
         public Encounter RoomEncounter = null;
         public CrawlRoomTrap RoomTrap = null;
+        public CrawlRoomComplexTrap ComplexTrap = null;
         public LootTableResult RoomTreasure = null;
         public string RoomHazard = "";
         public CrawlRoomTrick RoomTrick = null;
@@ -147,6 +148,7 @@ namespace DungeonCohort
                 + (RoomTrick is null ? "" : RoomTrick.ToString() + "\n")
                 + (RoomGate is null ? "" : RoomGate.ToString() + "\n")
                 + (RoomTrap is null ? "" : RoomTrap.ToString() + "\n")
+                + (ComplexTrap is null ? "" : ComplexTrap.ToString() + "\n")
                 + (RoomTreasure is null ? "" : RoomTreasure.ToString() + "\n")
                 ;
             return desc;
@@ -231,8 +233,18 @@ namespace DungeonCohort
 
         public void SetRoomTrap(int tier)
         {
-            RoomTrap = new CrawlRoomTrap();
-            RoomTrap.InitTrap(tier);
+            var dice = Dice.Instance;
+            bool isComplexTrap = dice.Roll(1, 6) <= 2;
+            if (isComplexTrap)
+            {
+                ComplexTrap = new CrawlRoomComplexTrap();
+                ComplexTrap.Init();
+            }
+            else
+            {
+                RoomTrap = new CrawlRoomTrap();
+                RoomTrap.InitTrap(tier);
+            }
         }
 
         public void SetRoomHoard(int tier, MagicItemPermissions permissions)

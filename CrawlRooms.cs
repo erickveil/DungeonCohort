@@ -156,13 +156,20 @@ namespace DungeonCohort
                 }
                 
             }
-            if (RoomType.Contains("Trap")
-                || RoomType.Contains("(trapped)")
-                )
+            if ( RoomType.Contains("Trap") )
             {
-                // possible complex trap
-                Contents.RoomTrap = new CrawlRoomTrap();
-                Contents.RoomTrap.InitAsRoomTrap(tier);
+                bool isComplexTrap = dice.Roll(1, 6) <= 2;
+                if (isComplexTrap)
+                {
+                    Contents.RoomTrap = null;
+                    Contents.ComplexTrap = new CrawlRoomComplexTrap();
+                    Contents.ComplexTrap.Init();
+                }
+                else
+                {
+                    Contents.RoomTrap = new CrawlRoomTrap();
+                    Contents.RoomTrap.InitAsRoomTrap(tier);
+                }
             }
             if (RoomType.Contains("trap"))
             {
