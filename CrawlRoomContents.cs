@@ -168,6 +168,7 @@ namespace DungeonCohort
             }
             else
             {
+                RoomTrick = new CrawlRoomTrick();
                 RoomGate = new CrawlRoomGate();
                 RoomGate.Init();
                 return;
@@ -259,6 +260,81 @@ namespace DungeonCohort
             RoomTreasure = lootGetn.GetIndividualTreasure(tier);
         }
 
+        public void SetArmoryContents()
+        {
+            var dice = Dice.Instance;
+            int numEntries = dice.Roll(1, 6) - 1;
+            if (numEntries < 1) { return; }
+
+            if (RoomTreasure == null) { RoomTreasure = new LootTableResult(); }
+            for (int i = 0; i < numEntries; ++i)
+            {
+                RoomTreasure.MundaneItemList.Add(ChooseArmoryItem());
+            }
+        }
+
+        public static string ChooseArmoryItem()
+        {
+            var dice = Dice.Instance;
+            int numHigh = dice.Roll(2, 8);
+            int numMed = dice.Roll(1, 8);
+            int numLow = dice.Roll(1, 4);
+
+            var armoryItemTable = new RandomTable<string>();
+            armoryItemTable.AddItem(numHigh + " Hide Armor");
+            armoryItemTable.AddItem(numHigh + " Leather Armor");
+            armoryItemTable.AddItem(numMed + " Studed Leather Armor");
+            armoryItemTable.AddItem(numMed + " Chain Shirts");
+            armoryItemTable.AddItem(numLow + " Chain Mail");
+            armoryItemTable.AddItem(numLow + " Scale Mail");
+            armoryItemTable.AddItem(numLow + " Breastplates");
+            armoryItemTable.AddItem("1 Plate Mail");
+            armoryItemTable.AddItem(numHigh + " Helmets");
+            armoryItemTable.AddItem(numHigh + " Shields");
+            armoryItemTable.AddItem(numHigh + " Bucklers");
+            armoryItemTable.AddItem(numLow + " Tower Shields");
+
+            armoryItemTable.AddItem("1 Balista and " + numHigh 
+                + " balista bolts");
+            armoryItemTable.AddItem("1 Catapult and " + numHigh 
+                + " catapult shot");
+            armoryItemTable.AddItem(numHigh + "Battering ram");
+            armoryItemTable.AddItem(numMed + " Mantlets");
+
+            armoryItemTable.AddItem(numHigh + " daggers");
+            armoryItemTable.AddItem(numHigh + " spears");
+            armoryItemTable.AddItem(numHigh + " staves");
+            armoryItemTable.AddItem(numHigh + " clubs");
+            armoryItemTable.AddItem(numMed + " short swords");
+            armoryItemTable.AddItem(numMed + " maces");
+            armoryItemTable.AddItem(numMed + " morning stars");
+            armoryItemTable.AddItem(numMed + " javelins");
+            armoryItemTable.AddItem(numLow + " longswords");
+            armoryItemTable.AddItem(numLow + " glaives");
+            armoryItemTable.AddItem(numLow + " polearms");
+
+            armoryItemTable.AddItem(numHigh + " days provisions");
+            armoryItemTable.AddItem(numMed + " pots of pitch");
+            armoryItemTable.AddItem(numMed + " pots of lamp oil");
+            armoryItemTable.AddItem(numHigh + " bales of straw");
+            armoryItemTable.AddItem(numHigh + " bags of sand");
+            armoryItemTable.AddItem(numHigh + " bags of flour");
+            armoryItemTable.AddItem(numHigh + " barrels of ale");
+            armoryItemTable.AddItem(numHigh + " barrels of fish");
+            armoryItemTable.AddItem(numHigh + " barrels of dried peas");
+            armoryItemTable.AddItem(numHigh + " casks of wine");
+
+            armoryItemTable.AddItem(numHigh + " bags of ball bearings");
+            armoryItemTable.AddItem(numHigh + " bags of caltrops");
+            armoryItemTable.AddItem(numHigh + " empty waterskins");
+            armoryItemTable.AddItem(numHigh + " torches");
+            armoryItemTable.AddItem(numHigh + " buckets");
+
+            armoryItemTable.AddItem(numLow + " vials of alchemist fire");
+
+            return armoryItemTable.GetResult();
+        }
+
         private string _getTypeString(RoomContentType typeVal)
         {
             switch (typeVal)
@@ -269,6 +345,7 @@ namespace DungeonCohort
                 default: return typeVal.ToString();
             }
         }
+
 
     }
 }

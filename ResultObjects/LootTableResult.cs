@@ -34,6 +34,8 @@ namespace DungeonCohort
         /// </summary>
         public List<MagicItems> MagicItemList = new List<MagicItems>();
 
+        public List<string> MundaneItemList = new List<string>();
+
         public override string ToString()
         {
             string report = "";
@@ -48,12 +50,14 @@ namespace DungeonCohort
             if (GP > 0) { report += "gp: " + GP.ToString(); }
             if (report != "" && PP > 0) { report += delim; }
             if (PP > 0) { report += "pp: " + PP.ToString(); }
+
             if (report != "" && !(Gems is null)) { report += "\n"; }
             if (!(Gems is null))
             {
                 report += Gems.qty.ToString() + " " + Gems.type + " at " 
                     + Gems.value.ToString() + " gp each";
             }
+
             if (report != "" && ( !(ArtList is null) && ArtList.Count != 0 ) ) 
             { 
                 report += "\n"; 
@@ -73,6 +77,17 @@ namespace DungeonCohort
                 report += magicItem.name 
                     + "(" + magicItem.type + ", " + magicItem.rarity + ")"
                     + "\n";
+            }
+
+            if (report != "" 
+                && ( !(MundaneItemList is null) 
+                && MundaneItemList.Count != 0 ) ) 
+            {
+                report += "\n";
+            }
+            foreach (var item in MundaneItemList)
+            {
+                report += item + "\n";
             }
 
             if (report == "") { return "none"; }

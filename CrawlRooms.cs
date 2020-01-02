@@ -181,7 +181,7 @@ namespace DungeonCohort
             }
             if (RoomType.Contains("Armory"))
             {
-                // Armory contents?
+                Contents.SetArmoryContents();
             }
             if (RoomType.Contains("Chapel")
                 || RoomType.Contains("Shrine")
