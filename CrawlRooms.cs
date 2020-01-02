@@ -150,6 +150,11 @@ namespace DungeonCohort
                     RoomType += " (Recently looted)";
                     Contents.RoomTreasure = null;
                 }
+                if (isLooted)
+                {
+                    RoomType += " (Recently looted)";
+                    Contents.RoomTreasure = null;
+                }
                 else
                 {
                     Contents.SetRoomHoard(tier, permissions);
@@ -158,7 +163,7 @@ namespace DungeonCohort
             }
             if ( RoomType.Contains("Trap") )
             {
-                bool isComplexTrap = dice.Roll(1, 6) <= 2;
+                bool isComplexTrap = dice.Roll(1, 6) <= 1;
                 if (isComplexTrap)
                 {
                     Contents.RoomTrap = null;
@@ -169,11 +174,12 @@ namespace DungeonCohort
                 {
                     Contents.RoomTrap = new CrawlRoomTrap();
                     Contents.RoomTrap.InitAsRoomTrap(tier);
+                    Contents.ComplexTrap = null;
                 }
             }
             if (RoomType.Contains("trap"))
             {
-                bool isTrapped = dice.Roll(1, 4) <= 3;
+                bool isTrapped = dice.Roll(1, 4) <= 2;
                 if (isTrapped)
                 {
                     Contents.SetRoomTrap(tier);
@@ -190,7 +196,20 @@ namespace DungeonCohort
                 )
 
             {
-                // a chapel furnishing
+                bool hasStrangObject = dice.Roll(1, 6) <= 2;
+                if (hasStrangObject)
+                {
+                    var furnishingTable = new JsonReligiousArticles();
+                    string furnishing = furnishingTable.GetItem();
+                    string descriptor = Descriptors.UnusualObjectDescriptor();
+                    string item = descriptor + " " + furnishing;
+                    if (Contents.RoomTrick == null)
+                    {
+                        Contents.RoomTrick = new CrawlRoomTrick();
+                        Contents.RoomTrick.Init();
+                    }
+                    Contents.RoomTrick.Object = item;
+                }
             }
             if (RoomType.Contains("Cistern")
                 || RoomType.Contains("Well")
@@ -198,7 +217,8 @@ namespace DungeonCohort
                 )
             {
                 Contents.RoomTrick = new CrawlRoomTrick();
-                Contents.RoomTrick.Object = "Filled with: " + CrawlRoomTrick.ChoosePoolLiquid(); 
+                Contents.RoomTrick.Object = "Filled with: " + 
+                    CrawlRoomTrick.ChoosePoolLiquid(); 
                 bool isTrick = dice.Roll(1, 6) == 1;
                 if (isTrick)
                 {

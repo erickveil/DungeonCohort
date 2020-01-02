@@ -82,19 +82,19 @@ namespace DungeonCohort
             table.AddItem("Large, floating eye");
             table.AddItem("Pyramid");
             table.AddItem("Massive harp with broken strings");
-            table.AddItem("A bowl of unusual fruit");
-            table.AddItem("A ring of salt");
-            table.AddItem("A sword embedded in the stone floor");
-            table.AddItem("A smoky quartz wall");
+            table.AddItem("Bowl of unusual fruit");
+            table.AddItem("Ring of salt");
+            table.AddItem("Sword embedded in the stone floor");
+            table.AddItem("Smoky quartz wall");
             table.AddItem("Three imp sculptures in tiny alcoves near the " +
                 "ceiling");
-            table.AddItem("A music box");
-            table.AddItem("A nest with three purple eggs");
-            table.AddItem("A Marbel pedestal");
-            table.AddItem("A red rune on the ceiling");
-            table.AddItem("A drooping plant bearing a single, red fruit");
+            table.AddItem("Music box");
+            table.AddItem("Nest with three purple eggs");
+            table.AddItem("Marbel pedestal");
+            table.AddItem("Red rune on the ceiling");
+            table.AddItem("Drooping plant bearing a single, red fruit");
             table.AddItem("Five red, wooden, creepy masks");
-            table.AddItem("A dome of black glass");
+            table.AddItem("Dome of black glass");
 
             return table.GetResult();
         }

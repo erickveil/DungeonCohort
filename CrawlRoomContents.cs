@@ -77,6 +77,8 @@ namespace DungeonCohort
             }
 
             ContentType = contentsTable.GetResult();
+            var dice = Dice.Instance;
+            bool isHoard = dice.Roll(1, 6) <= 3;
 
             switch (ContentType)
             {
@@ -85,14 +87,16 @@ namespace DungeonCohort
                 case RoomContentType.Monster:
                     break;
                 case RoomContentType.MonsterAndTreasure:
-                    SetRoomHoard(tier, allowedLoot);
+                    if (isHoard) { SetRoomHoard(tier, allowedLoot); }
+                    else { SetIncidentalTreasure(tier); }
                     break;
                 case RoomContentType.Trap:
                     SetRoomTrap(tier);
                     break;
                 case RoomContentType.TrapAndTreasure:
                     SetRoomTrap(tier);
-                    SetRoomHoard(tier, allowedLoot);
+                    if (isHoard) { SetRoomHoard(tier, allowedLoot); }
+                    else { SetIncidentalTreasure(tier); }
                     break;
                 case RoomContentType.Hazard:
                     SetRoomHazard(tier);
@@ -109,7 +113,8 @@ namespace DungeonCohort
                 case RoomContentType.Merchant:
                     break;
                 case RoomContentType.Treasure:
-                    SetRoomHoard(tier, allowedLoot);
+                    if (isHoard) { SetRoomHoard(tier, allowedLoot); }
+                    else { SetIncidentalTreasure(tier); }
                     break;
             }
         }
@@ -235,16 +240,18 @@ namespace DungeonCohort
         public void SetRoomTrap(int tier)
         {
             var dice = Dice.Instance;
-            bool isComplexTrap = dice.Roll(1, 6) <= 2;
+            bool isComplexTrap = dice.Roll(1, 6) <= 1;
             if (isComplexTrap)
             {
                 ComplexTrap = new CrawlRoomComplexTrap();
                 ComplexTrap.Init(tier);
+                RoomTrap = null;
             }
             else
             {
                 RoomTrap = new CrawlRoomTrap();
                 RoomTrap.InitTrap(tier);
+                ComplexTrap = null;
             }
         }
 

@@ -75,6 +75,7 @@
     <Compile Include="JsonLoading\JsonChamberPurpose.cs" />
     <Compile Include="JsonLoading\JsonChamberPurposeTable.cs" />
     <Compile Include="JsonLoading\JsonChamberPurposeLoader.cs" />
+    <Compile Include="JsonLoading\JsonReligiousArticles.cs" />
     <Compile Include="ResultObjects\Encounter.cs" />
     <Compile Include="EncounterFactory.cs" />
     <Compile Include="ResultObjects\EncounterComponent.cs" />
