@@ -238,7 +238,7 @@ namespace DungeonCohort
             if (isComplexTrap)
             {
                 ComplexTrap = new CrawlRoomComplexTrap();
-                ComplexTrap.Init();
+                ComplexTrap.Init(tier);
             }
             else
             {

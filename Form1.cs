@@ -483,5 +483,28 @@ namespace DungeonCohort
             var target = rtb_Crawl;
             target.Clear();
         }
+
+        private void but_trap_Click(object sender, EventArgs e)
+        {
+            var trap = new CrawlRoomTrap();
+            int tier = (int)nud_tier.Value;
+            trap.InitTrap(tier);
+            string desc = trap.ToString();
+            var target = rtb_Crawl;
+            target.Clear();
+            PrintBody(target, desc);
+        }
+
+        private void but_complexTrap_Click(object sender, EventArgs e)
+        {
+            int tier = (int)nud_tier.Value;
+            var trap = new CrawlRoomComplexTrap();
+            trap.Init(tier);
+            string desc = trap.ToString();
+            var target = rtb_Crawl;
+            target.Clear();
+            PrintBody(target, desc);
+
+        }
     }
 }

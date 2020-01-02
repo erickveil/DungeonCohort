@@ -163,7 +163,7 @@ namespace DungeonCohort
                 {
                     Contents.RoomTrap = null;
                     Contents.ComplexTrap = new CrawlRoomComplexTrap();
-                    Contents.ComplexTrap.Init();
+                    Contents.ComplexTrap.Init(tier);
                 }
                 else
                 {

@@ -37,17 +37,34 @@ namespace DungeonCohort
                 + (Coating == "" ? "" : "Coated with " + Coating + " ")
                 + "("
                 + (Radius == 0 ? "" : Radius.ToString() + " ft radius; ")
-                + (AttackBonus == -1 ? "" : "To Hit: +" + AttackBonus.ToString() + "; ")
-                + (DamageDice == "" ? "" : DamageDice + " " + DamageType + "; ")
-                + (DC == -1 ? "" : "DC: " + DC.ToString() + "; ")
-                + ")"
+                + (AttackBonus == -1 ? "" : "To Hit: +" + 
+                AttackBonus.ToString() + "; ")
+
+                + (DamageDice == "" 
+                ? "" 
+                : DamageDice + " " + DamageType + "; ")
+
+                + (DC == -1 ? "" : "DC: " + DC.ToString() + "; ") + ")"
                 + (Trigger == "" ? "" : "\nTrigged by: " + Trigger + "; ")
-                + (ExitBlocker == "" ? "" : "\nExits blocked: " + ExitBlocker + "; ")
+                
+                + (ExitBlocker == "" 
+                ? "" 
+                : "\nExits blocked: " + ExitBlocker + "; ")
+
                 + (Effect == "" ? "" : "\nEffect: " + Effect + "; ")
                 + (Disarm == "" ? "" : "\nTo disarm: " + Disarm + "; ")
-                + (TrapDoorContents == "" ? "" : "\nContains: " + TrapDoorContents + "; ")
-                + ( (!(TrapMonster is null) && useEncounters) ? "\nMonster: " + TrapMonster.ToString() + "; " : "" )
-                + ( TrapTreasure is null ? "" : "\nTreasure: " + TrapTreasure.ToString() + "; ")
+
+                + (TrapDoorContents == "" 
+                ? "" 
+                : "\nContains: " + TrapDoorContents + "; ")
+
+                + ( (!(TrapMonster is null) && useEncounters) 
+                ? "\nMonster: " + TrapMonster.ToString() + "; " 
+                : "" )
+
+                + ( TrapTreasure is null 
+                ? "" 
+                : "\nTreasure: " + TrapTreasure.ToString())
                 ;
             return desc;
         }
@@ -309,7 +326,7 @@ namespace DungeonCohort
         {
             var table = new RandomTable<string>();
             string direction = ChooseLocation();
-            string pool = _chooseTrapDoorPoolEffect();
+            string pool = ChooseTrapDoorPoolEffect();
             string coating = ChooseCoating();
             var monsterGen = new EncounterFactory();
             //var encounter = monsterGen.PickRandomEncounter("Trap", false);
@@ -377,7 +394,7 @@ namespace DungeonCohort
             return table.GetResult();
         }
 
-        private string _chooseTrapDoorPoolEffect()
+        public static string ChooseTrapDoorPoolEffect()
         {
             var table = new RandomTable<string>();
 
@@ -386,7 +403,7 @@ namespace DungeonCohort
             table.AddItem("Oil. Flames explode for extra fire damage. " +
                 "Climb out at disadvantage.");
             table.AddItem("Poisoned. Save against poison condition");
-            table.AddItem("Diseased: " + _chooseDisease());
+            table.AddItem("Diseased: " + ChooseDisease());
             table.AddItem("Ofal and feces");
             table.AddItem("Lava. Damage every round.");
 
@@ -461,7 +478,7 @@ namespace DungeonCohort
                 DamageType = "Falling",
                 DamageDice = damageDice, 
                 Coating = "",
-                Effect = _chooseTrapDoorPoolEffect(),
+                Effect = ChooseTrapDoorPoolEffect(),
                 TrapDoorContents = "Liquid", 
                 TrapMonster = null,
                 TrapTreasure = null,
@@ -605,7 +622,7 @@ namespace DungeonCohort
             table.AddItem(gas + "Petrification. Save against Petrified " +
                 "condition.");
             table.AddItem(gas + "Stunning. Save against stunning condition.");
-            table.AddItem(gas + "Disease: " + _chooseDisease());
+            table.AddItem(gas + "Disease: " + ChooseDisease());
             table.AddItem(gas + "Confusion. Save or attack random nearby " +
                 "creature or PC.");
             table.AddItem(gas + "Polymorph: " + _choosePolymorphForm());
@@ -1027,12 +1044,12 @@ namespace DungeonCohort
 
             table.AddItem("Poison. Save against poison condition");
             table.AddItem("Paralyzing poison. Save against Paralyzed condition");
-            table.AddItem("Disease: " + _chooseDisease());
+            table.AddItem("Disease: " + ChooseDisease());
 
             return table.GetResult();
         }
 
-        public static string _chooseDisease()
+        public static string ChooseDisease()
         {
             var table = new RandomTable<string>();
 
@@ -1052,11 +1069,11 @@ namespace DungeonCohort
                 );
             table.AddItem("Glitch. " +
                 "https://dandwiki.com/wiki/Gliched_(5e_Disease)");
-            table.AddItem("Miners Plague." +
+            table.AddItem("Miners Plague. " +
                 "https://dandwiki.com/wiki/Miners_Plague_(5e_Disease)");
-            table.AddItem("Necrotic Disease." +
+            table.AddItem("Necrotic Disease. " +
                 "https://dandwiki.com/wiki/Necrotic_Disease_(5e_Disease)");
-            table.AddItem("Weaver's Feaver." +
+            table.AddItem("Weaver's Feaver. " +
                 "https://dandwiki.com/wiki/Weaver%27s_Fever_(5e_Disease)");
 
             return table.GetResult();

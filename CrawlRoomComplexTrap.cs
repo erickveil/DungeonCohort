@@ -28,7 +28,7 @@ namespace DungeonCohort
             _setStragglerHandling();
             _setControlComponent(tier);
             _setGunComponent(tier);
-            _setAoEComponent(tier);
+            _setAoeComponent(tier);
             _setRoomComponent(tier);
 
         }
@@ -98,7 +98,7 @@ namespace DungeonCohort
             table.AddItem("Control station - " + _controlStationForm(tier) 
                 + stats);
             table.AddItem("Maintainance panel - " + 
-                _maintainancePanelForm(Severity, tier);
+                _maintainancePanelForm(Severity, tier));
             table.AddItem("Targeting component - " + _targetControlForm());
 
             ControlComponent = table.GetResult();
@@ -166,6 +166,81 @@ namespace DungeonCohort
 
             GunComponent = numGuns + formTable.GetResult() + "; fires " 
                 + beamType + " " + stats;
+        }
+
+        private void _setAoeComponent(int tier)
+        {
+            var shapeTable = new RandomTable<string>();
+            shapeTable.AddItem("Cone - from wall, fixed locations");
+            shapeTable.AddItem("Circle - from ceiling, fixed locations");
+            shapeTable.AddItem("Sphere - random blast areas marked one " +
+                "turn before exploding");
+            shapeTable.AddItem("Sphere - random blast area with no warning");
+            shapeTable.AddItem("Sphere - targets a random character");
+            string shape = shapeTable.GetResult();
+
+            int dc = CrawlRoomTrap.ChooseDc(Severity);
+            string stats = " (AC: " + dc + "; " +
+                "hp: " + _componentHp(tier) + "; " +
+                "damage threshold: " + _componentDamageThreshold(tier) + "; " +
+                "damage: " + CrawlRoomTrap.ChooseDamage(tier, Severity) +
+                ", Dex save DC " + dc + " for half damage)";
+
+            string location = CrawlRoomTrap.ChooseLocation();
+
+            var formTable = new RandomTable<string>();
+            formTable.AddItem("A Magic rune on the " + location);
+            formTable.AddItem("A Turret mounted on the " + location);
+            formTable.AddItem("A Standing stone of a strange material");
+            formTable.AddItem("A Floating, glowing orb");
+            formTable.AddItem("A Statue of cloaked figure");
+            formTable.AddItem("A Small, metal dome mounted on the " 
+                + location);
+            formTable.AddItem("An unknown source");
+            string form = formTable.GetResult();
+
+            var effectTable = new RandomTable<string>();
+            effectTable.AddItem("a blast of acid");
+            effectTable.AddItem("a cold blast - speed reduced by 10 " +
+                "feet until this initiative next turn - ");
+            effectTable.AddItem("a fireball");
+            effectTable.AddItem("a psychic blast - any concentration " +
+                "checks have disadvantage - ");
+            effectTable.AddItem("a necrotic blast - those slain rise as " +
+                "zombies - ");
+            effectTable.AddItem("a radiant blast");
+            effectTable.AddItem("a lightning ball");
+            effectTable.AddItem("a force blast");
+            string effect = effectTable.GetResult();
+
+            AoEComponent = form + " fires " + effect + " in the shape of a " 
+                + shape + ". " + stats;
+        }
+
+        private void _setRoomComponent(int tier)
+        {
+            var dice = Dice.Instance;
+            int rounds = dice.Roll(1, 4) + 5;
+            var effectTable = new RandomTable<string>();
+            effectTable.AddItem("Gas fills room in " + dice.Roll(1, 4) +
+                " rounds: " + CrawlRoomTrap.ChooseGasType());
+            effectTable.AddItem("Gravity reverses initiative for falling " +
+                "damage");
+            effectTable.AddItem("Room fills with " + 
+                CrawlRoomTrap.ChooseTrapDoorPoolEffect() + " in " + 
+                rounds + " rounds");
+            effectTable.AddItem("Monsters teleported into room");
+            effectTable.AddItem("Walls close in on party to smash them in " + 
+                rounds + " rounds");
+            effectTable.AddItem("Room filled with magical darkness");
+            effectTable.AddItem("Anti-magic - no arcane spells or abilities");
+            effectTable.AddItem("Shielded form the planes - no divine " +
+                "spells or abilites");
+            effectTable.AddItem("No gravity in room - we all float");
+            effectTable.AddItem("Everyone is slowed to half speed");
+            effectTable.AddItem("Room prevents magical scrying, gating, " +
+                "teleporting, passwall, etc");
+            RoomComponent = effectTable.GetResult();
         }
 
         private int _componentHp(int tier)
