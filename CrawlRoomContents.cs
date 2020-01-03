@@ -83,6 +83,7 @@ namespace DungeonCohort
             switch (ContentType)
             {
                 case RoomContentType.Empty:
+                    if (!isHall) { SetRoomEmpty(); }
                     break;
                 case RoomContentType.Monster:
                     break;
@@ -168,16 +169,24 @@ namespace DungeonCohort
             if (roll <= 4)
             {
                 RoomTrick = new CrawlRoomTrick();
-                RoomTrick.Init();
+                RoomTrick.InitAsTrick();
                 return;
             }
             else
             {
-                RoomTrick = new CrawlRoomTrick();
                 RoomGate = new CrawlRoomGate();
                 RoomGate.Init();
                 return;
             }
+        }
+
+        public void SetRoomEmpty()
+        {
+            var dice = Dice.Instance;
+            bool isFeature = dice.Roll(1, 6) <= 3;
+            if (!isFeature) { return; }
+            RoomTrick = new CrawlRoomTrick();
+            RoomTrick.InitAsFeature();
         }
 
         public void SetRoomHazard(int tier)

@@ -150,14 +150,10 @@ namespace DungeonCohort
                     RoomType += " (Recently looted)";
                     Contents.RoomTreasure = null;
                 }
-                if (isLooted)
-                {
-                    RoomType += " (Recently looted)";
-                    Contents.RoomTreasure = null;
-                }
                 else
                 {
                     Contents.SetRoomHoard(tier, permissions);
+
                 }
                 
             }
