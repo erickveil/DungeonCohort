@@ -75,7 +75,7 @@ namespace DungeonCohort
             foreach (var magicItem in MagicItemList)
             {
                 report += magicItem.name 
-                    + "(" + magicItem.type + ", " + magicItem.rarity + ")"
+                    + " (" + magicItem.type + ", " + magicItem.rarity + ")"
                     + "\n";
             }
 
