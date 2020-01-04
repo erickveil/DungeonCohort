@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonCohort.JsonLoading;
 
 namespace DungeonCohort
 {
@@ -74,7 +75,7 @@ namespace DungeonCohort
             }
             foreach (var magicItem in MagicItemList)
             {
-                report += magicItem.name 
+                report += magicItem.ToString()
                     + " (" + magicItem.type + ", " + magicItem.rarity + ")"
                     + "\n";
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace DungeonCohort.JsonLoading
+namespace DungeonCohort
 {
     class JsonSpell
     {
@@ -25,6 +25,11 @@ namespace DungeonCohort.JsonLoading
         public List<string> areaTags = new List<string>();
         public JArray backgrounds;
         public List<string> miscTags = new List<string>();
+
+        public override string ToString()
+        {
+            return name + " (" + source + ")";
+        }
 
         public List<string> GetCharacterClasses()
         {

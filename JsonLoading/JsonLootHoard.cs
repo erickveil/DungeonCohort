@@ -105,8 +105,10 @@ namespace DungeonCohort
 
             for (int i = 0; i < numItems; ++i)
             {
+                // sometimew we customise an item after it's been saved.
+                // so we want a copy of that item.
                 var magicItem = magicItemTable.GetResult();
-                baseEntry.MagicItemList.Add(magicItem);
+                baseEntry.MagicItemList.Add(magicItem.Copy());
             }
 
             return baseEntry;

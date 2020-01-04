@@ -52,6 +52,7 @@ namespace DungeonCohort.JsonLoading
 
         public RandomTable<JsonSpell> GetFullSpellTable()
         {
+            Validate();
             var table = new RandomTable<JsonSpell>();
             foreach (var spellObj in SpellList)
             {
@@ -60,7 +61,25 @@ namespace DungeonCohort.JsonLoading
             return table;
         }
 
-        public RandomTable<JsonSpell> FilterTableByLevel(
+        public static JsonSpell GetScrollSpell(string itemName, 
+            JsonSpellLoader spellRef)
+        {
+            if (!itemName.ToLower().Contains("spell scroll")) { return null; }
+            // the level is always the 14th character in the scroll item's name
+            // except catrips
+            const int LEVEL_POSITION = 14;
+            char levelChar = itemName[LEVEL_POSITION];
+            int spellLevel = (int)Char.GetNumericValue(levelChar);
+            if (spellLevel == -1) { spellLevel = 0; }
+
+            var spellTable = spellRef.GetFullSpellTable();
+            spellTable = 
+                FilterTableByLevel(spellTable, spellLevel);
+            return spellTable.GetResult();
+        }
+
+
+        public static RandomTable<JsonSpell> FilterTableByLevel(
             RandomTable<JsonSpell> baseTable, int level)
         {
             var table = new RandomTable<JsonSpell>();
@@ -73,7 +92,7 @@ namespace DungeonCohort.JsonLoading
             return table;
         }
 
-        public RandomTable<JsonSpell> FilterTableByLevelRange(
+        public static RandomTable<JsonSpell> FilterTableByLevelRange(
             RandomTable<JsonSpell> baseTable, int minLevel, int maxLevel)
         {
             var table = new RandomTable<JsonSpell>();
@@ -87,7 +106,7 @@ namespace DungeonCohort.JsonLoading
             return table;
         }
 
-        public RandomTable<JsonSpell> FilterTableBySchool(
+        public static RandomTable<JsonSpell> FilterTableBySchool(
             RandomTable<JsonSpell> baseTable, string school)
         {
             var table = new RandomTable<JsonSpell>();
@@ -100,7 +119,7 @@ namespace DungeonCohort.JsonLoading
             return table;
         }
 
-        public RandomTable<JsonSpell> FilterTableBySchool(
+        public static RandomTable<JsonSpell> FilterTableBySchool(
             RandomTable<JsonSpell> baseTable, List<string>schoolList)
         {
             var table = new RandomTable<JsonSpell>();
@@ -116,7 +135,7 @@ namespace DungeonCohort.JsonLoading
             return table;
         }
 
-        public RandomTable<JsonSpell> FilterTableByCharacterClass(
+        public static RandomTable<JsonSpell> FilterTableByCharacterClass(
             RandomTable<JsonSpell> baseTable, string characterClass)
         {
             var table = new RandomTable<JsonSpell>();
@@ -131,7 +150,7 @@ namespace DungeonCohort.JsonLoading
             return table;
         }
 
-        public RandomTable<JsonSpell> FilterTableByCharacterClass(
+        public static RandomTable<JsonSpell> FilterTableByCharacterClass(
             RandomTable<JsonSpell> baseTable, List<string>characterClassList)
         {
             var table = new RandomTable<JsonSpell>();
@@ -147,7 +166,12 @@ namespace DungeonCohort.JsonLoading
                 }
             }
             return table;
+        }
 
+        public void Validate()
+        {
+            if (SpellList.Count != 0) { return; }
+            LoadAllSpells();
         }
 
     }
