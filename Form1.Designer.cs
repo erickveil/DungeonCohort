@@ -201,7 +201,7 @@
             this.cb_stdRaceNpcs.Checked = true;
             this.cb_stdRaceNpcs.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_stdRaceNpcs.Location = new System.Drawing.Point(406, 11);
-            this.cb_stdRaceNpcs.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cb_stdRaceNpcs.Margin = new System.Windows.Forms.Padding(1);
             this.cb_stdRaceNpcs.Name = "cb_stdRaceNpcs";
             this.cb_stdRaceNpcs.Size = new System.Drawing.Size(128, 17);
             this.cb_stdRaceNpcs.TabIndex = 7;
@@ -211,7 +211,7 @@
             // bu_npcParty
             // 
             this.bu_npcParty.Location = new System.Drawing.Point(91, 103);
-            this.bu_npcParty.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.bu_npcParty.Margin = new System.Windows.Forms.Padding(1);
             this.bu_npcParty.Name = "bu_npcParty";
             this.bu_npcParty.Size = new System.Drawing.Size(137, 23);
             this.bu_npcParty.TabIndex = 8;
@@ -251,9 +251,9 @@
             this.gb_AllowedMagicItems.Controls.Add(this.cb_allowMinorUncommon);
             this.gb_AllowedMagicItems.Controls.Add(this.cb_allowCommon);
             this.gb_AllowedMagicItems.Location = new System.Drawing.Point(376, 39);
-            this.gb_AllowedMagicItems.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gb_AllowedMagicItems.Margin = new System.Windows.Forms.Padding(1);
             this.gb_AllowedMagicItems.Name = "gb_AllowedMagicItems";
-            this.gb_AllowedMagicItems.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gb_AllowedMagicItems.Padding = new System.Windows.Forms.Padding(1);
             this.gb_AllowedMagicItems.Size = new System.Drawing.Size(137, 259);
             this.gb_AllowedMagicItems.TabIndex = 11;
             this.gb_AllowedMagicItems.TabStop = false;
@@ -262,10 +262,8 @@
             // cb_allowMajorLegendary
             // 
             this.cb_allowMajorLegendary.AutoSize = true;
-            this.cb_allowMajorLegendary.Checked = true;
-            this.cb_allowMajorLegendary.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMajorLegendary.Location = new System.Drawing.Point(2, 225);
-            this.cb_allowMajorLegendary.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cb_allowMajorLegendary.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMajorLegendary.Name = "cb_allowMajorLegendary";
             this.cb_allowMajorLegendary.Size = new System.Drawing.Size(108, 17);
             this.cb_allowMajorLegendary.TabIndex = 8;
@@ -275,10 +273,8 @@
             // cb_allowMajorVeryRare
             // 
             this.cb_allowMajorVeryRare.AutoSize = true;
-            this.cb_allowMajorVeryRare.Checked = true;
-            this.cb_allowMajorVeryRare.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMajorVeryRare.Location = new System.Drawing.Point(2, 207);
-            this.cb_allowMajorVeryRare.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cb_allowMajorVeryRare.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMajorVeryRare.Name = "cb_allowMajorVeryRare";
             this.cb_allowMajorVeryRare.Size = new System.Drawing.Size(105, 17);
             this.cb_allowMajorVeryRare.TabIndex = 7;
@@ -288,10 +284,8 @@
             // cb_allowMajorRare
             // 
             this.cb_allowMajorRare.AutoSize = true;
-            this.cb_allowMajorRare.Checked = true;
-            this.cb_allowMajorRare.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMajorRare.Location = new System.Drawing.Point(2, 188);
-            this.cb_allowMajorRare.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cb_allowMajorRare.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMajorRare.Name = "cb_allowMajorRare";
             this.cb_allowMajorRare.Size = new System.Drawing.Size(81, 17);
             this.cb_allowMajorRare.TabIndex = 6;
@@ -301,10 +295,8 @@
             // cb_allowMajorUncommon
             // 
             this.cb_allowMajorUncommon.AutoSize = true;
-            this.cb_allowMajorUncommon.Checked = true;
-            this.cb_allowMajorUncommon.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMajorUncommon.Location = new System.Drawing.Point(2, 170);
-            this.cb_allowMajorUncommon.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cb_allowMajorUncommon.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMajorUncommon.Name = "cb_allowMajorUncommon";
             this.cb_allowMajorUncommon.Size = new System.Drawing.Size(112, 17);
             this.cb_allowMajorUncommon.TabIndex = 5;
@@ -317,7 +309,7 @@
             this.cb_allowMinorLegendary.Checked = true;
             this.cb_allowMinorLegendary.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMinorLegendary.Location = new System.Drawing.Point(2, 124);
-            this.cb_allowMinorLegendary.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cb_allowMinorLegendary.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMinorLegendary.Name = "cb_allowMinorLegendary";
             this.cb_allowMinorLegendary.Size = new System.Drawing.Size(108, 17);
             this.cb_allowMinorLegendary.TabIndex = 4;
@@ -330,7 +322,7 @@
             this.cb_allowMinorVeryRare.Checked = true;
             this.cb_allowMinorVeryRare.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMinorVeryRare.Location = new System.Drawing.Point(2, 101);
-            this.cb_allowMinorVeryRare.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cb_allowMinorVeryRare.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMinorVeryRare.Name = "cb_allowMinorVeryRare";
             this.cb_allowMinorVeryRare.Size = new System.Drawing.Size(105, 17);
             this.cb_allowMinorVeryRare.TabIndex = 3;
@@ -343,7 +335,7 @@
             this.cb_allowMinorRare.Checked = true;
             this.cb_allowMinorRare.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMinorRare.Location = new System.Drawing.Point(2, 78);
-            this.cb_allowMinorRare.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cb_allowMinorRare.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMinorRare.Name = "cb_allowMinorRare";
             this.cb_allowMinorRare.Size = new System.Drawing.Size(81, 17);
             this.cb_allowMinorRare.TabIndex = 2;
@@ -356,7 +348,7 @@
             this.cb_allowMinorUncommon.Checked = true;
             this.cb_allowMinorUncommon.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMinorUncommon.Location = new System.Drawing.Point(2, 58);
-            this.cb_allowMinorUncommon.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cb_allowMinorUncommon.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMinorUncommon.Name = "cb_allowMinorUncommon";
             this.cb_allowMinorUncommon.Size = new System.Drawing.Size(112, 17);
             this.cb_allowMinorUncommon.TabIndex = 1;
@@ -369,7 +361,7 @@
             this.cb_allowCommon.Checked = true;
             this.cb_allowCommon.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowCommon.Location = new System.Drawing.Point(2, 37);
-            this.cb_allowCommon.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cb_allowCommon.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowCommon.Name = "cb_allowCommon";
             this.cb_allowCommon.Size = new System.Drawing.Size(99, 17);
             this.cb_allowCommon.TabIndex = 0;
@@ -608,7 +600,7 @@
             this.tabControl1.Controls.Add(this.tab_mythic);
             this.tabControl1.Controls.Add(this.tabCrawl);
             this.tabControl1.Location = new System.Drawing.Point(4, 5);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(875, 434);
@@ -635,9 +627,9 @@
             this.tab_dev.Controls.Add(this.label1);
             this.tab_dev.Controls.Add(this.bu_monster);
             this.tab_dev.Location = new System.Drawing.Point(4, 22);
-            this.tab_dev.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tab_dev.Margin = new System.Windows.Forms.Padding(1);
             this.tab_dev.Name = "tab_dev";
-            this.tab_dev.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tab_dev.Padding = new System.Windows.Forms.Padding(1);
             this.tab_dev.Size = new System.Drawing.Size(867, 408);
             this.tab_dev.TabIndex = 0;
             this.tab_dev.Text = "Development";
@@ -667,9 +659,9 @@
             this.tab_mythic.Controls.Add(this.nud_chaosFactor);
             this.tab_mythic.Controls.Add(this.label7);
             this.tab_mythic.Location = new System.Drawing.Point(4, 22);
-            this.tab_mythic.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tab_mythic.Margin = new System.Windows.Forms.Padding(1);
             this.tab_mythic.Name = "tab_mythic";
-            this.tab_mythic.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tab_mythic.Padding = new System.Windows.Forms.Padding(1);
             this.tab_mythic.Size = new System.Drawing.Size(867, 408);
             this.tab_mythic.TabIndex = 1;
             this.tab_mythic.Text = "GM Emulation";
@@ -688,7 +680,7 @@
             // tb_scene
             // 
             this.tb_scene.Location = new System.Drawing.Point(87, 155);
-            this.tb_scene.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tb_scene.Margin = new System.Windows.Forms.Padding(1);
             this.tb_scene.Name = "tb_scene";
             this.tb_scene.Size = new System.Drawing.Size(160, 20);
             this.tb_scene.TabIndex = 9;
@@ -696,7 +688,7 @@
             // bu_scene
             // 
             this.bu_scene.Location = new System.Drawing.Point(10, 152);
-            this.bu_scene.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.bu_scene.Margin = new System.Windows.Forms.Padding(1);
             this.bu_scene.Name = "bu_scene";
             this.bu_scene.Size = new System.Drawing.Size(68, 21);
             this.bu_scene.TabIndex = 8;
@@ -707,7 +699,7 @@
             // rtb_event
             // 
             this.rtb_event.Location = new System.Drawing.Point(84, 56);
-            this.rtb_event.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.rtb_event.Margin = new System.Windows.Forms.Padding(1);
             this.rtb_event.Name = "rtb_event";
             this.rtb_event.Size = new System.Drawing.Size(163, 96);
             this.rtb_event.TabIndex = 7;
@@ -716,7 +708,7 @@
             // bu_event
             // 
             this.bu_event.Location = new System.Drawing.Point(10, 56);
-            this.bu_event.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.bu_event.Margin = new System.Windows.Forms.Padding(1);
             this.bu_event.Name = "bu_event";
             this.bu_event.Size = new System.Drawing.Size(68, 21);
             this.bu_event.TabIndex = 6;
@@ -727,7 +719,7 @@
             // tb_fate
             // 
             this.tb_fate.Location = new System.Drawing.Point(84, 30);
-            this.tb_fate.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tb_fate.Margin = new System.Windows.Forms.Padding(1);
             this.tb_fate.Name = "tb_fate";
             this.tb_fate.Size = new System.Drawing.Size(163, 20);
             this.tb_fate.TabIndex = 5;
@@ -735,7 +727,7 @@
             // bu_fate
             // 
             this.bu_fate.Location = new System.Drawing.Point(10, 27);
-            this.bu_fate.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.bu_fate.Margin = new System.Windows.Forms.Padding(1);
             this.bu_fate.Name = "bu_fate";
             this.bu_fate.Size = new System.Drawing.Size(68, 21);
             this.bu_fate.TabIndex = 4;
@@ -758,7 +750,7 @@
             "A sure thing",
             "Has to be"});
             this.cobo_odds.Location = new System.Drawing.Point(160, 7);
-            this.cobo_odds.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cobo_odds.Margin = new System.Windows.Forms.Padding(1);
             this.cobo_odds.Name = "cobo_odds";
             this.cobo_odds.Size = new System.Drawing.Size(87, 21);
             this.cobo_odds.TabIndex = 3;
@@ -776,7 +768,7 @@
             // nud_chaosFactor
             // 
             this.nud_chaosFactor.Location = new System.Drawing.Point(80, 8);
-            this.nud_chaosFactor.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.nud_chaosFactor.Margin = new System.Windows.Forms.Padding(1);
             this.nud_chaosFactor.Maximum = new decimal(new int[] {
             9,
             0,
@@ -822,7 +814,7 @@
             this.tabCrawl.Controls.Add(this.rtb_Crawl);
             this.tabCrawl.Location = new System.Drawing.Point(4, 22);
             this.tabCrawl.Name = "tabCrawl";
-            this.tabCrawl.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabCrawl.Padding = new System.Windows.Forms.Padding(3);
             this.tabCrawl.Size = new System.Drawing.Size(867, 408);
             this.tabCrawl.TabIndex = 2;
             this.tabCrawl.Text = "Crawl";
@@ -831,7 +823,7 @@
             // but_complexTrap
             // 
             this.but_complexTrap.Location = new System.Drawing.Point(6, 172);
-            this.but_complexTrap.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.but_complexTrap.Margin = new System.Windows.Forms.Padding(1);
             this.but_complexTrap.Name = "but_complexTrap";
             this.but_complexTrap.Size = new System.Drawing.Size(151, 23);
             this.but_complexTrap.TabIndex = 11;
@@ -842,7 +834,7 @@
             // but_trap
             // 
             this.but_trap.Location = new System.Drawing.Point(6, 147);
-            this.but_trap.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.but_trap.Margin = new System.Windows.Forms.Padding(1);
             this.but_trap.Name = "but_trap";
             this.but_trap.Size = new System.Drawing.Size(151, 23);
             this.but_trap.TabIndex = 10;
@@ -853,7 +845,7 @@
             // bu_crawlClear
             // 
             this.bu_crawlClear.Location = new System.Drawing.Point(85, 6);
-            this.bu_crawlClear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.bu_crawlClear.Margin = new System.Windows.Forms.Padding(1);
             this.bu_crawlClear.Name = "bu_crawlClear";
             this.bu_crawlClear.Size = new System.Drawing.Size(72, 23);
             this.bu_crawlClear.TabIndex = 9;
@@ -871,7 +863,7 @@
             "East",
             "West"});
             this.cb_crawlEnterDirection.Location = new System.Drawing.Point(85, 32);
-            this.cb_crawlEnterDirection.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cb_crawlEnterDirection.Margin = new System.Windows.Forms.Padding(1);
             this.cb_crawlEnterDirection.Name = "cb_crawlEnterDirection";
             this.cb_crawlEnterDirection.Size = new System.Drawing.Size(98, 21);
             this.cb_crawlEnterDirection.TabIndex = 8;
@@ -890,7 +882,7 @@
             // 
             this.ch_crawlFullEncounters.AutoSize = true;
             this.ch_crawlFullEncounters.Location = new System.Drawing.Point(9, 128);
-            this.ch_crawlFullEncounters.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ch_crawlFullEncounters.Margin = new System.Windows.Forms.Padding(1);
             this.ch_crawlFullEncounters.Name = "ch_crawlFullEncounters";
             this.ch_crawlFullEncounters.Size = new System.Drawing.Size(121, 17);
             this.ch_crawlFullEncounters.TabIndex = 6;

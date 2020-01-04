@@ -50,7 +50,7 @@ namespace DungeonCohort
             if (tier < 1) { tier = 1; }
             if (tier > 4) { tier = 4; }
             int tableIndex = tier - 1;
-            return hoard[tableIndex].AsRollableTable();
+            return hoard[tableIndex].AsRollableTable(tier);
         }
 
         public RandomTable<Gemstones> GetGemstoneTable(string type)

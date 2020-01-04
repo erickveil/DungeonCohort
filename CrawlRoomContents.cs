@@ -155,7 +155,7 @@ namespace DungeonCohort
                 + (RoomGate is null ? "" : RoomGate.ToString() + "\n")
                 + (RoomTrap is null ? "" : RoomTrap.ToString() + "\n")
                 + (ComplexTrap is null ? "" : ComplexTrap.ToString() + "\n")
-                + (RoomTreasure is null ? "" : RoomTreasure.ToString() + "\n")
+                + (RoomTreasure is null ? "" : "\n" + RoomTreasure.ToString() + "\n")
                 ;
             return desc;
         }
@@ -274,6 +274,7 @@ namespace DungeonCohort
         {
             var lootGetn = new TreasureFactory();
             RoomTreasure = lootGetn.GetIndividualTreasure(tier);
+            RoomTreasure.SetContainer(tier);
         }
 
         public void SetArmoryContents()

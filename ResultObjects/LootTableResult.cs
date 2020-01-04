@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DungeonCohort.JsonLoading;
+using Darkmoor;
 
 namespace DungeonCohort
 {
@@ -37,10 +38,29 @@ namespace DungeonCohort
 
         public List<string> MundaneItemList = new List<string>();
 
+        public string ContainedIn = "";
+        public string HiddenBy = "";
+        public CrawlRoomTrap ProtectedBy = null;
+
         public override string ToString()
         {
             string report = "";
             string delim = ", ";
+
+            if (HiddenBy != "")
+            {
+                report += "HIDDEN: " + HiddenBy + "\n";
+            }
+
+            if (ContainedIn != "")
+            {
+                report += "Container: " + ContainedIn + "\n";
+            }
+
+            if (!(ProtectedBy is null))
+            {
+                report += "Trapped: " + ProtectedBy.ToString() + "\n";
+            }
 
             if (CP > 0) { report += "cp: " + CP.ToString(); }
             if (report != "" && SP > 0) { report += delim; }
@@ -94,6 +114,52 @@ namespace DungeonCohort
             if (report == "") { return "none"; }
 
             return report;
+        }
+
+        public void SetContainer(int tier)
+        {
+            var table = new RandomTable<string>();
+            table.AddItem("Bags");
+            table.AddItem("Sacks");
+            table.AddItem("Small Coffers");
+            table.AddItem("Chests");
+            table.AddItem("Huge Chests");
+            table.AddItem("Pottery Jars");
+            table.AddItem("Metal Urns");
+            table.AddItem("Stone Containers");
+            table.AddItem("Iron Trunks");
+            table.AddItem("Loose");
+
+            var dice = Dice.Instance;
+            int choice = dice.Roll(1, 10) - 1;
+            ContainedIn = table.GetResult(choice);
+            if (choice <= 3) { SetHidingPlace(); }
+            if (choice >= 5) { SetProtection(tier); }
+        }
+
+        public void SetHidingPlace()
+        {
+            var table = new RandomTable<string>();
+            table.AddItem("Invisibility", 3);
+            table.AddItem("Illusion to change or hide appearance", 2);
+            table.AddItem("Secret space under container");
+            table.AddItem("Secret compartment in container", 2);
+            table.AddItem("Inside ordinary item in plain view");
+            table.AddItem("Disguised to appear as something else");
+            table.AddItem("Under a heap of trash/dung", 2);
+            table.AddItem("Behind a loose stone in the wall", 2);
+            table.AddItem("In a secret room nearby", 5);
+            table.AddItem("", 10);
+            HiddenBy = table.GetResult();
+        }
+
+        public void SetProtection(int tier)
+        {
+            var dice = Dice.Instance;
+            bool isNotTrapped = dice.Roll(1, 20) <= 11;
+            if (isNotTrapped) { return; }
+            ProtectedBy = new CrawlRoomTrap();
+            ProtectedBy.InitAsDoorTrap(tier);
         }
 
         public void PurgeResults(MagicItemPermissions permissions)

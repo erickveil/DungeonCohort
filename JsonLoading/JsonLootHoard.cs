@@ -36,7 +36,7 @@ namespace DungeonCohort
             _hoardItemSource = hoardItemSource;
         }
 
-        public RandomTable<LootTableResult> AsRollableTable()
+        public RandomTable<LootTableResult> AsRollableTable(int tier)
         {
             var lootTable = new RandomTable<LootTableResult>();
             foreach (var record in table)
@@ -54,6 +54,7 @@ namespace DungeonCohort
                 tableEntry = _addArtToHoard(tableEntry, record.artobjects);
                 tableEntry = _addMagicItemsToHoard(tableEntry, 
                     record.magicitems);
+                tableEntry.SetContainer(tier);
 
                 lootTable.AddItem(tableEntry, weight);
             }
