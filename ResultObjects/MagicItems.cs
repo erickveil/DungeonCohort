@@ -16,6 +16,8 @@ namespace DungeonCohort
 
         public JsonSpell scrollSpell = null;
 
+        public List<JsonSpell> spellBook = null;
+
         public override string ToString()
         {
             if (!(scrollSpell is null))
@@ -23,7 +25,26 @@ namespace DungeonCohort
                 return name + " - " + scrollSpell.ToString();
             }
 
+            if (!(spellBook != null))
+            {
+                return name + "\n" + GetOrderedSpellList();
+            }
+
             return name;
+        }
+
+        public string GetOrderedSpellList()
+        {
+            if (spellBook is null) { return ""; }
+
+            List<JsonSpell> orderedList = spellBook.OrderBy(o => o.level).ToList();
+
+            string result = "";
+            foreach (var spell in spellBook) 
+            {
+                result += "  - " + spell.ToString() + "\n";
+            }
+            return result;
         }
 
         public MagicItems Copy()
