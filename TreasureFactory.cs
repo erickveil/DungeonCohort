@@ -10,13 +10,10 @@ namespace DungeonCohort
     class TreasureFactory
     {
         JsonLootLoader _lootLoader;
-        JsonSpellLoader _spellLoader;
 
         public TreasureFactory()
         {
             _lootLoader = JsonLootLoader.Instance;
-            _spellLoader = new JsonSpellLoader();
-            _spellLoader.LoadAllSpells();
         }
 
         public LootTableResult GetIndividualTreasure(int tier, 
@@ -53,7 +50,7 @@ namespace DungeonCohort
             foreach (var item in loot.MagicItemList)
             {
                 JsonSpell spell = 
-                    JsonSpellLoader.GetScrollSpell(item.name, _spellLoader);
+                    JsonSpellLoader.GetScrollSpell(item.name);
                 if (spell is null) { continue; }
                 item.scrollSpell = spell;
             }

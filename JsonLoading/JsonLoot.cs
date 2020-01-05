@@ -7,6 +7,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Darkmoor;
+using DungeonCohort.JsonLoading;
 
 namespace DungeonCohort
 {

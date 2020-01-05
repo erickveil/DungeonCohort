@@ -61,8 +61,7 @@ namespace DungeonCohort.JsonLoading
             return table;
         }
 
-        public static JsonSpell GetScrollSpell(string itemName, 
-            JsonSpellLoader spellRef)
+        public static JsonSpell GetScrollSpell(string itemName) 
         {
             if (!itemName.ToLower().Contains("spell scroll")) { return null; }
             // the level is always the 14th character in the scroll item's name
@@ -72,7 +71,9 @@ namespace DungeonCohort.JsonLoading
             int spellLevel = (int)Char.GetNumericValue(levelChar);
             if (spellLevel == -1) { spellLevel = 0; }
 
-            var spellTable = spellRef.GetFullSpellTable();
+            var dataSource = DataSourceLoader.Instance;
+            var spellSource = dataSource.SpellSource;
+            var spellTable = spellSource.GetFullSpellTable();
             spellTable = 
                 FilterTableByLevel(spellTable, spellLevel);
             return spellTable.GetResult();

@@ -184,7 +184,7 @@ namespace DungeonCohort
             table.AddItem("Adds poisoned state");
             table.AddItem("Character tempoary glows with faerie fire");
             table.AddItem("First weapon temporarily act as magical +1");
-            table.AddItem("Weapons temporarily act as magical -1");
+            table.AddItem("Weapons temporarily act as cursed -1");
             table.AddItem("Grants inspiration to first character"); 
             table.AddItem("Mends and cleans character and all equipment");
             table.AddItem("Soils character and makes them stink of garbage. " +

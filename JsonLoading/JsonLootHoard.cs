@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Darkmoor;
+using DungeonCohort.JsonLoading;
 
 namespace DungeonCohort
 {
@@ -54,11 +55,24 @@ namespace DungeonCohort
                 tableEntry = _addArtToHoard(tableEntry, record.artobjects);
                 tableEntry = _addMagicItemsToHoard(tableEntry, 
                     record.magicitems);
+                tableEntry = _addSpellbookToHoard(tableEntry, tier);
+
                 tableEntry.SetContainer(tier);
 
                 lootTable.AddItem(tableEntry, weight);
             }
             return lootTable;
+        }
+
+        private LootTableResult _addSpellbookToHoard(LootTableResult baseEntry, int tier)
+        {
+            var dice = Dice.Instance;
+            bool isHasBook = dice.Roll(1, 100) <= 15;
+            if (!isHasBook) { return baseEntry; }
+            var spellbook = new MagicItems();
+            spellbook.InitAsWizardSpellbook(tier);
+            baseEntry.MagicItemList.Add(spellbook);
+            return baseEntry;
         }
 
         private LootTableResult _addGemsToHord(LootTableResult baseEntry, 

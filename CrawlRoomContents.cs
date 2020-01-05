@@ -148,14 +148,14 @@ namespace DungeonCohort
             }
 
             string desc = _getTypeString(ContentType)
-                + difficultyDesc
-                + (RoomHazard == "" ? "" : RoomHazard + "\n")
-                + (RoomEncounter is null ? "" : RoomEncounter.ToString() + "\n")
-                + (RoomTrick is null ? "" : RoomTrick.ToString() + "\n")
-                + (RoomGate is null ? "" : RoomGate.ToString() + "\n")
-                + (RoomTrap is null ? "" : RoomTrap.ToString() + "\n")
-                + (ComplexTrap is null ? "" : ComplexTrap.ToString() + "\n")
-                + (RoomTreasure is null ? "" : "\n" + RoomTreasure.ToString() + "\n")
+                + difficultyDesc 
+                + (RoomHazard == "" ? "" : "\n" + RoomHazard + "\n")
+                + (RoomEncounter is null ? "" : "\n" + RoomEncounter.ToString() + "\n")
+                + (RoomTrick is null ? "" : "\n" + RoomTrick.ToString() + "\n")
+                + (RoomGate is null ? "" : "\n" + RoomGate.ToString() + "\n")
+                + (RoomTrap is null ? "" : "\n" + RoomTrap.ToString() + "\n")
+                + (ComplexTrap is null ? "" : "\n" + ComplexTrap.ToString() + "\n")
+                + (RoomTreasure is null ? "" : "\n" + "Loot:\n" + RoomTreasure.ToString() + "\n")
                 ;
             return desc;
         }

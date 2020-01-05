@@ -951,9 +951,9 @@
             // rtb_Crawl
             // 
             this.rtb_Crawl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtb_Crawl.Location = new System.Drawing.Point(505, 6);
+            this.rtb_Crawl.Location = new System.Drawing.Point(336, 6);
             this.rtb_Crawl.Name = "rtb_Crawl";
-            this.rtb_Crawl.Size = new System.Drawing.Size(356, 395);
+            this.rtb_Crawl.Size = new System.Drawing.Size(525, 395);
             this.rtb_Crawl.TabIndex = 0;
             this.rtb_Crawl.Text = "";
             // 

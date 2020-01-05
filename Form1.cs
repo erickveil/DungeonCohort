@@ -30,9 +30,6 @@ namespace DungeonCohort
             _lootLoader = JsonLootLoader.Instance;
 
             _encounterFactory = new EncounterFactory();
-
-            var test = new JsonLoading.JsonSpellLoader();
-            test.LoadAllSpells();
         }
 
         public void Print(RichTextBox target, string message, Font font)
