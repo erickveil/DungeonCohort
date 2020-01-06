@@ -57,6 +57,11 @@
     <Compile Include="CrawlRoomTrick.cs" />
     <Compile Include="DataSourceLoader.cs" />
     <Compile Include="Descriptors.cs" />
+    <Compile Include="HexCrawl.cs" />
+    <Compile Include="HexCrawlContents.cs" />
+    <Compile Include="HexCrawlHex.cs" />
+    <Compile Include="HexCrawlSettlement.cs" />
+    <Compile Include="HexCrawlTrick.cs" />
     <Compile Include="JsonLoading\Ancestry.cs" />
     <Compile Include="JsonLoading\AncestryIndex.cs" />
     <Compile Include="JsonLoading\ArtObjects.cs" />
