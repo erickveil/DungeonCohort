@@ -11,7 +11,7 @@ namespace DungeonCohort
         public enum HexContentType
         {
             Empty, Encounter, EncouterWithTreasure, 
-            Event, Obstacle, FeatureWithTreasure, Trick, 
+            Event, Obstacle, Feature, FeatureWithTreasure, Trick, 
             Settlement, BiomeSwitch
         }
 

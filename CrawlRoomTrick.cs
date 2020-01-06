@@ -89,6 +89,7 @@ namespace DungeonCohort
             table.AddItem("Three imp sculptures in tiny alcoves near the " +
                 "ceiling");
             table.AddItem("Music box");
+            table.AddItem("Pillar of light");
             table.AddItem("Nest with three purple eggs");
             table.AddItem("Marbel pedestal");
             table.AddItem("Red rune on the ceiling");
