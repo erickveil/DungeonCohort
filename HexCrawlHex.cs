@@ -13,7 +13,12 @@ namespace DungeonCohort
             Empty, Encounter, EncouterWithTreasure, 
             Event, Obstacle, Feature, FeatureWithTreasure, Trick, 
             Settlement, BiomeSwitch
-        }
+        };
+
+        public enum TrailDirection
+        {
+            NoTrail, East, West, Northeast, Northwest, Southeast, Southwest
+        };
 
         /// The biome type of the hex, will often remain unchanged through the
         /// crawl, and is set by the user at the beginning.
@@ -50,5 +55,47 @@ namespace DungeonCohort
         public bool TrailNorthEast = false;
         public bool TrailSouthWest = false;
         public bool TrailSouthEast = false;
+
+        public void Init(string biome, int x, int y, int tier, 
+            MagicItemPermissions allowedItems, TrailDirection trailEntersFrom)
+        {
+            SetBiome(biome);
+            SetTerrain(Biome);
+            HexContentType contentType = ChooseContentType();
+            Contents = new HexCrawlContents();
+            Contents.Init(contentType, tier, allowedItems);
+            string severity = CrawlRoomTrap.ChooseSeverity();
+            NavigationDC = CrawlRoomTrap.ChooseDc(severity);
+            MapX = x;
+            MapY = y;
+            SetTrailRoutes(trailEntersFrom);
+
+            SetDistantView();
+        }
+
+        public void SetTrailRoutes(TrailDirection trailEntersFrom)
+        {
+
+        }
+
+        public void SetDistantView()
+        {
+
+        }
+
+        public HexContentType ChooseContentType()
+        {
+            return HexContentType.Empty;
+
+        }
+
+        public void SetBiome(string biome)
+        {
+
+        }
+
+        public void SetTerrain(string biome)
+        {
+        }
     }
 }

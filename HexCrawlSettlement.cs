@@ -45,11 +45,6 @@ namespace DungeonCohort
             // Dwarven hold, or dragon lair
 
             var table = new RandomTable<string>();
-            table.AddItem("Cottage");
-            table.AddItem("Hovel");
-            table.AddItem("Farm");
-            table.AddItem("Village");
-            table.AddItem("Mill");
             table.AddItem("Mine");
             table.AddItem("Pyramid");
             table.AddItem("Town");
@@ -59,7 +54,6 @@ namespace DungeonCohort
             table.AddItem("Tower");
             table.AddItem("Castle");
             table.AddItem("Temple");
-            table.AddItem("Inn");
             table.AddItem("Church");
             table.AddItem("Druid Grove");
             table.AddItem("Barbarian Camp");

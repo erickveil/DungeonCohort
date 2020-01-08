@@ -23,7 +23,7 @@ namespace DungeonCohort
             SetEffect();
         }
 
-        public void SetFeature()
+        public static string ChooseFeature()
         {
             var table = new RandomTable<string>();
             string liquid = CrawlRoomTrick.ChoosePoolLiquid();
@@ -38,6 +38,7 @@ namespace DungeonCohort
             table.AddItem("Altar");
             table.AddItem("Pool: " + liquid);
             table.AddItem("Fountain: " + liquid);
+            table.AddItem("Old Well");
             table.AddItem("Statue");
             table.AddItem("Giant Statue");
             table.AddItem("Great Crystal");
@@ -67,17 +68,21 @@ namespace DungeonCohort
             table.AddItem("Pillar of light");
             table.AddItem("Abandoned chest, filled with human bones");
             table.AddItem("Open grave");
+            return table.GetResult();
+        }
 
+        public void SetFeature()
+        {
             var dice = Dice.Instance;
             bool isUnusual = dice.Roll(1, 6) <= 2;
             if (isUnusual)
             {
                 TrickFeature = Descriptors.UnusualObjectDescriptor() + " "
-                    + table.GetResult();
+                    + ChooseFeature();
             }
             else
             {
-                TrickFeature = table.GetResult();
+                TrickFeature = ChooseFeature();
             }
         }
 

@@ -57,6 +57,7 @@
     <Compile Include="CrawlRoomTrick.cs" />
     <Compile Include="DataSourceLoader.cs" />
     <Compile Include="Descriptors.cs" />
+    <Compile Include="DualDescription.cs" />
     <Compile Include="HexCrawl.cs" />
     <Compile Include="HexCrawlContents.cs" />
     <Compile Include="HexCrawlHex.cs" />
