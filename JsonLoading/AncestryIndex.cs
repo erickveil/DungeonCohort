@@ -51,6 +51,11 @@ namespace Darkmoor
             }
         }
 
+        public RandomTable<Ancestry> GetFullAncestryTable()
+        {
+            return _ancestryTable;
+        }
+
         /// <summary>
         /// Old method used in the initial testing. Now ancestries are loaded
         /// from files so you can control what is included in your world.

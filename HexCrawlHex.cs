@@ -57,13 +57,16 @@ namespace DungeonCohort
         public bool TrailSouthEast = false;
 
         public void Init(string biome, int x, int y, int tier, 
-            MagicItemPermissions allowedItems, TrailDirection trailEntersFrom)
+            MagicItemPermissions allowedItems, TrailDirection trailEntersFrom,
+            bool isSettlementLeaderStdRace 
+            )
         {
             SetBiome(biome);
             SetTerrain(Biome);
             HexContentType contentType = ChooseContentType();
             Contents = new HexCrawlContents();
-            Contents.Init(contentType, tier, allowedItems);
+            Contents.Init(contentType, tier, allowedItems, 
+                isSettlementLeaderStdRace);
             string severity = CrawlRoomTrap.ChooseSeverity();
             NavigationDC = CrawlRoomTrap.ChooseDc(severity);
             MapX = x;

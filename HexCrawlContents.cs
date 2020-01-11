@@ -24,7 +24,7 @@ namespace DungeonCohort
         }
 
         public void Init(HexCrawlHex.HexContentType contentType, int tier, 
-            MagicItemPermissions allowedItems)
+            MagicItemPermissions allowedItems, bool isLeaderStdRace)
         {
             ContentType = contentType;
             switch(contentType)
@@ -52,7 +52,7 @@ namespace DungeonCohort
                     SetObstacle();
                     break;
                 case HexCrawlHex.HexContentType.Settlement:
-                    SetSettlement();
+                    SetSettlement(tier, isLeaderStdRace);
                     break;
                 case HexCrawlHex.HexContentType.Trick:
                     SetTrick();
@@ -254,10 +254,10 @@ namespace DungeonCohort
             HexTrick.Init();
         }
 
-        public void SetSettlement()
+        public void SetSettlement(int tier, bool isLeaderStdRace)
         {
             HexSettlement = new HexCrawlSettlement();
-            HexSettlement.Init();
+            HexSettlement.Init(tier, isLeaderStdRace);
         }
     }
 }
