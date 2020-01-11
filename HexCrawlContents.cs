@@ -120,6 +120,10 @@ namespace DungeonCohort
                 Near = "An NPC with a quest for the party", 
                 Far = "Humanoid tracks lead in this direction" 
             });
+            table.AddItem(new DualDescription() { 
+                Near = "A group of bandits, burying a box", 
+                Far = "Tracks of a small group of humanoids" + investigation 
+            });
 
             //table.AddItem(new DualDescription() { Near = "", Far = "" });
 
@@ -163,9 +167,10 @@ namespace DungeonCohort
                 Far = "The tracks of local fauna go every way but " +
                 "this one" + investigation 
             });
-            table.AddItem(new DualDescription() { 
-                Near = "A group of bandits, burying a box", 
-                Far = "Tracks of a small group of humanoids" + investigation 
+            table.AddItem(new DualDescription()
+            {
+                Near = "A lake fills the land ahead",
+                Far = "A small stream runs in this direction"
             });
 
             //table.AddItem(new DualDescription() { Near = "", Far = "" });
@@ -226,6 +231,7 @@ namespace DungeonCohort
                 Near = "Graveyard", 
                 Far = "" 
             });
+            
 
             // table.AddItem(new DualDescription() { Near = "", Far = "" });
 

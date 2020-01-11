@@ -62,6 +62,9 @@ namespace DungeonCohort
         public bool TrailSouthWest = false;
         public bool TrailSouthEast = false;
 
+        // TODO: waterway size?
+        // Requires growning/shrinking waterway
+
         public void Init(string biome, int x, int y, int tier, 
             MagicItemPermissions allowedItems, TrailDirection trailEntersFrom,
             bool isSettlementLeaderStdRace 
@@ -107,7 +110,6 @@ namespace DungeonCohort
                             TrailSouthEast = true;
                             break;
                         case TrailDirection.NoTrail:
-                            // TODO: find a trail?
                             break;
                         case TrailDirection.Southeast:
                             TrailSouthEast = true;
@@ -145,7 +147,6 @@ namespace DungeonCohort
                             TrailSouthEast = true;
                             break;
                         case TrailDirection.NoTrail:
-                            // Todo: find a trail?
                             break;
                         case TrailDirection.Southeast:
                             TrailSouthEast = true;
@@ -186,7 +187,6 @@ namespace DungeonCohort
                             TrailSouthEast = true;
                             break;
                         case TrailDirection.NoTrail:
-                            // Todo: find a trail?
                             break;
                         case TrailDirection.Southeast:
                             TrailSouthEast = true;
@@ -249,7 +249,6 @@ namespace DungeonCohort
                             TrailSouthEast = true;
                             break;
                         case TrailDirection.NoTrail:
-                            // Todo: find a trail?
                             break;
                         case TrailDirection.Southeast:
                             TrailSouthEast = true;
@@ -281,7 +280,6 @@ namespace DungeonCohort
                             TrailEast = true;
                             break;
                         case TrailDirection.NoTrail:
-                            // TODO: find a trail?
                             break;
                         case TrailDirection.Southeast:
                             TrailSouthEast = true;
@@ -313,7 +311,6 @@ namespace DungeonCohort
                             TrailEast = true;
                             break;
                         case TrailDirection.NoTrail:
-                            // Todo: find a trail?
                             break;
                         case TrailDirection.Southeast:
                             TrailSouthEast = true;
@@ -330,7 +327,324 @@ namespace DungeonCohort
                     } // switch (trailEntersFrom)
                     break;
             } // switch (route)
+
+            // find a trail
+            if (trailEntersFrom == TrailDirection.NoTrail)
+            {
+                bool findTrail = dice.Roll(1, 6) == 6;
+                if (!findTrail) { return; }
+                int trailPath = dice.Roll(1, 6);
+                switch (trailPath)
+                {
+                    case 1:
+                        TrailEast = true;
+                        TrailWest = true;
+                        break;
+                    case 2:
+                        TrailNorthEast = true;
+                        TrailSouthWest = true;
+                        break;
+                    case 3:
+                        TrailNorthWest = true;
+                        TrailSouthEast = true;
+                        break;
+                    case 4:
+                        TrailSouthEast = true;
+                        TrailNorthWest = true;
+                        break;
+                    case 5:
+                        TrailSouthWest = true;
+                        TrailNorthEast = true;
+                        break;
+                    default:
+                        TrailWest = true;
+                        TrailEast = true;
+                        break;
+                }
+            }
+
         } // void SetTrailRoutes()
+
+        public void SetRiverRoutes(TrailDirection riverEntersFrom)
+        {
+            var dice = Dice.Instance;
+            TrailRoute route = (TrailRoute)dice.RandomNumber(0, 6);
+            switch (route)
+            {
+                case TrailRoute.BranchLeft:
+                    switch (riverEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            RiverEast = true;
+                            RiverSouthWest = true;
+                            RiverWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            RiverNorthEast = true;
+                            RiverSouthEast = true;
+                            RiverSouthWest = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            RiverNorthWest = true;
+                            RiverEast = true;
+                            RiverSouthEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            break;
+                        case TrailDirection.Southeast:
+                            RiverSouthEast = true;
+                            RiverWest = true;
+                            RiverSouthWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            RiverSouthWest = true;
+                            RiverNorthWest = true;
+                            RiverNorthEast = true;
+                            break;
+                        case TrailDirection.West:
+                            RiverWest = true;
+                            RiverNorthEast = true;
+                            RiverEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.BranchRight:
+                    switch (riverEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            RiverEast = true;
+                            RiverNorthWest = true;
+                            RiverWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            RiverNorthEast = true;
+                            RiverSouthEast = true;
+                            RiverSouthWest = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            RiverNorthWest = true;
+                            RiverEast = true;
+                            RiverSouthEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            break;
+                        case TrailDirection.Southeast:
+                            RiverSouthEast = true;
+                            RiverWest = true;
+                            RiverNorthWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            RiverSouthWest = true;
+                            RiverNorthWest = true;
+                            RiverNorthEast = true;
+                            break;
+                        case TrailDirection.West:
+                            RiverWest = true;
+                            RiverNorthEast = true;
+                            RiverEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.Cross:
+                    switch (riverEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            RiverEast = true;
+                            RiverNorthWest = true;
+                            RiverSouthWest = true;
+                            RiverWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            RiverNorthEast = true;
+                            RiverSouthEast = true;
+                            RiverNorthEast= true;
+                            RiverSouthWest = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            RiverNorthWest = true;
+                            RiverEast = true;
+                            RiverSouthWest = true;
+                            RiverSouthEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            break;
+                        case TrailDirection.Southeast:
+                            RiverSouthEast = true;
+                            RiverWest = true;
+                            RiverNorthEast = true;
+                            RiverNorthWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            RiverSouthWest = true;
+                            RiverNorthWest = true;
+                            RiverEast = true;
+                            RiverNorthEast = true;
+                            break;
+                        case TrailDirection.West:
+                            RiverWest = true;
+                            RiverNorthEast = true;
+                            RiverSouthEast = true;
+                            RiverEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.DeadEnd:
+                    switch (riverEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            RiverEast = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            RiverNorthEast = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            RiverNorthWest = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            break;
+                        case TrailDirection.Southeast:
+                            RiverSouthEast = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            RiverSouthWest = true;
+                            break;
+                        case TrailDirection.West:
+                            RiverWest = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.Straight:
+                    switch (riverEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            RiverEast = true;
+                            RiverWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            RiverNorthEast = true;
+                            RiverSouthWest = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            RiverNorthWest = true;
+                            RiverSouthEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            break;
+                        case TrailDirection.Southeast:
+                            RiverSouthEast = true;
+                            RiverNorthWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            RiverSouthWest = true;
+                            RiverNorthEast = true;
+                            break;
+                        case TrailDirection.West:
+                            RiverWest = true;
+                            RiverEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.TurnLeft:
+                    switch (riverEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            RiverEast = true;
+                            RiverSouthWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            RiverNorthEast = true;
+                            RiverSouthEast = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            RiverNorthWest = true;
+                            RiverEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            break;
+                        case TrailDirection.Southeast:
+                            RiverSouthEast = true;
+                            RiverWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            RiverSouthWest = true;
+                            RiverNorthWest = true;
+                            break;
+                        case TrailDirection.West:
+                            RiverWest = true;
+                            RiverNorthEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.TurnRight:
+                    switch (riverEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            RiverEast = true;
+                            RiverNorthWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            RiverNorthEast = true;
+                            RiverSouthEast = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            RiverNorthWest = true;
+                            RiverEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            break;
+                        case TrailDirection.Southeast:
+                            RiverSouthEast = true;
+                            RiverWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            RiverSouthWest = true;
+                            RiverNorthWest = true;
+                            break;
+                        case TrailDirection.West:
+                            RiverWest = true;
+                            RiverNorthEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+            } // switch (route)
+
+            // find a river
+            if (riverEntersFrom == TrailDirection.NoTrail)
+            {
+                bool findRiver = dice.Roll(1, 6) == 6;
+                if (!findRiver) { return; }
+                int riverPath = dice.Roll(1, 6);
+                switch (riverPath)
+                {
+                    case 1:
+                        RiverEast = true;
+                        RiverWest = true;
+                        break;
+                    case 2:
+                        RiverNorthEast = true;
+                        RiverSouthWest = true;
+                        break;
+                    case 3:
+                        RiverNorthWest = true;
+                        RiverSouthEast = true;
+                        break;
+                    case 4:
+                        RiverSouthEast = true;
+                        RiverNorthWest = true;
+                        break;
+                    case 5:
+                        RiverSouthWest = true;
+                        RiverNorthEast = true;
+                        break;
+                    default:
+                        RiverWest = true;
+                        RiverEast = true;
+                        break;
+                }
+            }
+
+        } // void SetRiverRoutes()
+
 
         public void SetDistantView()
         {
