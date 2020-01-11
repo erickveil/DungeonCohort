@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Darkmoor;
 
 namespace DungeonCohort
 {
@@ -18,6 +19,11 @@ namespace DungeonCohort
         public enum TrailDirection
         {
             NoTrail, East, West, Northeast, Northwest, Southeast, Southwest
+        };
+
+        enum TrailRoute { 
+            Straight, TurnRight, TurnLeft, Cross, BranchRight, BranchLeft, 
+            DeadEnd
         };
 
         /// The biome type of the hex, will often remain unchanged through the
@@ -78,8 +84,253 @@ namespace DungeonCohort
 
         public void SetTrailRoutes(TrailDirection trailEntersFrom)
         {
-
-        }
+            var dice = Dice.Instance;
+            TrailRoute route = (TrailRoute)dice.RandomNumber(0, 6);
+            switch (route)
+            {
+                case TrailRoute.BranchLeft:
+                    switch (trailEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            TrailEast = true;
+                            TrailSouthWest = true;
+                            TrailWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            TrailNorthEast = true;
+                            TrailSouthEast = true;
+                            TrailSouthWest = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            TrailNorthWest = true;
+                            TrailEast = true;
+                            TrailSouthEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            // TODO: find a trail?
+                            break;
+                        case TrailDirection.Southeast:
+                            TrailSouthEast = true;
+                            TrailWest = true;
+                            TrailSouthWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            TrailSouthWest = true;
+                            TrailNorthWest = true;
+                            TrailNorthEast = true;
+                            break;
+                        case TrailDirection.West:
+                            TrailWest = true;
+                            TrailNorthEast = true;
+                            TrailEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.BranchRight:
+                    switch (trailEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            TrailEast = true;
+                            TrailNorthWest = true;
+                            TrailWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            TrailNorthEast = true;
+                            TrailSouthEast = true;
+                            TrailSouthWest = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            TrailNorthWest = true;
+                            TrailEast = true;
+                            TrailSouthEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            // Todo: find a trail?
+                            break;
+                        case TrailDirection.Southeast:
+                            TrailSouthEast = true;
+                            TrailWest = true;
+                            TrailNorthWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            TrailSouthWest = true;
+                            TrailNorthWest = true;
+                            TrailNorthEast = true;
+                            break;
+                        case TrailDirection.West:
+                            TrailWest = true;
+                            TrailNorthEast = true;
+                            TrailEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.Cross:
+                    switch (trailEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            TrailEast = true;
+                            TrailNorthWest = true;
+                            TrailSouthEast = true;
+                            TrailWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            TrailNorthEast = true;
+                            TrailSouthEast = true;
+                            TrailNorthWest = true;
+                            TrailSouthWest = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            TrailNorthWest = true;
+                            TrailEast = true;
+                            TrailWest = true;
+                            TrailSouthEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            // Todo: find a trail?
+                            break;
+                        case TrailDirection.Southeast:
+                            TrailSouthEast = true;
+                            TrailWest = true;
+                            TrailEast = true;
+                            TrailNorthWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            TrailSouthWest = true;
+                            TrailNorthWest = true;
+                            TrailSouthEast = true;
+                            TrailNorthEast = true;
+                            break;
+                        case TrailDirection.West:
+                            TrailWest = true;
+                            TrailNorthEast = true;
+                            TrailSouthWest = true;
+                            TrailEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.DeadEnd:
+                    switch (trailEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            TrailEast = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            TrailNorthEast = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            TrailNorthWest = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            break;
+                        case TrailDirection.Southeast:
+                            TrailSouthEast = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            TrailSouthWest = true;
+                            break;
+                        case TrailDirection.West:
+                            TrailWest = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.Straight:
+                    switch (trailEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            TrailEast = true;
+                            TrailWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            TrailNorthEast = true;
+                            TrailSouthWest = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            TrailNorthWest = true;
+                            TrailSouthEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            // Todo: find a trail?
+                            break;
+                        case TrailDirection.Southeast:
+                            TrailSouthEast = true;
+                            TrailNorthWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            TrailSouthWest = true;
+                            TrailNorthEast = true;
+                            break;
+                        case TrailDirection.West:
+                            TrailWest = true;
+                            TrailEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.TurnLeft:
+                    switch (trailEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            TrailEast = true;
+                            TrailSouthWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            TrailNorthEast = true;
+                            TrailSouthEast = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            TrailNorthWest = true;
+                            TrailEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            // TODO: find a trail?
+                            break;
+                        case TrailDirection.Southeast:
+                            TrailSouthEast = true;
+                            TrailWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            TrailSouthWest = true;
+                            TrailNorthWest = true;
+                            break;
+                        case TrailDirection.West:
+                            TrailWest = true;
+                            TrailNorthEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+                case TrailRoute.TurnRight:
+                    switch (trailEntersFrom)
+                    {
+                        case TrailDirection.East:
+                            TrailEast = true;
+                            TrailNorthWest = true;
+                            break;
+                        case TrailDirection.Northeast:
+                            TrailNorthEast = true;
+                            TrailSouthEast = true;
+                            break;
+                        case TrailDirection.Northwest:
+                            TrailNorthWest = true;
+                            TrailEast = true;
+                            break;
+                        case TrailDirection.NoTrail:
+                            // Todo: find a trail?
+                            break;
+                        case TrailDirection.Southeast:
+                            TrailSouthEast = true;
+                            TrailWest = true;
+                            break;
+                        case TrailDirection.Southwest:
+                            TrailSouthWest = true;
+                            TrailNorthWest = true;
+                            break;
+                        case TrailDirection.West:
+                            TrailWest = true;
+                            TrailNorthEast = true;
+                            break;
+                    } // switch (trailEntersFrom)
+                    break;
+            } // switch (route)
+        } // void SetTrailRoutes()
 
         public void SetDistantView()
         {
