@@ -527,5 +527,16 @@ namespace DungeonCohort
             target.Clear();
             PrintBody(target, newPath.ToString());
         }
+
+        private void bu_HexEvent_Click(object sender, EventArgs e)
+        {
+            var hexEvent = new HexCrawlEvent();
+            hexEvent.Init();
+
+            var target = rtb_HexCrawlOut;
+            target.Clear();
+            PrintBody(target, hexEvent.ToString());
+
+        }
     }
 }

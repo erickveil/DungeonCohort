@@ -9,6 +9,15 @@ namespace DungeonCohort
 {
     class HexCrawlHex
     {
+
+        public HexCrawlPath Route;
+        public HexCrawlLandmark Landmark;
+        public HexCrawlEvent Event;
+        public HexCrawlTrick Trick;
+
+
+
+        // =================================================
         public enum HexContentType
         {
             Empty, Encounter, EncouterWithTreasure, 
