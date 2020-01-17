@@ -96,6 +96,13 @@
             this.cb_crawlLargeRooms = new System.Windows.Forms.CheckBox();
             this.but_CrawlRoom = new System.Windows.Forms.Button();
             this.rtb_Crawl = new System.Windows.Forms.RichTextBox();
+            this.tabHexCrawl = new System.Windows.Forms.TabPage();
+            this.rtb_HexCrawlOut = new System.Windows.Forms.RichTextBox();
+            this.bu_hex_Encounter = new System.Windows.Forms.Button();
+            this.bu_hex_Landmark = new System.Windows.Forms.Button();
+            this.chb_isOnPath = new System.Windows.Forms.CheckBox();
+            this.bu_hexCrawl = new System.Windows.Forms.Button();
+            this.bu_Landscape = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -115,6 +122,7 @@
             this.tab_mythic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_chaosFactor)).BeginInit();
             this.tabCrawl.SuspendLayout();
+            this.tabHexCrawl.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtb_rndMonstOut
@@ -599,6 +607,7 @@
             this.tabControl1.Controls.Add(this.tab_dev);
             this.tabControl1.Controls.Add(this.tab_mythic);
             this.tabControl1.Controls.Add(this.tabCrawl);
+            this.tabControl1.Controls.Add(this.tabHexCrawl);
             this.tabControl1.Location = new System.Drawing.Point(4, 5);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(1);
             this.tabControl1.Name = "tabControl1";
@@ -957,6 +966,77 @@
             this.rtb_Crawl.TabIndex = 0;
             this.rtb_Crawl.Text = "";
             // 
+            // tabHexCrawl
+            // 
+            this.tabHexCrawl.Controls.Add(this.bu_Landscape);
+            this.tabHexCrawl.Controls.Add(this.bu_hexCrawl);
+            this.tabHexCrawl.Controls.Add(this.chb_isOnPath);
+            this.tabHexCrawl.Controls.Add(this.bu_hex_Landmark);
+            this.tabHexCrawl.Controls.Add(this.bu_hex_Encounter);
+            this.tabHexCrawl.Controls.Add(this.rtb_HexCrawlOut);
+            this.tabHexCrawl.Location = new System.Drawing.Point(4, 22);
+            this.tabHexCrawl.Name = "tabHexCrawl";
+            this.tabHexCrawl.Padding = new System.Windows.Forms.Padding(3);
+            this.tabHexCrawl.Size = new System.Drawing.Size(867, 408);
+            this.tabHexCrawl.TabIndex = 3;
+            this.tabHexCrawl.Text = "Hex Crawl";
+            this.tabHexCrawl.UseVisualStyleBackColor = true;
+            // 
+            // rtb_HexCrawlOut
+            // 
+            this.rtb_HexCrawlOut.Location = new System.Drawing.Point(408, 6);
+            this.rtb_HexCrawlOut.Name = "rtb_HexCrawlOut";
+            this.rtb_HexCrawlOut.Size = new System.Drawing.Size(453, 396);
+            this.rtb_HexCrawlOut.TabIndex = 0;
+            this.rtb_HexCrawlOut.Text = "";
+            // 
+            // bu_hex_Encounter
+            // 
+            this.bu_hex_Encounter.Location = new System.Drawing.Point(6, 60);
+            this.bu_hex_Encounter.Name = "bu_hex_Encounter";
+            this.bu_hex_Encounter.Size = new System.Drawing.Size(75, 23);
+            this.bu_hex_Encounter.TabIndex = 1;
+            this.bu_hex_Encounter.Text = "Encounter";
+            this.bu_hex_Encounter.UseVisualStyleBackColor = true;
+            // 
+            // bu_hex_Landmark
+            // 
+            this.bu_hex_Landmark.Location = new System.Drawing.Point(6, 89);
+            this.bu_hex_Landmark.Name = "bu_hex_Landmark";
+            this.bu_hex_Landmark.Size = new System.Drawing.Size(75, 23);
+            this.bu_hex_Landmark.TabIndex = 2;
+            this.bu_hex_Landmark.Text = "Landmark";
+            this.bu_hex_Landmark.UseVisualStyleBackColor = true;
+            this.bu_hex_Landmark.Click += new System.EventHandler(this.bu_hex_Landmark_Click);
+            // 
+            // chb_isOnPath
+            // 
+            this.chb_isOnPath.AutoSize = true;
+            this.chb_isOnPath.Location = new System.Drawing.Point(6, 8);
+            this.chb_isOnPath.Name = "chb_isOnPath";
+            this.chb_isOnPath.Size = new System.Drawing.Size(82, 17);
+            this.chb_isOnPath.TabIndex = 3;
+            this.chb_isOnPath.Text = "Is On Path?";
+            this.chb_isOnPath.UseVisualStyleBackColor = true;
+            // 
+            // bu_hexCrawl
+            // 
+            this.bu_hexCrawl.Location = new System.Drawing.Point(6, 31);
+            this.bu_hexCrawl.Name = "bu_hexCrawl";
+            this.bu_hexCrawl.Size = new System.Drawing.Size(75, 23);
+            this.bu_hexCrawl.TabIndex = 4;
+            this.bu_hexCrawl.Text = "Hex Crawl";
+            this.bu_hexCrawl.UseVisualStyleBackColor = true;
+            // 
+            // bu_Landscape
+            // 
+            this.bu_Landscape.Location = new System.Drawing.Point(6, 118);
+            this.bu_Landscape.Name = "bu_Landscape";
+            this.bu_Landscape.Size = new System.Drawing.Size(75, 23);
+            this.bu_Landscape.TabIndex = 5;
+            this.bu_Landscape.Text = "Landscape";
+            this.bu_Landscape.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -990,6 +1070,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_chaosFactor)).EndInit();
             this.tabCrawl.ResumeLayout(false);
             this.tabCrawl.PerformLayout();
+            this.tabHexCrawl.ResumeLayout(false);
+            this.tabHexCrawl.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1064,6 +1146,13 @@
         private System.Windows.Forms.Button bu_crawlClear;
         private System.Windows.Forms.Button but_complexTrap;
         private System.Windows.Forms.Button but_trap;
+        private System.Windows.Forms.TabPage tabHexCrawl;
+        private System.Windows.Forms.Button bu_Landscape;
+        private System.Windows.Forms.Button bu_hexCrawl;
+        private System.Windows.Forms.CheckBox chb_isOnPath;
+        private System.Windows.Forms.Button bu_hex_Landmark;
+        private System.Windows.Forms.Button bu_hex_Encounter;
+        private System.Windows.Forms.RichTextBox rtb_HexCrawlOut;
     }
 }
 

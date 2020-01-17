@@ -506,5 +506,14 @@ namespace DungeonCohort
             PrintBody(target, desc);
 
         }
+
+        private void bu_hex_Landmark_Click(object sender, EventArgs e)
+        {
+            var landmark = new HexCrawlLandmark();
+            landmark.Init();
+            var target = rtb_HexCrawlOut;
+            target.Clear();
+            PrintBody(target, landmark.ToString());
+        }
     }
 }
