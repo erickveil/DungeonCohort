@@ -515,5 +515,17 @@ namespace DungeonCohort
             target.Clear();
             PrintBody(target, landmark.ToString());
         }
+
+        private void bu_HexCrawlRoute_Click(object sender, EventArgs e)
+        {
+            string currentRouteType = cbx_HexCrawlRouteType.Text;
+            var newPath = new HexCrawlPath();
+            newPath.CurrentPathType = currentRouteType;
+            newPath.Init();
+
+            var target = rtb_HexCrawlOut;
+            target.Clear();
+            PrintBody(target, newPath.ToString());
+        }
     }
 }

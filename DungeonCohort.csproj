@@ -62,6 +62,7 @@
     <Compile Include="HexCrawlContents.cs" />
     <Compile Include="HexCrawlHex.cs" />
     <Compile Include="HexCrawlLandmark.cs" />
+    <Compile Include="HexCrawlPath.cs" />
     <Compile Include="HexCrawlSettlement.cs" />
     <Compile Include="HexCrawlTrick.cs" />
     <Compile Include="JsonLoading\Ancestry.cs" />

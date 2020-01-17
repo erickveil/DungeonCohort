@@ -97,12 +97,14 @@
             this.but_CrawlRoom = new System.Windows.Forms.Button();
             this.rtb_Crawl = new System.Windows.Forms.RichTextBox();
             this.tabHexCrawl = new System.Windows.Forms.TabPage();
-            this.rtb_HexCrawlOut = new System.Windows.Forms.RichTextBox();
-            this.bu_hex_Encounter = new System.Windows.Forms.Button();
-            this.bu_hex_Landmark = new System.Windows.Forms.Button();
-            this.chb_isOnPath = new System.Windows.Forms.CheckBox();
-            this.bu_hexCrawl = new System.Windows.Forms.Button();
             this.bu_Landscape = new System.Windows.Forms.Button();
+            this.bu_hexCrawl = new System.Windows.Forms.Button();
+            this.chb_isOnPath = new System.Windows.Forms.CheckBox();
+            this.bu_hex_Landmark = new System.Windows.Forms.Button();
+            this.bu_hex_Encounter = new System.Windows.Forms.Button();
+            this.rtb_HexCrawlOut = new System.Windows.Forms.RichTextBox();
+            this.bu_HexCrawlRoute = new System.Windows.Forms.Button();
+            this.cbx_HexCrawlRouteType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -968,6 +970,8 @@
             // 
             // tabHexCrawl
             // 
+            this.tabHexCrawl.Controls.Add(this.cbx_HexCrawlRouteType);
+            this.tabHexCrawl.Controls.Add(this.bu_HexCrawlRoute);
             this.tabHexCrawl.Controls.Add(this.bu_Landscape);
             this.tabHexCrawl.Controls.Add(this.bu_hexCrawl);
             this.tabHexCrawl.Controls.Add(this.chb_isOnPath);
@@ -982,6 +986,53 @@
             this.tabHexCrawl.Text = "Hex Crawl";
             this.tabHexCrawl.UseVisualStyleBackColor = true;
             // 
+            // bu_Landscape
+            // 
+            this.bu_Landscape.Location = new System.Drawing.Point(6, 104);
+            this.bu_Landscape.Name = "bu_Landscape";
+            this.bu_Landscape.Size = new System.Drawing.Size(75, 23);
+            this.bu_Landscape.TabIndex = 5;
+            this.bu_Landscape.Text = "Landscape";
+            this.bu_Landscape.UseVisualStyleBackColor = true;
+            // 
+            // bu_hexCrawl
+            // 
+            this.bu_hexCrawl.Location = new System.Drawing.Point(6, 162);
+            this.bu_hexCrawl.Name = "bu_hexCrawl";
+            this.bu_hexCrawl.Size = new System.Drawing.Size(75, 23);
+            this.bu_hexCrawl.TabIndex = 4;
+            this.bu_hexCrawl.Text = "Hex Crawl";
+            this.bu_hexCrawl.UseVisualStyleBackColor = true;
+            // 
+            // chb_isOnPath
+            // 
+            this.chb_isOnPath.AutoSize = true;
+            this.chb_isOnPath.Location = new System.Drawing.Point(4, 81);
+            this.chb_isOnPath.Name = "chb_isOnPath";
+            this.chb_isOnPath.Size = new System.Drawing.Size(82, 17);
+            this.chb_isOnPath.TabIndex = 3;
+            this.chb_isOnPath.Text = "Is On Path?";
+            this.chb_isOnPath.UseVisualStyleBackColor = true;
+            // 
+            // bu_hex_Landmark
+            // 
+            this.bu_hex_Landmark.Location = new System.Drawing.Point(6, 6);
+            this.bu_hex_Landmark.Name = "bu_hex_Landmark";
+            this.bu_hex_Landmark.Size = new System.Drawing.Size(75, 23);
+            this.bu_hex_Landmark.TabIndex = 2;
+            this.bu_hex_Landmark.Text = "Landmark";
+            this.bu_hex_Landmark.UseVisualStyleBackColor = true;
+            this.bu_hex_Landmark.Click += new System.EventHandler(this.bu_hex_Landmark_Click);
+            // 
+            // bu_hex_Encounter
+            // 
+            this.bu_hex_Encounter.Location = new System.Drawing.Point(6, 133);
+            this.bu_hex_Encounter.Name = "bu_hex_Encounter";
+            this.bu_hex_Encounter.Size = new System.Drawing.Size(75, 23);
+            this.bu_hex_Encounter.TabIndex = 1;
+            this.bu_hex_Encounter.Text = "Encounter";
+            this.bu_hex_Encounter.UseVisualStyleBackColor = true;
+            // 
             // rtb_HexCrawlOut
             // 
             this.rtb_HexCrawlOut.Location = new System.Drawing.Point(408, 6);
@@ -990,52 +1041,28 @@
             this.rtb_HexCrawlOut.TabIndex = 0;
             this.rtb_HexCrawlOut.Text = "";
             // 
-            // bu_hex_Encounter
+            // bu_HexCrawlRoute
             // 
-            this.bu_hex_Encounter.Location = new System.Drawing.Point(6, 60);
-            this.bu_hex_Encounter.Name = "bu_hex_Encounter";
-            this.bu_hex_Encounter.Size = new System.Drawing.Size(75, 23);
-            this.bu_hex_Encounter.TabIndex = 1;
-            this.bu_hex_Encounter.Text = "Encounter";
-            this.bu_hex_Encounter.UseVisualStyleBackColor = true;
+            this.bu_HexCrawlRoute.Location = new System.Drawing.Point(6, 35);
+            this.bu_HexCrawlRoute.Name = "bu_HexCrawlRoute";
+            this.bu_HexCrawlRoute.Size = new System.Drawing.Size(75, 23);
+            this.bu_HexCrawlRoute.TabIndex = 6;
+            this.bu_HexCrawlRoute.Text = "Route";
+            this.bu_HexCrawlRoute.UseVisualStyleBackColor = true;
+            this.bu_HexCrawlRoute.Click += new System.EventHandler(this.bu_HexCrawlRoute_Click);
             // 
-            // bu_hex_Landmark
+            // cbx_HexCrawlRouteType
             // 
-            this.bu_hex_Landmark.Location = new System.Drawing.Point(6, 89);
-            this.bu_hex_Landmark.Name = "bu_hex_Landmark";
-            this.bu_hex_Landmark.Size = new System.Drawing.Size(75, 23);
-            this.bu_hex_Landmark.TabIndex = 2;
-            this.bu_hex_Landmark.Text = "Landmark";
-            this.bu_hex_Landmark.UseVisualStyleBackColor = true;
-            this.bu_hex_Landmark.Click += new System.EventHandler(this.bu_hex_Landmark_Click);
-            // 
-            // chb_isOnPath
-            // 
-            this.chb_isOnPath.AutoSize = true;
-            this.chb_isOnPath.Location = new System.Drawing.Point(6, 8);
-            this.chb_isOnPath.Name = "chb_isOnPath";
-            this.chb_isOnPath.Size = new System.Drawing.Size(82, 17);
-            this.chb_isOnPath.TabIndex = 3;
-            this.chb_isOnPath.Text = "Is On Path?";
-            this.chb_isOnPath.UseVisualStyleBackColor = true;
-            // 
-            // bu_hexCrawl
-            // 
-            this.bu_hexCrawl.Location = new System.Drawing.Point(6, 31);
-            this.bu_hexCrawl.Name = "bu_hexCrawl";
-            this.bu_hexCrawl.Size = new System.Drawing.Size(75, 23);
-            this.bu_hexCrawl.TabIndex = 4;
-            this.bu_hexCrawl.Text = "Hex Crawl";
-            this.bu_hexCrawl.UseVisualStyleBackColor = true;
-            // 
-            // bu_Landscape
-            // 
-            this.bu_Landscape.Location = new System.Drawing.Point(6, 118);
-            this.bu_Landscape.Name = "bu_Landscape";
-            this.bu_Landscape.Size = new System.Drawing.Size(75, 23);
-            this.bu_Landscape.TabIndex = 5;
-            this.bu_Landscape.Text = "Landscape";
-            this.bu_Landscape.UseVisualStyleBackColor = true;
+            this.cbx_HexCrawlRouteType.FormattingEnabled = true;
+            this.cbx_HexCrawlRouteType.Items.AddRange(new object[] {
+            "Trail",
+            "Waterway",
+            "Landmark Chain",
+            "Guide"});
+            this.cbx_HexCrawlRouteType.Location = new System.Drawing.Point(88, 35);
+            this.cbx_HexCrawlRouteType.Name = "cbx_HexCrawlRouteType";
+            this.cbx_HexCrawlRouteType.Size = new System.Drawing.Size(121, 21);
+            this.cbx_HexCrawlRouteType.TabIndex = 7;
             // 
             // Form1
             // 
@@ -1153,6 +1180,8 @@
         private System.Windows.Forms.Button bu_hex_Landmark;
         private System.Windows.Forms.Button bu_hex_Encounter;
         private System.Windows.Forms.RichTextBox rtb_HexCrawlOut;
+        private System.Windows.Forms.Button bu_HexCrawlRoute;
+        private System.Windows.Forms.ComboBox cbx_HexCrawlRouteType;
     }
 }
 

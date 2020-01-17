@@ -294,6 +294,7 @@ namespace DungeonCohort
             table.AddItem("An odd wind blows");
             table.AddItem("Divine voice");
             table.AddItem("Gate");
+            table.AddItem("Deja vu");
             table.AddItem("Teleportation circle");
 
             return table.GetResult();
