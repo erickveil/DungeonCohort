@@ -538,5 +538,29 @@ namespace DungeonCohort
             PrintBody(target, hexEvent.ToString());
 
         }
+
+        private void bu_Landscape_Click(object sender, EventArgs e)
+        {
+            string biome = cb_HexCrawlBiome.Text;
+            var scenery = new HexCrawlScenery();
+            scenery.Init(biome);
+
+            var target = rtb_HexCrawlOut;
+            target.Clear();
+            PrintBody(target, scenery.ToString());
+        }
+
+        private void bu_hexCrawl_Click(object sender, EventArgs e)
+        {
+            string biome = cb_HexCrawlBiome.Text;
+            string currentPathType = cbx_HexCrawlRouteType.Text;
+
+            var hex = new HexCrawlHex();
+            hex.Init(biome, currentPathType);
+
+            var target = rtb_HexCrawlOut;
+            target.Clear();
+            PrintBody(target, hex.ToString());
+        }
     }
 }

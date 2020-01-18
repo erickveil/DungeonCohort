@@ -157,11 +157,29 @@ namespace DungeonCohort
         {
             var table = new RandomTable<string>();
 
-            table.AddItem("Tracks");
+            table.AddItem("Tracks - " + ChooseTracksType());
             table.AddItem("Animal run");
             table.AddItem("Infrequent trail");
             table.AddItem("Footpath");
             table.AddItem("Clear Trail");
+
+            return table.GetResult();
+        }
+
+        public static string ChooseTracksType()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Distant sighting");
+            table.AddItem("Sounds");
+            table.AddItem("Body parts");
+            table.AddItem("Victims");
+            table.AddItem("Footprints");
+            table.AddItem("Smells and vapors");
+            table.AddItem("Environmental damage");
+            table.AddItem("Intentional markings");
+            table.AddItem("Scat/refuse");
+            table.AddItem("Fur/Skin/Blood");
 
             return table.GetResult();
         }

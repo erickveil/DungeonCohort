@@ -147,6 +147,8 @@ namespace DungeonCohort
             table.AddItem("Bandit Hideout");
             table.AddItem("Planar Gate");
             table.AddItem("Pyramid");
+            table.AddItem("Small watchtower");
+            table.AddItem("Inn / Roadhouse");
 
             return table.GetResult();
         }
@@ -201,6 +203,11 @@ namespace DungeonCohort
             table.AddItem("Cave");
             table.AddItem("Sinkhole");
             table.AddItem(ChooseLandmarkSize() + " Boulder");
+            table.AddItem("Animal graveyard - lots of bones of many large animals");
+            table.AddItem("Hot springs");
+            table.AddItem("Geyser");
+            table.AddItem("Ancient massive crater");
+            table.AddItem("Earthmote floating in sky");
             
             return table.GetResult();
         }
@@ -230,6 +237,31 @@ namespace DungeonCohort
             table.AddItem("Foundation");
             table.AddItem("Rubble");
             table.AddItem("Battle site");
+            table.AddItem("Dry well");
+            table.AddItem("Burial mound");
+            table.AddItem("Old, tall - thick wooden pole adorned with " + TotemItems());
+            table.AddItem("Stone altar");
+            table.AddItem("Stone dias with pillars");
+            table.AddItem("Stone pillars");
+            table.AddItem("Collapsed half walls");
+            table.AddItem("Scattered stone blocks");
+            table.AddItem("Fallen statues: " + ChooseLandmarkSize() + " " + ChooseStatueSubject());
+            table.AddItem("Abandoned mine");
+            table.AddItem("Skeleton");
+            table.AddItem("Giant skull");
+
+            return table.GetResult();
+        }
+
+        public static string TotemItems()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Picture glyphs");
+            table.AddItem("Feathers");
+            table.AddItem("Small animal skulls");
+            table.AddItem("tattered, weathered, woven scarves");
+
 
             return table.GetResult();
         }
@@ -265,6 +297,12 @@ namespace DungeonCohort
             table.AddItem(ChooseStronghold());
             table.AddItem("Recent battle site: " + ChooseBattleType());
             table.AddItem("Communal campsite");
+            table.AddItem("Well");
+            table.AddItem("Tomb");
+            table.AddItem("Graveyard");
+            table.AddItem("Shallow grave with makeshift marker");
+            table.AddItem("Solitary gravestone");
+            table.AddItem("Dead body");
 
             return table.GetResult();
         }

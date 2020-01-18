@@ -9,21 +9,108 @@ namespace DungeonCohort
 {
     class HexCrawlHex
     {
-
-        public HexCrawlPath Route;
-        public HexCrawlLandmark Landmark;
-        public HexCrawlEvent Event;
-        public HexCrawlTrick Trick;
-
-
-
-        // =================================================
         public enum HexContentType
         {
             Empty, Encounter, EncouterWithTreasure, 
             Event, Obstacle, Feature, FeatureWithTreasure, Trick, 
             Settlement, BiomeSwitch
         };
+
+        public HexCrawlPath Route;
+        public HexCrawlScenery Scenery;
+        public HexContentType Contents;
+
+        public HexCrawlLandmark Landmark;
+        public HexCrawlEvent Event;
+        public HexCrawlTrick Trick;
+
+        public void Init(string biome, string currentPathType)
+        {
+            Route = new HexCrawlPath();
+            Route.CurrentPathType = currentPathType;
+            Route.Init();
+
+            Scenery = new HexCrawlScenery();
+            Scenery.Init(biome);
+
+            Contents = ChooseHexContentType();
+
+            if (Contents == HexContentType.Feature)
+            {
+                Landmark = new HexCrawlLandmark();
+                Landmark.Init();
+            }
+
+            if (Contents == HexContentType.Event)
+            {
+                Event = new HexCrawlEvent();
+                Event.Init();
+            }
+
+            if (Contents == HexContentType.Trick)
+            {
+                Trick = new HexCrawlTrick();
+                Trick.Init();
+            }
+
+        }
+
+        public override string ToString()
+        {
+            string desc =
+                "Route: " + Route.ToString() + "\n" 
+                + "Scenery: " + Scenery.ToString() + "\n" 
+                + "Contents: " + Contents.ToString() + "\n";
+
+            if (!(Landmark is null))
+            {
+                desc += "Local Landmark: " + Landmark.ToString() + "\n";
+            }
+
+            if (!(Event is null))
+            {
+                desc += Event.ToString() + "\n";
+            }
+
+            if (!(Trick is null))
+            {
+                desc += Trick.ToString() + "\n";
+            }
+
+            return desc;
+        }
+
+        public HexContentType ChooseHexContentType()
+        {
+            var table = new RandomTable<HexContentType>();
+
+            if (Route.PathBranch == "End")
+            {
+                table.AddItem(HexContentType.Feature);
+                table.AddItem(HexContentType.Trick);
+            }
+            else if (Route.PathBranch == "Straight")
+            {
+                table.AddItem(HexContentType.Empty);
+                table.AddItem(HexContentType.Feature, 2);
+                table.AddItem(HexContentType.Event, 4);
+                table.AddItem(HexContentType.Trick, 2);
+            }
+            else
+            {
+                table.AddItem(HexContentType.Feature, 2);
+                table.AddItem(HexContentType.Event, 4);
+                table.AddItem(HexContentType.Trick, 2);
+            }
+
+            return table.GetResult();
+        }
+
+
+
+        /*
+        // =================================================
+        
 
         public enum TrailDirection
         {
@@ -41,7 +128,7 @@ namespace DungeonCohort
         /// A description of the immediate environment, ground cover, flora, etc
         public string Terrain;
         /// What is interesting about this area
-        public HexCrawlContents Contents;
+        //public HexCrawlContents Contents;
         /// Like Terrain, but a description of what this hex looks like from 
         /// an adjacent hex, to provide clues as to which way a party might 
         /// want to go next.
@@ -674,5 +761,6 @@ namespace DungeonCohort
         public void SetTerrain(string biome)
         {
         }
+        */
     }
 }
