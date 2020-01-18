@@ -31,6 +31,7 @@ namespace DungeonCohort
             {
                 case HexCrawlHex.HexContentType.Empty:
                     break;
+                    /*
                 case HexCrawlHex.HexContentType.Encounter:
                     SetEncounter();
                     break;
@@ -38,12 +39,14 @@ namespace DungeonCohort
                     SetEncounter();
                     SetTreasure(tier, allowedItems);
                     break;
+                    */
                 case HexCrawlHex.HexContentType.Event:
                     SetEvent();
                     break;
                 case HexCrawlHex.HexContentType.Feature:
                     SetFeature();
                     break;
+                    /*
                 case HexCrawlHex.HexContentType.FeatureWithTreasure:
                     SetFeature();
                     SetTreasure(tier, allowedItems);
@@ -54,6 +57,7 @@ namespace DungeonCohort
                 case HexCrawlHex.HexContentType.Settlement:
                     SetSettlement(tier, isLeaderStdRace);
                     break;
+                    */
                 case HexCrawlHex.HexContentType.Trick:
                     SetTrick();
                     break;
