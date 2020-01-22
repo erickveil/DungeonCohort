@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DungeonIntel.cs" />
     <Compile Include="CrawlRoomComplexTrap.cs" />
     <Compile Include="CrawlRoomGate.cs" />
     <Compile Include="CrawlRoomTrick.cs" />
