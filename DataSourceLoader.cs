@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DungeonCohort.JsonLoading;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace DungeonCohort
 {
@@ -29,12 +31,14 @@ namespace DungeonCohort
         private static JsonSpellLoader _spellSource;
         private static JsonBookLoader _bookSource;
         private static JsonContainerContents _containerContentsSource;
+        private static JsonMageFurnishings _mageFurnishingsSource;
 
         private DataSourceLoader()
         {
             _spellSource = new JsonSpellLoader();
             _bookSource = new JsonBookLoader();
             _containerContentsSource = new JsonContainerContents();
+            _mageFurnishingsSource = new JsonMageFurnishings();
         }
 
         private static void _init()
@@ -42,6 +46,7 @@ namespace DungeonCohort
             _spellSource.LoadAllSpells();
             _bookSource.LoadBookFile();
             _containerContentsSource.Init();
+            _mageFurnishingsSource.LoadFile();
         }
 
         public static DataSourceLoader Instance
@@ -55,6 +60,19 @@ namespace DungeonCohort
                 }
                 return _instance;
             }
+        }
+
+        public static string LoadFile(string filename)
+        {
+            string jsonData;
+            try { jsonData = File.ReadAllText(filename); }
+            catch (Exception)
+            {
+                Console.WriteLine("Could not load file: " + filename);
+                return "";
+            }
+
+            return jsonData;
         }
 
         public JsonSpellLoader SpellSource
@@ -71,6 +89,12 @@ namespace DungeonCohort
         {
             get { return _containerContentsSource; }
         }
+
+        public JsonMageFurnishings MageFurnishingsSource
+        {
+            get { return _mageFurnishingsSource; }
+        }
+
 
 
     }
