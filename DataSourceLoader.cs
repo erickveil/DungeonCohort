@@ -27,15 +27,18 @@ namespace DungeonCohort
         private static DataSourceLoader _instance = null;
 
         private static JsonSpellLoader _spellSource;
+        private static JsonBookLoader _bookSource;
 
         private DataSourceLoader()
         {
             _spellSource = new JsonSpellLoader();
+            _bookSource = new JsonBookLoader();
         }
 
         private static void _init()
         {
             _spellSource.LoadAllSpells();
+            _bookSource.LoadBookFile();
 
         }
 
@@ -55,6 +58,11 @@ namespace DungeonCohort
         public JsonSpellLoader SpellSource
         {
             get { return  _spellSource; }
+        }
+
+        public JsonBookLoader BookSource
+        {
+            get { return _bookSource; }
         }
 
 

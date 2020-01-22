@@ -83,6 +83,7 @@
     <Compile Include="CrawlRooms.cs" />
     <Compile Include="CrawlRoomShape.cs" />
     <Compile Include="Dice.cs" />
+    <Compile Include="JsonLoading\JsonBookLoader.cs" />
     <Compile Include="JsonLoading\JsonChamberPurpose.cs" />
     <Compile Include="JsonLoading\JsonChamberPurposeTable.cs" />
     <Compile Include="JsonLoading\JsonChamberPurposeLoader.cs" />

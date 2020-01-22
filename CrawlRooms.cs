@@ -33,6 +33,7 @@ namespace DungeonCohort
         public CrawlRoomExit WestExit = null;
         public CrawlRoomExit StandardExit;
         public int CeilingHeight; // also choose a standard height?
+        public List<string> BookList;
 
 
         public void RandomizeRoom(string dungeonType, bool isLargeRooms,
@@ -98,12 +99,22 @@ namespace DungeonCohort
         public string AsString()
         {
             // RoomType comes out seperately as headder for formatting.
+            string books = "";
+            if (!(BookList is null))
+            {
+                books = "Books:\n";
+                foreach (var book in BookList)
+                {
+                    books += "  - " + book + "\n";
+                }
+            }
 
             string desc = ""
                 + "Illumination: " + Illumination.AsString() + "\n"
                 + RoomSize + ", " + RoomShape + "\n"
                 + (IsHall ? "" : "Orientation: " + Orientation.ToString() + "\n")
                 + "Contents: " + Contents.ToString() + "\n"
+                + books 
                 + GetExits()
                 ;
             return desc;
@@ -134,6 +145,7 @@ namespace DungeonCohort
             )
         {
             var dice = Dice.Instance;
+            var dataSource = DataSourceLoader.Instance;
 
             if (RoomType.ToLower().Contains("vault"))
             {
@@ -277,7 +289,14 @@ namespace DungeonCohort
                 if (Contents.RoomTrick is null)
                 {
                     Contents.SetRoomTrick();
-                    Contents.RoomTrick.Object = "Throne";
+                    if (!(Contents.RoomTrick is null))
+                    {
+                        Contents.RoomTrick.Object = "Throne";
+                    }
+                    else if (!(Contents.RoomGate is null))
+                    {
+                        Contents.RoomGate.GateForm = "Throne";
+                    }
                 }
             }
             if (RoomType.Contains("Trophy")
@@ -348,6 +367,13 @@ namespace DungeonCohort
                 )
             {
                 // books?
+                var bookSource = dataSource.BookSource;
+                int numBooks = dice.Roll(1, 4);
+                BookList = new List<string>();
+                for (int i = 0; i < numBooks; ++i)
+                {
+                    BookList.Add(bookSource.GetBookSubject());
+                }
             }
             if (RoomType.Contains("Planar"))
             {
