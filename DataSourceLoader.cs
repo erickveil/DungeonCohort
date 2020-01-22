@@ -28,18 +28,20 @@ namespace DungeonCohort
 
         private static JsonSpellLoader _spellSource;
         private static JsonBookLoader _bookSource;
+        private static JsonContainerContents _containerContentsSource;
 
         private DataSourceLoader()
         {
             _spellSource = new JsonSpellLoader();
             _bookSource = new JsonBookLoader();
+            _containerContentsSource = new JsonContainerContents();
         }
 
         private static void _init()
         {
             _spellSource.LoadAllSpells();
             _bookSource.LoadBookFile();
-
+            _containerContentsSource.Init();
         }
 
         public static DataSourceLoader Instance
@@ -63,6 +65,11 @@ namespace DungeonCohort
         public JsonBookLoader BookSource
         {
             get { return _bookSource; }
+        }
+
+        public JsonContainerContents ContainerContentsSource
+        {
+            get { return _containerContentsSource; }
         }
 
 

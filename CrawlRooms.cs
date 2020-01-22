@@ -33,7 +33,9 @@ namespace DungeonCohort
         public CrawlRoomExit WestExit = null;
         public CrawlRoomExit StandardExit;
         public int CeilingHeight; // also choose a standard height?
+
         public List<string> BookList;
+        public List<string> MundaneItemList;
 
 
         public void RandomizeRoom(string dungeonType, bool isLargeRooms,
@@ -109,12 +111,23 @@ namespace DungeonCohort
                 }
             }
 
+            string mundaneItems = "";
+            if (!(MundaneItemList is null))
+            {
+                mundaneItems = "Misc Containers:\n";
+                foreach (var item in MundaneItemList)
+                {
+                    mundaneItems += "  - " + item + "\n";
+                }
+            }
+
             string desc = ""
                 + "Illumination: " + Illumination.AsString() + "\n"
                 + RoomSize + ", " + RoomShape + "\n"
                 + (IsHall ? "" : "Orientation: " + Orientation.ToString() + "\n")
                 + "Contents: " + Contents.ToString() + "\n"
                 + books 
+                + mundaneItems
                 + GetExits()
                 ;
             return desc;
@@ -167,6 +180,7 @@ namespace DungeonCohort
                     Contents.SetRoomHoard(tier, permissions);
 
                 }
+                SetStorageItems();
                 
             }
             if ( RoomType.Contains("Trap") )
@@ -196,6 +210,7 @@ namespace DungeonCohort
             if (RoomType.Contains("Armory"))
             {
                 Contents.SetArmoryContents();
+                SetStorageItems();
             }
             if (RoomType.Contains("Chapel")
                 || RoomType.Contains("Shrine")
@@ -269,10 +284,12 @@ namespace DungeonCohort
                 if (isHoard)
                 {
                     Contents.SetRoomHoard(tier, permissions);
+                    SetStorageItems();
                 }
                 else if (isIncidental)
                 {
                     Contents.SetIncidentalTreasure(tier);
+                    SetStorageItems();
                 }
                 else if (isEmpty)
                 {
@@ -281,7 +298,7 @@ namespace DungeonCohort
                 }
                 else
                 {
-                    // chance of mundane loot 2-6
+                    SetStorageItems();
                 }
             }
             if (RoomType.Contains("Throne"))
@@ -318,6 +335,7 @@ namespace DungeonCohort
             if (RoomType.Contains("Workshop"))
             {
                 // What kind?
+                SetStorageItems();
             }
             if (RoomType.Contains("Conjuring"))
             {
@@ -366,7 +384,6 @@ namespace DungeonCohort
                 || RoomType.Contains("schoolroom")
                 )
             {
-                // books?
                 var bookSource = dataSource.BookSource;
                 int numBooks = dice.Roll(1, 4);
                 BookList = new List<string>();
@@ -436,8 +453,25 @@ namespace DungeonCohort
             if (RoomType == "Closet")
             {
                 RoomSize = "Small";
+                SetStorageItems();
             }
 
+        }
+
+        public void SetStorageItems()
+        {
+            var dataSource = DataSourceLoader.Instance;
+            var dice = Dice.Instance;
+            var contentsSource = dataSource.ContainerContentsSource;
+            int numContainers = dice.Roll(1, 3) + 1;
+            MundaneItemList = new List<string>();
+            for (int i = 0; i < numContainers; ++i)
+            {
+                string mundaneItem =
+                    contentsSource.GetContainer() + " of " +
+                    contentsSource.GetContainerContent();
+                MundaneItemList.Add(mundaneItem);
+            }
         }
 
         public void _setIsHall()

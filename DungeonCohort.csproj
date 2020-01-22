@@ -87,6 +87,7 @@
     <Compile Include="JsonLoading\JsonChamberPurpose.cs" />
     <Compile Include="JsonLoading\JsonChamberPurposeTable.cs" />
     <Compile Include="JsonLoading\JsonChamberPurposeLoader.cs" />
+    <Compile Include="JsonLoading\JsonContainerContents.cs" />
     <Compile Include="JsonLoading\JsonReligiousArticles.cs" />
     <Compile Include="JsonLoading\JsonSpellLoader.cs" />
     <Compile Include="JsonSpell.cs" />
