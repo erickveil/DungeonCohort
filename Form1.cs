@@ -562,5 +562,40 @@ namespace DungeonCohort
             target.Clear();
             PrintBody(target, hex.ToString());
         }
+
+        private void bu_dungeonIntel_Click(object sender, EventArgs e)
+        {
+            var dice = Dice.Instance;
+
+            string origin = DungeonIntel.GetDungeonOriginalPurpose();
+
+            int numHistory = dice.Roll(1, 4) + 1;
+            string history = "";
+            for (int i = 0; i < numHistory; ++i)
+            {
+                history += DungeonIntel.GetDungeonHistory() + "\n";
+            }
+
+            string puzzle = DungeonIntel.GetEndOfDungeonPuzzleSecret();
+
+            var target = rtb_Crawl;
+            target.Clear();
+
+            PrintBodyBold(target, "Origin: ");
+            PrintBody(target, origin + "\n");
+            PrintBodyBold(target, "History:\n");
+            PrintList(target, history);
+            PrintBodyBold(target, "Secret: ");
+            PrintBody(target, puzzle);
+
+        }
+
+        private void bu_questGen_Click(object sender, EventArgs e)
+        {
+            var target = rtb_rndMonstOut;
+            target.Clear();
+            PrintBody(target, Quests.CreateQuest());
+
+        }
     }
 }

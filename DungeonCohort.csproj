@@ -93,6 +93,7 @@
     <Compile Include="JsonLoading\JsonReligiousArticles.cs" />
     <Compile Include="JsonLoading\JsonSpellLoader.cs" />
     <Compile Include="JsonSpell.cs" />
+    <Compile Include="Quests.cs" />
     <Compile Include="ResultObjects\Encounter.cs" />
     <Compile Include="EncounterFactory.cs" />
     <Compile Include="ResultObjects\EncounterComponent.cs" />
