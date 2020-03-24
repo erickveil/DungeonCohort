@@ -597,5 +597,13 @@ namespace DungeonCohort
             PrintBody(target, Quests.CreateQuest());
 
         }
+
+        private void crawl_atmosphere_Click(object sender, EventArgs e)
+        {
+            var target = rtb_Crawl;
+            target.Clear();
+            PrintBody(target, DungeonAtmosphere.GenerateAtmosphere());
+
+        }
     }
 }

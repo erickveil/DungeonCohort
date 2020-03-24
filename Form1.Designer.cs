@@ -70,6 +70,7 @@
             this.nud_dNum = new System.Windows.Forms.NumericUpDown();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab_dev = new System.Windows.Forms.TabPage();
+            this.bu_questGen = new System.Windows.Forms.Button();
             this.bu_rndTrap = new System.Windows.Forms.Button();
             this.tab_mythic = new System.Windows.Forms.TabPage();
             this.bu_mythicClear = new System.Windows.Forms.Button();
@@ -84,6 +85,7 @@
             this.nud_chaosFactor = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.tabCrawl = new System.Windows.Forms.TabPage();
+            this.bu_dungeonIntel = new System.Windows.Forms.Button();
             this.but_complexTrap = new System.Windows.Forms.Button();
             this.but_trap = new System.Windows.Forms.Button();
             this.bu_crawlClear = new System.Windows.Forms.Button();
@@ -105,8 +107,7 @@
             this.bu_hex_Landmark = new System.Windows.Forms.Button();
             this.bu_HexEvent = new System.Windows.Forms.Button();
             this.rtb_HexCrawlOut = new System.Windows.Forms.RichTextBox();
-            this.bu_dungeonIntel = new System.Windows.Forms.Button();
-            this.bu_questGen = new System.Windows.Forms.Button();
+            this.crawl_atmosphere = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -649,6 +650,16 @@
             this.tab_dev.Text = "Development";
             this.tab_dev.UseVisualStyleBackColor = true;
             // 
+            // bu_questGen
+            // 
+            this.bu_questGen.Location = new System.Drawing.Point(91, 264);
+            this.bu_questGen.Name = "bu_questGen";
+            this.bu_questGen.Size = new System.Drawing.Size(137, 23);
+            this.bu_questGen.TabIndex = 18;
+            this.bu_questGen.Text = "Random Quest";
+            this.bu_questGen.UseVisualStyleBackColor = true;
+            this.bu_questGen.Click += new System.EventHandler(this.bu_questGen_Click);
+            // 
             // bu_rndTrap
             // 
             this.bu_rndTrap.Location = new System.Drawing.Point(91, 230);
@@ -814,6 +825,7 @@
             // 
             // tabCrawl
             // 
+            this.tabCrawl.Controls.Add(this.crawl_atmosphere);
             this.tabCrawl.Controls.Add(this.bu_dungeonIntel);
             this.tabCrawl.Controls.Add(this.but_complexTrap);
             this.tabCrawl.Controls.Add(this.but_trap);
@@ -834,6 +846,16 @@
             this.tabCrawl.TabIndex = 2;
             this.tabCrawl.Text = "Crawl";
             this.tabCrawl.UseVisualStyleBackColor = true;
+            // 
+            // bu_dungeonIntel
+            // 
+            this.bu_dungeonIntel.Location = new System.Drawing.Point(9, 213);
+            this.bu_dungeonIntel.Name = "bu_dungeonIntel";
+            this.bu_dungeonIntel.Size = new System.Drawing.Size(148, 23);
+            this.bu_dungeonIntel.TabIndex = 12;
+            this.bu_dungeonIntel.Text = "Dungeon Intel";
+            this.bu_dungeonIntel.UseVisualStyleBackColor = true;
+            this.bu_dungeonIntel.Click += new System.EventHandler(this.bu_dungeonIntel_Click);
             // 
             // but_complexTrap
             // 
@@ -1074,25 +1096,15 @@
             this.rtb_HexCrawlOut.TabIndex = 0;
             this.rtb_HexCrawlOut.Text = "";
             // 
-            // bu_dungeonIntel
+            // crawl_atmosphere
             // 
-            this.bu_dungeonIntel.Location = new System.Drawing.Point(9, 213);
-            this.bu_dungeonIntel.Name = "bu_dungeonIntel";
-            this.bu_dungeonIntel.Size = new System.Drawing.Size(148, 23);
-            this.bu_dungeonIntel.TabIndex = 12;
-            this.bu_dungeonIntel.Text = "Dungeon Intel";
-            this.bu_dungeonIntel.UseVisualStyleBackColor = true;
-            this.bu_dungeonIntel.Click += new System.EventHandler(this.bu_dungeonIntel_Click);
-            // 
-            // bu_questGen
-            // 
-            this.bu_questGen.Location = new System.Drawing.Point(91, 264);
-            this.bu_questGen.Name = "bu_questGen";
-            this.bu_questGen.Size = new System.Drawing.Size(137, 23);
-            this.bu_questGen.TabIndex = 18;
-            this.bu_questGen.Text = "Random Quest";
-            this.bu_questGen.UseVisualStyleBackColor = true;
-            this.bu_questGen.Click += new System.EventHandler(this.bu_questGen_Click);
+            this.crawl_atmosphere.Location = new System.Drawing.Point(9, 243);
+            this.crawl_atmosphere.Name = "crawl_atmosphere";
+            this.crawl_atmosphere.Size = new System.Drawing.Size(148, 23);
+            this.crawl_atmosphere.TabIndex = 13;
+            this.crawl_atmosphere.Text = "Atmosphere";
+            this.crawl_atmosphere.UseVisualStyleBackColor = true;
+            this.crawl_atmosphere.Click += new System.EventHandler(this.crawl_atmosphere_Click);
             // 
             // Form1
             // 
@@ -1213,6 +1225,7 @@
         private System.Windows.Forms.ComboBox cb_HexCrawlBiome;
         private System.Windows.Forms.Button bu_dungeonIntel;
         private System.Windows.Forms.Button bu_questGen;
+        private System.Windows.Forms.Button crawl_atmosphere;
     }
 }
 
