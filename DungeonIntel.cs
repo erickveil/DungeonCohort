@@ -21,9 +21,12 @@ namespace DungeonCohort
             table.AddItem("Treasure vault");
             table.AddItem("Mine");
             table.AddItem("Protect a gate");
-            table.AddItem("Refuge");
+            table.AddItem("Refuge/Stronghold");
             table.AddItem("Subterranean Society");
             table.AddItem("Underdark Entrance");
+            table.AddItem("Cult Temple");
+            table.AddItem("Tomb");
+            table.AddItem("Guarded Passage to another Demesne");
 
             return table.GetResult();
         }

@@ -68,7 +68,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.nud_dieSize = new System.Windows.Forms.NumericUpDown();
             this.nud_dNum = new System.Windows.Forms.NumericUpDown();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.TabAi = new System.Windows.Forms.TabControl();
             this.tab_dev = new System.Windows.Forms.TabPage();
             this.bu_questGen = new System.Windows.Forms.Button();
             this.bu_rndTrap = new System.Windows.Forms.Button();
@@ -85,6 +85,7 @@
             this.nud_chaosFactor = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.tabCrawl = new System.Windows.Forms.TabPage();
+            this.crawl_atmosphere = new System.Windows.Forms.Button();
             this.bu_dungeonIntel = new System.Windows.Forms.Button();
             this.but_complexTrap = new System.Windows.Forms.Button();
             this.but_trap = new System.Windows.Forms.Button();
@@ -107,7 +108,13 @@
             this.bu_hex_Landmark = new System.Windows.Forms.Button();
             this.bu_HexEvent = new System.Windows.Forms.Button();
             this.rtb_HexCrawlOut = new System.Windows.Forms.RichTextBox();
-            this.crawl_atmosphere = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.rtbCombatAI = new System.Windows.Forms.RichTextBox();
+            this.butAI = new System.Windows.Forms.Button();
+            this.butNegotiate = new System.Windows.Forms.Button();
+            this.rtbNegotiate = new System.Windows.Forms.RichTextBox();
+            this.butMorale = new System.Windows.Forms.Button();
+            this.rtbMorale = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -122,12 +129,13 @@
             this.gb_dice.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_dieSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_dNum)).BeginInit();
-            this.tabControl1.SuspendLayout();
+            this.TabAi.SuspendLayout();
             this.tab_dev.SuspendLayout();
             this.tab_mythic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_chaosFactor)).BeginInit();
             this.tabCrawl.SuspendLayout();
             this.tabHexCrawl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtb_rndMonstOut
@@ -607,18 +615,19 @@
             0,
             0});
             // 
-            // tabControl1
+            // TabAi
             // 
-            this.tabControl1.Controls.Add(this.tab_dev);
-            this.tabControl1.Controls.Add(this.tab_mythic);
-            this.tabControl1.Controls.Add(this.tabCrawl);
-            this.tabControl1.Controls.Add(this.tabHexCrawl);
-            this.tabControl1.Location = new System.Drawing.Point(4, 5);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(1);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(875, 434);
-            this.tabControl1.TabIndex = 17;
+            this.TabAi.Controls.Add(this.tab_dev);
+            this.TabAi.Controls.Add(this.tab_mythic);
+            this.TabAi.Controls.Add(this.tabCrawl);
+            this.TabAi.Controls.Add(this.tabHexCrawl);
+            this.TabAi.Controls.Add(this.tabPage1);
+            this.TabAi.Location = new System.Drawing.Point(0, 1);
+            this.TabAi.Margin = new System.Windows.Forms.Padding(1);
+            this.TabAi.Name = "TabAi";
+            this.TabAi.SelectedIndex = 0;
+            this.TabAi.Size = new System.Drawing.Size(875, 434);
+            this.TabAi.TabIndex = 17;
             // 
             // tab_dev
             // 
@@ -846,6 +855,16 @@
             this.tabCrawl.TabIndex = 2;
             this.tabCrawl.Text = "Crawl";
             this.tabCrawl.UseVisualStyleBackColor = true;
+            // 
+            // crawl_atmosphere
+            // 
+            this.crawl_atmosphere.Location = new System.Drawing.Point(9, 243);
+            this.crawl_atmosphere.Name = "crawl_atmosphere";
+            this.crawl_atmosphere.Size = new System.Drawing.Size(148, 23);
+            this.crawl_atmosphere.TabIndex = 13;
+            this.crawl_atmosphere.Text = "Atmosphere";
+            this.crawl_atmosphere.UseVisualStyleBackColor = true;
+            this.crawl_atmosphere.Click += new System.EventHandler(this.crawl_atmosphere_Click);
             // 
             // bu_dungeonIntel
             // 
@@ -1096,22 +1115,82 @@
             this.rtb_HexCrawlOut.TabIndex = 0;
             this.rtb_HexCrawlOut.Text = "";
             // 
-            // crawl_atmosphere
+            // tabPage1
             // 
-            this.crawl_atmosphere.Location = new System.Drawing.Point(9, 243);
-            this.crawl_atmosphere.Name = "crawl_atmosphere";
-            this.crawl_atmosphere.Size = new System.Drawing.Size(148, 23);
-            this.crawl_atmosphere.TabIndex = 13;
-            this.crawl_atmosphere.Text = "Atmosphere";
-            this.crawl_atmosphere.UseVisualStyleBackColor = true;
-            this.crawl_atmosphere.Click += new System.EventHandler(this.crawl_atmosphere_Click);
+            this.tabPage1.Controls.Add(this.rtbMorale);
+            this.tabPage1.Controls.Add(this.butMorale);
+            this.tabPage1.Controls.Add(this.rtbNegotiate);
+            this.tabPage1.Controls.Add(this.butNegotiate);
+            this.tabPage1.Controls.Add(this.butAI);
+            this.tabPage1.Controls.Add(this.rtbCombatAI);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(867, 408);
+            this.tabPage1.TabIndex = 4;
+            this.tabPage1.Text = "AI";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // rtbCombatAI
+            // 
+            this.rtbCombatAI.Location = new System.Drawing.Point(8, 35);
+            this.rtbCombatAI.Name = "rtbCombatAI";
+            this.rtbCombatAI.Size = new System.Drawing.Size(474, 367);
+            this.rtbCombatAI.TabIndex = 0;
+            this.rtbCombatAI.Text = "";
+            // 
+            // butAI
+            // 
+            this.butAI.Location = new System.Drawing.Point(8, 6);
+            this.butAI.Name = "butAI";
+            this.butAI.Size = new System.Drawing.Size(75, 23);
+            this.butAI.TabIndex = 1;
+            this.butAI.Text = "Combat AI";
+            this.butAI.UseVisualStyleBackColor = true;
+            this.butAI.Click += new System.EventHandler(this.butAI_Click);
+            // 
+            // butNegotiate
+            // 
+            this.butNegotiate.Location = new System.Drawing.Point(488, 6);
+            this.butNegotiate.Name = "butNegotiate";
+            this.butNegotiate.Size = new System.Drawing.Size(75, 23);
+            this.butNegotiate.TabIndex = 2;
+            this.butNegotiate.Text = "Negotiate";
+            this.butNegotiate.UseVisualStyleBackColor = true;
+            this.butNegotiate.Click += new System.EventHandler(this.butNegotiate_Click);
+            // 
+            // rtbNegotiate
+            // 
+            this.rtbNegotiate.Location = new System.Drawing.Point(488, 35);
+            this.rtbNegotiate.Name = "rtbNegotiate";
+            this.rtbNegotiate.Size = new System.Drawing.Size(373, 153);
+            this.rtbNegotiate.TabIndex = 3;
+            this.rtbNegotiate.Text = "";
+            // 
+            // butMorale
+            // 
+            this.butMorale.Location = new System.Drawing.Point(488, 194);
+            this.butMorale.Name = "butMorale";
+            this.butMorale.Size = new System.Drawing.Size(75, 23);
+            this.butMorale.TabIndex = 4;
+            this.butMorale.Text = "Morale";
+            this.butMorale.UseVisualStyleBackColor = true;
+            this.butMorale.Click += new System.EventHandler(this.butMorale_Click);
+            // 
+            // rtbMorale
+            // 
+            this.rtbMorale.Location = new System.Drawing.Point(488, 223);
+            this.rtbMorale.Name = "rtbMorale";
+            this.rtbMorale.Size = new System.Drawing.Size(373, 179);
+            this.rtbMorale.TabIndex = 5;
+            this.rtbMorale.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(885, 445);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.TabAi);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).EndInit();
@@ -1131,7 +1210,7 @@
             this.gb_dice.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_dieSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_dNum)).EndInit();
-            this.tabControl1.ResumeLayout(false);
+            this.TabAi.ResumeLayout(false);
             this.tab_dev.ResumeLayout(false);
             this.tab_dev.PerformLayout();
             this.tab_mythic.ResumeLayout(false);
@@ -1140,6 +1219,7 @@
             this.tabCrawl.ResumeLayout(false);
             this.tabCrawl.PerformLayout();
             this.tabHexCrawl.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1186,7 +1266,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown nud_dieSize;
         private System.Windows.Forms.NumericUpDown nud_dNum;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl TabAi;
         private System.Windows.Forms.TabPage tab_dev;
         private System.Windows.Forms.TabPage tab_mythic;
         private System.Windows.Forms.TextBox tb_scene;
@@ -1226,6 +1306,13 @@
         private System.Windows.Forms.Button bu_dungeonIntel;
         private System.Windows.Forms.Button bu_questGen;
         private System.Windows.Forms.Button crawl_atmosphere;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button butAI;
+        private System.Windows.Forms.RichTextBox rtbCombatAI;
+        private System.Windows.Forms.RichTextBox rtbNegotiate;
+        private System.Windows.Forms.Button butNegotiate;
+        private System.Windows.Forms.RichTextBox rtbMorale;
+        private System.Windows.Forms.Button butMorale;
     }
 }
 

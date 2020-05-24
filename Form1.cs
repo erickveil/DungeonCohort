@@ -605,5 +605,62 @@ namespace DungeonCohort
             PrintBody(target, DungeonAtmosphere.GenerateAtmosphere());
 
         }
+
+        private void butAI_Click(object sender, EventArgs e)
+        {
+            string tactics = CombatAi.ChooseOpeningTactics();
+            string reaction = CombatAi.CheckCombatReaction();
+            string focus = CombatAi.ChooseFocus();
+            string opportunity = CombatAi.OpportunityPreference();
+            string persistence = CombatAi.ChooseTargetPersistence();
+            string ranged = CombatAi.RangedStrategy();
+            string fatality = CombatAi.Fatality();
+
+            var target = rtbCombatAI;
+            target.Clear();
+            PrintBodyBold(target, "Tactics: \n");
+            PrintBody(target, tactics + "\n\n");
+            PrintBodyBold(target, "Reaction: \n");
+            PrintBody(target, reaction + "\n\n");
+            PrintBodyBold(target, "Focus: \n");
+            PrintBody(target, focus + "\n\n");
+            PrintBodyBold(target, "Opportunity: \n");
+            PrintBody(target, opportunity + "\n\n");
+            PrintBodyBold(target, "Persistence: \n");
+            PrintBody(target, persistence + "\n\n");
+            PrintBodyBold(target, "Ranged: \n");
+            PrintBody(target, ranged + "\n\n");
+            PrintBodyBold(target, "Fatality: \n");
+            PrintBody(target, fatality);
+        }
+
+        private void butNegotiate_Click(object sender, EventArgs e)
+        {
+            string personality = CombatAi.ChoosePersonality();
+            string offers = CombatAi.ConsiderOffers();
+
+            var target = rtbNegotiate;
+            target.Clear();
+
+            PrintBodyBold(target, "Personality:\n");
+            PrintBody(target, personality + "\n\n");
+            PrintBodyBold(target, "Offers:\n");
+            PrintBody(target, offers);
+        }
+
+        private void butMorale_Click(object sender, EventArgs e)
+        {
+            var dice = Dice.Instance;
+            int DC = dice.Roll(2, 8) + 3;
+            string failure = CombatAi.MoraleFailure();
+
+            var target = rtbMorale;
+            target.Clear();
+
+            PrintBodyBold(target, "Morale DC: ");
+            PrintBody(target, DC.ToString() + "\n\n");
+            PrintBodyBold(target, "If Failed: ");
+            PrintBody(target, failure);
+        }
     }
 }
