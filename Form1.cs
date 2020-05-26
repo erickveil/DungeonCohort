@@ -20,7 +20,12 @@ namespace DungeonCohort
 
         CrawlRooms _lastRoom = null;
         CrawlRoomExit _standardExit = null;
-        
+
+        TimeTracker tracker1 = new TimeTracker();
+        TimeTracker tracker2 = new TimeTracker();
+        TimeTracker tracker3 = new TimeTracker();
+        TimeTracker tracker4 = new TimeTracker();
+
         public Form1()
         {
             InitializeComponent();
@@ -661,6 +666,252 @@ namespace DungeonCohort
             PrintBody(target, DC.ToString() + "\n\n");
             PrintBodyBold(target, "If Failed: ");
             PrintBody(target, failure);
+        }
+
+        private void chIsSet1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chIsSet1.Checked)
+            {
+                tracker1.Name = tbTimerName1.Text;
+                tracker1.Duration.Rounds = (int)nudDurRounds1.Value;
+                tracker1.Duration.Minutes = (int)nudDurMins1.Value;
+                tracker1.Duration.Hours = (int)nudDurHrs1.Value;
+                tracker1.SetTimer();
+            }
+            else
+            {
+                tracker1.IsSet = false;
+            }
+            _updateTracker1Ui();
+        }
+
+        private void chIsSet2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chIsSet2.Checked)
+            {
+                tracker2.Name = tbTimerName2.Text;
+                tracker2.Duration.Rounds = (int)nudDurRounds2.Value;
+                tracker2.Duration.Minutes = (int)nudDurMins2.Value;
+                tracker2.Duration.Hours = (int)nudDurHrs2.Value;
+                tracker2.SetTimer();
+            }
+            else
+            {
+                tracker2.IsSet = false;
+            }
+            _updateTracker2Ui();
+        }
+
+        private void chIsSet3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chIsSet3.Checked)
+            {
+                tracker3.Name = tbTimerName3.Text;
+                tracker3.Duration.Rounds = (int)nudDurRounds3.Value;
+                tracker3.Duration.Minutes = (int)nudDurMins3.Value;
+                tracker3.Duration.Hours = (int)nudDurHrs3.Value;
+                tracker3.SetTimer();
+            }
+            else
+            {
+                tracker3.IsSet = false;
+            }
+            _updateTracker3Ui();
+        }
+
+        private void chIsSet4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chIsSet4.Checked)
+            {
+                tracker4.Name = tbTimerName4.Text;
+                tracker4.Duration.Rounds = (int)nudDurRounds4.Value;
+                tracker4.Duration.Minutes = (int)nudDurMins4.Value;
+                tracker4.Duration.Hours = (int)nudDurHrs4.Value;
+                tracker4.SetTimer();
+            }
+            else
+            {
+                tracker4.IsSet = false;
+            }
+            _updateTracker4Ui();
+        }
+
+        private void butRound_Click(object sender, EventArgs e)
+        {
+            ++nudCombatRounds.Value;
+            tracker1.AdvanceRound();
+            tracker2.AdvanceRound();
+            tracker3.AdvanceRound();
+            tracker4.AdvanceRound();
+            _updateTracker1Ui();
+            _updateTracker2Ui();
+            _updateTracker3Ui();
+            _updateTracker4Ui();
+        }
+
+        private void butEndCombat_Click(object sender, EventArgs e)
+        {
+            ++nudCombatRounds.Value;
+            tracker1.EndCombat();
+            tracker2.EndCombat();
+            tracker3.EndCombat();
+            tracker4.EndCombat();
+            _updateTracker1Ui();
+            _updateTracker2Ui();
+            _updateTracker3Ui();
+            _updateTracker4Ui();
+        }
+
+        private void butExplore_Click(object sender, EventArgs e)
+        {
+            ++nudCombatRounds.Value;
+            tracker1.AdvanceTenMinutes();
+            tracker2.AdvanceTenMinutes();
+            tracker3.AdvanceTenMinutes();
+            tracker4.AdvanceTenMinutes();
+            _updateTracker1Ui();
+            _updateTracker2Ui();
+            _updateTracker3Ui();
+            _updateTracker4Ui();
+        }
+
+        private void butShortRest_Click(object sender, EventArgs e)
+        {
+            ++nudCombatRounds.Value;
+            tracker1.AdvanceOneHour();
+            tracker2.AdvanceOneHour();
+            tracker3.AdvanceOneHour();
+            tracker4.AdvanceOneHour();
+            _updateTracker1Ui();
+            _updateTracker2Ui();
+            _updateTracker3Ui();
+            _updateTracker4Ui();
+        }
+
+        private void but4Hr_Click(object sender, EventArgs e)
+        {
+            ++nudCombatRounds.Value;
+            tracker1.AdvanceFourHours();
+            tracker2.AdvanceFourHours();
+            tracker3.AdvanceFourHours();
+            tracker4.AdvanceFourHours();
+            _updateTracker1Ui();
+            _updateTracker2Ui();
+            _updateTracker3Ui();
+            _updateTracker4Ui();
+        }
+
+        private void but8Hr_Click(object sender, EventArgs e)
+        {
+            ++nudCombatRounds.Value;
+            tracker1.AdvanceEightHours();
+            tracker2.AdvanceEightHours();
+            tracker3.AdvanceEightHours();
+            tracker4.AdvanceEightHours();
+            _updateTracker1Ui();
+            _updateTracker2Ui();
+            _updateTracker3Ui();
+            _updateTracker4Ui();
+        }
+
+        private void _updateTracker1Ui()
+        {
+            tbTimerName1.Text = tracker1.Name;
+
+            nudDurRounds1.Value = tracker1.Duration.Rounds;
+            nudDurMins1.Value = tracker1.Duration.Minutes;
+            nudDurHrs1.Value = tracker1.Duration.Hours;
+
+            nudRemRounds1.Value = tracker1.Remaining.Rounds;
+            nudRemMin1.Value = tracker1.Remaining.Minutes;
+            nudRemHr1.Value = tracker1.Remaining.Hours;
+            if (chIsSet1.Checked != tracker1.IsSet) 
+            { 
+                chIsSet1.Checked = tracker1.IsSet; 
+            }
+        }
+
+        private void _updateTracker2Ui()
+        {
+            tbTimerName2.Text = tracker2.Name;
+
+            nudDurRounds2.Value = tracker2.Duration.Rounds;
+            nudDurMins2.Value = tracker2.Duration.Minutes;
+            nudDurHrs2.Value = tracker2.Duration.Hours;
+
+            nudRemRounds2.Value = tracker2.Remaining.Rounds;
+            nudRemMin2.Value = tracker2.Remaining.Minutes;
+            nudRemHr2.Value = tracker2.Remaining.Hours;
+            if (chIsSet2.Checked != tracker2.IsSet) 
+            { 
+                chIsSet2.Checked = tracker2.IsSet; 
+            }
+        }
+
+        private void _updateTracker3Ui()
+        {
+            tbTimerName3.Text = tracker3.Name;
+
+            nudDurRounds3.Value = tracker3.Duration.Rounds;
+            nudDurMins3.Value = tracker3.Duration.Minutes;
+            nudDurHrs3.Value = tracker3.Duration.Hours;
+
+            nudRemRounds3.Value = tracker3.Remaining.Rounds;
+            nudRemMin3.Value = tracker3.Remaining.Minutes;
+            nudRemHr3.Value = tracker3.Remaining.Hours;
+            if (chIsSet3.Checked != tracker3.IsSet) 
+            { 
+                chIsSet3.Checked = tracker3.IsSet; 
+            }
+        }
+
+        private void _updateTracker4Ui()
+        {
+            tbTimerName4.Text = tracker4.Name;
+
+            nudDurRounds4.Value = tracker4.Duration.Rounds;
+            nudDurMins4.Value = tracker4.Duration.Minutes;
+            nudDurHrs4.Value = tracker4.Duration.Hours;
+
+            nudRemRounds4.Value = tracker4.Remaining.Rounds;
+            nudRemMin4.Value = tracker4.Remaining.Minutes;
+            nudRemHr4.Value = tracker4.Remaining.Hours;
+            if (chIsSet4.Checked != tracker4.IsSet) 
+            { 
+                chIsSet4.Checked = tracker4.IsSet; 
+            }
+        }
+
+        private void comboCommonTimers1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboCommonTimers1.Text == "Torch") { tracker1.SetTorch(); }
+            if (comboCommonTimers1.Text == "Lantern") { tracker1.setLantern(); }
+            if (comboCommonTimers1.Text == "Bless") { tracker1.setBless(); }
+            _updateTracker1Ui();
+        }
+
+        private void comboCommonTimers2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboCommonTimers2.Text == "Torch") { tracker2.SetTorch(); }
+            if (comboCommonTimers2.Text == "Lantern") { tracker2.setLantern(); }
+            if (comboCommonTimers2.Text == "Bless") { tracker2.setBless(); }
+            _updateTracker2Ui();
+        }
+
+        private void comboCommonTimers3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboCommonTimers3.Text == "Torch") { tracker3.SetTorch(); }
+            if (comboCommonTimers3.Text == "Lantern") { tracker3.setLantern(); }
+            if (comboCommonTimers3.Text == "Bless") { tracker3.setBless(); }
+            _updateTracker3Ui();
+        }
+
+        private void comboCommonTimers4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboCommonTimers4.Text == "Torch") { tracker4.SetTorch(); }
+            if (comboCommonTimers4.Text == "Lantern") { tracker4.setLantern(); }
+            if (comboCommonTimers4.Text == "Bless") { tracker4.setBless(); }
+            _updateTracker4Ui();
         }
     }
 }

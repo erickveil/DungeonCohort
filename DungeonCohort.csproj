@@ -134,6 +134,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomTable.cs" />
     <Compile Include="CrawlRoomTrap.cs" />
+    <Compile Include="TimeTracker.cs" />
+    <Compile Include="TimeTrackerData.cs" />
     <Compile Include="TreasureFactory.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
