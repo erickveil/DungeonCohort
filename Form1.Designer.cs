@@ -202,6 +202,8 @@
             this.butRound = new System.Windows.Forms.Button();
             this.butMagicItem = new System.Windows.Forms.Button();
             this.chkSpellbooksInHorde = new System.Windows.Forms.CheckBox();
+            this.comboReactionDisposition = new System.Windows.Forms.ComboBox();
+            this.label40 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -1245,6 +1247,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label40);
+            this.tabPage1.Controls.Add(this.comboReactionDisposition);
             this.tabPage1.Controls.Add(this.rtbMorale);
             this.tabPage1.Controls.Add(this.butMorale);
             this.tabPage1.Controls.Add(this.rtbNegotiate);
@@ -2167,6 +2171,28 @@
             this.chkSpellbooksInHorde.Text = "Spellbooks In Horde";
             this.chkSpellbooksInHorde.UseVisualStyleBackColor = true;
             // 
+            // comboReactionDisposition
+            // 
+            this.comboReactionDisposition.FormattingEnabled = true;
+            this.comboReactionDisposition.Items.AddRange(new object[] {
+            "Uncertain",
+            "Likely Foe",
+            "Likely Ally"});
+            this.comboReactionDisposition.Location = new System.Drawing.Point(169, 8);
+            this.comboReactionDisposition.Name = "comboReactionDisposition";
+            this.comboReactionDisposition.Size = new System.Drawing.Size(121, 21);
+            this.comboReactionDisposition.TabIndex = 6;
+            this.comboReactionDisposition.Text = "Uncertain";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(105, 11);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(58, 13);
+            this.label40.TabIndex = 7;
+            this.label40.Text = "Disposition";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2202,6 +2228,7 @@
             this.tabCrawl.PerformLayout();
             this.tabHexCrawl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox10.ResumeLayout(false);
@@ -2433,6 +2460,8 @@
         private System.Windows.Forms.ComboBox comboCommonTimers1;
         private System.Windows.Forms.Button butMagicItem;
         private System.Windows.Forms.CheckBox chkSpellbooksInHorde;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.ComboBox comboReactionDisposition;
     }
 }
 

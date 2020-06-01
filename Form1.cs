@@ -616,8 +616,9 @@ namespace DungeonCohort
 
         private void butAI_Click(object sender, EventArgs e)
         {
+            string disposition = comboReactionDisposition.Text;
             string tactics = CombatAi.ChooseOpeningTactics();
-            string reaction = CombatAi.CheckCombatReaction();
+            string reaction = CombatAi.CheckCombatReaction(disposition);
             string focus = CombatAi.ChooseFocus();
             string opportunity = CombatAi.OpportunityPreference();
             string persistence = CombatAi.ChooseTargetPersistence();

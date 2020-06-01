@@ -9,15 +9,16 @@ namespace DungeonCohort
 {
     class CombatAi
     {
-        public static string CheckCombatReaction()
+        public static string CheckCombatReaction(string disposition)
         {
+            List<uint> weight = _reactionWeights(disposition);
             var table = new RandomTable<string>();
 
-            table.AddItem("Unavoidable attack", 4);
-            table.AddItem("Hostile, likely attacks but might listen", 3);
-            table.AddItem("Uncertain, opponent confused, hesitant, or threatening", 3);
-            table.AddItem("No attack, opponent leaves or considers offeres");
-            table.AddItem("Friendly, seeking alliance or aid");
+            table.AddItem("Unavoidable attack", weight[0]);
+            table.AddItem("Hostile, likely attacks but might listen", weight[1]);
+            table.AddItem("Uncertain, opponent confused, hesitant, or threatening", weight[2]);
+            table.AddItem("No attack, opponent leaves or considers offeres", weight[3]);
+            table.AddItem("Friendly, seeking alliance or aid", weight[4]);
 
             return table.GetResult();
         }
@@ -207,5 +208,40 @@ namespace DungeonCohort
 
             return table.GetResult();
         }
+
+        private static List<uint> _reactionWeights(string disposition)
+        {
+            var list = new List<uint>();
+            if (disposition == "Uncertain")
+            {
+                list.Add(1);
+                list.Add(1);
+                list.Add(1);
+                list.Add(1);
+                list.Add(1);
+            }
+            else if (disposition == "Likely Ally")
+            {
+                list.Add(1);
+                list.Add(1);
+                list.Add(3);
+                list.Add(3);
+                list.Add(4);
+            }
+            else if (disposition == "Likely Foe")
+            {
+                list.Add(4);
+                list.Add(3);
+                list.Add(3);
+                list.Add(1);
+                list.Add(1);
+            }
+            else
+            {
+                throw new Exception("Undefined disposition: " + disposition);
+            }
+            return list;
+        }
+
     }
 }
