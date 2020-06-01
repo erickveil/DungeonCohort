@@ -46,12 +46,12 @@ namespace DungeonCohort
             return individual[tableIndex].AsRollableTable();
         }
 
-        public RandomTable<LootTableResult> GetHordeLootTable(int tier)
+        public RandomTable<LootTableResult> GetHordeLootTable(int tier, bool isSpellbooksInHrode)
         {
             if (tier < 1) { tier = 1; }
             if (tier > 4) { tier = 4; }
             int tableIndex = tier - 1;
-            return hoard[tableIndex].AsRollableTable(tier);
+            return hoard[tableIndex].AsRollableTable(tier, isSpellbooksInHrode);
         }
 
         public RandomTable<Gemstones> GetGemstoneTable(string type)
@@ -80,6 +80,7 @@ namespace DungeonCohort
         {
             foreach (var magicData in magicitems)
             {
+                Console.WriteLine("Found type: " + magicData.type);
                 if (type != magicData.type) { continue; }
                 return magicData.AsRollableTable();
             }
@@ -87,6 +88,7 @@ namespace DungeonCohort
                 + type);
             return magicitems[0].AsRollableTable();
         }
+
         
     }
 }

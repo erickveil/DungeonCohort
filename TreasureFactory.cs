@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DungeonCohort.JsonLoading;
+using Darkmoor;
 
 namespace DungeonCohort
 {
@@ -36,13 +37,33 @@ namespace DungeonCohort
         }
 
         public LootTableResult GetTreasureHoard(int tier,
-            MagicItemPermissions allowedItems)
+            MagicItemPermissions allowedItems, bool isSpellbooksInHorde)
         {
-            var lootTable = _lootLoader.GetHordeLootTable(tier);
+            var lootTable = _lootLoader.GetHordeLootTable(tier, isSpellbooksInHorde);
             LootTableResult loot = lootTable.GetResult();
             loot.PurgeResults(allowedItems);
             _addSpellsToScrolls(loot);
             return loot;
+        }
+
+        public MagicItems GetMagicItem(int tier, MagicItemPermissions allowedItems)
+        {
+            // TODO: Chose a valid type and result based on tier/allowedItems
+            var typeTable = new RandomTable<string>();
+            typeTable.AddItem("A");
+            typeTable.AddItem("B");
+            typeTable.AddItem("C");
+            typeTable.AddItem("D");
+            typeTable.AddItem("E");
+            typeTable.AddItem("F");
+            typeTable.AddItem("G");
+            typeTable.AddItem("H");
+            typeTable.AddItem("I");
+
+            string type = typeTable.GetResult();
+            var lootTable = _lootLoader.GetMagicItemTable(type);
+            MagicItems item = lootTable.GetResult();
+            return item;
         }
 
         private void _addSpellsToScrolls(LootTableResult loot)

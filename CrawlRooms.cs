@@ -42,7 +42,8 @@ namespace DungeonCohort
             bool isNarrowHalls, int tier, ExitDirection enterFrom,
             CrawlRoomExit entry, bool isSetEncounters,
             MagicItemPermissions allowedLoot, string biome,
-            bool isStandardRace, List<int> pcLevelList, List<int> pcQtyList)
+            bool isStandardRace, List<int> pcLevelList, List<int> pcQtyList,
+            bool isSpellbooksInHorde)
         {
             _setIsHall();
             _setRoomSize(isLargeRooms, isNarrowHalls);
@@ -79,15 +80,15 @@ namespace DungeonCohort
             if (isSetEncounters)
             {
                 Contents.Init(biome, isStandardRace, allowedLoot, pcLevelList,
-                    pcQtyList, IsHall);
+                    pcQtyList, IsHall, isSpellbooksInHorde);
 
             }
             else
             {
-                Contents.Init(tier, allowedLoot, IsHall);
+                Contents.Init(tier, allowedLoot, IsHall, isSpellbooksInHorde);
             }
 
-            _setFeaturesByRoomType(tier, allowedLoot);
+            _setFeaturesByRoomType(tier, allowedLoot, isSpellbooksInHorde);
 
         }
 
@@ -154,7 +155,7 @@ namespace DungeonCohort
         }
 
         public void _setFeaturesByRoomType(int tier, 
-            MagicItemPermissions permissions
+            MagicItemPermissions permissions, bool isSpellbooksInHorde
             )
         {
             var dice = Dice.Instance;
@@ -177,7 +178,7 @@ namespace DungeonCohort
                 }
                 else
                 {
-                    Contents.SetRoomHoard(tier, permissions);
+                    Contents.SetRoomHoard(tier, permissions, isSpellbooksInHorde);
 
                 }
                 SetStorageItems();
@@ -283,7 +284,7 @@ namespace DungeonCohort
                 bool isEmpty = roll == 1;
                 if (isHoard)
                 {
-                    Contents.SetRoomHoard(tier, permissions);
+                    Contents.SetRoomHoard(tier, permissions, isSpellbooksInHorde);
                     SetStorageItems();
                 }
                 else if (isIncidental)
@@ -325,7 +326,7 @@ namespace DungeonCohort
                 bool isIncidental = roll >= 4;
                 if (isHoard)
                 {
-                    Contents.SetRoomHoard(tier, permissions);
+                    Contents.SetRoomHoard(tier, permissions, isSpellbooksInHorde);
                 }
                 else if (isIncidental)
                 {

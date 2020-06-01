@@ -42,7 +42,7 @@ namespace DungeonCohort
         }
 
         public void Init(int tier, MagicItemPermissions allowedLoot, 
-            bool isHall)
+            bool isHall, bool isSpellbookInHorde)
         {
             EncounterDifficulty = GetRandomDifficulty();
 
@@ -88,7 +88,7 @@ namespace DungeonCohort
                 case RoomContentType.Monster:
                     break;
                 case RoomContentType.MonsterAndTreasure:
-                    if (isHoard) { SetRoomHoard(tier, allowedLoot); }
+                    if (isHoard) { SetRoomHoard(tier, allowedLoot, isSpellbookInHorde); }
                     else { SetIncidentalTreasure(tier); }
                     break;
                 case RoomContentType.Trap:
@@ -96,7 +96,7 @@ namespace DungeonCohort
                     break;
                 case RoomContentType.TrapAndTreasure:
                     SetRoomTrap(tier);
-                    if (isHoard) { SetRoomHoard(tier, allowedLoot); }
+                    if (isHoard) { SetRoomHoard(tier, allowedLoot, isSpellbookInHorde); }
                     else { SetIncidentalTreasure(tier); }
                     break;
                 case RoomContentType.Hazard:
@@ -114,7 +114,7 @@ namespace DungeonCohort
                 case RoomContentType.Merchant:
                     break;
                 case RoomContentType.Treasure:
-                    if (isHoard) { SetRoomHoard(tier, allowedLoot); }
+                    if (isHoard) { SetRoomHoard(tier, allowedLoot, isSpellbookInHorde); }
                     else { SetIncidentalTreasure(tier); }
                     break;
             }
@@ -122,10 +122,10 @@ namespace DungeonCohort
 
         public void Init(string biome, bool isStandardRace, 
             MagicItemPermissions allowedLoot, List<int> pcLevelList,
-            List<int> pcQtyList, bool isHall)
+            List<int> pcQtyList, bool isHall, bool isSpellbookInHorde)
         {
             int tier = EncounterFactory.GetTier(pcLevelList, pcQtyList);
-            Init(tier, allowedLoot, isHall);
+            Init(tier, allowedLoot, isHall, isSpellbookInHorde);
 
             if (ContentType == RoomContentType.Monster 
                 || ContentType == RoomContentType.MonsterAndTreasure)
@@ -264,10 +264,10 @@ namespace DungeonCohort
             }
         }
 
-        public void SetRoomHoard(int tier, MagicItemPermissions permissions)
+        public void SetRoomHoard(int tier, MagicItemPermissions permissions, bool isSpellbooksInHorde)
         {
             var lootGen = new TreasureFactory();
-            RoomTreasure = lootGen.GetTreasureHoard(tier, permissions);
+            RoomTreasure = lootGen.GetTreasureHoard(tier, permissions, isSpellbooksInHorde);
         }
 
         public void SetIncidentalTreasure(int tier)

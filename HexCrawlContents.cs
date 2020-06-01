@@ -243,14 +243,14 @@ namespace DungeonCohort
 
         }
 
-        public void SetTreasure(int tier, MagicItemPermissions allowedItems)
+        public void SetTreasure(int tier, MagicItemPermissions allowedItems, bool isSpellbookInHorde)
         {
             var treasureGen = new TreasureFactory();
             var dice = Dice.Instance;
             bool isHoard = dice.Roll(1, 6) == 6;
             if (isHoard)
             {
-                HexTreasure = treasureGen.GetTreasureHoard(tier, allowedItems);
+                HexTreasure = treasureGen.GetTreasureHoard(tier, allowedItems, isSpellbookInHorde);
             }
             else
             {

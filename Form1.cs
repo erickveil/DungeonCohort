@@ -214,8 +214,9 @@ namespace DungeonCohort
             int tier = (int)nud_tier.Value;
             var permissions = GetItemPermissions();
 
+            bool isSpellbooksInHorde = chkSpellbooksInHorde.Checked;
             var treasureGen = new TreasureFactory();
-            var loot = treasureGen.GetTreasureHoard(tier, permissions);
+            var loot = treasureGen.GetTreasureHoard(tier, permissions, isSpellbooksInHorde);
 
             string lootReport = "Treasure Horde:\n" + loot.ToString();
             PrintBody(target, lootReport);
@@ -439,6 +440,7 @@ namespace DungeonCohort
                 }
             }
 
+            bool isSpellbookInHorde = chkSpellbooksInHorde.Checked;
             // put it all together here
             room.RandomizeRoom(
                 dungeonType,
@@ -452,7 +454,8 @@ namespace DungeonCohort
                 biome,
                 isStandardRace,
                 pcLevelList,
-                pcQtyList
+                pcQtyList,
+                isSpellbookInHorde
                 );
 
             target.Clear();
@@ -912,6 +915,21 @@ namespace DungeonCohort
             if (comboCommonTimers4.Text == "Lantern") { tracker4.setLantern(); }
             if (comboCommonTimers4.Text == "Bless") { tracker4.setBless(); }
             _updateTracker4Ui();
+        }
+
+        private void butMagicItem_Click(object sender, EventArgs e)
+        {
+            RichTextBox target = rtb_rndMonstOut;
+            target.Clear();
+            int tier = (int)nud_tier.Value;
+            var permissions = GetItemPermissions();
+
+            var treasureGen = new TreasureFactory();
+            var loot = treasureGen.GetMagicItem(tier, permissions);
+
+            string lootReport = loot.ToString();
+            PrintBody(target, lootReport);
+
         }
     }
 }

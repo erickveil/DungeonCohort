@@ -57,9 +57,9 @@ namespace DungeonCohort
             return _lootObj.GetIndividualLootTable(tier);
         }
 
-        public RandomTable<LootTableResult> GetHordeLootTable(int tier)
+        public RandomTable<LootTableResult> GetHordeLootTable(int tier, bool isSpellbooksInHorde)
         {
-            return _lootObj.GetHordeLootTable(tier);
+            return _lootObj.GetHordeLootTable(tier, isSpellbooksInHorde);
         }
 
         public RandomTable<Gemstones> GetGemstoneTable(string type)

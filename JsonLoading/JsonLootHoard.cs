@@ -37,7 +37,7 @@ namespace DungeonCohort
             _hoardItemSource = hoardItemSource;
         }
 
-        public RandomTable<LootTableResult> AsRollableTable(int tier)
+        public RandomTable<LootTableResult> AsRollableTable(int tier, bool isSpellbooksInHorde)
         {
             var lootTable = new RandomTable<LootTableResult>();
             foreach (var record in table)
@@ -55,7 +55,10 @@ namespace DungeonCohort
                 tableEntry = _addArtToHoard(tableEntry, record.artobjects);
                 tableEntry = _addMagicItemsToHoard(tableEntry, 
                     record.magicitems);
-                tableEntry = _addSpellbookToHoard(tableEntry, tier);
+                if (isSpellbooksInHorde)
+                {
+                    tableEntry = _addSpellbookToHoard(tableEntry, tier);
+                }
 
                 tableEntry.SetContainer(tier);
 
