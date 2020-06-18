@@ -70,6 +70,8 @@
             this.nud_dNum = new System.Windows.Forms.NumericUpDown();
             this.TabAi = new System.Windows.Forms.TabControl();
             this.tab_dev = new System.Windows.Forms.TabPage();
+            this.chkSpellbooksInHorde = new System.Windows.Forms.CheckBox();
+            this.butMagicItem = new System.Windows.Forms.Button();
             this.bu_questGen = new System.Windows.Forms.Button();
             this.bu_rndTrap = new System.Windows.Forms.Button();
             this.tab_mythic = new System.Windows.Forms.TabPage();
@@ -85,6 +87,7 @@
             this.nud_chaosFactor = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.tabCrawl = new System.Windows.Forms.TabPage();
+            this.butRoomContents = new System.Windows.Forms.Button();
             this.crawl_atmosphere = new System.Windows.Forms.Button();
             this.bu_dungeonIntel = new System.Windows.Forms.Button();
             this.but_complexTrap = new System.Windows.Forms.Button();
@@ -109,6 +112,10 @@
             this.bu_HexEvent = new System.Windows.Forms.Button();
             this.rtb_HexCrawlOut = new System.Windows.Forms.RichTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.rtbReaction = new System.Windows.Forms.RichTextBox();
+            this.butReaction = new System.Windows.Forms.Button();
+            this.label40 = new System.Windows.Forms.Label();
+            this.comboReactionDisposition = new System.Windows.Forms.ComboBox();
             this.rtbMorale = new System.Windows.Forms.RichTextBox();
             this.butMorale = new System.Windows.Forms.Button();
             this.rtbNegotiate = new System.Windows.Forms.RichTextBox();
@@ -200,10 +207,8 @@
             this.butExplore = new System.Windows.Forms.Button();
             this.butEndCombat = new System.Windows.Forms.Button();
             this.butRound = new System.Windows.Forms.Button();
-            this.butMagicItem = new System.Windows.Forms.Button();
-            this.chkSpellbooksInHorde = new System.Windows.Forms.CheckBox();
-            this.comboReactionDisposition = new System.Windows.Forms.ComboBox();
-            this.label40 = new System.Windows.Forms.Label();
+            this.butRestock = new System.Windows.Forms.Button();
+            this.checkRestockHall = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -789,6 +794,26 @@
             this.tab_dev.Text = "Development";
             this.tab_dev.UseVisualStyleBackColor = true;
             // 
+            // chkSpellbooksInHorde
+            // 
+            this.chkSpellbooksInHorde.AutoSize = true;
+            this.chkSpellbooksInHorde.Location = new System.Drawing.Point(240, 307);
+            this.chkSpellbooksInHorde.Name = "chkSpellbooksInHorde";
+            this.chkSpellbooksInHorde.Size = new System.Drawing.Size(122, 17);
+            this.chkSpellbooksInHorde.TabIndex = 20;
+            this.chkSpellbooksInHorde.Text = "Spellbooks In Horde";
+            this.chkSpellbooksInHorde.UseVisualStyleBackColor = true;
+            // 
+            // butMagicItem
+            // 
+            this.butMagicItem.Location = new System.Drawing.Point(376, 365);
+            this.butMagicItem.Name = "butMagicItem";
+            this.butMagicItem.Size = new System.Drawing.Size(137, 23);
+            this.butMagicItem.TabIndex = 19;
+            this.butMagicItem.Text = "Magic Item";
+            this.butMagicItem.UseVisualStyleBackColor = true;
+            this.butMagicItem.Click += new System.EventHandler(this.butMagicItem_Click);
+            // 
             // bu_questGen
             // 
             this.bu_questGen.Location = new System.Drawing.Point(91, 264);
@@ -964,6 +989,9 @@
             // 
             // tabCrawl
             // 
+            this.tabCrawl.Controls.Add(this.checkRestockHall);
+            this.tabCrawl.Controls.Add(this.butRestock);
+            this.tabCrawl.Controls.Add(this.butRoomContents);
             this.tabCrawl.Controls.Add(this.crawl_atmosphere);
             this.tabCrawl.Controls.Add(this.bu_dungeonIntel);
             this.tabCrawl.Controls.Add(this.but_complexTrap);
@@ -985,6 +1013,16 @@
             this.tabCrawl.TabIndex = 2;
             this.tabCrawl.Text = "Crawl";
             this.tabCrawl.UseVisualStyleBackColor = true;
+            // 
+            // butRoomContents
+            // 
+            this.butRoomContents.Location = new System.Drawing.Point(9, 272);
+            this.butRoomContents.Name = "butRoomContents";
+            this.butRoomContents.Size = new System.Drawing.Size(148, 23);
+            this.butRoomContents.TabIndex = 14;
+            this.butRoomContents.Text = "Contents Only";
+            this.butRoomContents.UseVisualStyleBackColor = true;
+            this.butRoomContents.Click += new System.EventHandler(this.butRoomContents_Click);
             // 
             // crawl_atmosphere
             // 
@@ -1247,6 +1285,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.rtbReaction);
+            this.tabPage1.Controls.Add(this.butReaction);
             this.tabPage1.Controls.Add(this.label40);
             this.tabPage1.Controls.Add(this.comboReactionDisposition);
             this.tabPage1.Controls.Add(this.rtbMorale);
@@ -1262,6 +1302,46 @@
             this.tabPage1.TabIndex = 4;
             this.tabPage1.Text = "AI";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // rtbReaction
+            // 
+            this.rtbReaction.Location = new System.Drawing.Point(90, 35);
+            this.rtbReaction.Name = "rtbReaction";
+            this.rtbReaction.Size = new System.Drawing.Size(392, 23);
+            this.rtbReaction.TabIndex = 9;
+            this.rtbReaction.Text = "";
+            // 
+            // butReaction
+            // 
+            this.butReaction.Location = new System.Drawing.Point(8, 35);
+            this.butReaction.Name = "butReaction";
+            this.butReaction.Size = new System.Drawing.Size(75, 23);
+            this.butReaction.TabIndex = 8;
+            this.butReaction.Text = "Reaction";
+            this.butReaction.UseVisualStyleBackColor = true;
+            this.butReaction.Click += new System.EventHandler(this.butReaction_Click);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(105, 11);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(58, 13);
+            this.label40.TabIndex = 7;
+            this.label40.Text = "Disposition";
+            // 
+            // comboReactionDisposition
+            // 
+            this.comboReactionDisposition.FormattingEnabled = true;
+            this.comboReactionDisposition.Items.AddRange(new object[] {
+            "Uncertain",
+            "Likely Foe",
+            "Likely Ally"});
+            this.comboReactionDisposition.Location = new System.Drawing.Point(169, 8);
+            this.comboReactionDisposition.Name = "comboReactionDisposition";
+            this.comboReactionDisposition.Size = new System.Drawing.Size(121, 21);
+            this.comboReactionDisposition.TabIndex = 6;
+            this.comboReactionDisposition.Text = "Uncertain";
             // 
             // rtbMorale
             // 
@@ -1301,7 +1381,7 @@
             // 
             // butAI
             // 
-            this.butAI.Location = new System.Drawing.Point(8, 6);
+            this.butAI.Location = new System.Drawing.Point(8, 64);
             this.butAI.Name = "butAI";
             this.butAI.Size = new System.Drawing.Size(75, 23);
             this.butAI.TabIndex = 1;
@@ -1311,9 +1391,9 @@
             // 
             // rtbCombatAI
             // 
-            this.rtbCombatAI.Location = new System.Drawing.Point(8, 35);
+            this.rtbCombatAI.Location = new System.Drawing.Point(8, 93);
             this.rtbCombatAI.Name = "rtbCombatAI";
-            this.rtbCombatAI.Size = new System.Drawing.Size(474, 367);
+            this.rtbCombatAI.Size = new System.Drawing.Size(474, 309);
             this.rtbCombatAI.TabIndex = 0;
             this.rtbCombatAI.Text = "";
             // 
@@ -2151,47 +2231,25 @@
             this.butRound.UseVisualStyleBackColor = true;
             this.butRound.Click += new System.EventHandler(this.butRound_Click);
             // 
-            // butMagicItem
+            // butRestock
             // 
-            this.butMagicItem.Location = new System.Drawing.Point(376, 365);
-            this.butMagicItem.Name = "butMagicItem";
-            this.butMagicItem.Size = new System.Drawing.Size(137, 23);
-            this.butMagicItem.TabIndex = 19;
-            this.butMagicItem.Text = "Magic Item";
-            this.butMagicItem.UseVisualStyleBackColor = true;
-            this.butMagicItem.Click += new System.EventHandler(this.butMagicItem_Click);
+            this.butRestock.Location = new System.Drawing.Point(9, 301);
+            this.butRestock.Name = "butRestock";
+            this.butRestock.Size = new System.Drawing.Size(148, 23);
+            this.butRestock.TabIndex = 15;
+            this.butRestock.Text = "Restock";
+            this.butRestock.UseVisualStyleBackColor = true;
+            this.butRestock.Click += new System.EventHandler(this.butRestock_Click);
             // 
-            // chkSpellbooksInHorde
+            // checkRestockHall
             // 
-            this.chkSpellbooksInHorde.AutoSize = true;
-            this.chkSpellbooksInHorde.Location = new System.Drawing.Point(240, 307);
-            this.chkSpellbooksInHorde.Name = "chkSpellbooksInHorde";
-            this.chkSpellbooksInHorde.Size = new System.Drawing.Size(122, 17);
-            this.chkSpellbooksInHorde.TabIndex = 20;
-            this.chkSpellbooksInHorde.Text = "Spellbooks In Horde";
-            this.chkSpellbooksInHorde.UseVisualStyleBackColor = true;
-            // 
-            // comboReactionDisposition
-            // 
-            this.comboReactionDisposition.FormattingEnabled = true;
-            this.comboReactionDisposition.Items.AddRange(new object[] {
-            "Uncertain",
-            "Likely Foe",
-            "Likely Ally"});
-            this.comboReactionDisposition.Location = new System.Drawing.Point(169, 8);
-            this.comboReactionDisposition.Name = "comboReactionDisposition";
-            this.comboReactionDisposition.Size = new System.Drawing.Size(121, 21);
-            this.comboReactionDisposition.TabIndex = 6;
-            this.comboReactionDisposition.Text = "Uncertain";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(105, 11);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(58, 13);
-            this.label40.TabIndex = 7;
-            this.label40.Text = "Disposition";
+            this.checkRestockHall.AutoSize = true;
+            this.checkRestockHall.Location = new System.Drawing.Point(163, 305);
+            this.checkRestockHall.Name = "checkRestockHall";
+            this.checkRestockHall.Size = new System.Drawing.Size(87, 17);
+            this.checkRestockHall.TabIndex = 16;
+            this.checkRestockHall.Text = "Restock Hall";
+            this.checkRestockHall.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -2462,6 +2520,11 @@
         private System.Windows.Forms.CheckBox chkSpellbooksInHorde;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.ComboBox comboReactionDisposition;
+        private System.Windows.Forms.RichTextBox rtbReaction;
+        private System.Windows.Forms.Button butReaction;
+        private System.Windows.Forms.Button butRoomContents;
+        private System.Windows.Forms.CheckBox checkRestockHall;
+        private System.Windows.Forms.Button butRestock;
     }
 }
 

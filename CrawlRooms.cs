@@ -43,9 +43,11 @@ namespace DungeonCohort
             CrawlRoomExit entry, bool isSetEncounters,
             MagicItemPermissions allowedLoot, string biome,
             bool isStandardRace, List<int> pcLevelList, List<int> pcQtyList,
-            bool isSpellbooksInHorde)
+            bool isSpellbooksInHorde, bool isHallsAllowed = true) 
         {
-            _setIsHall();
+            if (isHallsAllowed) { _setIsHall(); }
+            else { IsHall = false; }
+
             _setRoomSize(isLargeRooms, isNarrowHalls);
             Illumination = new CrawlRoomIllumintion();
             Feature = new CrawlRoomFeature();
@@ -92,6 +94,36 @@ namespace DungeonCohort
 
         }
 
+        public void RestockRoom(int tier, bool isSetEncounters,
+            MagicItemPermissions allowedLoot, string biome,
+            bool isStandardRace, List<int> pcLevelList, List<int> pcQtyList,
+            bool isSpellbooksInHorde, bool isHall) 
+        {
+            IsHall = isHall;
+
+            Feature = new CrawlRoomFeature();
+            if (!IsHall)
+            {
+                Feature.Init();
+            }
+
+            Contents = new CrawlRoomContents();
+            if (isSetEncounters)
+            {
+                Contents.Init(biome, isStandardRace, allowedLoot, pcLevelList,
+                    pcQtyList, IsHall, isSpellbooksInHorde);
+
+            }
+            else
+            {
+                Contents.Init(tier, allowedLoot, IsHall, isSpellbooksInHorde);
+            }
+
+            _setFeaturesByRoomType(tier, allowedLoot, isSpellbooksInHorde);
+
+        }
+
+
         public string GetHeader()
         {
             return
@@ -134,6 +166,68 @@ namespace DungeonCohort
             return desc;
         }
 
+        public string AsContentsOnlyString()
+        {
+            // RoomType comes out seperately as headder for formatting.
+            string books = "";
+            if (!(BookList is null))
+            {
+                books = "Books:\n";
+                foreach (var book in BookList)
+                {
+                    books += "  - " + book + "\n";
+                }
+            }
+
+            string mundaneItems = "";
+            if (!(MundaneItemList is null))
+            {
+                mundaneItems = "Misc Containers:\n";
+                foreach (var item in MundaneItemList)
+                {
+                    mundaneItems += "  - " + item + "\n";
+                }
+            }
+
+            string desc = ""
+                + "Illumination: " + Illumination.AsString() + "\n"
+                + "Contents: " + Contents.ToString() + "\n"
+                + books 
+                + mundaneItems
+                ;
+            return desc;
+        }
+
+        public string AsRestockString()
+        {
+            // RoomType comes out seperately as headder for formatting.
+            string books = "";
+            if (!(BookList is null))
+            {
+                books = "Books:\n";
+                foreach (var book in BookList)
+                {
+                    books += "  - " + book + "\n";
+                }
+            }
+
+            string mundaneItems = "";
+            if (!(MundaneItemList is null))
+            {
+                mundaneItems = "Misc Containers:\n";
+                foreach (var item in MundaneItemList)
+                {
+                    mundaneItems += "  - " + item + "\n";
+                }
+            }
+
+            string desc = ""
+                + "Contents: " + Contents.ToString() + "\n"
+                + books 
+                + mundaneItems
+                ;
+            return desc;
+        }
         public string GetExits()
         {
             int numExits = 0;
@@ -160,8 +254,9 @@ namespace DungeonCohort
         {
             var dice = Dice.Instance;
             var dataSource = DataSourceLoader.Instance;
+            if (RoomType is null) { RoomType = ""; }
 
-            if (RoomType.ToLower().Contains("vault"))
+            if (!(RoomType is null) && RoomType.ToLower().Contains("vault"))
             {
                 bool isLooted = dice.Roll(1, 6) <= 2;
                 if (isLooted &&
@@ -184,7 +279,7 @@ namespace DungeonCohort
                 SetStorageItems();
                 
             }
-            if ( RoomType.Contains("Trap") )
+            if ( !(RoomType is null) && RoomType.Contains("Trap") )
             {
                 bool isComplexTrap = dice.Roll(1, 6) <= 1;
                 if (isComplexTrap)
@@ -200,7 +295,7 @@ namespace DungeonCohort
                     Contents.ComplexTrap = null;
                 }
             }
-            if (RoomType.Contains("trap"))
+            if (!(RoomType is null) && RoomType.Contains("trap"))
             {
                 bool isTrapped = dice.Roll(1, 4) <= 2;
                 if (isTrapped)
@@ -208,12 +303,12 @@ namespace DungeonCohort
                     Contents.SetRoomTrap(tier);
                 }
             }
-            if (RoomType.Contains("Armory"))
+            if (!(RoomType is null) && RoomType.Contains("Armory"))
             {
                 Contents.SetArmoryContents();
                 SetStorageItems();
             }
-            if (RoomType.Contains("Chapel")
+            if (!(RoomType is null) && RoomType.Contains("Chapel")
                 || RoomType.Contains("Shrine")
                 || RoomType.Contains("Central temple")
                 || RoomType == "Chantry"
@@ -235,7 +330,7 @@ namespace DungeonCohort
                     Contents.RoomTrick.Object = item;
                 }
             }
-            if (RoomType.Contains("Cistern")
+            if (!(RoomType is null) && RoomType.Contains("Cistern")
                 || RoomType.Contains("Well")
                 || RoomType.ToLower().Contains("bath")
                 )
@@ -250,7 +345,7 @@ namespace DungeonCohort
                         CrawlRoomTrick.ChooseTrickEffect();
                 }
             }
-            if (RoomType.Contains("Kennel")
+            if (!(RoomType is null) && RoomType.Contains("Kennel")
                 || RoomType.ToLower().Contains("zoo")
                 || RoomType.Contains("Stable")
                 || RoomType.Contains("Bestiary")
@@ -263,7 +358,7 @@ namespace DungeonCohort
                         CrawlRoomContents.RoomContentType.Monster;
                 }
             }
-            if (RoomType.Contains("Pen")
+            if (!(RoomType is null) && RoomType.Contains("Pen")
                 || RoomType.Contains("Prison")
                 || RoomType == "Cell"
                 )
@@ -276,7 +371,7 @@ namespace DungeonCohort
                         CrawlRoomContents.RoomContentType.Monster;
                 }
             }
-            if (RoomType.Contains("Storage"))
+            if (!(RoomType is null ) && RoomType.Contains("Storage"))
             {
                 int roll = dice.Roll(1, 8);
                 bool isHoard = roll == 8;
@@ -302,7 +397,7 @@ namespace DungeonCohort
                     SetStorageItems();
                 }
             }
-            if (RoomType.Contains("Throne"))
+            if (!(RoomType is null) && RoomType.Contains("Throne"))
             {
                 if (Contents.RoomTrick is null)
                 {
@@ -317,7 +412,7 @@ namespace DungeonCohort
                     }
                 }
             }
-            if (RoomType.Contains("Trophy")
+            if (!(RoomType is null) && RoomType.Contains("Trophy")
                 || RoomType.Contains("Gallery")
                 )
             {
@@ -333,12 +428,12 @@ namespace DungeonCohort
                     Contents.SetIncidentalTreasure(tier);
                 }
             }
-            if (RoomType.Contains("Workshop"))
+            if (!(RoomType is null) && RoomType.Contains("Workshop"))
             {
                 // What kind?
                 SetStorageItems();
             }
-            if (RoomType.Contains("Conjuring"))
+            if (!(RoomType is null) && RoomType.Contains("Conjuring"))
             {
                 bool isGate = dice.Roll(1, 6) <= 3;
                 bool isMonster = dice.Roll(1, 6) <= 2;

@@ -90,11 +90,6 @@ namespace DungeonCohort
             int qty;
             if (tier == 1)
             {
-                qty = dice.Roll(1, 4) + 1;
-                for (int i = 0; i < qty; ++i)
-                {
-                    spellBook.Add(spellsTableLevel[0].GetResult());
-                }
                 qty = dice.Roll(1, 2);
                 for (int i = 0; i < qty; ++i)
                 {

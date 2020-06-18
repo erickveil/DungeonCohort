@@ -618,7 +618,6 @@ namespace DungeonCohort
         {
             string disposition = comboReactionDisposition.Text;
             string tactics = CombatAi.ChooseOpeningTactics();
-            string reaction = CombatAi.CheckCombatReaction(disposition);
             string focus = CombatAi.ChooseFocus();
             string opportunity = CombatAi.OpportunityPreference();
             string persistence = CombatAi.ChooseTargetPersistence();
@@ -629,8 +628,6 @@ namespace DungeonCohort
             target.Clear();
             PrintBodyBold(target, "Tactics: \n");
             PrintBody(target, tactics + "\n\n");
-            PrintBodyBold(target, "Reaction: \n");
-            PrintBody(target, reaction + "\n\n");
             PrintBodyBold(target, "Focus: \n");
             PrintBody(target, focus + "\n\n");
             PrintBodyBold(target, "Opportunity: \n");
@@ -930,6 +927,173 @@ namespace DungeonCohort
 
             string lootReport = loot.ToString();
             PrintBody(target, lootReport);
+
+        }
+
+        private void butReaction_Click(object sender, EventArgs e)
+        {
+            string disposition = comboReactionDisposition.Text;
+            string reaction = CombatAi.CheckCombatReaction(disposition);
+
+            var target = rtbReaction;
+            target.Clear();
+            PrintBody(target, reaction);
+        }
+
+        private void butRoomContents_Click(object sender, EventArgs e)
+        {
+            var room = new CrawlRooms();
+
+            // Get basic crawl room specifications from UI
+            string dungeonType = combo_crawlDungeonType.Text;
+            bool isLargeRoom = cb_crawlLargeRooms.Checked;
+            bool isNarrowHalls = cb_crawlNarrowPassages.Checked;
+            int tier = (int)nud_tier.Value;
+
+            // If we generate full encounters in monster rooms, we need more
+            // data from the UI
+            bool isSetEncounters = ch_crawlFullEncounters.Checked;
+            MagicItemPermissions allowedItems = GetItemPermissions();
+            string biome = cb_biome.Text;
+            bool isStandardRace = cb_stdRaceNpcs.Checked;
+            List<int> pcLevelList = new List<int>();
+            List<int> pcQtyList = new List<int>();
+            pcLevelList.Add((int)nud_pcLevelA.Value);
+            pcLevelList.Add((int)nud_pcLevelB.Value);
+            pcLevelList.Add((int)nud_pcLevelC.Value);
+            pcLevelList.Add((int)nud_pcLevelD.Value);
+            pcQtyList.Add((int)nud_pcQtyA.Value);
+            pcQtyList.Add((int)nud_pcQtyB.Value);
+            pcQtyList.Add((int)nud_pcQtyC.Value);
+            pcQtyList.Add((int)nud_pcQtyD.Value);
+
+            // for encounters we need to make sure the encounter data is set
+            var target = rtb_Crawl;
+            target.Clear();
+            if (isSetEncounters)
+            {
+                if (biome == "")
+                {
+                    PrintBody(target, "Set Biome");
+                    return;
+                }
+                if (pcLevelList.Sum() == 0)
+                {
+                    PrintBody(target, "Set PC Levels");
+                    return;
+                }
+                if (pcQtyList.Sum() == 0)
+                {
+                    PrintBody(target, "Set Number of PCs");
+                    return;
+                }
+            }
+
+
+            bool isSpellbookInHorde = chkSpellbooksInHorde.Checked;
+
+            var entry = new CrawlRoomExit();
+            var enterFrom = CrawlRooms.ExitDirection.EXIT_EAST;
+            // put it all together here
+            room.RandomizeRoom(
+                dungeonType,
+                isLargeRoom,
+                isNarrowHalls,
+                tier,
+                enterFrom,
+                entry,
+                isSetEncounters,
+                allowedItems,
+                biome,
+                isStandardRace,
+                pcLevelList,
+                pcQtyList,
+                isSpellbookInHorde,
+                isHallsAllowed: false
+                );
+
+            target.Clear();
+            PrintH2(target, room.GetHeader());
+            PrintBody(target, "\n" + room.AsContentsOnlyString());
+
+            // save the room for determining the next room's entrance
+            _lastRoom = room;
+
+        }
+
+        private void butRestock_Click(object sender, EventArgs e)
+        {
+            var room = new CrawlRooms();
+
+            // Get basic crawl room specifications from UI
+            string dungeonType = combo_crawlDungeonType.Text;
+            bool isLargeRoom = cb_crawlLargeRooms.Checked;
+            bool isNarrowHalls = cb_crawlNarrowPassages.Checked;
+            int tier = (int)nud_tier.Value;
+
+            // If we generate full encounters in monster rooms, we need more
+            // data from the UI
+            bool isSetEncounters = ch_crawlFullEncounters.Checked;
+            MagicItemPermissions allowedItems = GetItemPermissions();
+            string biome = cb_biome.Text;
+            bool isStandardRace = cb_stdRaceNpcs.Checked;
+            List<int> pcLevelList = new List<int>();
+            List<int> pcQtyList = new List<int>();
+            pcLevelList.Add((int)nud_pcLevelA.Value);
+            pcLevelList.Add((int)nud_pcLevelB.Value);
+            pcLevelList.Add((int)nud_pcLevelC.Value);
+            pcLevelList.Add((int)nud_pcLevelD.Value);
+            pcQtyList.Add((int)nud_pcQtyA.Value);
+            pcQtyList.Add((int)nud_pcQtyB.Value);
+            pcQtyList.Add((int)nud_pcQtyC.Value);
+            pcQtyList.Add((int)nud_pcQtyD.Value);
+
+            // for encounters we need to make sure the encounter data is set
+            var target = rtb_Crawl;
+            target.Clear();
+            if (isSetEncounters)
+            {
+                if (biome == "")
+                {
+                    PrintBody(target, "Set Biome");
+                    return;
+                }
+                if (pcLevelList.Sum() == 0)
+                {
+                    PrintBody(target, "Set PC Levels");
+                    return;
+                }
+                if (pcQtyList.Sum() == 0)
+                {
+                    PrintBody(target, "Set Number of PCs");
+                    return;
+                }
+            }
+
+
+            bool isSpellbookInHorde = chkSpellbooksInHorde.Checked;
+
+            bool isHall = checkRestockHall.Checked;
+
+            // put it all together here
+            room.RestockRoom(
+                tier,
+                isSetEncounters,
+                allowedItems,
+                biome,
+                isStandardRace,
+                pcLevelList,
+                pcQtyList,
+                isSpellbookInHorde,
+                isHall
+                );
+
+            target.Clear();
+            PrintBody(target, room.AsRestockString());
+
+            // save the room for determining the next room's entrance
+            _lastRoom = room;
+
 
         }
     }

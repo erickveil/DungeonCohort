@@ -199,7 +199,6 @@ namespace DungeonCohort
             return table.GetResult();
         }
 
-
         public static string ChooseDirection()
         {
             var table = new RandomTable<string>();
