@@ -642,7 +642,7 @@ namespace DungeonCohort
 
         private void butNegotiate_Click(object sender, EventArgs e)
         {
-            string personality = CombatAi.ChoosePersonality();
+            string personality = CombatAi.GetDualPersonality();
             string offers = CombatAi.ConsiderOffers();
 
             var target = rtbNegotiate;
@@ -1096,5 +1096,18 @@ namespace DungeonCohort
 
 
         }
+
+        private void butEldEncounter_Click(object sender, EventArgs e)
+        {
+            var eldTable = new EldTables();
+            var location = (EldTables.EldBiome)cbEldLocation.SelectedIndex;
+            var lvl = (int)nudEldLevel.Value; 
+            string result = eldTable.Encounter(location, lvl);
+
+            var target = rtbEldResult;
+            target.Clear();
+            PrintBody(target, result);
+        }
+
     }
 }

@@ -87,6 +87,8 @@
             this.nud_chaosFactor = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.tabCrawl = new System.Windows.Forms.TabPage();
+            this.checkRestockHall = new System.Windows.Forms.CheckBox();
+            this.butRestock = new System.Windows.Forms.Button();
             this.butRoomContents = new System.Windows.Forms.Button();
             this.crawl_atmosphere = new System.Windows.Forms.Button();
             this.bu_dungeonIntel = new System.Windows.Forms.Button();
@@ -207,8 +209,13 @@
             this.butExplore = new System.Windows.Forms.Button();
             this.butEndCombat = new System.Windows.Forms.Button();
             this.butRound = new System.Windows.Forms.Button();
-            this.butRestock = new System.Windows.Forms.Button();
-            this.checkRestockHall = new System.Windows.Forms.CheckBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.rtbEldResult = new System.Windows.Forms.RichTextBox();
+            this.cbEldLocation = new System.Windows.Forms.ComboBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.nudEldLevel = new System.Windows.Forms.NumericUpDown();
+            this.label42 = new System.Windows.Forms.Label();
+            this.butEldEncounter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -268,6 +275,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDurMins1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDurRounds1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCombatRounds)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEldLevel)).BeginInit();
             this.SuspendLayout();
             // 
             // rtb_rndMonstOut
@@ -755,6 +764,7 @@
             this.TabAi.Controls.Add(this.tabHexCrawl);
             this.TabAi.Controls.Add(this.tabPage1);
             this.TabAi.Controls.Add(this.tabPage2);
+            this.TabAi.Controls.Add(this.tabPage3);
             this.TabAi.Location = new System.Drawing.Point(0, 1);
             this.TabAi.Margin = new System.Windows.Forms.Padding(1);
             this.TabAi.Name = "TabAi";
@@ -1013,6 +1023,26 @@
             this.tabCrawl.TabIndex = 2;
             this.tabCrawl.Text = "Crawl";
             this.tabCrawl.UseVisualStyleBackColor = true;
+            // 
+            // checkRestockHall
+            // 
+            this.checkRestockHall.AutoSize = true;
+            this.checkRestockHall.Location = new System.Drawing.Point(163, 305);
+            this.checkRestockHall.Name = "checkRestockHall";
+            this.checkRestockHall.Size = new System.Drawing.Size(87, 17);
+            this.checkRestockHall.TabIndex = 16;
+            this.checkRestockHall.Text = "Restock Hall";
+            this.checkRestockHall.UseVisualStyleBackColor = true;
+            // 
+            // butRestock
+            // 
+            this.butRestock.Location = new System.Drawing.Point(9, 301);
+            this.butRestock.Name = "butRestock";
+            this.butRestock.Size = new System.Drawing.Size(148, 23);
+            this.butRestock.TabIndex = 15;
+            this.butRestock.Text = "Restock";
+            this.butRestock.UseVisualStyleBackColor = true;
+            this.butRestock.Click += new System.EventHandler(this.butRestock_Click);
             // 
             // butRoomContents
             // 
@@ -2231,25 +2261,95 @@
             this.butRound.UseVisualStyleBackColor = true;
             this.butRound.Click += new System.EventHandler(this.butRound_Click);
             // 
-            // butRestock
+            // tabPage3
             // 
-            this.butRestock.Location = new System.Drawing.Point(9, 301);
-            this.butRestock.Name = "butRestock";
-            this.butRestock.Size = new System.Drawing.Size(148, 23);
-            this.butRestock.TabIndex = 15;
-            this.butRestock.Text = "Restock";
-            this.butRestock.UseVisualStyleBackColor = true;
-            this.butRestock.Click += new System.EventHandler(this.butRestock_Click);
+            this.tabPage3.Controls.Add(this.butEldEncounter);
+            this.tabPage3.Controls.Add(this.label42);
+            this.tabPage3.Controls.Add(this.nudEldLevel);
+            this.tabPage3.Controls.Add(this.label41);
+            this.tabPage3.Controls.Add(this.cbEldLocation);
+            this.tabPage3.Controls.Add(this.rtbEldResult);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(867, 408);
+            this.tabPage3.TabIndex = 6;
+            this.tabPage3.Text = "Eld";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // checkRestockHall
+            // rtbEldResult
             // 
-            this.checkRestockHall.AutoSize = true;
-            this.checkRestockHall.Location = new System.Drawing.Point(163, 305);
-            this.checkRestockHall.Name = "checkRestockHall";
-            this.checkRestockHall.Size = new System.Drawing.Size(87, 17);
-            this.checkRestockHall.TabIndex = 16;
-            this.checkRestockHall.Text = "Restock Hall";
-            this.checkRestockHall.UseVisualStyleBackColor = true;
+            this.rtbEldResult.Location = new System.Drawing.Point(181, 6);
+            this.rtbEldResult.Name = "rtbEldResult";
+            this.rtbEldResult.Size = new System.Drawing.Size(680, 396);
+            this.rtbEldResult.TabIndex = 0;
+            this.rtbEldResult.Text = "";
+            // 
+            // cbEldLocation
+            // 
+            this.cbEldLocation.FormattingEnabled = true;
+            this.cbEldLocation.Items.AddRange(new object[] {
+            "Light Forest",
+            "Deep Forest",
+            "Tundra",
+            "Hills",
+            "Mountain",
+            "Dungeon",
+            "Village"});
+            this.cbEldLocation.Location = new System.Drawing.Point(8, 30);
+            this.cbEldLocation.Name = "cbEldLocation";
+            this.cbEldLocation.Size = new System.Drawing.Size(121, 21);
+            this.cbEldLocation.TabIndex = 1;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(9, 11);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(103, 13);
+            this.label41.TabIndex = 2;
+            this.label41.Text = "Where are the PCs?";
+            // 
+            // nudEldLevel
+            // 
+            this.nudEldLevel.Location = new System.Drawing.Point(12, 77);
+            this.nudEldLevel.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudEldLevel.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudEldLevel.Name = "nudEldLevel";
+            this.nudEldLevel.Size = new System.Drawing.Size(120, 20);
+            this.nudEldLevel.TabIndex = 3;
+            this.nudEldLevel.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(8, 61);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(60, 13);
+            this.label42.TabIndex = 4;
+            this.label42.Text = "Party Level";
+            // 
+            // butEldEncounter
+            // 
+            this.butEldEncounter.Location = new System.Drawing.Point(8, 103);
+            this.butEldEncounter.Name = "butEldEncounter";
+            this.butEldEncounter.Size = new System.Drawing.Size(121, 23);
+            this.butEldEncounter.TabIndex = 5;
+            this.butEldEncounter.Text = "Encounter";
+            this.butEldEncounter.UseVisualStyleBackColor = true;
+            this.butEldEncounter.Click += new System.EventHandler(this.butEldEncounter_Click);
             // 
             // Form1
             // 
@@ -2338,6 +2438,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDurMins1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDurRounds1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCombatRounds)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEldLevel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2525,6 +2628,13 @@
         private System.Windows.Forms.Button butRoomContents;
         private System.Windows.Forms.CheckBox checkRestockHall;
         private System.Windows.Forms.Button butRestock;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button butEldEncounter;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.NumericUpDown nudEldLevel;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.ComboBox cbEldLocation;
+        private System.Windows.Forms.RichTextBox rtbEldResult;
     }
 }
 

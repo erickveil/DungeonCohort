@@ -159,6 +159,65 @@ namespace DungeonCohort
             return table.GetResult();
         }
 
+        public static string GetDualPersonality()
+        {
+            var positiveTable = GetPositivePersonalityTable();
+            var negativeTable = GetNegativePersonalityTable();
+            int positiveIndex = positiveTable.GetResultIndex();
+            int negativeIndex = negativeTable.GetResultIndex();
+            while (positiveIndex == negativeIndex)
+            {
+                negativeIndex = negativeTable.GetResultIndex();
+            }
+            string positiveResult = positiveTable.GetResult(positiveIndex);
+            string negativeResult = negativeTable.GetResult(negativeIndex);
+            return positiveResult + "\n" + negativeResult;
+        }
+
+        public static RandomTable<string> GetPositivePersonalityTable()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Bored: Performance checks made by PCs get " +
+                "advantage.", 2);
+            table.AddItem("Gullible: Deception checks made by PCs get " +
+                "advantage.", 2);
+            table.AddItem("Glass Jaw: Intimidation checks made by PCs have " +
+                "advantage.", 2);
+            table.AddItem("Pushover: Persuasion checks made by PCs have " +
+                "advantage.", 2);
+
+            table.AddItem("Indifferent: All negotiation check made normally.");
+            table.AddItem("Amicable: All PC negotiation checks made with " + 
+                "advantage.");
+
+            table.AddItem("Unusual: Some other skill check can be used " +
+                "and would get advantage (Medicine for an ill opponent, " +
+                "arcana for one with interest in the arcane, etc.)");
+
+            return table;
+        }
+
+        public static RandomTable<string> GetNegativePersonalityTable()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Grim: Performance checks made by PCs get " + 
+                "disadvantage.", 2);
+            table.AddItem("Suspicious: Deception checks made by PCs get " + 
+                "disadvantage.", 2);
+            table.AddItem("Imitigable: Intimidation checks made by the PCs " + 
+                "have disadvantage.", 2);
+            table.AddItem("Paranoid: Persuasion checks made by PCs have " + 
+                "disadvantage.", 2);
+
+            table.AddItem("Indifferent: All negotiation check made normally.");
+            table.AddItem("Surly: All PC negotiation checks made at " + 
+                "disadvantage.");
+
+            return table;
+        }
+
         public static string OpportunityPreference()
         {
             var table = new RandomTable<string>();
