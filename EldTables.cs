@@ -104,7 +104,9 @@ namespace DungeonCohort
                 table.AddItem("Rest/Relax/Nest", 4);
                 table.AddItem("Fleeing/Pursuit; ", 3);
                 table.AddItem("Hunting/Gathering", 3);
-                table.AddItem("Altered State", 1);
+
+                table.AddItem(AlteredState(), 1);
+
                 table.AddItem("Defecating", 1);
             }
             else if (type == "Intelligent")
@@ -120,7 +122,9 @@ namespace DungeonCohort
                 table.AddItem("In Combat; ", 5);
                 table.AddItem("Walking", 5);
                 table.AddItem("Patrolling", 4);
-                table.AddItem("Altered State", 4);
+
+                table.AddItem(AlteredState(), 4);
+
                 table.AddItem("Hunting/Gathering", 3);
                 table.AddItem("Competing", 3);
                 table.AddItem("Resting/Camp", 1);
@@ -139,12 +143,34 @@ namespace DungeonCohort
                 table.AddItem("In Combat; ", 5);
                 table.AddItem("Walking", 5);
                 table.AddItem("Patrolling", 4);
-                table.AddItem("Altered State", 4);
+
+                table.AddItem(AlteredState(), 4);
+
                 table.AddItem("Eating/Refueling", 3);
                 table.AddItem("Standing", 3);
                 table.AddItem("Walking", 1);
                 table.AddItem("Guarding", 1);
             }
+
+            return table.GetResult();
+        }
+
+        public string AlteredState()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Enlarged");
+            table.AddItem("Drugged");
+            table.AddItem("Poisoned");
+            table.AddItem("Bound and Gagged");
+            table.AddItem("Hasted");
+            table.AddItem("Enraged");
+            table.AddItem("Paralyzed");
+            table.AddItem("Asleep");
+            table.AddItem("Exhausted");
+            table.AddItem("Invisible");
+            table.AddItem("Dead");
+            table.AddItem("Dying");
 
             return table.GetResult();
         }
