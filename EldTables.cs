@@ -585,12 +585,41 @@ namespace DungeonCohort
             table.AddItem(new EldUnit("Benjamin (Figher - Guild)", "1"));
             table.AddItem(new EldUnit("Claire (Wizard)", "1"));
             table.AddItem(new EldUnit("Eunice (Wizard)", "1"));
-            table.AddItem(new EldUnit("Jenny (Figher Guild)", "1"));
+            table.AddItem(new EldUnit("Jenny (Figher - Guild)", "1"));
             table.AddItem(new EldUnit("Joni (Ranger)", "1"));
             table.AddItem(new EldUnit("Neville (Fighter)", "1"));
-            table.AddItem(new EldUnit("Six (Imp)", "1"));
+            table.AddItem(new EldUnit("'Six' (Imp)", "1"));
             table.AddItem(new EldUnit("Travis (Fighter - Ex Guild)", "1"));
             table.AddItem(new EldUnit("Wild Eye (Barbarian)", "1"));
+
+            table.AddItem(new EldUnit("Charlie (Thief)"));
+            table.AddItem(new EldUnit("Bryan (Cleric)"));
+            table.AddItem(new EldUnit("Trevor (Fighter)"));
+            table.AddItem(new EldUnit("Ada (Wizard)"));
+            table.AddItem(new EldUnit("Jack The Jewler (Thief)"));
+            table.AddItem(new EldUnit("Audry (Fighter)"));
+            table.AddItem(new EldUnit("Alphonse (Thief - bandit)"));
+            table.AddItem(new EldUnit("Ivan Blackhand (Fighter - Guild)"));
+            table.AddItem(new EldUnit("Horatio (Thief - Guild)"));
+            table.AddItem(new EldUnit("Ruben (Fighter - Guild)"));
+            table.AddItem(new EldUnit("Tabitha (Monk)"));
+            table.AddItem(new EldUnit("Gretchen (Wizard)"));
+            table.AddItem(new EldUnit("Marcia (Wizard)"));
+            table.AddItem(new EldUnit("Ulysses (Fighter)"));
+            table.AddItem(new EldUnit("Dale (Cleric)"));
+            table.AddItem(new EldUnit("Luther (Sorcerer)"));
+            table.AddItem(new EldUnit("Jus (Druid)"));
+            table.AddItem(new EldUnit("Ssa (Ranger - Lizardfolk)"));
+            table.AddItem(new EldUnit("Horoch (Ranger - Lizardfolk)"));
+            table.AddItem(new EldUnit("Golok (Orc)"));
+            table.AddItem(new EldUnit("Bokel (Orc)"));
+            table.AddItem(new EldUnit("Orin (Orc Eye)"));
+            table.AddItem(new EldUnit("Zulok (Orc)"));
+            table.AddItem(new EldUnit("Rocky (Imp)"));
+            table.AddItem(new EldUnit("Felor and Blix (Firenewts)"));
+            table.AddItem(new EldUnit("Skletch (Firenewt)"));
+            table.AddItem(new EldUnit("Furss (Firenewt)"));
+            table.AddItem(new EldUnit("Jelex (Firenewt)"));
 
             return table.GetResult();
         }

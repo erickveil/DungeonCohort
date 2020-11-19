@@ -48,5 +48,6 @@ namespace DungeonCohort
 
             return table.GetResult();
         }
+
     }
 }

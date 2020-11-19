@@ -14,6 +14,12 @@ namespace DungeonCohort
         public int NumAppearing = -1;
         public string Type;
 
+        public EldUnit(string name)
+        {
+            Name = name;
+            CR = "1";
+        }
+
         public EldUnit(string name, string cr)
         {
             Name = name;

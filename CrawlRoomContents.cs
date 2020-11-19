@@ -61,15 +61,20 @@ namespace DungeonCohort
             }
             else
             {
-                contentsTable.AddItem(RoomContentType.Empty, 8);
-                contentsTable.AddItem(RoomContentType.Monster, 28);
-                contentsTable.AddItem(RoomContentType.MonsterAndTreasure, 20);
-                contentsTable.AddItem(RoomContentType.Trap, 10);
-                contentsTable.AddItem(RoomContentType.TrapAndTreasure, 3);
-                contentsTable.AddItem(RoomContentType.Treasure, 6);
-                contentsTable.AddItem(RoomContentType.Hazard, 6);
-                contentsTable.AddItem(RoomContentType.HazardAndTreasure, 8);
-                contentsTable.AddItem(RoomContentType.Trick, 6);
+                // 1/3 monster
+                contentsTable.AddItem(RoomContentType.Monster, 1);
+                contentsTable.AddItem(RoomContentType.MonsterAndTreasure, 1);
+                contentsTable.AddItem(RoomContentType.Trick, 1);
+
+                // 1/3 empty
+                contentsTable.AddItem(RoomContentType.Empty, 2);
+                contentsTable.AddItem(RoomContentType.Trap, 1);
+                contentsTable.AddItem(RoomContentType.Hazard, 1);
+
+                // 1/3 treasure
+                contentsTable.AddItem(RoomContentType.Treasure, 1);
+                contentsTable.AddItem(RoomContentType.TrapAndTreasure, 1);
+                contentsTable.AddItem(RoomContentType.HazardAndTreasure, 1);
                 /*
                 contentsTable.AddItem(RoomContentType.Obstacle, 4);
                 contentsTable.AddItem(RoomContentType.Merchant);

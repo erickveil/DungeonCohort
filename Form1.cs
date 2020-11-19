@@ -1109,5 +1109,32 @@ namespace DungeonCohort
             PrintBody(target, result);
         }
 
+        private void bu_crawl_trick_Click(object sender, EventArgs e)
+        {
+            var trickObj = new CrawlRoomTrick();
+            trickObj.InitAsTrick();
+            var target = rtb_Crawl;
+            target.Clear();
+            string result = trickObj.Object + "\n" + trickObj.Effect;
+            PrintBody(target, result);
+        }
+
+        private void bu_crawl_feature_Click(object sender, EventArgs e)
+        {
+            var featureObj = new CrawlRoomTrick();
+            featureObj.InitAsFeature();
+            var target = rtb_Crawl;
+            target.Clear();
+            string result = featureObj.Object;
+            PrintBody(target, result);
+        }
+
+        private void butEldRndQuest_Click(object sender, EventArgs e)
+        {
+            string quest = EldQuests.EldRandomQuest();
+            var target = rtbEldQuestResult;
+            target.Clear();
+            PrintBody(target, quest);
+        }
     }
 }

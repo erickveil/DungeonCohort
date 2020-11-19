@@ -87,6 +87,8 @@
             this.nud_chaosFactor = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.tabCrawl = new System.Windows.Forms.TabPage();
+            this.bu_crawl_feature = new System.Windows.Forms.Button();
+            this.bu_crawl_trick = new System.Windows.Forms.Button();
             this.checkRestockHall = new System.Windows.Forms.CheckBox();
             this.butRestock = new System.Windows.Forms.Button();
             this.butRoomContents = new System.Windows.Forms.Button();
@@ -210,12 +212,14 @@
             this.butEndCombat = new System.Windows.Forms.Button();
             this.butRound = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.rtbEldResult = new System.Windows.Forms.RichTextBox();
-            this.cbEldLocation = new System.Windows.Forms.ComboBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.nudEldLevel = new System.Windows.Forms.NumericUpDown();
-            this.label42 = new System.Windows.Forms.Label();
             this.butEldEncounter = new System.Windows.Forms.Button();
+            this.label42 = new System.Windows.Forms.Label();
+            this.nudEldLevel = new System.Windows.Forms.NumericUpDown();
+            this.label41 = new System.Windows.Forms.Label();
+            this.cbEldLocation = new System.Windows.Forms.ComboBox();
+            this.rtbEldResult = new System.Windows.Forms.RichTextBox();
+            this.butEldRndQuest = new System.Windows.Forms.Button();
+            this.rtbEldQuestResult = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -999,6 +1003,8 @@
             // 
             // tabCrawl
             // 
+            this.tabCrawl.Controls.Add(this.bu_crawl_feature);
+            this.tabCrawl.Controls.Add(this.bu_crawl_trick);
             this.tabCrawl.Controls.Add(this.checkRestockHall);
             this.tabCrawl.Controls.Add(this.butRestock);
             this.tabCrawl.Controls.Add(this.butRoomContents);
@@ -1023,6 +1029,26 @@
             this.tabCrawl.TabIndex = 2;
             this.tabCrawl.Text = "Crawl";
             this.tabCrawl.UseVisualStyleBackColor = true;
+            // 
+            // bu_crawl_feature
+            // 
+            this.bu_crawl_feature.Location = new System.Drawing.Point(9, 361);
+            this.bu_crawl_feature.Name = "bu_crawl_feature";
+            this.bu_crawl_feature.Size = new System.Drawing.Size(148, 23);
+            this.bu_crawl_feature.TabIndex = 18;
+            this.bu_crawl_feature.Text = "Feature";
+            this.bu_crawl_feature.UseVisualStyleBackColor = true;
+            this.bu_crawl_feature.Click += new System.EventHandler(this.bu_crawl_feature_Click);
+            // 
+            // bu_crawl_trick
+            // 
+            this.bu_crawl_trick.Location = new System.Drawing.Point(9, 331);
+            this.bu_crawl_trick.Name = "bu_crawl_trick";
+            this.bu_crawl_trick.Size = new System.Drawing.Size(148, 23);
+            this.bu_crawl_trick.TabIndex = 17;
+            this.bu_crawl_trick.Text = "Trick";
+            this.bu_crawl_trick.UseVisualStyleBackColor = true;
+            this.bu_crawl_trick.Click += new System.EventHandler(this.bu_crawl_trick_Click);
             // 
             // checkRestockHall
             // 
@@ -2263,6 +2289,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.rtbEldQuestResult);
+            this.tabPage3.Controls.Add(this.butEldRndQuest);
             this.tabPage3.Controls.Add(this.butEldEncounter);
             this.tabPage3.Controls.Add(this.label42);
             this.tabPage3.Controls.Add(this.nudEldLevel);
@@ -2277,13 +2305,55 @@
             this.tabPage3.Text = "Eld";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // rtbEldResult
+            // butEldEncounter
             // 
-            this.rtbEldResult.Location = new System.Drawing.Point(181, 6);
-            this.rtbEldResult.Name = "rtbEldResult";
-            this.rtbEldResult.Size = new System.Drawing.Size(680, 396);
-            this.rtbEldResult.TabIndex = 0;
-            this.rtbEldResult.Text = "";
+            this.butEldEncounter.Location = new System.Drawing.Point(8, 103);
+            this.butEldEncounter.Name = "butEldEncounter";
+            this.butEldEncounter.Size = new System.Drawing.Size(121, 23);
+            this.butEldEncounter.TabIndex = 5;
+            this.butEldEncounter.Text = "Encounter";
+            this.butEldEncounter.UseVisualStyleBackColor = true;
+            this.butEldEncounter.Click += new System.EventHandler(this.butEldEncounter_Click);
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(8, 61);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(60, 13);
+            this.label42.TabIndex = 4;
+            this.label42.Text = "Party Level";
+            // 
+            // nudEldLevel
+            // 
+            this.nudEldLevel.Location = new System.Drawing.Point(12, 77);
+            this.nudEldLevel.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudEldLevel.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudEldLevel.Name = "nudEldLevel";
+            this.nudEldLevel.Size = new System.Drawing.Size(117, 20);
+            this.nudEldLevel.TabIndex = 3;
+            this.nudEldLevel.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(9, 11);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(103, 13);
+            this.label41.TabIndex = 2;
+            this.label41.Text = "Where are the PCs?";
             // 
             // cbEldLocation
             // 
@@ -2301,55 +2371,31 @@
             this.cbEldLocation.Size = new System.Drawing.Size(121, 21);
             this.cbEldLocation.TabIndex = 1;
             // 
-            // label41
+            // rtbEldResult
             // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(9, 11);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(103, 13);
-            this.label41.TabIndex = 2;
-            this.label41.Text = "Where are the PCs?";
+            this.rtbEldResult.Location = new System.Drawing.Point(135, 6);
+            this.rtbEldResult.Name = "rtbEldResult";
+            this.rtbEldResult.Size = new System.Drawing.Size(726, 120);
+            this.rtbEldResult.TabIndex = 0;
+            this.rtbEldResult.Text = "";
             // 
-            // nudEldLevel
+            // butEldRndQuest
             // 
-            this.nudEldLevel.Location = new System.Drawing.Point(12, 77);
-            this.nudEldLevel.Maximum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.nudEldLevel.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudEldLevel.Name = "nudEldLevel";
-            this.nudEldLevel.Size = new System.Drawing.Size(120, 20);
-            this.nudEldLevel.TabIndex = 3;
-            this.nudEldLevel.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.butEldRndQuest.Location = new System.Drawing.Point(8, 149);
+            this.butEldRndQuest.Name = "butEldRndQuest";
+            this.butEldRndQuest.Size = new System.Drawing.Size(121, 23);
+            this.butEldRndQuest.TabIndex = 6;
+            this.butEldRndQuest.Text = "Random Quest";
+            this.butEldRndQuest.UseVisualStyleBackColor = true;
+            this.butEldRndQuest.Click += new System.EventHandler(this.butEldRndQuest_Click);
             // 
-            // label42
+            // rtbEldQuestResult
             // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(8, 61);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(60, 13);
-            this.label42.TabIndex = 4;
-            this.label42.Text = "Party Level";
-            // 
-            // butEldEncounter
-            // 
-            this.butEldEncounter.Location = new System.Drawing.Point(8, 103);
-            this.butEldEncounter.Name = "butEldEncounter";
-            this.butEldEncounter.Size = new System.Drawing.Size(121, 23);
-            this.butEldEncounter.TabIndex = 5;
-            this.butEldEncounter.Text = "Encounter";
-            this.butEldEncounter.UseVisualStyleBackColor = true;
-            this.butEldEncounter.Click += new System.EventHandler(this.butEldEncounter_Click);
+            this.rtbEldQuestResult.Location = new System.Drawing.Point(135, 149);
+            this.rtbEldQuestResult.Name = "rtbEldQuestResult";
+            this.rtbEldQuestResult.Size = new System.Drawing.Size(726, 96);
+            this.rtbEldQuestResult.TabIndex = 7;
+            this.rtbEldQuestResult.Text = "";
             // 
             // Form1
             // 
@@ -2635,6 +2681,10 @@
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.ComboBox cbEldLocation;
         private System.Windows.Forms.RichTextBox rtbEldResult;
+        private System.Windows.Forms.Button bu_crawl_feature;
+        private System.Windows.Forms.Button bu_crawl_trick;
+        private System.Windows.Forms.RichTextBox rtbEldQuestResult;
+        private System.Windows.Forms.Button butEldRndQuest;
     }
 }
 
