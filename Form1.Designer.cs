@@ -87,6 +87,8 @@
             this.nud_chaosFactor = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.tabCrawl = new System.Windows.Forms.TabPage();
+            this.but_crawlRoomHazard = new System.Windows.Forms.Button();
+            this.but_crawlRoomType = new System.Windows.Forms.Button();
             this.bu_crawl_feature = new System.Windows.Forms.Button();
             this.bu_crawl_trick = new System.Windows.Forms.Button();
             this.checkRestockHall = new System.Windows.Forms.CheckBox();
@@ -212,14 +214,43 @@
             this.butEndCombat = new System.Windows.Forms.Button();
             this.butRound = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.butEldEncounter = new System.Windows.Forms.Button();
-            this.label42 = new System.Windows.Forms.Label();
-            this.nudEldLevel = new System.Windows.Forms.NumericUpDown();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.label41 = new System.Windows.Forms.Label();
             this.cbEldLocation = new System.Windows.Forms.ComboBox();
-            this.rtbEldResult = new System.Windows.Forms.RichTextBox();
-            this.butEldRndQuest = new System.Windows.Forms.Button();
+            this.nudEldLevel = new System.Windows.Forms.NumericUpDown();
+            this.label42 = new System.Windows.Forms.Label();
+            this.rtbEldArtifact = new System.Windows.Forms.RichTextBox();
+            this.buttEldArtifact = new System.Windows.Forms.Button();
+            this.rtbUnderdarkCrawl = new System.Windows.Forms.RichTextBox();
+            this.butUnderdarkCrawl = new System.Windows.Forms.Button();
             this.rtbEldQuestResult = new System.Windows.Forms.RichTextBox();
+            this.butEldRndQuest = new System.Windows.Forms.Button();
+            this.butEldEncounter = new System.Windows.Forms.Button();
+            this.rtbEldResult = new System.Windows.Forms.RichTextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.butFurnBook = new System.Windows.Forms.Button();
+            this.butThroneRoomFurniture = new System.Windows.Forms.Button();
+            this.butCryptFurniture = new System.Windows.Forms.Button();
+            this.butTreasureRoom = new System.Windows.Forms.Button();
+            this.butStorageFurniture = new System.Windows.Forms.Button();
+            this.butMuseumFurniture = new System.Windows.Forms.Button();
+            this.butFurnitureCondition = new System.Windows.Forms.Button();
+            this.butPrisonFurnature = new System.Windows.Forms.Button();
+            this.butKennelFurnature = new System.Windows.Forms.Button();
+            this.butPantryFurnature = new System.Windows.Forms.Button();
+            this.butKitchenFurnature = new System.Windows.Forms.Button();
+            this.butDiningFurnature = new System.Windows.Forms.Button();
+            this.butBedroomFurnature = new System.Windows.Forms.Button();
+            this.butBaracksFurnature = new System.Windows.Forms.Button();
+            this.butLibraryFurnature = new System.Windows.Forms.Button();
+            this.butStudyFurnature = new System.Windows.Forms.Button();
+            this.butGuardFurnature = new System.Windows.Forms.Button();
+            this.butTempleFurnature = new System.Windows.Forms.Button();
+            this.butTortureFurnature = new System.Windows.Forms.Button();
+            this.butDormFurnature = new System.Windows.Forms.Button();
+            this.butGenItems = new System.Windows.Forms.Button();
+            this.butGenFurnature = new System.Windows.Forms.Button();
+            this.rtbFurniture = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -280,7 +311,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDurRounds1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCombatRounds)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.groupBox13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEldLevel)).BeginInit();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtb_rndMonstOut
@@ -313,7 +346,7 @@
             this.nud_tier.Size = new System.Drawing.Size(42, 20);
             this.nud_tier.TabIndex = 2;
             this.nud_tier.Value = new decimal(new int[] {
-            2,
+            3,
             0,
             0,
             0});
@@ -428,6 +461,8 @@
             // cb_allowMajorLegendary
             // 
             this.cb_allowMajorLegendary.AutoSize = true;
+            this.cb_allowMajorLegendary.Checked = true;
+            this.cb_allowMajorLegendary.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMajorLegendary.Location = new System.Drawing.Point(2, 225);
             this.cb_allowMajorLegendary.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMajorLegendary.Name = "cb_allowMajorLegendary";
@@ -439,6 +474,8 @@
             // cb_allowMajorVeryRare
             // 
             this.cb_allowMajorVeryRare.AutoSize = true;
+            this.cb_allowMajorVeryRare.Checked = true;
+            this.cb_allowMajorVeryRare.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMajorVeryRare.Location = new System.Drawing.Point(2, 207);
             this.cb_allowMajorVeryRare.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMajorVeryRare.Name = "cb_allowMajorVeryRare";
@@ -450,6 +487,8 @@
             // cb_allowMajorRare
             // 
             this.cb_allowMajorRare.AutoSize = true;
+            this.cb_allowMajorRare.Checked = true;
+            this.cb_allowMajorRare.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMajorRare.Location = new System.Drawing.Point(2, 188);
             this.cb_allowMajorRare.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMajorRare.Name = "cb_allowMajorRare";
@@ -461,6 +500,8 @@
             // cb_allowMajorUncommon
             // 
             this.cb_allowMajorUncommon.AutoSize = true;
+            this.cb_allowMajorUncommon.Checked = true;
+            this.cb_allowMajorUncommon.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_allowMajorUncommon.Location = new System.Drawing.Point(2, 170);
             this.cb_allowMajorUncommon.Margin = new System.Windows.Forms.Padding(1);
             this.cb_allowMajorUncommon.Name = "cb_allowMajorUncommon";
@@ -769,6 +810,7 @@
             this.TabAi.Controls.Add(this.tabPage1);
             this.TabAi.Controls.Add(this.tabPage2);
             this.TabAi.Controls.Add(this.tabPage3);
+            this.TabAi.Controls.Add(this.tabPage4);
             this.TabAi.Location = new System.Drawing.Point(0, 1);
             this.TabAi.Margin = new System.Windows.Forms.Padding(1);
             this.TabAi.Name = "TabAi";
@@ -1003,6 +1045,8 @@
             // 
             // tabCrawl
             // 
+            this.tabCrawl.Controls.Add(this.but_crawlRoomHazard);
+            this.tabCrawl.Controls.Add(this.but_crawlRoomType);
             this.tabCrawl.Controls.Add(this.bu_crawl_feature);
             this.tabCrawl.Controls.Add(this.bu_crawl_trick);
             this.tabCrawl.Controls.Add(this.checkRestockHall);
@@ -1030,9 +1074,29 @@
             this.tabCrawl.Text = "Crawl";
             this.tabCrawl.UseVisualStyleBackColor = true;
             // 
+            // but_crawlRoomHazard
+            // 
+            this.but_crawlRoomHazard.Location = new System.Drawing.Point(182, 172);
+            this.but_crawlRoomHazard.Name = "but_crawlRoomHazard";
+            this.but_crawlRoomHazard.Size = new System.Drawing.Size(148, 23);
+            this.but_crawlRoomHazard.TabIndex = 20;
+            this.but_crawlRoomHazard.Text = "Hazard";
+            this.but_crawlRoomHazard.UseVisualStyleBackColor = true;
+            this.but_crawlRoomHazard.Click += new System.EventHandler(this.but_crawlRoomHazard_Click);
+            // 
+            // but_crawlRoomType
+            // 
+            this.but_crawlRoomType.Location = new System.Drawing.Point(182, 143);
+            this.but_crawlRoomType.Name = "but_crawlRoomType";
+            this.but_crawlRoomType.Size = new System.Drawing.Size(148, 23);
+            this.but_crawlRoomType.TabIndex = 19;
+            this.but_crawlRoomType.Text = "Room Type";
+            this.but_crawlRoomType.UseVisualStyleBackColor = true;
+            this.but_crawlRoomType.Click += new System.EventHandler(this.but_crawlRoomType_Click);
+            // 
             // bu_crawl_feature
             // 
-            this.bu_crawl_feature.Location = new System.Drawing.Point(9, 361);
+            this.bu_crawl_feature.Location = new System.Drawing.Point(182, 230);
             this.bu_crawl_feature.Name = "bu_crawl_feature";
             this.bu_crawl_feature.Size = new System.Drawing.Size(148, 23);
             this.bu_crawl_feature.TabIndex = 18;
@@ -1042,7 +1106,7 @@
             // 
             // bu_crawl_trick
             // 
-            this.bu_crawl_trick.Location = new System.Drawing.Point(9, 331);
+            this.bu_crawl_trick.Location = new System.Drawing.Point(182, 201);
             this.bu_crawl_trick.Name = "bu_crawl_trick";
             this.bu_crawl_trick.Size = new System.Drawing.Size(148, 23);
             this.bu_crawl_trick.TabIndex = 17;
@@ -1053,7 +1117,7 @@
             // checkRestockHall
             // 
             this.checkRestockHall.AutoSize = true;
-            this.checkRestockHall.Location = new System.Drawing.Point(163, 305);
+            this.checkRestockHall.Location = new System.Drawing.Point(163, 373);
             this.checkRestockHall.Name = "checkRestockHall";
             this.checkRestockHall.Size = new System.Drawing.Size(87, 17);
             this.checkRestockHall.TabIndex = 16;
@@ -1062,7 +1126,7 @@
             // 
             // butRestock
             // 
-            this.butRestock.Location = new System.Drawing.Point(9, 301);
+            this.butRestock.Location = new System.Drawing.Point(8, 369);
             this.butRestock.Name = "butRestock";
             this.butRestock.Size = new System.Drawing.Size(148, 23);
             this.butRestock.TabIndex = 15;
@@ -1072,7 +1136,7 @@
             // 
             // butRoomContents
             // 
-            this.butRoomContents.Location = new System.Drawing.Point(9, 272);
+            this.butRoomContents.Location = new System.Drawing.Point(8, 340);
             this.butRoomContents.Name = "butRoomContents";
             this.butRoomContents.Size = new System.Drawing.Size(148, 23);
             this.butRoomContents.TabIndex = 14;
@@ -1082,7 +1146,7 @@
             // 
             // crawl_atmosphere
             // 
-            this.crawl_atmosphere.Location = new System.Drawing.Point(9, 243);
+            this.crawl_atmosphere.Location = new System.Drawing.Point(9, 230);
             this.crawl_atmosphere.Name = "crawl_atmosphere";
             this.crawl_atmosphere.Size = new System.Drawing.Size(148, 23);
             this.crawl_atmosphere.TabIndex = 13;
@@ -1092,7 +1156,7 @@
             // 
             // bu_dungeonIntel
             // 
-            this.bu_dungeonIntel.Location = new System.Drawing.Point(9, 213);
+            this.bu_dungeonIntel.Location = new System.Drawing.Point(9, 201);
             this.bu_dungeonIntel.Name = "bu_dungeonIntel";
             this.bu_dungeonIntel.Size = new System.Drawing.Size(148, 23);
             this.bu_dungeonIntel.TabIndex = 12;
@@ -1102,10 +1166,10 @@
             // 
             // but_complexTrap
             // 
-            this.but_complexTrap.Location = new System.Drawing.Point(6, 172);
+            this.but_complexTrap.Location = new System.Drawing.Point(182, 285);
             this.but_complexTrap.Margin = new System.Windows.Forms.Padding(1);
             this.but_complexTrap.Name = "but_complexTrap";
-            this.but_complexTrap.Size = new System.Drawing.Size(151, 23);
+            this.but_complexTrap.Size = new System.Drawing.Size(148, 23);
             this.but_complexTrap.TabIndex = 11;
             this.but_complexTrap.Text = "Complex Trap";
             this.but_complexTrap.UseVisualStyleBackColor = true;
@@ -1113,10 +1177,10 @@
             // 
             // but_trap
             // 
-            this.but_trap.Location = new System.Drawing.Point(6, 147);
+            this.but_trap.Location = new System.Drawing.Point(182, 257);
             this.but_trap.Margin = new System.Windows.Forms.Padding(1);
             this.but_trap.Name = "but_trap";
-            this.but_trap.Size = new System.Drawing.Size(151, 23);
+            this.but_trap.Size = new System.Drawing.Size(148, 23);
             this.but_trap.TabIndex = 10;
             this.but_trap.Text = "Trap";
             this.but_trap.UseVisualStyleBackColor = true;
@@ -2289,13 +2353,14 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.groupBox13);
+            this.tabPage3.Controls.Add(this.rtbEldArtifact);
+            this.tabPage3.Controls.Add(this.buttEldArtifact);
+            this.tabPage3.Controls.Add(this.rtbUnderdarkCrawl);
+            this.tabPage3.Controls.Add(this.butUnderdarkCrawl);
             this.tabPage3.Controls.Add(this.rtbEldQuestResult);
             this.tabPage3.Controls.Add(this.butEldRndQuest);
             this.tabPage3.Controls.Add(this.butEldEncounter);
-            this.tabPage3.Controls.Add(this.label42);
-            this.tabPage3.Controls.Add(this.nudEldLevel);
-            this.tabPage3.Controls.Add(this.label41);
-            this.tabPage3.Controls.Add(this.cbEldLocation);
             this.tabPage3.Controls.Add(this.rtbEldResult);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -2305,28 +2370,47 @@
             this.tabPage3.Text = "Eld";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // butEldEncounter
+            // groupBox13
             // 
-            this.butEldEncounter.Location = new System.Drawing.Point(8, 103);
-            this.butEldEncounter.Name = "butEldEncounter";
-            this.butEldEncounter.Size = new System.Drawing.Size(121, 23);
-            this.butEldEncounter.TabIndex = 5;
-            this.butEldEncounter.Text = "Encounter";
-            this.butEldEncounter.UseVisualStyleBackColor = true;
-            this.butEldEncounter.Click += new System.EventHandler(this.butEldEncounter_Click);
+            this.groupBox13.Controls.Add(this.label41);
+            this.groupBox13.Controls.Add(this.cbEldLocation);
+            this.groupBox13.Controls.Add(this.nudEldLevel);
+            this.groupBox13.Controls.Add(this.label42);
+            this.groupBox13.Location = new System.Drawing.Point(433, 152);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(135, 121);
+            this.groupBox13.TabIndex = 12;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "Settings";
             // 
-            // label42
+            // label41
             // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(8, 61);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(60, 13);
-            this.label42.TabIndex = 4;
-            this.label42.Text = "Party Level";
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(6, 16);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(103, 13);
+            this.label41.TabIndex = 2;
+            this.label41.Text = "Where are the PCs?";
+            // 
+            // cbEldLocation
+            // 
+            this.cbEldLocation.FormattingEnabled = true;
+            this.cbEldLocation.Items.AddRange(new object[] {
+            "Light Forest",
+            "Deep Forest",
+            "Tundra",
+            "Hills",
+            "Mountain",
+            "Dungeon",
+            "Village"});
+            this.cbEldLocation.Location = new System.Drawing.Point(5, 35);
+            this.cbEldLocation.Name = "cbEldLocation";
+            this.cbEldLocation.Size = new System.Drawing.Size(121, 21);
+            this.cbEldLocation.TabIndex = 1;
             // 
             // nudEldLevel
             // 
-            this.nudEldLevel.Location = new System.Drawing.Point(12, 77);
+            this.nudEldLevel.Location = new System.Drawing.Point(9, 82);
             this.nudEldLevel.Maximum = new decimal(new int[] {
             2,
             0,
@@ -2346,42 +2430,62 @@
             0,
             0});
             // 
-            // label41
+            // label42
             // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(9, 11);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(103, 13);
-            this.label41.TabIndex = 2;
-            this.label41.Text = "Where are the PCs?";
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(5, 66);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(60, 13);
+            this.label42.TabIndex = 4;
+            this.label42.Text = "Party Level";
             // 
-            // cbEldLocation
+            // rtbEldArtifact
             // 
-            this.cbEldLocation.FormattingEnabled = true;
-            this.cbEldLocation.Items.AddRange(new object[] {
-            "Light Forest",
-            "Deep Forest",
-            "Tundra",
-            "Hills",
-            "Mountain",
-            "Dungeon",
-            "Village"});
-            this.cbEldLocation.Location = new System.Drawing.Point(8, 30);
-            this.cbEldLocation.Name = "cbEldLocation";
-            this.cbEldLocation.Size = new System.Drawing.Size(121, 21);
-            this.cbEldLocation.TabIndex = 1;
+            this.rtbEldArtifact.Location = new System.Drawing.Point(133, 3);
+            this.rtbEldArtifact.Name = "rtbEldArtifact";
+            this.rtbEldArtifact.Size = new System.Drawing.Size(728, 137);
+            this.rtbEldArtifact.TabIndex = 11;
+            this.rtbEldArtifact.Text = "";
             // 
-            // rtbEldResult
+            // buttEldArtifact
             // 
-            this.rtbEldResult.Location = new System.Drawing.Point(135, 6);
-            this.rtbEldResult.Name = "rtbEldResult";
-            this.rtbEldResult.Size = new System.Drawing.Size(726, 120);
-            this.rtbEldResult.TabIndex = 0;
-            this.rtbEldResult.Text = "";
+            this.buttEldArtifact.Location = new System.Drawing.Point(6, 6);
+            this.buttEldArtifact.Name = "buttEldArtifact";
+            this.buttEldArtifact.Size = new System.Drawing.Size(121, 23);
+            this.buttEldArtifact.TabIndex = 10;
+            this.buttEldArtifact.Text = "Artifact";
+            this.buttEldArtifact.UseVisualStyleBackColor = true;
+            this.buttEldArtifact.Click += new System.EventHandler(this.buttEldArtifact_Click);
+            // 
+            // rtbUnderdarkCrawl
+            // 
+            this.rtbUnderdarkCrawl.Location = new System.Drawing.Point(133, 250);
+            this.rtbUnderdarkCrawl.Name = "rtbUnderdarkCrawl";
+            this.rtbUnderdarkCrawl.Size = new System.Drawing.Size(294, 150);
+            this.rtbUnderdarkCrawl.TabIndex = 9;
+            this.rtbUnderdarkCrawl.Text = "";
+            // 
+            // butUnderdarkCrawl
+            // 
+            this.butUnderdarkCrawl.Location = new System.Drawing.Point(6, 250);
+            this.butUnderdarkCrawl.Name = "butUnderdarkCrawl";
+            this.butUnderdarkCrawl.Size = new System.Drawing.Size(121, 23);
+            this.butUnderdarkCrawl.TabIndex = 8;
+            this.butUnderdarkCrawl.Text = "Underdark Crawl";
+            this.butUnderdarkCrawl.UseVisualStyleBackColor = true;
+            this.butUnderdarkCrawl.Click += new System.EventHandler(this.butUnderdarkCrawl_Click);
+            // 
+            // rtbEldQuestResult
+            // 
+            this.rtbEldQuestResult.Location = new System.Drawing.Point(133, 147);
+            this.rtbEldQuestResult.Name = "rtbEldQuestResult";
+            this.rtbEldQuestResult.Size = new System.Drawing.Size(294, 96);
+            this.rtbEldQuestResult.TabIndex = 7;
+            this.rtbEldQuestResult.Text = "";
             // 
             // butEldRndQuest
             // 
-            this.butEldRndQuest.Location = new System.Drawing.Point(8, 149);
+            this.butEldRndQuest.Location = new System.Drawing.Point(6, 147);
             this.butEldRndQuest.Name = "butEldRndQuest";
             this.butEldRndQuest.Size = new System.Drawing.Size(121, 23);
             this.butEldRndQuest.TabIndex = 6;
@@ -2389,13 +2493,285 @@
             this.butEldRndQuest.UseVisualStyleBackColor = true;
             this.butEldRndQuest.Click += new System.EventHandler(this.butEldRndQuest_Click);
             // 
-            // rtbEldQuestResult
+            // butEldEncounter
             // 
-            this.rtbEldQuestResult.Location = new System.Drawing.Point(135, 149);
-            this.rtbEldQuestResult.Name = "rtbEldQuestResult";
-            this.rtbEldQuestResult.Size = new System.Drawing.Size(726, 96);
-            this.rtbEldQuestResult.TabIndex = 7;
-            this.rtbEldQuestResult.Text = "";
+            this.butEldEncounter.Location = new System.Drawing.Point(574, 147);
+            this.butEldEncounter.Name = "butEldEncounter";
+            this.butEldEncounter.Size = new System.Drawing.Size(121, 23);
+            this.butEldEncounter.TabIndex = 5;
+            this.butEldEncounter.Text = "Encounter";
+            this.butEldEncounter.UseVisualStyleBackColor = true;
+            this.butEldEncounter.Click += new System.EventHandler(this.butEldEncounter_Click);
+            // 
+            // rtbEldResult
+            // 
+            this.rtbEldResult.Location = new System.Drawing.Point(574, 176);
+            this.rtbEldResult.Name = "rtbEldResult";
+            this.rtbEldResult.Size = new System.Drawing.Size(287, 137);
+            this.rtbEldResult.TabIndex = 0;
+            this.rtbEldResult.Text = "";
+            this.rtbEldResult.TextChanged += new System.EventHandler(this.rtbEldResult_TextChanged);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.butFurnBook);
+            this.tabPage4.Controls.Add(this.butThroneRoomFurniture);
+            this.tabPage4.Controls.Add(this.butCryptFurniture);
+            this.tabPage4.Controls.Add(this.butTreasureRoom);
+            this.tabPage4.Controls.Add(this.butStorageFurniture);
+            this.tabPage4.Controls.Add(this.butMuseumFurniture);
+            this.tabPage4.Controls.Add(this.butFurnitureCondition);
+            this.tabPage4.Controls.Add(this.butPrisonFurnature);
+            this.tabPage4.Controls.Add(this.butKennelFurnature);
+            this.tabPage4.Controls.Add(this.butPantryFurnature);
+            this.tabPage4.Controls.Add(this.butKitchenFurnature);
+            this.tabPage4.Controls.Add(this.butDiningFurnature);
+            this.tabPage4.Controls.Add(this.butBedroomFurnature);
+            this.tabPage4.Controls.Add(this.butBaracksFurnature);
+            this.tabPage4.Controls.Add(this.butLibraryFurnature);
+            this.tabPage4.Controls.Add(this.butStudyFurnature);
+            this.tabPage4.Controls.Add(this.butGuardFurnature);
+            this.tabPage4.Controls.Add(this.butTempleFurnature);
+            this.tabPage4.Controls.Add(this.butTortureFurnature);
+            this.tabPage4.Controls.Add(this.butDormFurnature);
+            this.tabPage4.Controls.Add(this.butGenItems);
+            this.tabPage4.Controls.Add(this.butGenFurnature);
+            this.tabPage4.Controls.Add(this.rtbFurniture);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(867, 408);
+            this.tabPage4.TabIndex = 7;
+            this.tabPage4.Text = "Furnish";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // butFurnBook
+            // 
+            this.butFurnBook.Location = new System.Drawing.Point(9, 124);
+            this.butFurnBook.Name = "butFurnBook";
+            this.butFurnBook.Size = new System.Drawing.Size(115, 23);
+            this.butFurnBook.TabIndex = 22;
+            this.butFurnBook.Text = "Text";
+            this.butFurnBook.UseVisualStyleBackColor = true;
+            this.butFurnBook.Click += new System.EventHandler(this.butFurnBook_Click);
+            // 
+            // butThroneRoomFurniture
+            // 
+            this.butThroneRoomFurniture.Location = new System.Drawing.Point(133, 273);
+            this.butThroneRoomFurniture.Name = "butThroneRoomFurniture";
+            this.butThroneRoomFurniture.Size = new System.Drawing.Size(115, 23);
+            this.butThroneRoomFurniture.TabIndex = 21;
+            this.butThroneRoomFurniture.Text = "Throne Room";
+            this.butThroneRoomFurniture.UseVisualStyleBackColor = true;
+            this.butThroneRoomFurniture.Click += new System.EventHandler(this.butThroneRoomFurniture_Click);
+            // 
+            // butCryptFurniture
+            // 
+            this.butCryptFurniture.Location = new System.Drawing.Point(255, 7);
+            this.butCryptFurniture.Name = "butCryptFurniture";
+            this.butCryptFurniture.Size = new System.Drawing.Size(115, 23);
+            this.butCryptFurniture.TabIndex = 20;
+            this.butCryptFurniture.Text = "Crypt";
+            this.butCryptFurniture.UseVisualStyleBackColor = true;
+            this.butCryptFurniture.Click += new System.EventHandler(this.butCryptFurniture_Click);
+            // 
+            // butTreasureRoom
+            // 
+            this.butTreasureRoom.Location = new System.Drawing.Point(133, 244);
+            this.butTreasureRoom.Name = "butTreasureRoom";
+            this.butTreasureRoom.Size = new System.Drawing.Size(115, 23);
+            this.butTreasureRoom.TabIndex = 19;
+            this.butTreasureRoom.Text = "Treasure Room";
+            this.butTreasureRoom.UseVisualStyleBackColor = true;
+            this.butTreasureRoom.Click += new System.EventHandler(this.butTreasureRoom_Click);
+            // 
+            // butStorageFurniture
+            // 
+            this.butStorageFurniture.Location = new System.Drawing.Point(9, 96);
+            this.butStorageFurniture.Name = "butStorageFurniture";
+            this.butStorageFurniture.Size = new System.Drawing.Size(115, 23);
+            this.butStorageFurniture.TabIndex = 18;
+            this.butStorageFurniture.Text = "Storage Room";
+            this.butStorageFurniture.UseVisualStyleBackColor = true;
+            this.butStorageFurniture.Click += new System.EventHandler(this.butStorageFurniture_Click);
+            // 
+            // butMuseumFurniture
+            // 
+            this.butMuseumFurniture.Location = new System.Drawing.Point(133, 183);
+            this.butMuseumFurniture.Name = "butMuseumFurniture";
+            this.butMuseumFurniture.Size = new System.Drawing.Size(115, 23);
+            this.butMuseumFurniture.TabIndex = 17;
+            this.butMuseumFurniture.Text = "Museum";
+            this.butMuseumFurniture.UseVisualStyleBackColor = true;
+            this.butMuseumFurniture.Click += new System.EventHandler(this.butMuseumFurniture_Click);
+            // 
+            // butFurnitureCondition
+            // 
+            this.butFurnitureCondition.Location = new System.Drawing.Point(9, 7);
+            this.butFurnitureCondition.Name = "butFurnitureCondition";
+            this.butFurnitureCondition.Size = new System.Drawing.Size(117, 23);
+            this.butFurnitureCondition.TabIndex = 16;
+            this.butFurnitureCondition.Text = "Condition";
+            this.butFurnitureCondition.UseVisualStyleBackColor = true;
+            this.butFurnitureCondition.Click += new System.EventHandler(this.butFurnitureCondition_Click);
+            // 
+            // butPrisonFurnature
+            // 
+            this.butPrisonFurnature.Location = new System.Drawing.Point(133, 124);
+            this.butPrisonFurnature.Name = "butPrisonFurnature";
+            this.butPrisonFurnature.Size = new System.Drawing.Size(115, 23);
+            this.butPrisonFurnature.TabIndex = 15;
+            this.butPrisonFurnature.Text = "Prison";
+            this.butPrisonFurnature.UseVisualStyleBackColor = true;
+            this.butPrisonFurnature.Click += new System.EventHandler(this.butPrisonFurnature_Click);
+            // 
+            // butKennelFurnature
+            // 
+            this.butKennelFurnature.Location = new System.Drawing.Point(133, 94);
+            this.butKennelFurnature.Name = "butKennelFurnature";
+            this.butKennelFurnature.Size = new System.Drawing.Size(115, 23);
+            this.butKennelFurnature.TabIndex = 14;
+            this.butKennelFurnature.Text = "Kennel";
+            this.butKennelFurnature.UseVisualStyleBackColor = true;
+            this.butKennelFurnature.Click += new System.EventHandler(this.butKennelFurnature_Click);
+            // 
+            // butPantryFurnature
+            // 
+            this.butPantryFurnature.Location = new System.Drawing.Point(133, 66);
+            this.butPantryFurnature.Name = "butPantryFurnature";
+            this.butPantryFurnature.Size = new System.Drawing.Size(115, 23);
+            this.butPantryFurnature.TabIndex = 13;
+            this.butPantryFurnature.Text = "Pantry";
+            this.butPantryFurnature.UseVisualStyleBackColor = true;
+            this.butPantryFurnature.Click += new System.EventHandler(this.butPantryFurnature_Click);
+            // 
+            // butKitchenFurnature
+            // 
+            this.butKitchenFurnature.Location = new System.Drawing.Point(9, 273);
+            this.butKitchenFurnature.Name = "butKitchenFurnature";
+            this.butKitchenFurnature.Size = new System.Drawing.Size(117, 23);
+            this.butKitchenFurnature.TabIndex = 12;
+            this.butKitchenFurnature.Text = "Kitchen";
+            this.butKitchenFurnature.UseVisualStyleBackColor = true;
+            this.butKitchenFurnature.Click += new System.EventHandler(this.butKitchenFurnature_Click);
+            // 
+            // butDiningFurnature
+            // 
+            this.butDiningFurnature.Location = new System.Drawing.Point(132, 36);
+            this.butDiningFurnature.Name = "butDiningFurnature";
+            this.butDiningFurnature.Size = new System.Drawing.Size(116, 23);
+            this.butDiningFurnature.TabIndex = 11;
+            this.butDiningFurnature.Text = "Dining Room";
+            this.butDiningFurnature.UseVisualStyleBackColor = true;
+            this.butDiningFurnature.Click += new System.EventHandler(this.butDiningFurnature_Click);
+            // 
+            // butBedroomFurnature
+            // 
+            this.butBedroomFurnature.Location = new System.Drawing.Point(132, 7);
+            this.butBedroomFurnature.Name = "butBedroomFurnature";
+            this.butBedroomFurnature.Size = new System.Drawing.Size(117, 23);
+            this.butBedroomFurnature.TabIndex = 10;
+            this.butBedroomFurnature.Text = "Bedroom";
+            this.butBedroomFurnature.UseVisualStyleBackColor = true;
+            this.butBedroomFurnature.Click += new System.EventHandler(this.butBedroomFurnature_Click);
+            // 
+            // butBaracksFurnature
+            // 
+            this.butBaracksFurnature.Location = new System.Drawing.Point(9, 244);
+            this.butBaracksFurnature.Name = "butBaracksFurnature";
+            this.butBaracksFurnature.Size = new System.Drawing.Size(117, 23);
+            this.butBaracksFurnature.TabIndex = 9;
+            this.butBaracksFurnature.Text = "Baracks";
+            this.butBaracksFurnature.UseVisualStyleBackColor = true;
+            this.butBaracksFurnature.Click += new System.EventHandler(this.butBaracksFurnature_Click);
+            // 
+            // butLibraryFurnature
+            // 
+            this.butLibraryFurnature.Location = new System.Drawing.Point(9, 214);
+            this.butLibraryFurnature.Name = "butLibraryFurnature";
+            this.butLibraryFurnature.Size = new System.Drawing.Size(117, 23);
+            this.butLibraryFurnature.TabIndex = 8;
+            this.butLibraryFurnature.Text = "Library";
+            this.butLibraryFurnature.UseVisualStyleBackColor = true;
+            this.butLibraryFurnature.Click += new System.EventHandler(this.butLibraryFurnature_Click);
+            // 
+            // butStudyFurnature
+            // 
+            this.butStudyFurnature.Location = new System.Drawing.Point(9, 184);
+            this.butStudyFurnature.Name = "butStudyFurnature";
+            this.butStudyFurnature.Size = new System.Drawing.Size(117, 23);
+            this.butStudyFurnature.TabIndex = 7;
+            this.butStudyFurnature.Text = "Study";
+            this.butStudyFurnature.UseVisualStyleBackColor = true;
+            this.butStudyFurnature.Click += new System.EventHandler(this.butStudyFurnature_Click);
+            // 
+            // butGuardFurnature
+            // 
+            this.butGuardFurnature.Location = new System.Drawing.Point(9, 154);
+            this.butGuardFurnature.Name = "butGuardFurnature";
+            this.butGuardFurnature.Size = new System.Drawing.Size(117, 23);
+            this.butGuardFurnature.TabIndex = 6;
+            this.butGuardFurnature.Text = "Guard Room";
+            this.butGuardFurnature.UseVisualStyleBackColor = true;
+            this.butGuardFurnature.Click += new System.EventHandler(this.butGuardFurnature_Click);
+            // 
+            // butTempleFurnature
+            // 
+            this.butTempleFurnature.Location = new System.Drawing.Point(255, 36);
+            this.butTempleFurnature.Name = "butTempleFurnature";
+            this.butTempleFurnature.Size = new System.Drawing.Size(115, 23);
+            this.butTempleFurnature.TabIndex = 5;
+            this.butTempleFurnature.Text = "Temple";
+            this.butTempleFurnature.UseVisualStyleBackColor = true;
+            this.butTempleFurnature.Click += new System.EventHandler(this.butTempleFurnature_Click);
+            // 
+            // butTortureFurnature
+            // 
+            this.butTortureFurnature.Location = new System.Drawing.Point(133, 212);
+            this.butTortureFurnature.Name = "butTortureFurnature";
+            this.butTortureFurnature.Size = new System.Drawing.Size(115, 23);
+            this.butTortureFurnature.TabIndex = 4;
+            this.butTortureFurnature.Text = "Torture Chamber";
+            this.butTortureFurnature.UseVisualStyleBackColor = true;
+            this.butTortureFurnature.Click += new System.EventHandler(this.butTortureFurnature_Click);
+            // 
+            // butDormFurnature
+            // 
+            this.butDormFurnature.Location = new System.Drawing.Point(133, 154);
+            this.butDormFurnature.Name = "butDormFurnature";
+            this.butDormFurnature.Size = new System.Drawing.Size(115, 23);
+            this.butDormFurnature.TabIndex = 3;
+            this.butDormFurnature.Text = "Dorms";
+            this.butDormFurnature.UseVisualStyleBackColor = true;
+            this.butDormFurnature.Click += new System.EventHandler(this.butDormFurnature_Click);
+            // 
+            // butGenItems
+            // 
+            this.butGenItems.Location = new System.Drawing.Point(9, 66);
+            this.butGenItems.Name = "butGenItems";
+            this.butGenItems.Size = new System.Drawing.Size(117, 23);
+            this.butGenItems.TabIndex = 2;
+            this.butGenItems.Text = "General Items";
+            this.butGenItems.UseVisualStyleBackColor = true;
+            this.butGenItems.Click += new System.EventHandler(this.butGenItems_Click);
+            // 
+            // butGenFurnature
+            // 
+            this.butGenFurnature.Location = new System.Drawing.Point(9, 36);
+            this.butGenFurnature.Name = "butGenFurnature";
+            this.butGenFurnature.Size = new System.Drawing.Size(117, 23);
+            this.butGenFurnature.TabIndex = 1;
+            this.butGenFurnature.Text = "General Furnature";
+            this.butGenFurnature.UseVisualStyleBackColor = true;
+            this.butGenFurnature.Click += new System.EventHandler(this.butGenFurnature_Click);
+            // 
+            // rtbFurniture
+            // 
+            this.rtbFurniture.Location = new System.Drawing.Point(8, 306);
+            this.rtbFurniture.Name = "rtbFurniture";
+            this.rtbFurniture.Size = new System.Drawing.Size(241, 96);
+            this.rtbFurniture.TabIndex = 0;
+            this.rtbFurniture.Text = "";
             // 
             // Form1
             // 
@@ -2485,8 +2861,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDurRounds1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCombatRounds)).EndInit();
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEldLevel)).EndInit();
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2685,6 +3063,37 @@
         private System.Windows.Forms.Button bu_crawl_trick;
         private System.Windows.Forms.RichTextBox rtbEldQuestResult;
         private System.Windows.Forms.Button butEldRndQuest;
+        private System.Windows.Forms.RichTextBox rtbUnderdarkCrawl;
+        private System.Windows.Forms.Button butUnderdarkCrawl;
+        private System.Windows.Forms.RichTextBox rtbEldArtifact;
+        private System.Windows.Forms.Button buttEldArtifact;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.Button but_crawlRoomType;
+        private System.Windows.Forms.Button but_crawlRoomHazard;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Button butThroneRoomFurniture;
+        private System.Windows.Forms.Button butCryptFurniture;
+        private System.Windows.Forms.Button butTreasureRoom;
+        private System.Windows.Forms.Button butStorageFurniture;
+        private System.Windows.Forms.Button butMuseumFurniture;
+        private System.Windows.Forms.Button butFurnitureCondition;
+        private System.Windows.Forms.Button butPrisonFurnature;
+        private System.Windows.Forms.Button butKennelFurnature;
+        private System.Windows.Forms.Button butPantryFurnature;
+        private System.Windows.Forms.Button butKitchenFurnature;
+        private System.Windows.Forms.Button butDiningFurnature;
+        private System.Windows.Forms.Button butBedroomFurnature;
+        private System.Windows.Forms.Button butBaracksFurnature;
+        private System.Windows.Forms.Button butLibraryFurnature;
+        private System.Windows.Forms.Button butStudyFurnature;
+        private System.Windows.Forms.Button butGuardFurnature;
+        private System.Windows.Forms.Button butTempleFurnature;
+        private System.Windows.Forms.Button butTortureFurnature;
+        private System.Windows.Forms.Button butDormFurnature;
+        private System.Windows.Forms.Button butGenItems;
+        private System.Windows.Forms.Button butGenFurnature;
+        private System.Windows.Forms.RichTextBox rtbFurniture;
+        private System.Windows.Forms.Button butFurnBook;
     }
 }
 

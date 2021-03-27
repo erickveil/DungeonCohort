@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Darkmoor;
+using DungeonCohort.JsonLoading;
 
 namespace DungeonCohort
 {
@@ -1135,6 +1136,234 @@ namespace DungeonCohort
             var target = rtbEldQuestResult;
             target.Clear();
             PrintBody(target, quest);
+        }
+
+        private void butUnderdarkCrawl_Click(object sender, EventArgs e)
+        {
+            string hex = UnderdarkCrawl.RollHex();
+            var target = rtbUnderdarkCrawl;
+            target.Clear();
+            PrintBody(target, hex);
+        }
+
+        private void buttEldArtifact_Click(object sender, EventArgs e)
+        {
+            string artifact = EldMagicItemGen.genItem();
+            var target = rtbEldArtifact;
+            target.Clear();
+            PrintBody(target, artifact);
+        }
+
+        private void rtbEldResult_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void but_crawlRoomType_Click(object sender, EventArgs e)
+        {
+            var chamber = JsonChamberPurposeLoader.Instance;
+            var table = chamber.GetDungeonRoomTypeTable(combo_crawlDungeonType.Text);
+            string type = table.GetResult();
+            var target = rtb_Crawl;
+            target.Clear();
+            PrintBody(target, type);
+        }
+
+        private void but_crawlRoomHazard_Click(object sender, EventArgs e)
+        {
+            var contents = new CrawlRoomContents();
+            contents.SetRoomHazard((int)nud_tier.Value);
+            string hazard = contents.RoomHazard;
+            var target = rtb_Crawl;
+            target.Clear();
+            PrintBody(target, hazard);
+        }
+
+        private void butFurnitureCondition_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Condition();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+        }
+
+        private void butGenFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.General();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+        }
+
+        private void butGenItems_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Items();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+        }
+
+        private void butStorageFurniture_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Storage();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+        }
+
+        private void butFurnBook_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Book();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+        }
+
+        private void butGuardFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.GuardRoom();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+        }
+
+        private void butStudyFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Study();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+        }
+
+        private void butLibraryFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Library();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+        }
+
+        private void butBaracksFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Baracks();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+        }
+
+        private void butKitchenFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Kitchen();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+        }
+
+        private void butBedroomFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Bedroom();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+        }
+
+        private void butDiningFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.DiningRoom();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+
+        }
+
+        private void butPantryFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Pantry();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+
+        }
+
+        private void butKennelFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Kennel();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+
+        }
+
+        private void butPrisonFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Prison();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+
+        }
+
+        private void butDormFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Dorm();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+
+        }
+
+        private void butMuseumFurniture_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Museum();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+
+        }
+
+        private void butTortureFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.TortureChamber();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+
+        }
+
+        private void butTreasureRoom_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.TreasureRoom();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+
+        }
+
+        private void butThroneRoomFurniture_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.ThroneRoom();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+
+        }
+
+        private void butCryptFurniture_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Crypt();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+
+        }
+
+        private void butTempleFurnature_Click(object sender, EventArgs e)
+        {
+            string item = DungeonFurnishings.Temple();
+            var target = rtbFurniture;
+            target.Clear();
+            PrintBody(target, item);
+
         }
     }
 }

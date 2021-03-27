@@ -321,6 +321,7 @@ namespace DungeonCohort
                 table.AddItem(new EldUnit("Chwinga", "0"));
                 table.AddItem(new EldUnit("Mud Mephit", "1/4"));
                 table.AddItem(Devils(), 2);
+                table.AddItem(Yugoloths());
                 table.AddItem(new EldUnit("Darkling", "1/2"));
                 table.AddItem(new EldUnit("Darkling Elder", "2"));
             }
@@ -332,6 +333,7 @@ namespace DungeonCohort
                 table.AddItem(new EldUnit("Firenewt Warlock", "1"));
                 table.AddItem(new EldUnit("Dryad", "1"));
                 table.AddItem(new EldUnit("Meenlock", "2"));
+                table.AddItem(Yugoloths());
             }
             else if (biome == EldBiome.Tundra)
             {
@@ -340,12 +342,14 @@ namespace DungeonCohort
                 table.AddItem(new EldUnit("Aesir Raider (Guard)", "1/8"));
                 table.AddItem(new EldUnit("Firenewt Warrior", "1/2"));
                 table.AddItem(new EldUnit("Githzerai Monk", "2"));
+                table.AddItem(Yugoloths());
             }
             else if (biome == EldBiome.Hills)
             {
                 table.AddItem(new EldUnit("Ice Mephit", "1/2"));
                 table.AddItem(new EldUnit("Vargouille", "1"));
                 table.AddItem(Demons(), 2);
+                table.AddItem(Yugoloths());
                 table.AddItem(new EldUnit("Shadow Mastiff", "2"),2);
             }
             else if (biome == EldBiome.Mountain)
@@ -354,11 +358,13 @@ namespace DungeonCohort
                 table.AddItem(new EldUnit("Ice Mephit", "1/2"));
                 table.AddItem(new EldUnit("Magma Mephit", "1/2"));
                 table.AddItem(Demons(), 3);
+                table.AddItem(Yugoloths());
             }
             else if (biome == EldBiome.Dungeon)
             {
-                table.AddItem(Devils(), 2);
-                table.AddItem(Demons(), 2);
+                table.AddItem(Devils(), 1);
+                table.AddItem(Demons(), 1);
+                table.AddItem(Yugoloths(), 2);
                 table.AddItem(new EldUnit("Slaad Tadpole", "1/8"));
                 table.AddItem(new EldUnit("Gargoyle", "2"));
             }
@@ -369,6 +375,7 @@ namespace DungeonCohort
                 table.AddItem(new EldUnit("Darkling", "1/2"));
                 table.AddItem(Demons());
                 table.AddItem(Devils());
+                table.AddItem(Yugoloths());
                 table.AddItem(new EldUnit("Githzerai Monk", "2"));
             }
 
@@ -459,6 +466,20 @@ namespace DungeonCohort
             table.AddItem(new EldUnit("Nupperibo", "1/2"));
             table.AddItem(new EldUnit("Imp", "1"));
             table.AddItem(new EldUnit("Spined Devil", "2"));
+
+            return table.GetResult();
+        }
+
+        public EldUnit Yugoloths()
+        {
+            var table = new RandomTable<EldUnit>();
+
+            table.AddItem(new EldUnit("Octoloth", "0"));
+            table.AddItem(new EldUnit("Thrall", "1/8"));
+            table.AddItem(new EldUnit("Illacme", "1/4"));
+            table.AddItem(new EldUnit("Drudge", "1/2"));
+            table.AddItem(new EldUnit("Quisling", "1"));
+            table.AddItem(new EldUnit("Apostath", "2"));
 
             return table.GetResult();
         }
