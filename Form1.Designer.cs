@@ -216,6 +216,9 @@
             this.butEndCombat = new System.Windows.Forms.Button();
             this.butRound = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tbEldMotivation = new System.Windows.Forms.TextBox();
+            this.comboEldMotivation = new System.Windows.Forms.ComboBox();
+            this.butEldMotivation = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.label41 = new System.Windows.Forms.Label();
             this.cbEldLocation = new System.Windows.Forms.ComboBox();
@@ -266,9 +269,13 @@
             this.butJGNoble = new System.Windows.Forms.Button();
             this.butJGCity = new System.Windows.Forms.Button();
             this.comboJgQuarters = new System.Windows.Forms.ComboBox();
-            this.butEldMotivation = new System.Windows.Forms.Button();
-            this.comboEldMotivation = new System.Windows.Forms.ComboBox();
-            this.tbEldMotivation = new System.Windows.Forms.TextBox();
+            this.butEldSpecificQuest = new System.Windows.Forms.Button();
+            this.butEldVisitorQuest = new System.Windows.Forms.Button();
+            this.butEldRumors = new System.Windows.Forms.Button();
+            this.rtbEldHex = new System.Windows.Forms.RichTextBox();
+            this.butEldLocations = new System.Windows.Forms.Button();
+            this.butEldHexEvents = new System.Windows.Forms.Button();
+            this.rtbEldHexEvents = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -2396,6 +2403,13 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.rtbEldHexEvents);
+            this.tabPage3.Controls.Add(this.butEldHexEvents);
+            this.tabPage3.Controls.Add(this.butEldLocations);
+            this.tabPage3.Controls.Add(this.rtbEldHex);
+            this.tabPage3.Controls.Add(this.butEldRumors);
+            this.tabPage3.Controls.Add(this.butEldVisitorQuest);
+            this.tabPage3.Controls.Add(this.butEldSpecificQuest);
             this.tabPage3.Controls.Add(this.tbEldMotivation);
             this.tabPage3.Controls.Add(this.comboEldMotivation);
             this.tabPage3.Controls.Add(this.butEldMotivation);
@@ -2415,6 +2429,36 @@
             this.tabPage3.TabIndex = 6;
             this.tabPage3.Text = "Eld";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tbEldMotivation
+            // 
+            this.tbEldMotivation.Location = new System.Drawing.Point(434, 338);
+            this.tbEldMotivation.Name = "tbEldMotivation";
+            this.tbEldMotivation.Size = new System.Drawing.Size(120, 20);
+            this.tbEldMotivation.TabIndex = 15;
+            // 
+            // comboEldMotivation
+            // 
+            this.comboEldMotivation.FormattingEnabled = true;
+            this.comboEldMotivation.Items.AddRange(new object[] {
+            "Beast",
+            "Intelligent",
+            "Undead/Construct"});
+            this.comboEldMotivation.Location = new System.Drawing.Point(433, 310);
+            this.comboEldMotivation.Name = "comboEldMotivation";
+            this.comboEldMotivation.Size = new System.Drawing.Size(121, 21);
+            this.comboEldMotivation.TabIndex = 14;
+            this.comboEldMotivation.Text = "Beast";
+            // 
+            // butEldMotivation
+            // 
+            this.butEldMotivation.Location = new System.Drawing.Point(434, 280);
+            this.butEldMotivation.Name = "butEldMotivation";
+            this.butEldMotivation.Size = new System.Drawing.Size(120, 23);
+            this.butEldMotivation.TabIndex = 13;
+            this.butEldMotivation.Text = "Motivation";
+            this.butEldMotivation.UseVisualStyleBackColor = true;
+            this.butEldMotivation.Click += new System.EventHandler(this.butEldMotivation_Click);
             // 
             // groupBox13
             // 
@@ -2489,7 +2533,7 @@
             // 
             this.rtbEldArtifact.Location = new System.Drawing.Point(133, 3);
             this.rtbEldArtifact.Name = "rtbEldArtifact";
-            this.rtbEldArtifact.Size = new System.Drawing.Size(728, 137);
+            this.rtbEldArtifact.Size = new System.Drawing.Size(294, 137);
             this.rtbEldArtifact.TabIndex = 11;
             this.rtbEldArtifact.Text = "";
             // 
@@ -2505,15 +2549,15 @@
             // 
             // rtbUnderdarkCrawl
             // 
-            this.rtbUnderdarkCrawl.Location = new System.Drawing.Point(133, 250);
+            this.rtbUnderdarkCrawl.Location = new System.Drawing.Point(133, 260);
             this.rtbUnderdarkCrawl.Name = "rtbUnderdarkCrawl";
-            this.rtbUnderdarkCrawl.Size = new System.Drawing.Size(294, 150);
+            this.rtbUnderdarkCrawl.Size = new System.Drawing.Size(294, 140);
             this.rtbUnderdarkCrawl.TabIndex = 9;
             this.rtbUnderdarkCrawl.Text = "";
             // 
             // butUnderdarkCrawl
             // 
-            this.butUnderdarkCrawl.Location = new System.Drawing.Point(6, 250);
+            this.butUnderdarkCrawl.Location = new System.Drawing.Point(6, 276);
             this.butUnderdarkCrawl.Name = "butUnderdarkCrawl";
             this.butUnderdarkCrawl.Size = new System.Drawing.Size(121, 23);
             this.butUnderdarkCrawl.TabIndex = 8;
@@ -2525,7 +2569,7 @@
             // 
             this.rtbEldQuestResult.Location = new System.Drawing.Point(133, 147);
             this.rtbEldQuestResult.Name = "rtbEldQuestResult";
-            this.rtbEldQuestResult.Size = new System.Drawing.Size(294, 96);
+            this.rtbEldQuestResult.Size = new System.Drawing.Size(294, 107);
             this.rtbEldQuestResult.TabIndex = 7;
             this.rtbEldQuestResult.Text = "";
             // 
@@ -2964,35 +3008,71 @@
             this.comboJgQuarters.TabIndex = 0;
             this.comboJgQuarters.Text = "Plazas";
             // 
-            // butEldMotivation
+            // butEldSpecificQuest
             // 
-            this.butEldMotivation.Location = new System.Drawing.Point(434, 280);
-            this.butEldMotivation.Name = "butEldMotivation";
-            this.butEldMotivation.Size = new System.Drawing.Size(120, 23);
-            this.butEldMotivation.TabIndex = 13;
-            this.butEldMotivation.Text = "Motivation";
-            this.butEldMotivation.UseVisualStyleBackColor = true;
-            this.butEldMotivation.Click += new System.EventHandler(this.butEldMotivation_Click);
+            this.butEldSpecificQuest.Location = new System.Drawing.Point(6, 174);
+            this.butEldSpecificQuest.Name = "butEldSpecificQuest";
+            this.butEldSpecificQuest.Size = new System.Drawing.Size(121, 23);
+            this.butEldSpecificQuest.TabIndex = 16;
+            this.butEldSpecificQuest.Text = "Specific Quest";
+            this.butEldSpecificQuest.UseVisualStyleBackColor = true;
+            this.butEldSpecificQuest.Click += new System.EventHandler(this.butEldSpecificQuest_Click);
             // 
-            // comboEldMotivation
+            // butEldVisitorQuest
             // 
-            this.comboEldMotivation.FormattingEnabled = true;
-            this.comboEldMotivation.Items.AddRange(new object[] {
-            "Beast",
-            "Intelligent",
-            "Undead/Construct"});
-            this.comboEldMotivation.Location = new System.Drawing.Point(433, 310);
-            this.comboEldMotivation.Name = "comboEldMotivation";
-            this.comboEldMotivation.Size = new System.Drawing.Size(121, 21);
-            this.comboEldMotivation.TabIndex = 14;
-            this.comboEldMotivation.Text = "Beast";
+            this.butEldVisitorQuest.Location = new System.Drawing.Point(6, 205);
+            this.butEldVisitorQuest.Name = "butEldVisitorQuest";
+            this.butEldVisitorQuest.Size = new System.Drawing.Size(121, 23);
+            this.butEldVisitorQuest.TabIndex = 17;
+            this.butEldVisitorQuest.Text = "Visitor Quest";
+            this.butEldVisitorQuest.UseVisualStyleBackColor = true;
+            this.butEldVisitorQuest.Click += new System.EventHandler(this.butEldVisitorQuest_Click);
             // 
-            // tbEldMotivation
+            // butEldRumors
             // 
-            this.tbEldMotivation.Location = new System.Drawing.Point(434, 338);
-            this.tbEldMotivation.Name = "tbEldMotivation";
-            this.tbEldMotivation.Size = new System.Drawing.Size(120, 20);
-            this.tbEldMotivation.TabIndex = 15;
+            this.butEldRumors.Location = new System.Drawing.Point(6, 234);
+            this.butEldRumors.Name = "butEldRumors";
+            this.butEldRumors.Size = new System.Drawing.Size(121, 23);
+            this.butEldRumors.TabIndex = 18;
+            this.butEldRumors.Text = "Rumors";
+            this.butEldRumors.UseVisualStyleBackColor = true;
+            this.butEldRumors.Click += new System.EventHandler(this.butEldRumors_Click);
+            // 
+            // rtbEldHex
+            // 
+            this.rtbEldHex.Location = new System.Drawing.Point(574, 6);
+            this.rtbEldHex.Name = "rtbEldHex";
+            this.rtbEldHex.Size = new System.Drawing.Size(287, 71);
+            this.rtbEldHex.TabIndex = 19;
+            this.rtbEldHex.Text = "";
+            // 
+            // butEldLocations
+            // 
+            this.butEldLocations.Location = new System.Drawing.Point(438, 6);
+            this.butEldLocations.Name = "butEldLocations";
+            this.butEldLocations.Size = new System.Drawing.Size(121, 23);
+            this.butEldLocations.TabIndex = 20;
+            this.butEldLocations.Text = "Locations";
+            this.butEldLocations.UseVisualStyleBackColor = true;
+            this.butEldLocations.Click += new System.EventHandler(this.butEldLocations_Click);
+            // 
+            // butEldHexEvents
+            // 
+            this.butEldHexEvents.Location = new System.Drawing.Point(438, 81);
+            this.butEldHexEvents.Name = "butEldHexEvents";
+            this.butEldHexEvents.Size = new System.Drawing.Size(121, 23);
+            this.butEldHexEvents.TabIndex = 21;
+            this.butEldHexEvents.Text = "Events";
+            this.butEldHexEvents.UseVisualStyleBackColor = true;
+            this.butEldHexEvents.Click += new System.EventHandler(this.butEldHexEvents_Click);
+            // 
+            // rtbEldHexEvents
+            // 
+            this.rtbEldHexEvents.Location = new System.Drawing.Point(574, 83);
+            this.rtbEldHexEvents.Name = "rtbEldHexEvents";
+            this.rtbEldHexEvents.Size = new System.Drawing.Size(287, 58);
+            this.rtbEldHexEvents.TabIndex = 22;
+            this.rtbEldHexEvents.Text = "";
             // 
             // Form1
             // 
@@ -3336,6 +3416,13 @@
         private System.Windows.Forms.TextBox tbEldMotivation;
         private System.Windows.Forms.ComboBox comboEldMotivation;
         private System.Windows.Forms.Button butEldMotivation;
+        private System.Windows.Forms.Button butEldRumors;
+        private System.Windows.Forms.Button butEldVisitorQuest;
+        private System.Windows.Forms.Button butEldSpecificQuest;
+        private System.Windows.Forms.Button butEldLocations;
+        private System.Windows.Forms.RichTextBox rtbEldHex;
+        private System.Windows.Forms.Button butEldHexEvents;
+        private System.Windows.Forms.RichTextBox rtbEldHexEvents;
     }
 }
 

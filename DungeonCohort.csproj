@@ -64,6 +64,7 @@
     <Compile Include="DataSourceLoader.cs" />
     <Compile Include="Descriptors.cs" />
     <Compile Include="DualDescription.cs" />
+    <Compile Include="EldHex.cs" />
     <Compile Include="EldMagicItemGen.cs" />
     <Compile Include="EldQuests.cs" />
     <Compile Include="EldTables.cs" />

@@ -1526,5 +1526,48 @@ namespace DungeonCohort
             string result = table.Motivation(subject);
             tbEldMotivation.Text = result;
         }
+
+        private void butEldSpecificQuest_Click(object sender, EventArgs e)
+        {
+            string quest = EldQuests.SpecificAdventures();
+            var target = rtbEldQuestResult;
+            target.Clear();
+            PrintBody(target, quest);
+        }
+
+        private void butEldVisitorQuest_Click(object sender, EventArgs e)
+        {
+            string quest = EldQuests.VisitorQuest();
+            var target = rtbEldQuestResult;
+            target.Clear();
+            PrintBody(target, quest);
+        }
+
+        private void butEldRumors_Click(object sender, EventArgs e)
+        {
+            string quest = EldQuests.Rumors();
+            var target = rtbEldQuestResult;
+            target.Clear();
+            PrintBody(target, quest);
+        }
+
+        private void butEldLocations_Click(object sender, EventArgs e)
+        {
+            string loc = EldHex.HexLocations();
+            var target = rtbEldHex;
+            target.Clear();
+            PrintBody(target, loc);
+        }
+
+        private void butEldHexEvents_Click(object sender, EventArgs e)
+        {
+            int tier = 1;
+
+            string hexEvent = EldHex.HexEvent(tier, _ancestryIndex);
+            var target = rtbEldHexEvents;
+            target.Clear();
+            PrintBody(target, hexEvent);
+
+        }
     }
 }
