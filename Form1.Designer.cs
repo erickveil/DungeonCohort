@@ -87,6 +87,8 @@
             this.nud_chaosFactor = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.tabCrawl = new System.Windows.Forms.TabPage();
+            this.buShuffleCrawlContent = new System.Windows.Forms.Button();
+            this.butContentCard = new System.Windows.Forms.Button();
             this.but_crawlRoomHazard = new System.Windows.Forms.Button();
             this.but_crawlRoomType = new System.Windows.Forms.Button();
             this.bu_crawl_feature = new System.Windows.Forms.Button();
@@ -251,6 +253,22 @@
             this.butGenItems = new System.Windows.Forms.Button();
             this.butGenFurnature = new System.Windows.Forms.Button();
             this.rtbFurniture = new System.Windows.Forms.RichTextBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.rtbJg = new System.Windows.Forms.RichTextBox();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.butJgSocial = new System.Windows.Forms.Button();
+            this.butJgWoman = new System.Windows.Forms.Button();
+            this.butJgGeneral = new System.Windows.Forms.Button();
+            this.butJgMerchant = new System.Windows.Forms.Button();
+            this.jgGuildEncounter = new System.Windows.Forms.Button();
+            this.butJGMilitary = new System.Windows.Forms.Button();
+            this.butJgGentlemen = new System.Windows.Forms.Button();
+            this.butJGNoble = new System.Windows.Forms.Button();
+            this.butJGCity = new System.Windows.Forms.Button();
+            this.comboJgQuarters = new System.Windows.Forms.ComboBox();
+            this.butEldMotivation = new System.Windows.Forms.Button();
+            this.comboEldMotivation = new System.Windows.Forms.ComboBox();
+            this.tbEldMotivation = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -314,6 +332,8 @@
             this.groupBox13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEldLevel)).BeginInit();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.groupBox14.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtb_rndMonstOut
@@ -811,6 +831,7 @@
             this.TabAi.Controls.Add(this.tabPage2);
             this.TabAi.Controls.Add(this.tabPage3);
             this.TabAi.Controls.Add(this.tabPage4);
+            this.TabAi.Controls.Add(this.tabPage5);
             this.TabAi.Location = new System.Drawing.Point(0, 1);
             this.TabAi.Margin = new System.Windows.Forms.Padding(1);
             this.TabAi.Name = "TabAi";
@@ -1045,6 +1066,8 @@
             // 
             // tabCrawl
             // 
+            this.tabCrawl.Controls.Add(this.buShuffleCrawlContent);
+            this.tabCrawl.Controls.Add(this.butContentCard);
             this.tabCrawl.Controls.Add(this.but_crawlRoomHazard);
             this.tabCrawl.Controls.Add(this.but_crawlRoomType);
             this.tabCrawl.Controls.Add(this.bu_crawl_feature);
@@ -1073,6 +1096,26 @@
             this.tabCrawl.TabIndex = 2;
             this.tabCrawl.Text = "Crawl";
             this.tabCrawl.UseVisualStyleBackColor = true;
+            // 
+            // buShuffleCrawlContent
+            // 
+            this.buShuffleCrawlContent.Location = new System.Drawing.Point(9, 260);
+            this.buShuffleCrawlContent.Name = "buShuffleCrawlContent";
+            this.buShuffleCrawlContent.Size = new System.Drawing.Size(148, 23);
+            this.buShuffleCrawlContent.TabIndex = 22;
+            this.buShuffleCrawlContent.Text = "Reshuffle Content Cards";
+            this.buShuffleCrawlContent.UseVisualStyleBackColor = true;
+            this.buShuffleCrawlContent.Click += new System.EventHandler(this.buShuffleCrawlContent_Click);
+            // 
+            // butContentCard
+            // 
+            this.butContentCard.Location = new System.Drawing.Point(9, 230);
+            this.butContentCard.Name = "butContentCard";
+            this.butContentCard.Size = new System.Drawing.Size(148, 23);
+            this.butContentCard.TabIndex = 21;
+            this.butContentCard.Text = "Draw Content Card";
+            this.butContentCard.UseVisualStyleBackColor = true;
+            this.butContentCard.Click += new System.EventHandler(this.butContentCard_Click);
             // 
             // but_crawlRoomHazard
             // 
@@ -1128,7 +1171,7 @@
             // 
             this.butRestock.Location = new System.Drawing.Point(8, 369);
             this.butRestock.Name = "butRestock";
-            this.butRestock.Size = new System.Drawing.Size(148, 23);
+            this.butRestock.Size = new System.Drawing.Size(149, 23);
             this.butRestock.TabIndex = 15;
             this.butRestock.Text = "Restock";
             this.butRestock.UseVisualStyleBackColor = true;
@@ -1138,7 +1181,7 @@
             // 
             this.butRoomContents.Location = new System.Drawing.Point(8, 340);
             this.butRoomContents.Name = "butRoomContents";
-            this.butRoomContents.Size = new System.Drawing.Size(148, 23);
+            this.butRoomContents.Size = new System.Drawing.Size(149, 23);
             this.butRoomContents.TabIndex = 14;
             this.butRoomContents.Text = "Contents Only";
             this.butRoomContents.UseVisualStyleBackColor = true;
@@ -1146,7 +1189,7 @@
             // 
             // crawl_atmosphere
             // 
-            this.crawl_atmosphere.Location = new System.Drawing.Point(9, 230);
+            this.crawl_atmosphere.Location = new System.Drawing.Point(9, 178);
             this.crawl_atmosphere.Name = "crawl_atmosphere";
             this.crawl_atmosphere.Size = new System.Drawing.Size(148, 23);
             this.crawl_atmosphere.TabIndex = 13;
@@ -1156,7 +1199,7 @@
             // 
             // bu_dungeonIntel
             // 
-            this.bu_dungeonIntel.Location = new System.Drawing.Point(9, 201);
+            this.bu_dungeonIntel.Location = new System.Drawing.Point(9, 149);
             this.bu_dungeonIntel.Name = "bu_dungeonIntel";
             this.bu_dungeonIntel.Size = new System.Drawing.Size(148, 23);
             this.bu_dungeonIntel.TabIndex = 12;
@@ -2353,6 +2396,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.tbEldMotivation);
+            this.tabPage3.Controls.Add(this.comboEldMotivation);
+            this.tabPage3.Controls.Add(this.butEldMotivation);
             this.tabPage3.Controls.Add(this.groupBox13);
             this.tabPage3.Controls.Add(this.rtbEldArtifact);
             this.tabPage3.Controls.Add(this.buttEldArtifact);
@@ -2507,7 +2553,7 @@
             // 
             this.rtbEldResult.Location = new System.Drawing.Point(574, 176);
             this.rtbEldResult.Name = "rtbEldResult";
-            this.rtbEldResult.Size = new System.Drawing.Size(287, 137);
+            this.rtbEldResult.Size = new System.Drawing.Size(287, 97);
             this.rtbEldResult.TabIndex = 0;
             this.rtbEldResult.Text = "";
             this.rtbEldResult.TextChanged += new System.EventHandler(this.rtbEldResult_TextChanged);
@@ -2773,6 +2819,181 @@
             this.rtbFurniture.TabIndex = 0;
             this.rtbFurniture.Text = "";
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.rtbJg);
+            this.tabPage5.Controls.Add(this.groupBox14);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(867, 408);
+            this.tabPage5.TabIndex = 8;
+            this.tabPage5.Text = "JG";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // rtbJg
+            // 
+            this.rtbJg.Location = new System.Drawing.Point(294, 11);
+            this.rtbJg.Name = "rtbJg";
+            this.rtbJg.Size = new System.Drawing.Size(567, 391);
+            this.rtbJg.TabIndex = 1;
+            this.rtbJg.Text = "";
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.butJgSocial);
+            this.groupBox14.Controls.Add(this.butJgWoman);
+            this.groupBox14.Controls.Add(this.butJgGeneral);
+            this.groupBox14.Controls.Add(this.butJgMerchant);
+            this.groupBox14.Controls.Add(this.jgGuildEncounter);
+            this.groupBox14.Controls.Add(this.butJGMilitary);
+            this.groupBox14.Controls.Add(this.butJgGentlemen);
+            this.groupBox14.Controls.Add(this.butJGNoble);
+            this.groupBox14.Controls.Add(this.butJGCity);
+            this.groupBox14.Controls.Add(this.comboJgQuarters);
+            this.groupBox14.Location = new System.Drawing.Point(8, 6);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(139, 335);
+            this.groupBox14.TabIndex = 0;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "City Encounter";
+            // 
+            // butJgSocial
+            // 
+            this.butJgSocial.Location = new System.Drawing.Point(7, 78);
+            this.butJgSocial.Name = "butJgSocial";
+            this.butJgSocial.Size = new System.Drawing.Size(121, 23);
+            this.butJgSocial.TabIndex = 9;
+            this.butJgSocial.Text = "Social Level Encounter";
+            this.butJgSocial.UseVisualStyleBackColor = true;
+            this.butJgSocial.Click += new System.EventHandler(this.butJgSocial_Click);
+            // 
+            // butJgWoman
+            // 
+            this.butJgWoman.Location = new System.Drawing.Point(7, 299);
+            this.butJgWoman.Name = "butJgWoman";
+            this.butJgWoman.Size = new System.Drawing.Size(121, 23);
+            this.butJgWoman.TabIndex = 8;
+            this.butJgWoman.Text = "Woman Encounter";
+            this.butJgWoman.UseVisualStyleBackColor = true;
+            this.butJgWoman.Click += new System.EventHandler(this.butJgWoman_Click);
+            // 
+            // butJgGeneral
+            // 
+            this.butJgGeneral.Location = new System.Drawing.Point(7, 269);
+            this.butJgGeneral.Name = "butJgGeneral";
+            this.butJgGeneral.Size = new System.Drawing.Size(121, 23);
+            this.butJgGeneral.TabIndex = 7;
+            this.butJgGeneral.Text = "General Encounter";
+            this.butJgGeneral.UseVisualStyleBackColor = true;
+            this.butJgGeneral.Click += new System.EventHandler(this.butJgGeneral_Click);
+            // 
+            // butJgMerchant
+            // 
+            this.butJgMerchant.Location = new System.Drawing.Point(7, 239);
+            this.butJgMerchant.Name = "butJgMerchant";
+            this.butJgMerchant.Size = new System.Drawing.Size(121, 23);
+            this.butJgMerchant.TabIndex = 6;
+            this.butJgMerchant.Text = "Merchant Encounter";
+            this.butJgMerchant.UseVisualStyleBackColor = true;
+            this.butJgMerchant.Click += new System.EventHandler(this.butJgMerchant_Click);
+            // 
+            // jgGuildEncounter
+            // 
+            this.jgGuildEncounter.Location = new System.Drawing.Point(7, 209);
+            this.jgGuildEncounter.Name = "jgGuildEncounter";
+            this.jgGuildEncounter.Size = new System.Drawing.Size(121, 23);
+            this.jgGuildEncounter.TabIndex = 5;
+            this.jgGuildEncounter.Text = "Guild Encounter";
+            this.jgGuildEncounter.UseVisualStyleBackColor = true;
+            this.jgGuildEncounter.Click += new System.EventHandler(this.jgGuildEncounter_Click);
+            // 
+            // butJGMilitary
+            // 
+            this.butJGMilitary.Location = new System.Drawing.Point(7, 179);
+            this.butJGMilitary.Name = "butJGMilitary";
+            this.butJGMilitary.Size = new System.Drawing.Size(121, 23);
+            this.butJGMilitary.TabIndex = 4;
+            this.butJGMilitary.Text = "Military Encounter";
+            this.butJGMilitary.UseVisualStyleBackColor = true;
+            this.butJGMilitary.Click += new System.EventHandler(this.butJGMilitary_Click);
+            // 
+            // butJgGentlemen
+            // 
+            this.butJgGentlemen.Location = new System.Drawing.Point(7, 149);
+            this.butJgGentlemen.Name = "butJgGentlemen";
+            this.butJgGentlemen.Size = new System.Drawing.Size(121, 23);
+            this.butJgGentlemen.TabIndex = 3;
+            this.butJgGentlemen.Text = "Gentlemen Encounter";
+            this.butJgGentlemen.UseVisualStyleBackColor = true;
+            this.butJgGentlemen.Click += new System.EventHandler(this.butJgGentlemen_Click);
+            // 
+            // butJGNoble
+            // 
+            this.butJGNoble.Location = new System.Drawing.Point(7, 119);
+            this.butJGNoble.Name = "butJGNoble";
+            this.butJGNoble.Size = new System.Drawing.Size(121, 23);
+            this.butJGNoble.TabIndex = 2;
+            this.butJGNoble.Text = "Noble Encounter";
+            this.butJGNoble.UseVisualStyleBackColor = true;
+            this.butJGNoble.Click += new System.EventHandler(this.butJGNoble_Click);
+            // 
+            // butJGCity
+            // 
+            this.butJGCity.Location = new System.Drawing.Point(7, 48);
+            this.butJGCity.Name = "butJGCity";
+            this.butJGCity.Size = new System.Drawing.Size(121, 23);
+            this.butJGCity.TabIndex = 1;
+            this.butJGCity.Text = "City Encounter";
+            this.butJGCity.UseVisualStyleBackColor = true;
+            this.butJGCity.Click += new System.EventHandler(this.butJGCity_Click);
+            // 
+            // comboJgQuarters
+            // 
+            this.comboJgQuarters.FormattingEnabled = true;
+            this.comboJgQuarters.Items.AddRange(new object[] {
+            "Noble",
+            "Common",
+            "Plazas",
+            "Seafront",
+            "Merchant",
+            "Thieves"});
+            this.comboJgQuarters.Location = new System.Drawing.Point(7, 20);
+            this.comboJgQuarters.Name = "comboJgQuarters";
+            this.comboJgQuarters.Size = new System.Drawing.Size(121, 21);
+            this.comboJgQuarters.TabIndex = 0;
+            this.comboJgQuarters.Text = "Plazas";
+            // 
+            // butEldMotivation
+            // 
+            this.butEldMotivation.Location = new System.Drawing.Point(434, 280);
+            this.butEldMotivation.Name = "butEldMotivation";
+            this.butEldMotivation.Size = new System.Drawing.Size(120, 23);
+            this.butEldMotivation.TabIndex = 13;
+            this.butEldMotivation.Text = "Motivation";
+            this.butEldMotivation.UseVisualStyleBackColor = true;
+            this.butEldMotivation.Click += new System.EventHandler(this.butEldMotivation_Click);
+            // 
+            // comboEldMotivation
+            // 
+            this.comboEldMotivation.FormattingEnabled = true;
+            this.comboEldMotivation.Items.AddRange(new object[] {
+            "Beast",
+            "Intelligent",
+            "Undead/Construct"});
+            this.comboEldMotivation.Location = new System.Drawing.Point(433, 310);
+            this.comboEldMotivation.Name = "comboEldMotivation";
+            this.comboEldMotivation.Size = new System.Drawing.Size(121, 21);
+            this.comboEldMotivation.TabIndex = 14;
+            this.comboEldMotivation.Text = "Beast";
+            // 
+            // tbEldMotivation
+            // 
+            this.tbEldMotivation.Location = new System.Drawing.Point(434, 338);
+            this.tbEldMotivation.Name = "tbEldMotivation";
+            this.tbEldMotivation.Size = new System.Drawing.Size(120, 20);
+            this.tbEldMotivation.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2861,10 +3082,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDurRounds1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCombatRounds)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEldLevel)).EndInit();
             this.tabPage4.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.groupBox14.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3094,6 +3318,24 @@
         private System.Windows.Forms.Button butGenFurnature;
         private System.Windows.Forms.RichTextBox rtbFurniture;
         private System.Windows.Forms.Button butFurnBook;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.ComboBox comboJgQuarters;
+        private System.Windows.Forms.RichTextBox rtbJg;
+        private System.Windows.Forms.Button butJgWoman;
+        private System.Windows.Forms.Button butJgGeneral;
+        private System.Windows.Forms.Button butJgMerchant;
+        private System.Windows.Forms.Button jgGuildEncounter;
+        private System.Windows.Forms.Button butJGMilitary;
+        private System.Windows.Forms.Button butJgGentlemen;
+        private System.Windows.Forms.Button butJGNoble;
+        private System.Windows.Forms.Button butJGCity;
+        private System.Windows.Forms.Button butJgSocial;
+        private System.Windows.Forms.Button butContentCard;
+        private System.Windows.Forms.Button buShuffleCrawlContent;
+        private System.Windows.Forms.TextBox tbEldMotivation;
+        private System.Windows.Forms.ComboBox comboEldMotivation;
+        private System.Windows.Forms.Button butEldMotivation;
     }
 }
 

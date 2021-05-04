@@ -74,7 +74,7 @@ namespace DungeonCohort
             }
 
             var result = table.GetResult();
-            string motivation = Motivation(result.Type, location, lvl);
+            string motivation = Motivation(result.Type);
             string encounterStr = result.ToString(lvl) + " - " + motivation;
             if (encounterStr.Contains("; "))
             {
@@ -84,7 +84,7 @@ namespace DungeonCohort
         }
 
 
-        public string Motivation(string type, EldBiome location, int lvl)
+        public string Motivation(string type)
         {
             var table = new RandomTable<string>();
 
@@ -92,7 +92,7 @@ namespace DungeonCohort
             {
                 table.AddItem("Sleeping", 1);
                 table.AddItem("Dying", 1);
-                table.AddItem("Mating", 2);
+                table.AddItem("Feeding young/Nesting", 2);
                 table.AddItem("Eating/Being eaten; ", 2);
                 table.AddItem("Patrolling", 3);
                 table.AddItem("Walking", 3);

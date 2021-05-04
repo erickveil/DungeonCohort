@@ -52,7 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CardDeck.cs" />
     <Compile Include="CombatAi.cs" />
+    <Compile Include="CrawlRoomContentDeck.cs" />
     <Compile Include="DungeonAtmosphere.cs" />
     <Compile Include="DungeonFurnishings.cs" />
     <Compile Include="DungeonIntel.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="HexCrawlScenery.cs" />
     <Compile Include="HexCrawlSettlement.cs" />
     <Compile Include="HexCrawlTrick.cs" />
+    <Compile Include="JgCityEncounter.cs" />
     <Compile Include="JsonLoading\Ancestry.cs" />
     <Compile Include="JsonLoading\AncestryIndex.cs" />
     <Compile Include="JsonLoading\ArtObjects.cs" />

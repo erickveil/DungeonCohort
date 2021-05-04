@@ -1365,5 +1365,166 @@ namespace DungeonCohort
             PrintBody(target, item);
 
         }
+
+        private void butJGCity_Click(object sender, EventArgs e)
+        {
+            var encounter = new JgCityEncounter();
+            string quarters = comboJgQuarters.Text;
+            encounter.init(quarters);
+            var target = rtbJg;
+            target.Clear();
+            PrintBody(target, encounter.toString());
+        }
+
+        private void butJgSocial_Click(object sender, EventArgs e)
+        {
+            var encounter = new JgCityEncounter();
+            string quarters = comboJgQuarters.Text;
+            encounter.init(quarters);
+            encounter.Who = encounter.socialLevelEncounter();
+
+            var target = rtbJg;
+            target.Clear();
+            PrintBody(target, encounter.Who + " (SL: " + encounter.SocialLevel + ")");
+
+        }
+
+        private void butJGNoble_Click(object sender, EventArgs e)
+        {
+            var encounter = new JgCityEncounter();
+            string quarters = comboJgQuarters.Text;
+            encounter.init(quarters);
+            encounter.Who = encounter.nobleEncounter();
+
+            var target = rtbJg;
+            target.Clear();
+            PrintBody(target, encounter.toString());
+        }
+
+        private void butJgGentlemen_Click(object sender, EventArgs e)
+        {
+            var encounter = new JgCityEncounter();
+            string quarters = comboJgQuarters.Text;
+            encounter.init(quarters);
+            encounter.Who = encounter.gentlemenEncounter();
+
+            var target = rtbJg;
+            target.Clear();
+            PrintBody(target, encounter.toString());
+
+        }
+
+        private void butJGMilitary_Click(object sender, EventArgs e)
+        {
+            var encounter = new JgCityEncounter();
+            string quarters = comboJgQuarters.Text;
+            encounter.init(quarters);
+            encounter.Who = encounter.militaryEncounter();
+
+            var target = rtbJg;
+            target.Clear();
+            PrintBody(target, encounter.toString());
+
+        }
+
+        private void jgGuildEncounter_Click(object sender, EventArgs e)
+        {
+            var encounter = new JgCityEncounter();
+            string quarters = comboJgQuarters.Text;
+            encounter.init(quarters);
+            encounter.Who = encounter.guildEncounter();
+
+            var target = rtbJg;
+            target.Clear();
+            PrintBody(target, encounter.toString());
+
+        }
+
+        private void butJgMerchant_Click(object sender, EventArgs e)
+        {
+            var encounter = new JgCityEncounter();
+            string quarters = comboJgQuarters.Text;
+            encounter.init(quarters);
+            encounter.Who = encounter.merchantEncounter();
+
+            var target = rtbJg;
+            target.Clear();
+            PrintBody(target, encounter.toString());
+
+        }
+
+        private void butJgGeneral_Click(object sender, EventArgs e)
+        {
+            var encounter = new JgCityEncounter();
+            string quarters = comboJgQuarters.Text;
+            encounter.init(quarters);
+            encounter.Who = encounter.generalEncounter();
+
+            var target = rtbJg;
+            target.Clear();
+            PrintBody(target, encounter.toString());
+
+        }
+
+        private void butJgWoman_Click(object sender, EventArgs e)
+        {
+            var encounter = new JgCityEncounter();
+            string quarters = comboJgQuarters.Text;
+            encounter.init(quarters);
+            encounter.Who = encounter.womanEncounter();
+
+            var target = rtbJg;
+            target.Clear();
+            PrintBody(target, encounter.toString());
+
+
+        }
+
+        private CrawlRoomContentDeck _crawlRoomContentDeck = null;
+
+        private void butContentCard_Click(object sender, EventArgs e)
+        {
+            if (_crawlRoomContentDeck == null)
+            {
+                _crawlRoomContentDeck = new CrawlRoomContentDeck();
+                _crawlRoomContentDeck.BuildDeck();
+            }
+
+            string result = _crawlRoomContentDeck.DrawCard();
+            var target = rtb_Crawl;
+            target.Clear();
+            PrintBody(target, result + 
+                "\n" +
+                "\nDraw Deck Count: " + _crawlRoomContentDeck.RoomContentDeck.CountDrawDeck() +
+                "\nDiscard Deck Count: " + _crawlRoomContentDeck.RoomContentDeck.CountDiscardDeck()
+                );
+
+        }
+
+        private void buShuffleCrawlContent_Click(object sender, EventArgs e)
+        {
+            if (_crawlRoomContentDeck == null)
+            {
+                _crawlRoomContentDeck = new CrawlRoomContentDeck();
+                _crawlRoomContentDeck.BuildDeck();
+            }
+
+            _crawlRoomContentDeck.RoomContentDeck.ReshuffleDeck();
+            var target = rtb_Crawl;
+            target.Clear();
+            PrintBody(target, 
+                "\nDraw Deck Count: " + _crawlRoomContentDeck.RoomContentDeck.CountDrawDeck() +
+                "\nDiscard Deck Count: " + _crawlRoomContentDeck.RoomContentDeck.CountDiscardDeck() 
+                );
+
+        }
+
+        private void butEldMotivation_Click(object sender, EventArgs e)
+        {
+            var table = new EldTables();
+            string subject = comboEldMotivation.Text;
+            string result = table.Motivation(subject);
+            tbEldMotivation.Text = result;
+        }
     }
 }
