@@ -90,7 +90,12 @@ namespace DungeonCohort
             table.AddItem("Bracers");
             table.AddItem("Breastplate");
             table.AddItem("Cup");
-
+            table.AddItem("Battleaxe");
+            table.AddItem("Greataxe");
+            table.AddItem("Glaive");
+            table.AddItem("Pike");
+            table.AddItem("Halberd");
+            table.AddItem("Warhammer");
 
             return table.GetResult();
         }

@@ -104,6 +104,7 @@ namespace DungeonCohort
                 table.AddItem("Rest/Relax/Nest", 4);
                 table.AddItem("Fleeing/Pursuit; ", 3);
                 table.AddItem("Hunting/Gathering", 3);
+                table.AddItem("Shadowing/Stalking", 1);
 
                 table.AddItem(AlteredState(), 1);
 
@@ -129,6 +130,7 @@ namespace DungeonCohort
                 table.AddItem("Competing", 3);
                 table.AddItem("Resting/Camp", 1);
                 table.AddItem("Sleeping", 1);
+                table.AddItem("Shadowing/Stalking", 1);
             }
             else
             {

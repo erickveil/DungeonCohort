@@ -1569,5 +1569,15 @@ namespace DungeonCohort
             PrintBody(target, hexEvent);
 
         }
+
+        private void butEldNpc_Click(object sender, EventArgs e)
+        {
+            int tier = 1;
+            var npc = EldHex.Npc(tier, _ancestryIndex);
+
+            var target = rtbEldNpc;
+            target.Clear();
+            PrintBody(target, npc);
+        }
     }
 }

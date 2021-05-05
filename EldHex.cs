@@ -68,7 +68,7 @@ namespace DungeonCohort
             var table = new RandomTable<string>();
 
             table.AddItem("Bandit Ambush");
-            table.AddItem("Battle: " + Battle());
+            table.AddItem("Battle: " + Battle() + " (" + WarringFactions() + " vs " + WarringFactions() + ")");
             table.AddItem("Flora: " + Flora());
             table.AddItem("Camp: " + Camp(tier, ancestryIndex));
             table.AddItem("Traveling Merchant: " + Merchant());
@@ -76,7 +76,7 @@ namespace DungeonCohort
             table.AddItem("Ritual");
             table.AddItem("A discarded trinket or treasure");
             table.AddItem("Quicksand/sinkhole");
-            table.AddItem(AstronomicalEvent());
+            table.AddItem("Astronomical Event: " + AstronomicalEvent());
             table.AddItem("Site of an execution");
             table.AddItem("Allergic reaction to something in area");
             table.AddItem("Earthquake or avalanche");
@@ -85,7 +85,7 @@ namespace DungeonCohort
             table.AddItem("Horse/Pack Animal/Hireling becomes pregnant or ill");
             table.AddItem("PC lost an item");
             table.AddItem("Find strange trash, such as wagon wheel or chest of clothing");
-            table.AddItem("Unlucky omen");
+            table.AddItem("Unlucky omen: " + BadOmens());
             table.AddItem("Curious non-dangerous creature approaches: " + Animal());
             table.AddItem("Discover insect hive");
             table.AddItem("Disturb insect hive");
@@ -96,6 +96,48 @@ namespace DungeonCohort
             table.AddItem("Animal Herd: " + HerdAnimal());
             table.AddItem("Fire");
             table.AddItem("Volcanic activity");
+
+            return table.GetResult();
+        }
+
+        public static string BadOmens()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Cat lies dead and smells of rot");
+            table.AddItem("Moss grows on south side of a tree or rock");
+            table.AddItem("Black bird files widdershins overhead");
+            table.AddItem("Black flies cloud over puddle of muddy water");
+            table.AddItem("Blade tree leaves curl at their tips");
+            table.AddItem("Old hangman's noose hangs over path");
+            table.AddItem("Bones found arranged in a triangle");
+            table.AddItem("Smell of sulfur");
+            table.AddItem("Sun/moon appears red when a cloud covers it");
+            table.AddItem("Bad star appears in the sky");
+            table.AddItem("The call of a blue owl is heard");
+            table.AddItem("Snake found biting its tail");
+            table.AddItem("Animal found, starved to death");
+            table.AddItem("Unseasonal bloom of a tree");
+            table.AddItem("Ghostly lights bob in the distance");
+            table.AddItem("Copper piece found tails up");
+            table.AddItem("Mold growth covers tree trunk");
+
+            return table.GetResult();
+        }
+
+        public static string WarringFactions()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Blacktalons");
+            table.AddItem("Forest Orcs");
+            table.AddItem("Hill Orcs");
+            table.AddItem("Mountain Orcs");
+            table.AddItem("Hobgoblins");
+            table.AddItem("Brigands");
+            table.AddItem("Savages");
+            table.AddItem("Necromancer");
+            table.AddItem("Draugr");
 
             return table.GetResult();
         }
@@ -447,7 +489,7 @@ namespace DungeonCohort
             table.AddItem("Engaged in Battle");
             table.AddItem("Recently Fought");
             table.AddItem("Scavengers Picking");
-            table.AddItem("Rotting Losses");
+            table.AddItem("Stripped bodies");
             table.AddItem("Old Battlefield");
 
             return table.GetResult();

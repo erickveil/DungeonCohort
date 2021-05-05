@@ -39,6 +39,11 @@ namespace DungeonCohort
             return NumAppearing.ToString() + " " + Name;
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public int CalcNumAppearing(int lvl)
         {
             var die = Dice.Instance;
