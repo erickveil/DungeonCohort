@@ -364,10 +364,9 @@ namespace DungeonCohort
             }
             else if (biome == EldBiome.Dungeon)
             {
-                table.AddItem(Devils(), 1);
-                table.AddItem(Demons(), 1);
-                table.AddItem(Yugoloths(), 2);
+                table.AddItem(Fiends(), 2);
                 table.AddItem(new EldUnit("Slaad Tadpole", "1/8"));
+                table.AddItem(new EldUnit("Chaosling", "1/4"), 2);
                 table.AddItem(new EldUnit("Gargoyle", "2"));
             }
             else if (biome == EldBiome.Village)
@@ -384,6 +383,18 @@ namespace DungeonCohort
             var result = table.GetResult();
             result.Type = "Intelligent";
             return result;
+        }
+
+        public EldUnit Fiends()
+        {
+            var table = new RandomTable<EldUnit>();
+
+            table.AddItem(Devils());
+            table.AddItem(Demons());
+            table.AddItem(Yugoloths());
+
+            return table.GetResult();
+
         }
 
         public EldUnit Undead(EldBiome biome)
