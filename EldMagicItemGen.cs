@@ -402,7 +402,7 @@ namespace DungeonCohort
         }
         */
 
-        static string symbology()
+        public static string symbology()
         {
             var table = new RandomTable<string>();
 
@@ -417,6 +417,21 @@ namespace DungeonCohort
             table.AddItem("leaf");
             table.AddItem("mountain");
             table.AddItem("dragon");
+            table.AddItem("bat");
+            table.AddItem("skull");
+            table.AddItem("pentacle");
+            table.AddItem("heart");
+            table.AddItem("diamond");
+            table.AddItem("sword");
+            table.AddItem("gryphon");
+            table.AddItem("claw");
+            table.AddItem("'X'");
+            table.AddItem("circle");
+            table.AddItem("eye");
+            table.AddItem("hand");
+            table.AddItem("wolf");
+            table.AddItem("bird");
+            table.AddItem("cat");
 
             return table.GetResult();
         }

@@ -40,7 +40,7 @@ namespace DungeonCohort
             table.AddItem("Abandoned Campsite (" + ageTable.GetResult() + ")");
             table.AddItem("Discarded item");
             table.AddItem("Fountain");
-            table.AddItem("Altar");
+            table.AddItem("Altar emblazoned with: " + EldMagicItemGen.symbology());
             table.AddItem("Rain Cistern");
             table.AddItem("Floating Stones");
             table.AddItem("Shallow Grave with a makeshift tombstone");

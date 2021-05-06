@@ -45,7 +45,6 @@ namespace DungeonCohort
 
             var table = new RandomTable<string>();
             table.AddItem(Storage());
-            table.AddItem("Altar");
             table.AddItem("Armchair");
             table.AddItem("Armoire");
             table.AddItem("Curtain");
@@ -58,23 +57,19 @@ namespace DungeonCohort
             table.AddItem("Candelabrum");
             table.AddItem("Carpet");
             table.AddItem("Chandelier");
-            table.AddItem("Pile of charcoal");
             table.AddItem("Chair");
             table.AddItem("Wardrobe");
-            table.AddItem("Pile of coal");
             table.AddItem("Couch");
-            table.AddItem("Cupboard");
             table.AddItem("Cushion");
             table.AddItem("Dais");
             table.AddItem("Desk");
             table.AddItem("Fireplace");
             table.AddItem("Fountain");
-            table.AddItem("Fresco");
+            table.AddItem("Fresco: " + HexCrawlLandmark.ChooseStatueSubject());
             table.AddItem("Grindstone");
             table.AddItem("Idol");
             table.AddItem("Keg");
             table.AddItem("Loom");
-            table.AddItem("Mattress");
             table.AddItem("Painting");
             table.AddItem("Pedestal");
             table.AddItem("Pillow");
@@ -84,16 +79,63 @@ namespace DungeonCohort
             table.AddItem("Shrine");
             table.AddItem("Sofa");
             table.AddItem("Stand");
-            table.AddItem("Statue");
-            table.AddItem("Stool");
             table.AddItem("Table");
-            table.AddItem("Tapestry");
             table.AddItem("Urn");
             table.AddItem("Wall basin");
-            table.AddItem("Pile of firewood");
-            table.AddItem("Workbench");
+            table.AddItem("Mushrooms");
+            table.AddItem("Mold");
+            table.AddItem("Giant Mushroom");
+            table.AddItem("Standing Stone");
+            table.AddItem("Statue: " + HexCrawlLandmark.ChooseStatueSubject());
+            table.AddItem("Mural: " + HexCrawlLandmark.ChooseStatueSubject());
+            table.AddItem("Tapestry: " + HexCrawlLandmark.ChooseStatueSubject());
+            table.AddItem("Painting: " + HexCrawlLandmark.ChooseStatueSubject());
+            table.AddItem("Bass Relief: " + HexCrawlLandmark.ChooseStatueSubject());
+            table.AddItem("Column of light");
+            table.AddItem("Columns");
+            table.AddItem("Armor stand");
+            table.AddItem("Mosaic: " + HexCrawlLandmark.ChooseStatueSubject());
+            table.AddItem("Workshop: " + Workshop());
+            table.AddItem("Runes");
+            table.AddItem("Glyphs");
+            table.AddItem("Altar emblazoned with :" + EldMagicItemGen.symbology());
             return table.GetResult();
+        }
 
+        public static string Workshop()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Boyer");
+            table.AddItem("Carpenter");
+            table.AddItem("Jeweler");
+            table.AddItem("Mason");
+            table.AddItem("Butcher");
+            table.AddItem("Mechanic");
+            table.AddItem("Farmer");
+            table.AddItem("Fishery");
+            table.AddItem("Crafts");
+            table.AddItem("Siege");
+            table.AddItem("Wood Furnace");
+            table.AddItem("Magma Smelter");
+            table.AddItem("Magma Kiln");
+            table.AddItem("Magma glass furnace");
+            table.AddItem("Tanner");
+            table.AddItem("Loom");
+            table.AddItem("Still");
+            table.AddItem("Ashery");
+            table.AddItem("Screw Press");
+            table.AddItem("Smelter");
+            table.AddItem("Quern");
+            table.AddItem("Kiln");
+            table.AddItem("Glass furnace");
+            table.AddItem("Leather works");
+            table.AddItem("Dyer");
+            table.AddItem("Clothier");
+            table.AddItem("Metalsmith forge");
+            table.AddItem("Magma forge");
+
+            return table.GetResult();
         }
 
         public static string Items()
