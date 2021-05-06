@@ -289,12 +289,13 @@ namespace DungeonCohort
             table.AddItem("Disadvantage on saves against poison");
             table.AddItem("Strong stench noticiable up to 10 feet away");
             table.AddItem("All holy water within 10 feet is destoyed");
-            table.AddItem("Physically ill and have disadvantage on Strength and Constitution ability checks or saves");
-            table.AddItem("Weight increases by 1d4x10 lbs");
+            table.AddItem("Physically ill and have disadvantage on Strength and Constitution ability checks, skill checks, or saves");
+            table.AddItem("Weight increases by 5 lbs each time it is used");
             table.AddItem("Appearance changes (up to DM)");
             table.AddItem("Deafened when more than 10 feet from this item");
-            table.AddItem("Weight drops by 1d4x5 lbs");
-            table.AddItem("Can't smell");
+            table.AddItem("Weight drops by 5 lbs each time this is used");
+            table.AddItem("Age 1 month with each use");
+            table.AddItem("Become younger by 1 month with each use");
             table.AddItem("Nonmagical flames are extinguished within 30 feet");
             table.AddItem("Other creatures cannot take a short or long rest within 300 feet of you");
             table.AddItem("Deal 1d6 necrotic damage to any plant you touch that isn't a creature");
