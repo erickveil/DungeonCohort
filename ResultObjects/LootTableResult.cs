@@ -158,8 +158,50 @@ namespace DungeonCohort
             var dice = Dice.Instance;
             bool isNotTrapped = dice.Roll(1, 20) <= 11;
             if (isNotTrapped) { return; }
+            bool isMagicCircle = dice.Roll(1, 6) <= 2;
+            if (isMagicCircle)
+            {
+                CreateProtectiveCircle(tier);
+            }
+            else
+            {
+                ProtectedBy = new CrawlRoomTrap();
+                ProtectedBy.InitAsDoorTrap(tier);
+            }
+        }
+
+        public void CreateProtectiveCircle(int tier)
+        {
             ProtectedBy = new CrawlRoomTrap();
-            ProtectedBy.InitAsDoorTrap(tier);
+
+            var effectTable = new RandomTable<string>();
+            effectTable.AddItem("Teleportation");
+            effectTable.AddItem("Force Shield");
+            effectTable.AddItem("Damage");
+            effectTable.AddItem("Summoning");
+
+            var damageTable = new RandomTable<string>();
+            damageTable.AddItem("Force");
+            damageTable.AddItem("Psychic");
+            damageTable.AddItem("Necrotic");
+            damageTable.AddItem("Cold");
+            damageTable.AddItem("Fire");
+            damageTable.AddItem("Lightning");
+            damageTable.AddItem("Thunder");
+
+            ProtectedBy.Effect = effectTable.GetResult();
+            ProtectedBy.Radius = 10;
+            ProtectedBy.Type = "Magic Circle";
+
+            if (ProtectedBy.Effect == "Damage")
+            {
+                ProtectedBy.Severity = CrawlRoomTrap.ChooseSeverity();
+                ProtectedBy.DC = CrawlRoomTrap.ChooseDc(ProtectedBy.Severity);
+                ProtectedBy.DamageDice = CrawlRoomTrap.ChooseDamage(tier, ProtectedBy.Severity);
+                ProtectedBy.DamageType = damageTable.GetResult();
+            }
+
+
         }
 
         public void PurgeResults(MagicItemPermissions permissions)

@@ -99,6 +99,47 @@ namespace DungeonCohort
             table.AddItem("Runes");
             table.AddItem("Glyphs");
             table.AddItem("Altar emblazoned with :" + EldMagicItemGen.symbology());
+            table.AddItem("Skeleton: " + Skeleton());
+            table.AddItem("Cobwebs");
+            table.AddItem("Sticky Webs");
+            table.AddItem("Magic Circle: " + Circle());
+            table.AddItem("Archway (free-standing or against wall)");
+            table.AddItem("Table");
+            table.AddItem("Skull: " + Skeleton());
+            table.AddItem("Body: " + Skeleton());
+            table.AddItem("Bones: " + Skeleton());
+            table.AddItem("Broken weapon");
+            table.AddItem("Armor parts");
+            table.AddItem("Gong");
+            table.AddItem("Great Horn");
+            return table.GetResult();
+        }
+
+        public static string Circle()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Ritual");
+            table.AddItem("Teleportation Target");
+            table.AddItem("Summoning Circle (Spell required)");
+            table.AddItem("Divination focus");
+            table.AddItem("Protection");
+            table.AddItem("AoE Spell target focus (Casting required)");
+            table.AddItem("Trap trigger");
+            table.AddItem("Decoration/mandala");
+            table.AddItem("Unknown use");
+
+            return table.GetResult();
+        }
+
+        public static string Skeleton()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Inhabitant");
+            table.AddItem("Beast");
+            table.AddItem("Adventurer");
+
             return table.GetResult();
         }
 
