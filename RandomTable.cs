@@ -13,6 +13,15 @@ namespace Darkmoor
         private Dice _dice;
 
         /// <summary>
+        /// Allows for bell curves on the table by specifying the number of 
+        /// dice to roll for the table.
+        /// Note that you should buffer the front of the table with N-1 elements
+        /// and if you have a number of items not divisible by N, Padd the end 
+        /// until you do.
+        /// </summary>
+        public int NumTableDice = 1;
+
+        /// <summary>
         /// Initializes the entry list
         /// </summary>
         public RandomTable()
@@ -44,10 +53,18 @@ namespace Darkmoor
         /// <returns></returns>
         public T GetResult()
         {
-            if (_ItemList.Count == 0) { return default(T);  }
-            int roll = _dice.Roll(1, _ItemList.Count) - 1;
-            var result = _ItemList[roll];
-            return result;
+            if (_ItemList.Count == 0) { return default(T); }
+            if (NumTableDice == 1)
+            {
+                int roll = _dice.Roll(1, _ItemList.Count) - 1;
+                var result = _ItemList[roll];
+                return result;
+            }
+
+            int dieSize = _ItemList.Count / NumTableDice;
+            int multiroll = _dice.Roll(NumTableDice, dieSize) - 1;
+            var multiresult = _ItemList[multiroll];
+            return multiresult;
         }
 
         /// <summary>

@@ -1579,5 +1579,22 @@ namespace DungeonCohort
             target.Clear();
             PrintBody(target, npc);
         }
+
+        private void butEldHirling_Click(object sender, EventArgs e)
+        {
+            var target = rtbUnderdarkCrawl;
+            string npc = EldHenchmen.GenerateHireling();
+            target.Clear();
+            PrintBody(target, npc);
+        }
+
+        private void butEldHirelingGroup_Click(object sender, EventArgs e)
+        {
+            var target = rtbUnderdarkCrawl;
+            string npc = EldHenchmen.GenerateAllHirelings();
+            target.Clear();
+            PrintBody(target, npc);
+
+        }
     }
 }

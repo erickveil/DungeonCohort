@@ -216,6 +216,8 @@
             this.butEndCombat = new System.Windows.Forms.Button();
             this.butRound = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.rtbEldNpc = new System.Windows.Forms.RichTextBox();
+            this.butEldNpc = new System.Windows.Forms.Button();
             this.rtbEldHexEvents = new System.Windows.Forms.RichTextBox();
             this.butEldHexEvents = new System.Windows.Forms.Button();
             this.butEldLocations = new System.Windows.Forms.Button();
@@ -276,8 +278,8 @@
             this.butJGNoble = new System.Windows.Forms.Button();
             this.butJGCity = new System.Windows.Forms.Button();
             this.comboJgQuarters = new System.Windows.Forms.ComboBox();
-            this.butEldNpc = new System.Windows.Forms.Button();
-            this.rtbEldNpc = new System.Windows.Forms.RichTextBox();
+            this.butEldHirling = new System.Windows.Forms.Button();
+            this.butEldHirelingGroup = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -875,7 +877,7 @@
             this.tab_dev.Margin = new System.Windows.Forms.Padding(1);
             this.tab_dev.Name = "tab_dev";
             this.tab_dev.Padding = new System.Windows.Forms.Padding(1);
-            this.tab_dev.Size = new System.Drawing.Size(867, 408);
+            this.tab_dev.Size = new System.Drawing.Size(867, 426);
             this.tab_dev.TabIndex = 0;
             this.tab_dev.Text = "Development";
             this.tab_dev.UseVisualStyleBackColor = true;
@@ -937,7 +939,7 @@
             this.tab_mythic.Margin = new System.Windows.Forms.Padding(1);
             this.tab_mythic.Name = "tab_mythic";
             this.tab_mythic.Padding = new System.Windows.Forms.Padding(1);
-            this.tab_mythic.Size = new System.Drawing.Size(867, 408);
+            this.tab_mythic.Size = new System.Drawing.Size(867, 426);
             this.tab_mythic.TabIndex = 1;
             this.tab_mythic.Text = "GM Emulation";
             this.tab_mythic.UseVisualStyleBackColor = true;
@@ -1101,7 +1103,7 @@
             this.tabCrawl.Location = new System.Drawing.Point(4, 22);
             this.tabCrawl.Name = "tabCrawl";
             this.tabCrawl.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCrawl.Size = new System.Drawing.Size(867, 408);
+            this.tabCrawl.Size = new System.Drawing.Size(867, 426);
             this.tabCrawl.TabIndex = 2;
             this.tabCrawl.Text = "Crawl";
             this.tabCrawl.UseVisualStyleBackColor = true;
@@ -1366,7 +1368,7 @@
             this.tabHexCrawl.Location = new System.Drawing.Point(4, 22);
             this.tabHexCrawl.Name = "tabHexCrawl";
             this.tabHexCrawl.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHexCrawl.Size = new System.Drawing.Size(867, 408);
+            this.tabHexCrawl.Size = new System.Drawing.Size(867, 426);
             this.tabHexCrawl.TabIndex = 3;
             this.tabHexCrawl.Text = "Hex Crawl";
             this.tabHexCrawl.UseVisualStyleBackColor = true;
@@ -1470,7 +1472,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(867, 408);
+            this.tabPage1.Size = new System.Drawing.Size(867, 426);
             this.tabPage1.TabIndex = 4;
             this.tabPage1.Text = "AI";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1590,7 +1592,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(867, 408);
+            this.tabPage2.Size = new System.Drawing.Size(867, 426);
             this.tabPage2.TabIndex = 5;
             this.tabPage2.Text = "Timers";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -2405,6 +2407,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.butEldHirelingGroup);
+            this.tabPage3.Controls.Add(this.butEldHirling);
             this.tabPage3.Controls.Add(this.rtbEldNpc);
             this.tabPage3.Controls.Add(this.butEldNpc);
             this.tabPage3.Controls.Add(this.rtbEldHexEvents);
@@ -2433,6 +2437,24 @@
             this.tabPage3.TabIndex = 6;
             this.tabPage3.Text = "Eld";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // rtbEldNpc
+            // 
+            this.rtbEldNpc.Location = new System.Drawing.Point(574, 351);
+            this.rtbEldNpc.Name = "rtbEldNpc";
+            this.rtbEldNpc.Size = new System.Drawing.Size(287, 69);
+            this.rtbEldNpc.TabIndex = 24;
+            this.rtbEldNpc.Text = "";
+            // 
+            // butEldNpc
+            // 
+            this.butEldNpc.Location = new System.Drawing.Point(574, 322);
+            this.butEldNpc.Name = "butEldNpc";
+            this.butEldNpc.Size = new System.Drawing.Size(121, 23);
+            this.butEldNpc.TabIndex = 23;
+            this.butEldNpc.Text = "NPC";
+            this.butEldNpc.UseVisualStyleBackColor = true;
+            this.butEldNpc.Click += new System.EventHandler(this.butEldNpc_Click);
             // 
             // rtbEldHexEvents
             // 
@@ -2700,7 +2722,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(867, 408);
+            this.tabPage4.Size = new System.Drawing.Size(867, 426);
             this.tabPage4.TabIndex = 7;
             this.tabPage4.Text = "Furnish";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -2940,7 +2962,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(867, 408);
+            this.tabPage5.Size = new System.Drawing.Size(867, 426);
             this.tabPage5.TabIndex = 8;
             this.tabPage5.Text = "JG";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -3078,23 +3100,25 @@
             this.comboJgQuarters.TabIndex = 0;
             this.comboJgQuarters.Text = "Plazas";
             // 
-            // butEldNpc
+            // butEldHirling
             // 
-            this.butEldNpc.Location = new System.Drawing.Point(574, 322);
-            this.butEldNpc.Name = "butEldNpc";
-            this.butEldNpc.Size = new System.Drawing.Size(121, 23);
-            this.butEldNpc.TabIndex = 23;
-            this.butEldNpc.Text = "NPC";
-            this.butEldNpc.UseVisualStyleBackColor = true;
-            this.butEldNpc.Click += new System.EventHandler(this.butEldNpc_Click);
+            this.butEldHirling.Location = new System.Drawing.Point(9, 306);
+            this.butEldHirling.Name = "butEldHirling";
+            this.butEldHirling.Size = new System.Drawing.Size(118, 23);
+            this.butEldHirling.TabIndex = 25;
+            this.butEldHirling.Text = "Hireling";
+            this.butEldHirling.UseVisualStyleBackColor = true;
+            this.butEldHirling.Click += new System.EventHandler(this.butEldHirling_Click);
             // 
-            // rtbEldNpc
+            // butEldHirelingGroup
             // 
-            this.rtbEldNpc.Location = new System.Drawing.Point(574, 351);
-            this.rtbEldNpc.Name = "rtbEldNpc";
-            this.rtbEldNpc.Size = new System.Drawing.Size(287, 69);
-            this.rtbEldNpc.TabIndex = 24;
-            this.rtbEldNpc.Text = "";
+            this.butEldHirelingGroup.Location = new System.Drawing.Point(9, 336);
+            this.butEldHirelingGroup.Name = "butEldHirelingGroup";
+            this.butEldHirelingGroup.Size = new System.Drawing.Size(118, 23);
+            this.butEldHirelingGroup.TabIndex = 26;
+            this.butEldHirelingGroup.Text = "Hireling Group";
+            this.butEldHirelingGroup.UseVisualStyleBackColor = true;
+            this.butEldHirelingGroup.Click += new System.EventHandler(this.butEldHirelingGroup_Click);
             // 
             // Form1
             // 
@@ -3447,6 +3471,8 @@
         private System.Windows.Forms.RichTextBox rtbEldHexEvents;
         private System.Windows.Forms.RichTextBox rtbEldNpc;
         private System.Windows.Forms.Button butEldNpc;
+        private System.Windows.Forms.Button butEldHirling;
+        private System.Windows.Forms.Button butEldHirelingGroup;
     }
 }
 
