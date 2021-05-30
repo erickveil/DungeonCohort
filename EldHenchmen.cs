@@ -62,7 +62,7 @@ namespace DungeonCohort
         {
             var table = new RandomTable<string>();
 
-            table.AddItem("Vanir");
+            table.AddItem("Vanir", 8);
             table.AddItem("Thraxian");
             table.AddItem("Illuskan");
             table.AddItem("Waterdhavian");
