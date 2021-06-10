@@ -108,6 +108,7 @@ namespace DungeonCohort
             table.AddItem("Skull: " + Skeleton());
             table.AddItem("Body: " + Skeleton());
             table.AddItem("Bones: " + Skeleton());
+            table.AddItem("Severed Head: " + Skeleton());
             table.AddItem("Broken weapon");
             table.AddItem("Armor parts");
             table.AddItem("Gong");

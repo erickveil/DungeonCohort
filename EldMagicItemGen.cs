@@ -48,7 +48,6 @@ namespace DungeonCohort
             table.AddItem("Cloak");
             table.AddItem("Belt");
             table.AddItem("Mask");
-            table.AddItem("Font");
             table.AddItem("Fountain");
             table.AddItem("Statue");
             table.AddItem("Statuette");
@@ -96,6 +95,8 @@ namespace DungeonCohort
             table.AddItem("Pike");
             table.AddItem("Halberd");
             table.AddItem("Warhammer");
+            table.AddItem("Key");
+            table.AddItem("Crystal");
 
             return table.GetResult();
         }

@@ -88,7 +88,7 @@ namespace DungeonCohort
         {
             var table = new RandomTable<string>();
 
-            table.AddItem("Human", 16);
+            table.AddItem("Human", 8);
             table.AddItem("Orc");
             table.AddItem("Elf");
             table.AddItem("Halfling");
