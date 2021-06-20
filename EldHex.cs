@@ -96,6 +96,26 @@ namespace DungeonCohort
             table.AddItem("Animal Herd: " + HerdAnimal());
             table.AddItem("Fire");
             table.AddItem("Volcanic activity");
+            table.AddItem("Treasure! " + HexTreasure(), 4);
+            table.AddItem("Zone Sweeper", 6);
+            
+
+            return table.GetResult();
+        }
+
+
+        public static string HexTreasure()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Psionic Crystal Cluster");
+            table.AddItem("Discarded personal loot, poorly hidden");
+            table.AddItem("Bandit markings leading to a stash (possibly guarded)");
+            table.AddItem("Lotus Patch (ready for picking)");
+            table.AddItem("Half-eaten body with loot (predators or scavengers may be nearby)");
+            table.AddItem("A rare and valuable animal (will need to be captured)");
+            table.AddItem("Easy pickings monsters with more loot than they should have");
+            table.AddItem("A wrecked caravan or wagon, with abandoned trade goods");
 
             return table.GetResult();
         }
@@ -328,7 +348,10 @@ namespace DungeonCohort
                     }
                 }
             }
-            return found;
+
+            bool isBloom = die.Roll(1, 100) <= 25;
+
+            return found + (isBloom ? " (in bloom)" : "");
         }
 
         public static string Mushrooms()
@@ -362,6 +385,9 @@ namespace DungeonCohort
             table.AddItem("Assassin Vine");
             table.AddItem("Carnivorous Flower");
             table.AddItem("Corpse Flower");
+            table.AddItem("Gas Spore");
+            table.AddItem("Thorn Slinger");
+            table.AddItem("Yellow Musk Creeper");
 
             return table.GetResult();
         }
@@ -373,7 +399,26 @@ namespace DungeonCohort
             table.AddItem(Lotus());
             table.AddItem(Mushrooms());
             table.AddItem(DangerousFlora());
-            table.AddItem("Psionic Crystal Growth");
+            table.AddItem("Trapweed: " + Trapweed());
+
+            return table.GetResult();
+        }
+
+        public static string Trapweed()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Arrowroot");
+            table.AddItem("Bladeleaf");
+            table.AddItem("Dartthorn");
+            table.AddItem("Deathbreath");
+            table.AddItem("Frostflower");
+            table.AddItem("Foolsbait");
+            table.AddItem("Mindscreamers");
+            table.AddItem("Razorvine");
+            table.AddItem("Spear-mint");
+            table.AddItem("Trap Door Bulb");
+            table.AddItem("Tanglevine");
 
             return table.GetResult();
         }
