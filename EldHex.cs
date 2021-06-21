@@ -131,9 +131,23 @@ namespace DungeonCohort
             table.AddItem("Volcanic activity");
             table.AddItem("Treasure! " + HexTreasure(), 4);
             table.AddItem("Zone Sweeper", 6);
+            table.AddItem(Gangrel());
             
 
             return table.GetResult();
+        }
+
+        public static string Gangrel()
+        {
+            var table = new RandomTable<string>();
+            table.AddItem("Individual");
+            table.AddItem("Hunting Party");
+            table.AddItem("Gatherers");
+            table.AddItem("Nomadic Encampment");
+            table.AddItem("Ambush");
+            table.AddItem("Organized War Party moving in on a Civilized area.");
+            table.AddItem("Lost Child");
+            return "Gangrel: " + table.GetResult();
         }
 
 
@@ -351,6 +365,7 @@ namespace DungeonCohort
             table.AddItem("Bandits");
             table.AddItem("Ranger");
             table.AddItem("Adventurers: " + AdventurerParty(tier, ancestryIndex));
+            table.AddItem("Gangrel");
 
             return ageTable.GetResult() + " - " + table.GetResult();
         }

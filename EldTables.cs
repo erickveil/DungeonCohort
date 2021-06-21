@@ -173,6 +173,7 @@ namespace DungeonCohort
             table.AddItem("Invisible");
             table.AddItem("Dead");
             table.AddItem("Dying");
+            table.AddItem("Hidden");
 
             return table.GetResult();
         }
