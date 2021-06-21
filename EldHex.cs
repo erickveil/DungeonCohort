@@ -11,6 +11,8 @@ namespace DungeonCohort
     {
         public static string HexLocations()
         {
+            var die = Dice.Instance;
+
             var table = new RandomTable<string>();
             table.AddItem("Orc outpost");
             table.AddItem("Bandit stash");
@@ -40,7 +42,15 @@ namespace DungeonCohort
             table.AddItem("Abandoned Campsite (" + ageTable.GetResult() + ")");
             table.AddItem("Discarded item");
             table.AddItem("Fountain");
-            table.AddItem("Altar emblazoned with: " + EldMagicItemGen.symbology());
+            bool hasOffering = die.Roll(1, 6) <= 2;
+            string offering = 
+                hasOffering ? ". Offering left: " + Offering() : "";
+            table.AddItem("Altar emblazoned with: " + 
+                EldMagicItemGen.symbology() + offering);
+            table.AddItem("Ritual circle emblazoned with: " + 
+                EldMagicItemGen.symbology() + offering);
+            table.AddItem("Idol emblazoned with: " + 
+                EldMagicItemGen.symbology() + offering);
             table.AddItem("Rain Cistern");
             table.AddItem("Floating Stones");
             table.AddItem("Shallow Grave with a makeshift tombstone");
@@ -54,12 +64,35 @@ namespace DungeonCohort
             table.AddItem("River with Bridge");
             table.AddItem("Recently abandoned cabin");
             table.AddItem("Tower");
-            table.AddItem("Frozen Lake (circumvent and lose time, or risk crossing and breaking ice)");
+            table.AddItem("Frozen Lake (circumvent and lose time, or risk " +
+                "crossing and breaking ice)");
+            table.AddItem("Wild garden with growing herbs, roots, and " +
+                "tubers, berries and fruit, wild cabbages, and wild onions.");
 
             var hexLandmark = new HexCrawlLandmark();
             hexLandmark.Init();
             table.AddItem(hexLandmark.ToString(), 5);
 
+            return table.GetResult();
+        }
+
+        public static string Offering()
+        {
+            var table = new RandomTable<string>();
+            table.AddItem("Sacrificed animal");
+            table.AddItem("Sacrificed person");
+            table.AddItem("Entrails and fat - burned");
+            table.AddItem("Meat - burned");
+            table.AddItem("Fruit - rotting");
+            table.AddItem("Fruit - fresh");
+            table.AddItem("Personal Treasure / coins");
+            table.AddItem("Flowers");
+            table.AddItem("Polished Rocks and Beads");
+            table.AddItem("Incense");
+            table.AddItem("Scented oil");
+            table.AddItem("Blood - fresh");
+            table.AddItem("Blood - dried");
+            table.AddItem("Bones");
             return table.GetResult();
         }
 
