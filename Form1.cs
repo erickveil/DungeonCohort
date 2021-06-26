@@ -1596,5 +1596,39 @@ namespace DungeonCohort
             PrintBody(target, npc);
 
         }
+
+        private void buEldPatrons_Click(object sender, EventArgs e)
+        {
+            var die = Dice.Instance;
+            int numPatrons = die.Roll(4, 4);
+            string results = "";
+            
+            for (int i = 0; i < numPatrons; ++i)
+            {
+                string quest = EldQuests.VisitorQuest();
+                int tier = 1;
+                string npc = EldHex.Npc(tier, _ancestryIndex);
+                string henchman = EldHenchmen.GenerateHireling();
+
+                var table = new RandomTable<string>();
+                table.AddItem("Corporal of the Watch Eilidh");
+                table.AddItem("Captain of the Watch Mebros");
+                table.AddItem("Baliff Laird");
+                table.AddItem("Priest Svartr the Bold");
+                var num = die.Roll(2, 2);
+                table.AddItem(num + " Guards", 2);
+                table.AddItem("Seargent of the Guard");
+                table.AddItem("Quest patron: " + quest);
+                table.AddItem("NPC: " + npc, 3);
+                table.AddItem("Hireling: " + henchman, 8);
+
+                results += table.GetResult() + "\n\n";
+
+                var target = rtbUnderdarkCrawl;
+                target.Clear();
+                PrintBody(target, results);
+
+            }
+        }
     }
 }

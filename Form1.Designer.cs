@@ -216,6 +216,8 @@
             this.butEndCombat = new System.Windows.Forms.Button();
             this.butRound = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.butEldHirelingGroup = new System.Windows.Forms.Button();
+            this.butEldHirling = new System.Windows.Forms.Button();
             this.rtbEldNpc = new System.Windows.Forms.RichTextBox();
             this.butEldNpc = new System.Windows.Forms.Button();
             this.rtbEldHexEvents = new System.Windows.Forms.RichTextBox();
@@ -278,8 +280,7 @@
             this.butJGNoble = new System.Windows.Forms.Button();
             this.butJGCity = new System.Windows.Forms.Button();
             this.comboJgQuarters = new System.Windows.Forms.ComboBox();
-            this.butEldHirling = new System.Windows.Forms.Button();
-            this.butEldHirelingGroup = new System.Windows.Forms.Button();
+            this.buEldPatrons = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -2407,6 +2408,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.buEldPatrons);
             this.tabPage3.Controls.Add(this.butEldHirelingGroup);
             this.tabPage3.Controls.Add(this.butEldHirling);
             this.tabPage3.Controls.Add(this.rtbEldNpc);
@@ -2437,6 +2439,26 @@
             this.tabPage3.TabIndex = 6;
             this.tabPage3.Text = "Eld";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // butEldHirelingGroup
+            // 
+            this.butEldHirelingGroup.Location = new System.Drawing.Point(9, 336);
+            this.butEldHirelingGroup.Name = "butEldHirelingGroup";
+            this.butEldHirelingGroup.Size = new System.Drawing.Size(118, 23);
+            this.butEldHirelingGroup.TabIndex = 26;
+            this.butEldHirelingGroup.Text = "Hireling Group";
+            this.butEldHirelingGroup.UseVisualStyleBackColor = true;
+            this.butEldHirelingGroup.Click += new System.EventHandler(this.butEldHirelingGroup_Click);
+            // 
+            // butEldHirling
+            // 
+            this.butEldHirling.Location = new System.Drawing.Point(9, 306);
+            this.butEldHirling.Name = "butEldHirling";
+            this.butEldHirling.Size = new System.Drawing.Size(118, 23);
+            this.butEldHirling.TabIndex = 25;
+            this.butEldHirling.Text = "Hireling";
+            this.butEldHirling.UseVisualStyleBackColor = true;
+            this.butEldHirling.Click += new System.EventHandler(this.butEldHirling_Click);
             // 
             // rtbEldNpc
             // 
@@ -3100,25 +3122,15 @@
             this.comboJgQuarters.TabIndex = 0;
             this.comboJgQuarters.Text = "Plazas";
             // 
-            // butEldHirling
+            // buEldPatrons
             // 
-            this.butEldHirling.Location = new System.Drawing.Point(9, 306);
-            this.butEldHirling.Name = "butEldHirling";
-            this.butEldHirling.Size = new System.Drawing.Size(118, 23);
-            this.butEldHirling.TabIndex = 25;
-            this.butEldHirling.Text = "Hireling";
-            this.butEldHirling.UseVisualStyleBackColor = true;
-            this.butEldHirling.Click += new System.EventHandler(this.butEldHirling_Click);
-            // 
-            // butEldHirelingGroup
-            // 
-            this.butEldHirelingGroup.Location = new System.Drawing.Point(9, 336);
-            this.butEldHirelingGroup.Name = "butEldHirelingGroup";
-            this.butEldHirelingGroup.Size = new System.Drawing.Size(118, 23);
-            this.butEldHirelingGroup.TabIndex = 26;
-            this.butEldHirelingGroup.Text = "Hireling Group";
-            this.butEldHirelingGroup.UseVisualStyleBackColor = true;
-            this.butEldHirelingGroup.Click += new System.EventHandler(this.butEldHirelingGroup_Click);
+            this.buEldPatrons.Location = new System.Drawing.Point(9, 366);
+            this.buEldPatrons.Name = "buEldPatrons";
+            this.buEldPatrons.Size = new System.Drawing.Size(118, 23);
+            this.buEldPatrons.TabIndex = 27;
+            this.buEldPatrons.Text = "Tavern Patrons";
+            this.buEldPatrons.UseVisualStyleBackColor = true;
+            this.buEldPatrons.Click += new System.EventHandler(this.buEldPatrons_Click);
             // 
             // Form1
             // 
@@ -3473,6 +3485,7 @@
         private System.Windows.Forms.Button butEldNpc;
         private System.Windows.Forms.Button butEldHirling;
         private System.Windows.Forms.Button butEldHirelingGroup;
+        private System.Windows.Forms.Button buEldPatrons;
     }
 }
 
