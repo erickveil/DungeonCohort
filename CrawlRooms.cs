@@ -554,6 +554,49 @@ namespace DungeonCohort
 
         }
 
+        public static string SpecialBook()
+        {
+            var table = new RandomTable<string>();
+            table.AddItem("Players Handbook I");
+            table.AddItem("Players Handbook II");
+            table.AddItem("Players Handbook III");
+            table.AddItem("Dungeon Masters Guide I");
+            table.AddItem("Dungeon Masters Guide II");
+            table.AddItem("Dungeon Masters Guide III");
+            table.AddItem("Monster Manual I");
+            table.AddItem("Monster Manual II");
+            table.AddItem("Monster Manual III");
+            table.AddItem("Monsterous Compendium vol I");
+            table.AddItem("Monsterous Compendium vol II");
+            table.AddItem("Monsterous Compendium vol III");
+            table.AddItem("Manual of the Planes");
+            table.AddItem("Dungeoneers Survival Guide");
+            table.AddItem("Wilderness Survival Guide");
+            table.AddItem("Dieties and Demigods");
+            table.AddItem("Eldritch Wizardry");
+            table.AddItem("Blackmoor");
+            table.AddItem("Greyhawk");
+            table.AddItem("Dragonlance");
+            table.AddItem("Fiend Folio");
+            table.AddItem("Unearthed Arcana");
+            table.AddItem("Magical Encyclopedia I");
+            table.AddItem("Magical Encyclopedia II");
+            table.AddItem("Magical Encyclopedia III");
+            table.AddItem("Volos Guide to Monsters");
+            table.AddItem("Volos Guide to Waterdeep");
+            table.AddItem("Volos Guide to Baldurs Gate");
+            table.AddItem("Volos Guide to Neverwinter");
+            table.AddItem("Mordenakin's Tome of Foes");
+            table.AddItem("Tasha's Cauldron of Everything");
+            table.AddItem("Xanathar's Guide to Everything");
+            table.AddItem("Waterdeep and the North");
+            table.AddItem("Ill Met in Lankhamar");
+            table.AddItem("Elric or Melnminbone");
+            table.AddItem("Song of the Black Sword");
+            table.AddItem("Corum: The Coming of Chaos");
+            return table.GetResult();
+        }
+
         public void SetStorageItems()
         {
             var dataSource = DataSourceLoader.Instance;
