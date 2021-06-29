@@ -480,12 +480,11 @@ namespace DungeonCohort
                 || RoomType.Contains("schoolroom")
                 )
             {
-                var bookSource = dataSource.BookSource;
                 int numBooks = dice.Roll(1, 4);
-                BookList = new List<string>();
+                if (BookList is null) { BookList = new List<string>(); }
                 for (int i = 0; i < numBooks; ++i)
                 {
-                    BookList.Add(bookSource.GetBookSubject());
+                    BookList.Add(Books.getBook());
                 }
             }
             if (RoomType.Contains("Planar"))

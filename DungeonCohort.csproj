@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Books.cs" />
     <Compile Include="CardDeck.cs" />
     <Compile Include="CombatAi.cs" />
     <Compile Include="CrawlRoomContentDeck.cs" />

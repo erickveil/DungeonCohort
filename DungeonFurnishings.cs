@@ -197,7 +197,7 @@ namespace DungeonCohort
             table.AddItem("Padlock");
             table.AddItem("Key");
             table.AddItem("Scroll");
-            table.AddItem(Book());
+            table.AddItem(Books.getBook());
             table.AddItem("Crystal");
             return table.GetResult();
 
@@ -383,14 +383,14 @@ namespace DungeonCohort
             table.AddItem("Carpet");
             table.AddItem("Tapestry");
             table.AddItem("Pile of Firewood");
-            table.AddItem(Book());
+            table.AddItem(Books.getBook());
             return table.GetResult();
         }
 
         public static string Library()
         {
             var table = new RandomTable<string>();
-            string book = Book();
+            string book = Books.getBook();
             table.AddItem(General());
             table.AddItem(Storage());
             table.AddItem(Study());
@@ -472,7 +472,7 @@ namespace DungeonCohort
             table.AddItem("Rug");
             table.AddItem("Painting");
             table.AddItem("Locket");
-            table.AddItem(Book());
+            table.AddItem(Books.getBook());
             table.AddItem("Brush");
             table.AddItem("Comb");
             table.AddItem("Curtain");
@@ -613,7 +613,7 @@ namespace DungeonCohort
             table.AddItem("Trunk");
             table.AddItem("Desk");
             table.AddItem("Chair");
-            table.AddItem(Book());
+            table.AddItem(Books.getBook());
             table.AddItem("Bench");
             return table.GetResult();
         }
@@ -637,7 +637,7 @@ namespace DungeonCohort
             table.AddItem("Skeleton");
             table.AddItem("Tablet");
             table.AddItem("Mummy");
-            table.AddItem(Book());
+            table.AddItem(Books.getBook());
             table.AddItem("Crystal");
             return table.GetResult();
         }
