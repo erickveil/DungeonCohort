@@ -1630,5 +1630,30 @@ namespace DungeonCohort
 
             }
         }
+
+        private void butEldRandomSummons_Click(object sender, EventArgs e)
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Individual Treasure");
+            table.AddItem("Minor Artifact");
+            table.AddItem("Magic Item");
+            table.AddItem("Treasure Horde");
+            table.AddItem("Inspiration");
+
+            table.AddItem("Monster Encounter", 2);
+            table.AddItem("Deadly Encounter");
+            table.AddItem("Trap Effect", 2);
+            table.AddItem("Curse");
+            table.AddItem("Cursed Magic Item");
+
+            table.AddItem("Nothing");
+
+            string result = table.GetResult();
+
+            var target = rtbEldArtifact;
+            target.Clear();
+            PrintBody(target, result);
+        }
     }
 }

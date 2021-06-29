@@ -138,6 +138,7 @@ namespace DungeonCohort
             table.AddItem("A fireplace stuffed with bones");
             table.AddItem("Bones litter the floor");
             table.AddItem("A collection of hand-drawn orc erotica");
+            table.AddItem("Slot machine Summoning Circle with a Lever");
             return table.GetResult();
         }
 

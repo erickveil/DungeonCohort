@@ -216,6 +216,7 @@
             this.butEndCombat = new System.Windows.Forms.Button();
             this.butRound = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.buEldPatrons = new System.Windows.Forms.Button();
             this.butEldHirelingGroup = new System.Windows.Forms.Button();
             this.butEldHirling = new System.Windows.Forms.Button();
             this.rtbEldNpc = new System.Windows.Forms.RichTextBox();
@@ -280,7 +281,7 @@
             this.butJGNoble = new System.Windows.Forms.Button();
             this.butJGCity = new System.Windows.Forms.Button();
             this.comboJgQuarters = new System.Windows.Forms.ComboBox();
-            this.buEldPatrons = new System.Windows.Forms.Button();
+            this.butEldRandomSummons = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -2408,6 +2409,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.butEldRandomSummons);
             this.tabPage3.Controls.Add(this.buEldPatrons);
             this.tabPage3.Controls.Add(this.butEldHirelingGroup);
             this.tabPage3.Controls.Add(this.butEldHirling);
@@ -2439,6 +2441,16 @@
             this.tabPage3.TabIndex = 6;
             this.tabPage3.Text = "Eld";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // buEldPatrons
+            // 
+            this.buEldPatrons.Location = new System.Drawing.Point(9, 366);
+            this.buEldPatrons.Name = "buEldPatrons";
+            this.buEldPatrons.Size = new System.Drawing.Size(118, 23);
+            this.buEldPatrons.TabIndex = 27;
+            this.buEldPatrons.Text = "Tavern Patrons";
+            this.buEldPatrons.UseVisualStyleBackColor = true;
+            this.buEldPatrons.Click += new System.EventHandler(this.buEldPatrons_Click);
             // 
             // butEldHirelingGroup
             // 
@@ -3122,15 +3134,15 @@
             this.comboJgQuarters.TabIndex = 0;
             this.comboJgQuarters.Text = "Plazas";
             // 
-            // buEldPatrons
+            // butEldRandomSummons
             // 
-            this.buEldPatrons.Location = new System.Drawing.Point(9, 366);
-            this.buEldPatrons.Name = "buEldPatrons";
-            this.buEldPatrons.Size = new System.Drawing.Size(118, 23);
-            this.buEldPatrons.TabIndex = 27;
-            this.buEldPatrons.Text = "Tavern Patrons";
-            this.buEldPatrons.UseVisualStyleBackColor = true;
-            this.buEldPatrons.Click += new System.EventHandler(this.buEldPatrons_Click);
+            this.butEldRandomSummons.Location = new System.Drawing.Point(9, 36);
+            this.butEldRandomSummons.Name = "butEldRandomSummons";
+            this.butEldRandomSummons.Size = new System.Drawing.Size(118, 23);
+            this.butEldRandomSummons.TabIndex = 28;
+            this.butEldRandomSummons.Text = "Random Summons";
+            this.butEldRandomSummons.UseVisualStyleBackColor = true;
+            this.butEldRandomSummons.Click += new System.EventHandler(this.butEldRandomSummons_Click);
             // 
             // Form1
             // 
@@ -3486,6 +3498,7 @@
         private System.Windows.Forms.Button butEldHirling;
         private System.Windows.Forms.Button butEldHirelingGroup;
         private System.Windows.Forms.Button buEldPatrons;
+        private System.Windows.Forms.Button butEldRandomSummons;
     }
 }
 
