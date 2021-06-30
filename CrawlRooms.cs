@@ -76,6 +76,11 @@ namespace DungeonCohort
             }
 
             var dice = Dice.Instance;
+
+            bool isWeirdRoom = dice.Roll(1, 6) == 1;
+            if (isWeirdRoom) { RoomType = OddRooms.GetOddRoomType(); }
+
+
             Orientation = dice.Roll(1, 4);
 
             Contents = new CrawlRoomContents();
