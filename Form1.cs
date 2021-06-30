@@ -349,6 +349,9 @@ namespace DungeonCohort
 
             // Get basic crawl room specifications from UI
             string dungeonType = combo_crawlDungeonType.Text;
+            var die = Dice.Instance;
+            bool isGeneral = die.Roll(1, 6) == 1;
+            if (isGeneral) { dungeonType = "General"; }
             bool isLargeRoom = cb_crawlLargeRooms.Checked;
             bool isNarrowHalls = cb_crawlNarrowPassages.Checked;
             int tier = (int)nud_tier.Value;
@@ -947,6 +950,10 @@ namespace DungeonCohort
 
             // Get basic crawl room specifications from UI
             string dungeonType = combo_crawlDungeonType.Text;
+            var die = Dice.Instance;
+            bool isGeneral = die.Roll(1, 6) == 1;
+            if (isGeneral) { dungeonType = "General"; }
+ 
             bool isLargeRoom = cb_crawlLargeRooms.Checked;
             bool isNarrowHalls = cb_crawlNarrowPassages.Checked;
             int tier = (int)nud_tier.Value;
@@ -1028,6 +1035,10 @@ namespace DungeonCohort
 
             // Get basic crawl room specifications from UI
             string dungeonType = combo_crawlDungeonType.Text;
+            var die = Dice.Instance;
+            bool isGeneral = die.Roll(1, 6) == 1;
+            if (isGeneral) { dungeonType = "General"; }
+ 
             bool isLargeRoom = cb_crawlLargeRooms.Checked;
             bool isNarrowHalls = cb_crawlNarrowPassages.Checked;
             int tier = (int)nud_tier.Value;
