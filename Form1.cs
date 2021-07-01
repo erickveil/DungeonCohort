@@ -1666,5 +1666,18 @@ namespace DungeonCohort
             target.Clear();
             PrintBody(target, result);
         }
+
+        private void butEldRepop_Click(object sender, EventArgs e)
+        {
+            string result = "Faction: " +
+                EldRepop.GetFaction() + "\n" +
+                "Event: " +
+                EldRepop.WhatsGoingOn();
+
+            var target = rtbEldArtifact;
+            target.Clear();
+            PrintBody(target, result);
+
+        }
     }
 }
