@@ -91,6 +91,69 @@ namespace DungeonCohort
             Severity = severity;
         }
 
+        public void InitAsMagicTrapKit()
+        {
+            var typeTable = new RandomTable<CrawlRoomTrap>();
+            CrawlRoomTrap beam = _chooseBeamEffect();
+            Dice dice = Dice.Instance;
+
+            typeTable.AddItem(new CrawlRoomTrap
+            {
+                Effect = ChooseGasType(),
+                Location = ChooseLocation(),
+                Type = "Gas",
+            });
+            typeTable.AddItem(new CrawlRoomTrap
+            {
+                DamageType = beam.DamageType,
+                Effect = beam.Effect,
+                IsMagic = true,
+                Location = ChooseLocation(),
+                Type = "Beam",
+            });
+            typeTable.AddItem(new CrawlRoomTrap
+            {
+                DamageType = beam.DamageType,
+                Effect = beam.Effect,
+                IsMagic = true,
+                Location = ChooseLocation(),
+                Trigger = "Viewing",
+                Type = "Symbol",
+            });
+            typeTable.AddItem(new CrawlRoomTrap
+            {
+                DamageType = beam.DamageType,
+                Effect = beam.Effect,
+                IsMagic = true,
+                Location = ChooseLocation(),
+                Type = "Blast",
+            });
+            typeTable.AddItem(new CrawlRoomTrap
+            {
+                Type = "Sleep spell trap for " + dice.Roll(13, 8) + 
+                " hp of creatures in ascending order of total hp, no save " +
+                "(undead and immune to charm not affected)"
+            });
+
+            var trap = typeTable.GetResult();
+
+            AttackBonus = trap.AttackBonus;
+            Coating = trap.Coating;
+            DamageDice = trap.DamageDice;
+            DamageType = trap.DamageType;
+            Effect = trap.Effect;
+            ExitBlocker = trap.ExitBlocker;
+            IsMagic = trap.IsMagic;
+            Location = trap.Location;
+            Radius = trap.Radius;
+            TrapDoorContents = trap.TrapDoorContents;
+            TrapMonster = trap.TrapMonster;
+            TrapTreasure = trap.TrapTreasure;
+            Trigger = trap.Trigger;
+            Type = trap.Type;
+
+        }
+
         public void InitTrap(int tier)
         {
             _setType(tier, isDoor: false);

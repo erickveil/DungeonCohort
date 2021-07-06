@@ -89,6 +89,57 @@ namespace DungeonCohort
             return magicitems[0].AsRollableTable();
         }
 
+        public RandomTable<MagicItems> GetMagicItemTable()
+        {
+            var typeTable = new RandomTable<string>();
+            typeTable.AddItem("A");
+            typeTable.AddItem("B");
+            typeTable.AddItem("C");
+            typeTable.AddItem("D");
+            typeTable.AddItem("E");
+            typeTable.AddItem("F");
+            typeTable.AddItem("G");
+            typeTable.AddItem("H");
+            typeTable.AddItem("I");
+
+            string type = typeTable.GetResult();
+            return GetMagicItemTable(type);
+        }
+
+        public RandomTable<string> GetMagicWandTable()
+        {
+            var wandTable = new RandomTable<string>();
+            foreach (var magicData in magicitems)
+            {
+                foreach (var tableItem in magicData.table)
+                {
+                    if (tableItem.GetItemId().ToLower().Contains("wand"))
+                    {
+                        string name = tableItem.GetItemId().Replace("{@item", "").Replace("}", "");
+                        wandTable.AddItem(name);
+                    }
+                }
+            }
+            return wandTable;
+        }
+
+        public RandomTable<string> GetPotionTable()
+        {
+            var potionTable = new RandomTable<string>();
+            foreach (var magicData in magicitems)
+            {
+                foreach (var tableItem in magicData.table)
+                {
+                    if (tableItem.GetItemId().ToLower().Contains("potion"))
+                    {
+                        string name = tableItem.GetItemId().Replace("{@item", "").Replace("}", "");
+                        potionTable.AddItem(name);
+                    }
+                }
+            }
+            return potionTable;
+        }
+
         
     }
 }

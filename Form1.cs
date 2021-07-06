@@ -203,8 +203,9 @@ namespace DungeonCohort
 
             var treasureGen = new TreasureFactory();
             var loot = treasureGen.GetIndividualTreasure(tier, permissions);
+            string result = IndividualLoot.SpecialIndividualLoot(loot);
 
-            string lootReport = "Loot: " + loot.ToString();
+            string lootReport = "Loot: " + result;
             PrintBody(target, lootReport);
         }
 

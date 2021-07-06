@@ -81,6 +81,7 @@
     <Compile Include="HexCrawlScenery.cs" />
     <Compile Include="HexCrawlSettlement.cs" />
     <Compile Include="HexCrawlTrick.cs" />
+    <Compile Include="IndividualLoot.cs" />
     <Compile Include="JgCityEncounter.cs" />
     <Compile Include="JsonLoading\Ancestry.cs" />
     <Compile Include="JsonLoading\AncestryIndex.cs" />
