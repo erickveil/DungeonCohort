@@ -98,6 +98,7 @@ namespace DungeonCohort
 
         public static string HexEvent(int tier, AncestryIndex ancestryIndex)
         {
+            var motivation = new EldTables();
             var table = new RandomTable<string>();
 
             table.AddItem("Bandit Ambush");
@@ -131,6 +132,7 @@ namespace DungeonCohort
             table.AddItem("Volcanic activity");
             table.AddItem("Treasure! " + HexTreasure(), 4);
             table.AddItem("Zone Sweeper", 6);
+            table.AddItem("Hirelings! " + motivation.Motivation("Intelligent"), 6);
             table.AddItem(Gangrel());
             
 
@@ -366,6 +368,7 @@ namespace DungeonCohort
             table.AddItem("Ranger");
             table.AddItem("Adventurers: " + AdventurerParty(tier, ancestryIndex));
             table.AddItem("Gangrel");
+            table.AddItem("Hirelings");
 
             return ageTable.GetResult() + " - " + table.GetResult();
         }
