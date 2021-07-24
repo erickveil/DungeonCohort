@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Darkmoor;
 using DungeonCohort.JsonLoading;
+using RandomWords;
 
 namespace DungeonCohort
 {
@@ -19,9 +20,35 @@ namespace DungeonCohort
             string lesserPower = minorBenficialProperty();
             string lesserCurse = minorDetrimentalProperty();
 
-            string description = name + ":" + "\n" +
+            string description = 
                 "Lesser ability: " + lesserPower + "\n" +
                 "Lesser curse: " + lesserCurse;
+
+            string major =
+                "\nMajor ability: " + majorBeneficialProperty() + "\n" +
+                "Major curse: " + majorDetrimentalProperty();
+            var die = Dice.Instance;
+            bool isMajor = die.Roll(1, 6) == 6;
+            if (isMajor) { description += major; }
+
+            bool isIntelligent = die.Roll(1, 6) == 6;
+            string ego = itemEgo();
+            string temperament = intelligentItemTemprament();
+            string communication = intelligentItemCommunication();
+            string purpose = specialPurpose();
+
+            if (isIntelligent)
+            {
+                description += "\n" +
+                    "Intelligent\n" +
+                    "Ego: +" + ego + "\n" +
+                    "Temperament: " + temperament + "\n" +
+                    "Communication: " + communication + "\n" +
+                    "Special Purpose: " + purpose + "\n";
+                name = namedItemIdentity();
+            }
+
+            description = name + ":" + "\n" + description;
 
             return description;
         }
@@ -136,6 +163,19 @@ namespace DungeonCohort
             table.AddItem("+1 to hit and damage, +2 vs " + alignment());
             table.AddItem("+1 AC, +2 vs " + monsterType());
             table.AddItem("+1 AC, +2 vs " + alignment());
+            table.AddItem("Beacon. The bearer can use a bonus action to cause the item to shed bright light in a 10-foot radius and dim light for an additional 10 feet, or to extinguish the light.");
+            table.AddItem("Compass. The wielder can use an action to learn which way is north.");
+            table.AddItem("Conscientious. When the bearer of this item contemplates or undertakes a malevolent act, the item enhances pangs of conscience.");
+            table.AddItem("Delver. While underground, the bearer of this item always knows the item's depth below the surface and the direction to the nearest staircase, ramp, or other path leading upward.");
+            table.AddItem("Gleaming. This item never gets dirty.");
+            table.AddItem("Guardian. The item whispers warnings to its bearer, granting a +2 bonus to initiative if the bearer isn't incapacitated.");
+            table.AddItem("Hidden Message. A message is hidden somewhere on the item. It might be visible only at a certain time of the year, under the light of one phase of the moon, or in a specific location.");
+            table.AddItem("Key. The item is used to unlock a container, chamber, vault, or other entryway.");
+            table.AddItem("Language. The bearer can speak and understand a language of the DM's choice while the item is on the bearer 's person.");
+            table.AddItem("Sentinel. Choose a kind of creature that is an enemy of the item's creator. This item glows faintly when such creatures are within 120 feet of it.");
+            table.AddItem("Temperate. The bearer suffers no harm in temperatures as cold as -20 degrees Fahrenheit or as warm as 120 degrees Fahrenheit.");
+            table.AddItem("War Leader. The bearer can use an action to cause his or her voice to carry clearly for up to 300 feet until the end of the bearer's next turn.");
+            table.AddItem("Waterborne. This item floats on water and other liquids. Its bearer has advantage on Strength (Athletics) checks to swim.");
 
             return table.GetResult();
         }
@@ -304,6 +344,14 @@ namespace DungeonCohort
             table.AddItem("Must eat and drink 6 times the normal ammount each day");
             table.AddItem("Once attuned, the owner never wants to part with the " +
                 "object and guards it jealously and with paranoia");
+            table.AddItem("Wicked. When the bearer is presented with an opportunity to act in a selfish or malevolent way, the item heightens the bearer's urge to do so.");
+            table.AddItem("Frail. The item crumbles, frays, chips, or cracks slightly when wielded, worn, or activated. This quirk has no effect on its properties, but if the item has seen much use, it looks decrepit.");
+            table.AddItem("Hungry. This item's magical properties function only if fresh blood from a humanoid has been applied to it within the past 24 hours. It needs only a drop to activate.");
+            table.AddItem("Loud. The item makes a loud noise-such as a clang, a shout, or a resonating gong-when used. ");
+            table.AddItem("Painful. The bearer experiences a harmless flash of pain when using the item.");
+            table.AddItem("Posessive. Doesn't allow the owner to posess any other magical items.");
+            table.AddItem("Repulsive. The bearer feels a sense of distaste when in contact with the item, and continues to sense discomfort while bearing it.");
+            table.AddItem("Slothful. The bearer of this item feels slothful and lethargic. While attuned to the item, the bearer requires 10 hours to finish a long rest.");
 
             return table.GetResult();
 
@@ -362,46 +410,71 @@ namespace DungeonCohort
         {
             var table = new RandomTable<string>();
 
-            table.AddItem("8");
-            table.AddItem("9");
-            table.AddItem("10");
-            table.AddItem("11");
-            table.AddItem("12");
-            table.AddItem("13");
-            table.AddItem("14");
-            table.AddItem("15");
-            table.AddItem("16");
-            table.AddItem("17");
-            table.AddItem("18");
-            table.AddItem("19");
-            table.AddItem("20");
-            table.AddItem("21");
-            table.AddItem("22");
-            table.AddItem("23");
+            table.AddItem("0");
+            table.AddItem("1");
+            table.AddItem("2");
+            table.AddItem("3");
+            table.AddItem("4");
+            table.AddItem("5");
+            table.AddItem("6");
 
             return table.GetResult();
         }
 
-        /*
-        // https://5e.tools/items.html#moonblade_dmg
-        static string sentience()
-        {
-
-        }
-
         static string intelligentItemCommunication()
         {
+            var table = new RandomTable<string>();
 
+            table.AddItem("Semi-empathy (throb, tingle, urges)");
+            table.AddItem("Empathy");
+            table.AddItem("Muttering, requires close attention that can only be understood sometimes.");
+            table.AddItem("Speech");
+            table.AddItem("Visions and dreams");
+            table.AddItem("Telepathy");
+
+            return table.GetResult();
         }
-        */
 
-        /*
-        // random syllables
+        static string intelligentItemTemprament()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Noble and just");
+            table.AddItem("Kind and caring");
+            table.AddItem("Crass but well-meaning");
+            table.AddItem("Strict and unbending");
+            table.AddItem("Indifferent");
+            table.AddItem("Fickle and inconsistent");
+            table.AddItem("Manipulative and deceitful");
+            table.AddItem("Cruel and self-serving");
+            table.AddItem("Angry and bloothirsty");
+
+            return table.GetResult();
+        }
+
+        static string specialPurpose()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Defeat and slay a faction");
+            table.AddItem("Slay all " + monsterType());
+            table.AddItem("Overthrow a government");
+            table.AddItem("Avenge a wrong");
+            table.AddItem("Restore a lost faction");
+            table.AddItem("Fulfill a prophesey");
+
+            return table.GetResult();
+        }
+
         static string itemPropperName()
         {
+            var wordGen = new WordGen();
+            var die = Dice.Instance;
+            var rng = die.getRng();
+            string word = wordGen.randWord(rng);
 
+            return wordGen.capitalize(word);
         }
-        */
 
         public static string symbology()
         {
@@ -529,7 +602,19 @@ namespace DungeonCohort
         // The Crown of Aeldian - Lightning (Static shock when touched, makes hair stand on end, Lightning damage)
         static string itemIdentity()
         {
-            return physicalForm() + " of " + itemOrigin();
+            var die = Dice.Instance;
+            bool isNamed = die.Roll(1, 6) >= 4;
+            string name = "";
+            if (isNamed) { name = itemPropperName() + ", "; }
+            return name + physicalForm() + " of " + itemOrigin();
+        }
+
+        static string namedItemIdentity()
+        {
+            var die = Dice.Instance;
+            string name = itemPropperName() + ", "; 
+            return name + physicalForm() + " of " + itemOrigin();
+
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Darkmoor
 {
     public class Dice
     {
-        readonly Random _rng = new Random();
+        private Random _rng = new Random();
         private static Dice _instance = null;
 
         /// <summary>
@@ -139,6 +139,11 @@ namespace Darkmoor
             }
 
             return Roll(numDice, sides);
+        }
+
+        public Random getRng()
+        {
+            return _rng;
         }
     }
 }

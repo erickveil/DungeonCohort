@@ -216,6 +216,7 @@
             this.butEndCombat = new System.Windows.Forms.Button();
             this.butRound = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.butEldRepop = new System.Windows.Forms.Button();
             this.butEldRandomSummons = new System.Windows.Forms.Button();
             this.buEldPatrons = new System.Windows.Forms.Button();
             this.butEldHirelingGroup = new System.Windows.Forms.Button();
@@ -282,7 +283,7 @@
             this.butJGNoble = new System.Windows.Forms.Button();
             this.butJGCity = new System.Windows.Forms.Button();
             this.comboJgQuarters = new System.Windows.Forms.ComboBox();
-            this.butEldRepop = new System.Windows.Forms.Button();
+            this.eldHexByLevel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_tier)).BeginInit();
             this.gb_AllowedMagicItems.SuspendLayout();
             this.gb_party.SuspendLayout();
@@ -2410,6 +2411,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.eldHexByLevel);
             this.tabPage3.Controls.Add(this.butEldRepop);
             this.tabPage3.Controls.Add(this.butEldRandomSummons);
             this.tabPage3.Controls.Add(this.buEldPatrons);
@@ -2443,6 +2445,16 @@
             this.tabPage3.TabIndex = 6;
             this.tabPage3.Text = "Eld";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // butEldRepop
+            // 
+            this.butEldRepop.Location = new System.Drawing.Point(9, 66);
+            this.butEldRepop.Name = "butEldRepop";
+            this.butEldRepop.Size = new System.Drawing.Size(118, 23);
+            this.butEldRepop.TabIndex = 29;
+            this.butEldRepop.Text = "Repop/Event";
+            this.butEldRepop.UseVisualStyleBackColor = true;
+            this.butEldRepop.Click += new System.EventHandler(this.butEldRepop_Click);
             // 
             // butEldRandomSummons
             // 
@@ -3146,15 +3158,15 @@
             this.comboJgQuarters.TabIndex = 0;
             this.comboJgQuarters.Text = "Plazas";
             // 
-            // butEldRepop
+            // eldHexByLevel
             // 
-            this.butEldRepop.Location = new System.Drawing.Point(9, 66);
-            this.butEldRepop.Name = "butEldRepop";
-            this.butEldRepop.Size = new System.Drawing.Size(118, 23);
-            this.butEldRepop.TabIndex = 29;
-            this.butEldRepop.Text = "Repop/Event";
-            this.butEldRepop.UseVisualStyleBackColor = true;
-            this.butEldRepop.Click += new System.EventHandler(this.butEldRepop_Click);
+            this.eldHexByLevel.Location = new System.Drawing.Point(438, 36);
+            this.eldHexByLevel.Name = "eldHexByLevel";
+            this.eldHexByLevel.Size = new System.Drawing.Size(121, 23);
+            this.eldHexByLevel.TabIndex = 30;
+            this.eldHexByLevel.Text = "Hex By Level";
+            this.eldHexByLevel.UseVisualStyleBackColor = true;
+            this.eldHexByLevel.Click += new System.EventHandler(this.eldHexByLevel_Click);
             // 
             // Form1
             // 
@@ -3512,6 +3524,7 @@
         private System.Windows.Forms.Button buEldPatrons;
         private System.Windows.Forms.Button butEldRandomSummons;
         private System.Windows.Forms.Button butEldRepop;
+        private System.Windows.Forms.Button eldHexByLevel;
     }
 }
 

@@ -1680,5 +1680,17 @@ namespace DungeonCohort
             PrintBody(target, result);
 
         }
+
+        private void eldHexByLevel_Click(object sender, EventArgs e)
+        {
+            int level = (int)nudEldLevel.Value;
+            string result = EldRandomHex.ChoseHex(level);
+
+            var target = rtbEldHex;
+            target.Clear();
+            PrintBody(target, result);
+
+
+        }
     }
 }
