@@ -190,6 +190,7 @@ namespace DungeonCohort
             table.AddItem("Ghostly lights bob in the distance");
             table.AddItem("Copper piece found tails up");
             table.AddItem("Mold growth covers tree trunk");
+            table.AddItem("Stick totem hanging from tree");
 
             return table.GetResult();
         }
@@ -443,6 +444,63 @@ namespace DungeonCohort
             return table.GetResult();
         }
 
+        public static string AlchemicalHerbs()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Heartflower");
+            table.AddItem("Rageroot");
+            table.AddItem("Devils Respite");
+            table.AddItem("Heroes Hops");
+
+            return table.GetResult();
+        }
+
+        public static string PoisonHerbs()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Spiders Milk");
+            table.AddItem("Snakeweed");
+            table.AddItem("Blackroot");
+            table.AddItem("Kingsbane");
+            table.AddItem("Lilting Grass");
+            table.AddItem("Headthorn");
+            table.AddItem("Foebegone");
+            table.AddItem("Nightdrake");
+            table.AddItem("Falleaf");
+            table.AddItem("Manshade");
+            table.AddItem("Whealflower");
+
+            return table.GetResult();
+        }
+
+        public static string MedicinalHerbs()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem("Goodberry");
+            table.AddItem("Sapleaf");
+            table.AddItem("Blayroot");
+            table.AddItem("Lembas Oat");
+            table.AddItem("Chamowise");
+            table.AddItem("Redroot");
+            table.AddItem("Halfling Leaf");
+
+            return table.GetResult();
+        }
+
+        public static string Herbs()
+        {
+            var table = new RandomTable<string>();
+
+            table.AddItem(AlchemicalHerbs());
+            table.AddItem(PoisonHerbs());
+            table.AddItem(MedicinalHerbs());
+
+            return table.GetResult();
+        }
+
         public static string Flora()
         {
             var table = new RandomTable<string>();
@@ -450,7 +508,9 @@ namespace DungeonCohort
             table.AddItem(Lotus());
             table.AddItem(Mushrooms());
             table.AddItem(DangerousFlora());
+            table.AddItem(Herbs());
             table.AddItem("Trapweed: " + Trapweed());
+            table.AddItem("Edible Vegtables");
 
             return table.GetResult();
         }
